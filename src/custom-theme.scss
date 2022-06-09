@@ -1,0 +1,23 @@
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$vetClinicFrontEnd-primary: mat.define-palette(mat.$teal-palette, 600);
+$vetClinicFrontEnd-accent: mat.define-palette(mat.$green-palette, A400);
+
+$vetClinicFrontEnd-warn: mat.define-palette(mat.$red-palette);
+
+$vetClinicFrontEnd-theme: mat.define-light-theme((
+  color: (
+    primary: $vetClinicFrontEnd-primary,
+    accent: $vetClinicFrontEnd-accent,
+    warn: $vetClinicFrontEnd-warn,
+  )
+));
+
+
+@include mat.all-component-themes($vetClinicFrontEnd-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
