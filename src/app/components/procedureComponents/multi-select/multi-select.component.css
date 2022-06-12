@@ -1,0 +1,14 @@
+.mat-chip.mat-standard-chip {
+  background-color: #00897b;
+  color: white;
+}
+
+.full-width {
+  width: 320px;
+}
+
+.chip-list-wrapper {
+  width: 320px;
+  min-height: 3em;
+}
+/*# sourceMappingURL=multi-select.component.css.map */
