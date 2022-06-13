@@ -24,7 +24,8 @@
       <div (click)="optionClicked(data, $event)">
         <mat-checkbox [checked]="data.selected" 
           (change)="toggleSelection(data)"
-          (click)="$event.stopPropagation()">
+          (click)="$event.stopPropagation()"
+          color="primary">
           {{ data.item.name }}
         </mat-checkbox>
       </div>
