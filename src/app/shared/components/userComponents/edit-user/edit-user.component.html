@@ -1,0 +1,89 @@
+<form [formGroup]="editUserForm">
+    <div class="wrapper">
+        <div id="profile-pic">
+            <img src="" alt="">
+        </div>
+        <div>
+            <mat-tab-group dynamicHeight>
+                <mat-tab class="mat-tab" label="Base info">
+                    <div>
+                        <mat-form-field class="first-form-field form-field" appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input matInput placeholder="First Name" formControlName="firstName">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput placeholder="Last Name" formControlName="lastName">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-icon class="phone-icon" matPrefix>phone</mat-icon>
+                        <mat-form-field id="phone-form-field">
+                            <mat-label>Phone Number</mat-label>
+                            <input matInput placeholder="+(380)97-3174-065" formControlName="phoneNumber">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="form-field">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="datepicker" formControlName="birthDate" readonly>
+                            <mat-hint>DD/MM/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker>
+                              <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                              </mat-datepicker-actions>
+                            </mat-datepicker>
+                          </mat-form-field>
+                    </div>
+
+                    <div class="controls">
+                        <button mat-raised-button class="submit-btn" color="primary" (click)="updateUser()">Submit</button>
+                        <button mat-raised-button color="warn" (click)="goToPreviousPage()">Cancel</button>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Address">
+                  <div>
+                    <mat-form-field class="first-form-field form-field" appearance="outline">
+                      <mat-label>City</mat-label>
+                      <input matInput placeholder="Enter your city" [(ngModel)]="userAddress.city" formControlName="city">
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Street</mat-label>
+                      <input matInput placeholder="Enter your street" [(ngModel)]="userAddress.street" formControlName="street">
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>House</mat-label>
+                      <input matInput placeholder="Enter your house" [(ngModel)]="userAddress.house" formControlName="house">
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Apartment number</mat-label>
+                      <input matInput placeholder="Enter your apartment number, if you live in a block tower"
+                             [(ngModel)]="userAddress.apartmentNumber" formControlName="apartmentNumber">
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>ZipCode</mat-label>
+                      <input matInput placeholder="Enter your zipcode" [(ngModel)]="userAddress.zipCode" formControlName="zipCode">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="controls">
+                    <button mat-raised-button class="submit-btn" color="primary" (click)="updateAddress()">Submit</button>
+                    <button mat-raised-button color="warn" (click)="goToPreviousPage()">Cancel</button>
+                  </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</form>
