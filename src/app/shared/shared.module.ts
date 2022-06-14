@@ -16,12 +16,22 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input'   
 import { ExceptionTodayPageComponent } from './components/exceptionComponents/exception-today-page/exception-today-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DeleteProcedureDialogComponent } from './components/procedureComponents/delete-procedure-dialog/delete-procedure-dialog.component';
+import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
+import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
+import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+
+
 
 @NgModule({
-  declarations: [ProceduresPageComponent, SpecializationListComponent,
+  declarations: [ProceduresPageComponent, SpecializationListComponent, DeleteProcedureDialogComponent, NewProcedureDialogComponent, EditProcedureDialogComponent, MultiSelectComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent],
-    
   imports: [
     CommonModule,
     MatIconModule,
@@ -32,7 +42,14 @@ import { ExceptionTodayPageComponent } from './components/exceptionComponents/ex
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule, 
+    MatCardModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatTableModule
   ],
   exports: [
     ProceduresPageComponent,
