@@ -1,0 +1,8 @@
+<div class="mat-title">Delete procedure</div>
+<div class="mat-display-5">Do you want to delete procedure {{name}} with id {{id}}?</div>
+<div class="buttons-div">
+    <button mat-button (click)="onNoClick()">Discard</button>
+    <button mat-raised-button color="warn" (click)="onDeleteProcedure()">
+        Delete
+    </button>
+</div>

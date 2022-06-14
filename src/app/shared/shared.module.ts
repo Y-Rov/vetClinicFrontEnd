@@ -16,15 +16,27 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
 import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UsersComponent } from './components/userComponents/users/users.component';
-import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
+import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/userComponents/delete-user/delete-user.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DeleteProcedureDialogComponent } from './components/procedureComponents/delete-procedure-dialog/delete-procedure-dialog.component';
+import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
+import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
+import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
 
 @NgModule({
   declarations: [
     ProceduresPageComponent, 
-    SpecializationListComponent,
+    SpecializationListComponent, 
+    DeleteProcedureDialogComponent, 
+    NewProcedureDialogComponent, 
+    EditProcedureDialogComponent, 
+    MultiSelectComponent,
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
@@ -46,7 +58,11 @@ import { DeleteUserComponent } from './components/userComponents/delete-user/del
     MatDialogModule,
     MatNativeDateModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule, 
+    MatCardModule,
+    MatChipsModule,
+    MatCheckboxModule,
   ],
   exports:[
     ProceduresPageComponent,
