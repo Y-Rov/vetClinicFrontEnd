@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatRadioModule} from '@angular/material/radio'
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ProceduresPageComponent } from './components/procedureComponents/procedures-page/procedures-page.component';
+import { ProceduresPageComponent } from './shared/components/procedureComponents/procedures-page/procedures-page.component';
+import {LayoutModule} from "./layout/layout.module";
+import {SharedModule} from "./shared/shared.module";
+import {SpecializationListComponent} from "./shared/components/specialization-list/specialization-list.component";
 
 const appRoutes: Routes = [
   {
@@ -22,26 +19,25 @@ const appRoutes: Routes = [
   {
     path: 'procedures',
     component: ProceduresPageComponent
+  },
+  {
+    path:'specializations',
+    component: SpecializationListComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ProceduresPageComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
     RouterModule.forRoot(appRoutes),
-    MatRadioModule,
-    MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    LayoutModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
