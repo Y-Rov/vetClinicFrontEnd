@@ -22,7 +22,6 @@ export class EditSalaryDialogComponent implements OnInit {
   }
 
   form = new FormGroup({
-    EmloyeeId: new FormControl(0, Validators.min(1)),
     Value: new FormControl(0, Validators.min(1))
   });
 
@@ -32,7 +31,7 @@ export class EditSalaryDialogComponent implements OnInit {
 
   onSaveForm(): void {
 
-    this.data.EmloyeeId = this.form.value.Value!;
+    this.data.Value = this.form.value.Value!;
     this.salaryService.updateSalary(this.data).subscribe(() => this.dialogRef.close(true));
   }
 

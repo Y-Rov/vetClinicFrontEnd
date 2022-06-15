@@ -10,21 +10,21 @@ import { SalaryPageComponent } from '../salary-page/salary-page.component';
 })
 export class DeleteSalaryDialogComponent implements OnInit {
 
-  id: number;
+  EmployeeId: number;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { id: number },
+    @Inject(MAT_DIALOG_DATA) private data: { EmployeeId: number } ,
     public dialogRef: MatDialogRef<SalaryPageComponent>,
     private salaryService: SalaryService)
   {
-    this.id = data.id;
+    this.EmployeeId = data.EmployeeId;
   }
 
   ngOnInit(): void {
   }
 
   onDeleteSalary(): void {
-    this.salaryService.deleteSalaryById(this.id).subscribe(() => this.dialogRef.close(true));
+    this.salaryService.deleteSalaryById(this.EmployeeId).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {
