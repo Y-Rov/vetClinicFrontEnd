@@ -7,9 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProceduresPageComponent } from './shared/components/procedureComponents/procedures-page/procedures-page.component';
-import {LayoutModule} from "./layout/layout.module";
-import {SharedModule} from "./shared/shared.module";
-import {SpecializationListComponent} from "./shared/components/specialization-list/specialization-list.component";
+
+import { LayoutModule } from "./layout/layout.module";
+import { SharedModule } from "./shared/shared.module";
+
+import { SpecializationListComponent } from "./shared/components/specialization-list/specialization-list.component";
+import { UserProfileInfoComponent } from './shared/components/userComponents/user-profile-info/user-profile-info.component';
+import { EditUserComponent } from './shared/components/userComponents/edit-user/edit-user.component';
+import { UsersComponent } from './shared/components/userComponents/users/users.component';
 
 const appRoutes: Routes = [
   {
@@ -23,6 +28,18 @@ const appRoutes: Routes = [
   {
     path:'specializations',
     component: SpecializationListComponent
+  },
+  {
+    path: 'users',
+    component: UsersComponent
+  },
+  {
+    path: 'users/:id',
+    component: UserProfileInfoComponent
+  },
+  {
+    path: 'users/:id/edit',
+    component: EditUserComponent
   }
 ];
 
