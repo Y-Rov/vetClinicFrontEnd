@@ -30,7 +30,7 @@ export class AnimalService {
     return this.http.get<Animal>(url)
       .pipe(
         tap(_ => console.log(`Animal with id = ${id}`)),
-        catchError(this.handleError<Animal>(`getAnimal /w id = ${id}`,[]))
+        catchError(this.handleError<Animal>(`getAnimal /w id = ${id}`))
       );
   }
 
