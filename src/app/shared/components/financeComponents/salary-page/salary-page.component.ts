@@ -17,7 +17,7 @@ import { NewSalaryDialogComponent } from '../new-salary-dialog/new-salary-dialog
 export class SalaryPageComponent implements OnInit {
 
   dataSource: MatTableDataSource<Salary> = new MatTableDataSource();
-  displayedColumns: string[] = ['emlpyeeId', 'value', 'edit', 'delete'];
+  displayedColumns: string[] = ['emloyeeId', 'value', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
