@@ -51,7 +51,7 @@ export class AnimalService {
       );
   }
 
-  deleteAddress(id: number): Observable<Animal> {
+  deleteAnimal(id: number): Observable<Animal> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<Animal>(url, this.httpOption)
       .pipe(
