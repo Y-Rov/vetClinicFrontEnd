@@ -33,6 +33,8 @@ import { DeleteProcedureDialogComponent } from './components/procedureComponents
 import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
 
@@ -47,8 +49,12 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
-    ExceptionPageComponent, ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent
+    CreateEmployeeComponent,
+    ExceptionPageComponent, 
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent, 
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +78,8 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     MatAutocompleteModule, 
     MatCardModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   exports: [
     ProceduresPageComponent,
@@ -84,7 +91,8 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    CreateEmployeeComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
