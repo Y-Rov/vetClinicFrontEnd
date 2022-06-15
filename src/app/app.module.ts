@@ -16,6 +16,7 @@ import { EditUserComponent } from './shared/components/userComponents/edit-user/
 import { UsersComponent } from './shared/components/userComponents/users/users.component';
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
+import { AppointmentsPageComponent } from './shared/components/appointmentComponents/appointments-page/appointments-page.component';
 
 const appRoutes: Routes = [
   {
@@ -49,6 +50,10 @@ const appRoutes: Routes = [
   {
     path: 'users/:id/edit',
     component: EditUserComponent
+  },
+  {
+    path: 'appointments',
+    component: AppointmentsPageComponent
   }
 ];
 

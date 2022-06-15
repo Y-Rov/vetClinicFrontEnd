@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../../models/Appointment';
@@ -16,7 +16,7 @@ export class AppointmentService {
     }),
   };
 
-  private apiUrl : string = "";
+  private apiUrl : string = "https://62a9f6063b314385543f4974.mockapi.io/api/appointment/Appointments";
 
   constructor(private   http: HttpClient) { }
 

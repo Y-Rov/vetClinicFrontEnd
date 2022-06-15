@@ -33,6 +33,10 @@ import { DeleteProcedureDialogComponent } from './components/procedureComponents
 import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+import { AppointmentsPageComponent } from './components/appointmentComponents/appointments-page/appointments-page.component';
+import { DeleteAppointmentDialogComponent } from './components/appointmentComponents/delete-appointment-dialog/delete-appointment-dialog.component';
+import { EditAppointmentDialogComponent } from './components/appointmentComponents/edit-appointment-dialog/edit-appointment-dialog.component';
+import { NewAppointmentDialogComponent } from './components/appointmentComponents/new-appointment-dialog/new-appointment-dialog.component';
 
 @NgModule({
 
@@ -47,8 +51,15 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
-    ExceptionPageComponent, ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent
+    ExceptionPageComponent, 
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent, 
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent, 
+    AppointmentsPageComponent, 
+    DeleteAppointmentDialogComponent, 
+    EditAppointmentDialogComponent, 
+    NewAppointmentDialogComponent
   ],
   imports: [
     CommonModule,
@@ -84,7 +95,11 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    AppointmentsPageComponent, 
+    DeleteAppointmentDialogComponent, 
+    EditAppointmentDialogComponent, 
+    NewAppointmentDialogComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
