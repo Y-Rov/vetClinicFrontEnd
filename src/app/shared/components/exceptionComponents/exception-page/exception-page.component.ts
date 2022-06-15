@@ -7,13 +7,12 @@ import { ExceptionService } from 'src/app/core/services/exceptionServices/except
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-exception-page',
   templateUrl: './exception-page.component.html',
   styleUrls: ['./exception-page.component.sass']
 })
+
 export class ExceptionPageComponent implements OnInit {
   dataSource: MatTableDataSource<Exception> = new MatTableDataSource();               //Special data class to handle a table
   @ViewChild(MatSort) sort?: MatSort;
@@ -24,19 +23,20 @@ export class ExceptionPageComponent implements OnInit {
     private exceptionService: ExceptionService,
     private router: Router,
   ) {
-    this.updateList();
-    ;
-
   }
 
   ngOnInit(): void {
+    this.updateList();
   }
+  
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator!;
   }
+
   onButtonInfoClick(element: Exception) {
     this.router.navigateByUrl(`/exceptions/${element.id}`)
   }
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -8,6 +8,7 @@ import { ExceptionService } from 'src/app/core/services/exceptionServices/except
   templateUrl: './exception-detail-page.component.html',
   styleUrls: ['./exception-detail-page.component.sass']
 })
+
 export class ExceptionDetailPageComponent implements OnInit {
   exception: Exception | null = null;
 
@@ -22,16 +23,16 @@ export class ExceptionDetailPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   onButtonClick() {
     this.router.navigateByUrl('/exceptions');
   }
+
   private updateThis(id: number): void {
     console.log(id);
     this.exceptionService.getExceptionById(id).subscribe((exception) => {
       this.exception = exception;
       console.log(exception);
     });
-
   };
-
 }
