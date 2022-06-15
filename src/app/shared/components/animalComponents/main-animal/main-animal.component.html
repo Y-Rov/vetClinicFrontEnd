@@ -1,1 +1,13 @@
 <p>main-animal works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 py-3">
+      <h2 class="pb-2">Animal</h2>
+      <ngb-carousel *ngIf="animals" class="carus">
+        <ng-template ngbSlide *ngFor="let animal of animals">
+          <h3>{{animal.nickName}}</h3>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+</div>

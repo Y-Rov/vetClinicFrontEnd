@@ -38,22 +38,30 @@ import { EditAnimalComponent } from './components/animalComponents/edit-animal/e
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
 
   declarations: [
-    ProceduresPageComponent, 
-    SpecializationListComponent, 
-    DeleteProcedureDialogComponent, 
-    NewProcedureDialogComponent, 
-    EditProcedureDialogComponent, 
+    ProceduresPageComponent,
+    SpecializationListComponent,
+    DeleteProcedureDialogComponent,
+    NewProcedureDialogComponent,
+    EditProcedureDialogComponent,
     MultiSelectComponent,
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent, AddAnimalComponent, EditAnimalComponent, DeleteAnimalComponent, MainAnimalComponent, AnimalMedcardComponent
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
+    AddAnimalComponent,
+    EditAnimalComponent,
+    DeleteAnimalComponent,
+    MainAnimalComponent,
+    AnimalMedcardComponent
   ],
   imports: [
     CommonModule,
@@ -74,10 +82,11 @@ import { AnimalMedcardComponent } from './components/animalComponents/animal-med
     MatDatepickerModule,
     MatTabsModule,
     MatNativeDateModule,
-    MatAutocompleteModule, 
+    MatAutocompleteModule,
     MatCardModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgbModule
   ],
   exports: [
     ProceduresPageComponent,
@@ -89,7 +98,8 @@ import { AnimalMedcardComponent } from './components/animalComponents/animal-med
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    MainAnimalComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
