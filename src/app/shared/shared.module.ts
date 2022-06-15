@@ -33,6 +33,9 @@ import { DeleteProcedureDialogComponent } from './components/procedureComponents
 import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+import { SalaryPageComponent } from './components/financeComponents/salary-page/salary-page.component';
+import { EditSalaryDialogComponent } from './components/financeComponents/edit-salary-dialog/edit-salary-dialog.component';
+
 
 @NgModule({
 
@@ -48,8 +51,9 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent
-  ],
+    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent, ExceptionTodayPageComponent,
+    SalaryPageComponent,
+    EditSalaryDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
