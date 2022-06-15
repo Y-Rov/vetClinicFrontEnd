@@ -5,6 +5,11 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatButtonModule } from "@angular/material/button";
+import { ExceptionPageComponent } from './components/exceptionComponents/exception-page/exception-page.component';
+import { ExceptionDetailPageComponent } from './components/exceptionComponents/exception-detail-page/exception-detail-page.component';
+import { ExceptionStatsPageComponent } from './components/exceptionComponents/exception-stats-page/exception-stats-page.component';
+import { ExceptionTodayStatsPageComponent } from './components/exceptionComponents/exception-today-stats-page/exception-today-stats-page.component';
+import { ExceptionTodayPageComponent } from './components/exceptionComponents/exception-today-page/exception-today-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -30,6 +35,7 @@ import { EditProcedureDialogComponent } from './components/procedureComponents/e
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
 
 @NgModule({
+
   declarations: [
     ProceduresPageComponent, 
     SpecializationListComponent, 
@@ -40,7 +46,9 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    ExceptionPageComponent, ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent
   ],
   imports: [
     CommonModule,
@@ -51,22 +59,28 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
     MatExpansionModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatPaginatorModule,
+    MatSortModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatDatepickerModule,
     MatTabsModule,
-    MatDialogModule,
     MatNativeDateModule,
-    MatInputModule,
-    MatSortModule,
     MatAutocompleteModule, 
     MatCardModule,
     MatChipsModule,
-    MatCheckboxModule,
+    MatCheckboxModule
   ],
-  exports:[
+  exports: [
     ProceduresPageComponent,
     SpecializationListComponent,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,

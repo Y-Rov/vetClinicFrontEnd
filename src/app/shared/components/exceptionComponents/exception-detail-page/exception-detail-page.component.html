@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <H1>Error info</H1>
+    <div class="item">
+        <div class="container">
+            <div>Id:</div>
+            <div class="border">
+                {{exception?.id}}</div>
+        </div>
+    </div>
+
+    <div class="item">
+
+        <div class="container">
+            <div>Name:</div>
+            <div class="border">
+                {{exception?.name}}</div>
+        </div>
+    </div>
+    <div class="item">
+
+        <div class="container">
+            <div>Date:</div>
+            <div class="border">
+                {{exception?.dateTime}}</div>
+        </div>
+    </div>
+    <div class="item">
+
+        <div class="container">
+            <div>Path:</div>
+            <div class="border">
+                {{exception?.path}}</div>
+        </div>
+    </div>
+    <div class="item">
+
+        <div class="container">
+            <div>Stack trace:</div>
+            <div class="border">
+                {{exception?.stacktrace}}</div>
+        </div>
+    </div>
+</div>
+<div class="center">
+    <button mat-raised-button color="warn" (click)="onButtonClick()">Back</button>
+</div>
