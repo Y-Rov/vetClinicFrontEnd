@@ -1,40 +1,42 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { MatIconModule } from "@angular/material/icon";
-import { MatExpansionModule } from "@angular/material/expansion";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from "@angular/material/button";
-import { ExceptionPageComponent } from './components/exceptionComponents/exception-page/exception-page.component';
-import { ExceptionDetailPageComponent } from './components/exceptionComponents/exception-detail-page/exception-detail-page.component';
-import { ExceptionStatsPageComponent } from './components/exceptionComponents/exception-stats-page/exception-stats-page.component';
-import { ExceptionTodayStatsPageComponent } from './components/exceptionComponents/exception-today-stats-page/exception-today-stats-page.component';
-import { ExceptionTodayPageComponent } from './components/exceptionComponents/exception-today-page/exception-today-page.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatSortModule } from '@angular/material/sort';
-import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
-import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { UsersComponent } from './components/userComponents/users/users.component';
-import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
-import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
-import { DeleteUserComponent } from './components/userComponents/delete-user/delete-user.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { RouterModule } from '@angular/router';
+import { ExceptionDetailPageComponent } from './components/exceptionComponents/exception-detail-page/exception-detail-page.component';
+import { ExceptionPageComponent } from './components/exceptionComponents/exception-page/exception-page.component';
+import { ExceptionStatsPageComponent } from './components/exceptionComponents/exception-stats-page/exception-stats-page.component';
+import { ExceptionTodayPageComponent } from './components/exceptionComponents/exception-today-page/exception-today-page.component';
+import { ExceptionTodayStatsPageComponent } from './components/exceptionComponents/exception-today-stats-page/exception-today-stats-page.component';
+import { DeleteSalaryDialogComponent } from './components/financeComponents/delete-salary-dialog/delete-salary-dialog.component';
+import { EditSalaryDialogComponent } from './components/financeComponents/edit-salary-dialog/edit-salary-dialog.component';
+import { NewSalaryDialogComponent } from './components/financeComponents/new-salary-dialog/new-salary-dialog.component';
+import { SalaryPageComponent } from './components/financeComponents/salary-page/salary-page.component';
 import { DeleteProcedureDialogComponent } from './components/procedureComponents/delete-procedure-dialog/delete-procedure-dialog.component';
-import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
-import { SalaryPageComponent } from './components/financeComponents/salary-page/salary-page.component';
-import { EditSalaryDialogComponent } from './components/financeComponents/edit-salary-dialog/edit-salary-dialog.component';
+import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
+import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
+import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
+import { DeleteUserComponent } from './components/userComponents/delete-user/delete-user.component';
+import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
+import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
+import { UsersComponent } from './components/userComponents/users/users.component';
 
 
 @NgModule({
@@ -50,10 +52,16 @@ import { EditSalaryDialogComponent } from './components/financeComponents/edit-s
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
-    ExceptionPageComponent, ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent, ExceptionTodayPageComponent,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
     SalaryPageComponent,
-    EditSalaryDialogComponent],
+    EditSalaryDialogComponent,
+    DeleteSalaryDialogComponent,
+    NewSalaryDialogComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -88,7 +96,11 @@ import { EditSalaryDialogComponent } from './components/financeComponents/edit-s
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    SalaryPageComponent,
+    EditSalaryDialogComponent,
+    DeleteSalaryDialogComponent,
+    NewSalaryDialogComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

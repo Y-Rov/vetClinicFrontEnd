@@ -1,45 +1,39 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Salary } from '../../../../core/models/Salary';
 import { SalaryService } from '../../../../core/services/financialService/salary.service';
 import { SalaryPageComponent } from '../salary-page/salary-page.component';
 
 @Component({
-  selector: 'app-edit-salary-dialog',
-  templateUrl: './edit-salary-dialog.component.html',
-  styleUrls: ['./edit-salary-dialog.component.sass']
+  selector: 'app-new-salary-dialog',
+  templateUrl: './new-salary-dialog.component.html',
+  styleUrls: ['./new-salary-dialog.component.sass']
 })
-export class EditSalaryDialogComponent implements OnInit {
+export class NewSalaryDialogComponent implements OnInit {
 
   isSelectionChanged: boolean = false;
 
-  constructor(
-    @Inject(FormBuilder) private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: Salary,
+  constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<SalaryPageComponent>,
-    private salaryService: SalaryService) {
-  }
+    private salaryService: SalaryService) {}
+
 
   form = new FormGroup({
-    EmloyeeId: new FormControl(0, Validators.min(1)),
     Value: new FormControl(0, Validators.min(1))
   });
 
   ngOnInit(): void {
-    this.form.patchValue(this.data);
   }
 
   onSaveForm(): void {
-
-    this.data.EmloyeeId = this.form.value.Value!;
-    this.salaryService.updateSalary(this.data).subscribe(() => this.dialogRef.close(true));
+    const finalData: Salary = this.form.value as Salary;
+    this.salaryService.addSalary(finalData).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {
     this.dialogRef.close(false);
   }
-
 
   isButtonEnabled(): boolean {
     return this.form.valid && (this.form.dirty || this.isSelectionChanged);

@@ -5,6 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Salary } from '../../../../core/models/Salary';
 import { SalaryService } from '../../../../core/services/financialService/salary.service'; 
+import { DeleteSalaryDialogComponent } from '../delete-salary-dialog/delete-salary-dialog.component';
+import { EditSalaryDialogComponent } from '../edit-salary-dialog/edit-salary-dialog.component';
+import { NewSalaryDialogComponent } from '../new-salary-dialog/new-salary-dialog.component';
 
 @Component({
   selector: 'app-salary-page',
@@ -14,7 +17,7 @@ import { SalaryService } from '../../../../core/services/financialService/salary
 export class SalaryPageComponent implements OnInit {
 
   dataSource: MatTableDataSource<Salary> = new MatTableDataSource();
-  displayedColumns: string[] = ['name', 'cost', 'description', 'duration', 'delete', 'edit'];
+  displayedColumns: string[] = ['emlpyeeId', 'value', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -26,7 +29,7 @@ export class SalaryPageComponent implements OnInit {
   }
 
   private updateList(): void {
-    this.salaryService.getProcedures().subscribe((data) => {
+    this.salaryService.getSalary().subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });
@@ -62,7 +65,7 @@ export class SalaryPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((reuireReload: boolean) => { if (reuireReload) this.updateList() });
   }
 
-  onNewProcedure() {
+  onNewSalary() {
     const dialogRef = this.matDialog.open(NewSalaryDialogComponent);
 
     dialogRef.afterClosed().subscribe((reuireReload: boolean) => { if (reuireReload) this.updateList() });
