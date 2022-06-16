@@ -12,12 +12,40 @@
       <mat-hint>Length must be greater than 3 but less than 255 characters long</mat-hint>
       <mat-error *ngIf="form.controls.disease.invalid">Length must be greater than 3 but less than 255 characters long</mat-error>
     </mat-form-field>
-    
-        <app-multi-select placeholder="Procedure name"
-        key="procedures"
-        [data]="procedures"
-        (result)="onMultiSelectSubmit($event)"
-        [alreadySelected]="data.procedures"></app-multi-select>
+
+    <p>
+      <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline" >
+            
+      <app-multi-select placeholder="Procedure name"
+      key="procedures"
+      [data]="procedures"
+      (result)="onMultiSelectSubmitProcedure($event)"
+      [alreadySelected]="data.procedures"></app-multi-select>
+      </mat-form-field>
+  </p>
+
+        <p>
+          <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline">
+              <mat-label>Doctor name</mat-label>
+                 
+      <app-multi-select placeholder="Doctor name"
+      key="users"
+      [data]="users"
+      (result)="onMultiSelectSubmitDoctor($event)"
+      [alreadySelected]="data.users"></app-multi-select>
+          </mat-form-field>
+      </p>
+
+      
+      <!-- <h4>Basic mat-select</h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Animal name</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let animalName of animalNames" [value]="animalName.value">
+            {{animalName.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
 
    
    

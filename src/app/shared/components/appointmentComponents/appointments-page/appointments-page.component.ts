@@ -17,7 +17,7 @@ import { NewAppointmentDialogComponent } from '../new-appointment-dialog/new-app
 export class AppointmentsPageComponent implements OnInit {
 
   dataSource: MatTableDataSource<Appointment> = new MatTableDataSource();
-  displayedColumns: string[] = ['name', 'animalname', 'desease', 'procedurename', 'Doctorname', 'dateAndTime', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'animalname', 'disease', 'procedurename', 'Doctorname', 'dateAndTime', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
