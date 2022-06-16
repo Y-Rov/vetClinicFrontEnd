@@ -33,7 +33,7 @@ export class EditAddressComponent implements OnInit {
   }
 
   getUserAddress() {
-    this.addressService.getAddress(this.userId)
+    this.addressService.getById(this.userId)
       .subscribe(address => {
         if (address !== undefined) {
           this.editUserAddressForm.patchValue({
@@ -44,6 +44,7 @@ export class EditAddressComponent implements OnInit {
             zipCode: address.zipCode
           });
           this.isAddressGetRequestSuccessful = true;
+          console.log(address);
         }
         else {
           this.isAddressGetRequestSuccessful = false;
@@ -53,11 +54,12 @@ export class EditAddressComponent implements OnInit {
 
   updateUserAddress(): void {
     if (this.isAddressGetRequestSuccessful) {
-      this.addressService.updateAddress({userId: this.userId, ...this.editUserAddressForm.value})
-        .subscribe(() => this.addressService.goToPreviousPage());
+      console.log({id: this.userId, ...this.editUserAddressForm.value});
+      this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
+        .subscribe();
     } else {
       if (this.editUserAddressForm.valid) {
-        this.addressService.addAddress({userId: this.userId, ...this.editUserAddressForm.value})
+        this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})
           .subscribe(() => this.addressService.goToPreviousPage());
       }
     }

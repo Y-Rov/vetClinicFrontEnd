@@ -1,56 +1,63 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
+import {ResourceModel} from "../../models/ResourceModel";
+import {map} from "rxjs/operators";
+import {Location} from "@angular/common";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GenericService<T extends { id: number }> {
-  url: string = '';
+export abstract class GenericService<T extends ResourceModel<T>> {
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
 
-  constructor(private http: HttpClient) { }
+  protected constructor(
+    private http: HttpClient,
+    private location: Location,
+    private tConstructor: { new (m: Partial<T>): T },
+    protected apiUrl: string
+  ) { }
 
   getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.url)
+    return this.http.get<T[]>(this.apiUrl)
       .pipe(
+        map((result) => result.map((i) => new this.tConstructor(i))),
         catchError(this.handleError<T[]>('getAll', []))
       );
   }
 
   getById(id: number): Observable<T> {
-    const url = `${this.url}/${id}`;
+    const url = `${this.apiUrl}/${id}`;
 
     return this.http.get<T>(url)
       .pipe(
+        map((result) => new this.tConstructor(result)),
         catchError(this.handleError<T>('getById'))
       );
   }
 
   create(entity: T): Observable<T> {
-    return this.http.post<T>(this.url, entity, this.httpOptions)
+    return this.http.post<T>(this.apiUrl, entity, this.httpOptions)
       .pipe(
+        map((result) => new this.tConstructor(result)),
         catchError(this.handleError<T>('create', entity))
       );
   }
 
   update(entity: T): Observable<T> {
-    const url = `${this.url}/${entity.id}`;
-    return this.http.put<T>(url, entity, this.httpOptions)
+    return this.http.put<T>(this.apiUrl, entity, this.httpOptions)
       .pipe(
+        map((result) => new this.tConstructor(result)),
         catchError(this.handleError<T>('update', entity))
       );
   }
 
-  delete(entity: T): Observable<T> {
-    const url = `${this.url}/${entity.id}`;
-    return this.http.delete<T>(url, this.httpOptions)
+  delete(entity: T): Observable<void> {
+    const url = `${this.apiUrl}/${entity.id}`;
+    return this.http.delete<void>(url, this.httpOptions)
       .pipe(
-        catchError(this.handleError<T>('delete', entity))
+        catchError(this.handleError<void>('delete'))
       );
   }
 
@@ -58,20 +65,24 @@ export class GenericService<T extends { id: number }> {
     return (error: HttpErrorResponse): Observable<T> => {
       switch (error.status) {
         case 0:
-          console.error('A client-side error occurred: ', error.error);
+          console.error(`During ${operation} a client-side error occurred: `, error.error);
           break;
         case 401:
-          console.warn(`Unauthorized access, code ${error.status}, body was: `, error.error);
+          console.warn(`During ${operation}: Unauthorized access, code ${error.status}, body was: `, error.error);
           break;
         case 404:
-          console.warn(`Resource not availab,e code ${error.status}, body was: `, error.error);
+          console.warn(`During ${operation}: Resource is not available code ${error.status}, body was: `, error.error);
           break;
         case 500:
-          console.error('Something went wrong on the server!');
+          console.error(`During ${operation}: something went wrong on the server!`);
           break;
       }
 
       return of(result as T);
     }
+  }
+
+  goToPreviousPage(): void {
+    this.location.back();
   }
 }
