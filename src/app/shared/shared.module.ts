@@ -37,6 +37,13 @@ import { EditAddressComponent } from './components/userComponents/edit-user/edit
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
+import { AboutComponent } from './about/about.component';
+
+import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
+import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
+import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
+import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
@@ -51,14 +58,26 @@ import { DoctorsComponent } from './components/userComponents/doctors/doctors.co
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
-    EditAddressComponent,
-    CreateEmployeeComponent,
-    ExceptionPageComponent, 
-    ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, 
+    ExceptionPageComponent, ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
-    DoctorsComponent
+    EditAddressComponent,
+    CreateEmployeeComponent,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
+    DoctorsComponent,
+    AddAnimalComponent,
+    EditAnimalComponent,
+    DeleteAnimalComponent,
+    MainAnimalComponent,
+    
+    //AnimalMedcardComponent
+    
+    AboutComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +102,7 @@ import { DoctorsComponent } from './components/userComponents/doctors/doctors.co
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   exports: [
     ProceduresPageComponent,
@@ -97,7 +116,8 @@ import { DoctorsComponent } from './components/userComponents/doctors/doctors.co
     EditUserComponent,
     DeleteUserComponent,
     EditAddressComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    MainAnimalComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
