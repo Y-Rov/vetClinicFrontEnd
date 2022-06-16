@@ -25,7 +25,7 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   get(id: number): void {
-    this.userService.getUserById(id)
+    this.userService.getById(id)
       .subscribe(user => this.user = user);
   }
 }
