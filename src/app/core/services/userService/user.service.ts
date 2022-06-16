@@ -59,12 +59,9 @@ import { GenericService } from '../genericService/generic.service';
 export class UserService extends GenericService<User> {
   constructor(
     http: HttpClient,
-    private location: Location) { 
-      super(http);
-      this.url = 'https://62a66c1d430ba53411d495fe.mockapi.io/api/users';
+    currentLocation: Location
+    ) {
+      super(http, currentLocation, User, 'https://62a66c1d430ba53411d495fe.mockapi.io/api/users');
     }
 
-  goToPreviousPage(): void {
-    this.location.back();
-  }
 }

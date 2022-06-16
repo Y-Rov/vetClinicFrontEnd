@@ -1,8 +1,13 @@
-export interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    birthDate: Date;
+import {ResourceModel} from "./ResourceModel";
+
+export class User extends ResourceModel<User> {
+    firstName?: string | null;
+    lastName?: string | null;
+    email?: string | null;
+    phoneNumber?: string | null;
+    birthDate?: Date | null;
+
+  constructor(model?: Partial<User>) {
+    super(model);
+  }
 }

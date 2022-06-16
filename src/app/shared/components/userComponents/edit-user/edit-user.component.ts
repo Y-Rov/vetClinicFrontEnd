@@ -42,7 +42,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getById(this.user.id)
+    this.userService.getById(this.user.id!)
       .subscribe(user => {
         this.user = {...user};
 
