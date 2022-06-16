@@ -41,7 +41,7 @@ import { AddAnimalComponent } from './components/animalComponents/add-animal/add
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
-import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
+//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
@@ -59,20 +59,20 @@ import { AnimalMedcardComponent } from './components/animalComponents/animal-med
     ExceptionPageComponent, ExceptionDetailPageComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent,    
+    ExceptionTodayPageComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    ExceptionPageComponent, 
+    ExceptionPageComponent,
     ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, 
+    ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
-    
+
     AddAnimalComponent,
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
-    AnimalMedcardComponent
+    //AnimalMedcardComponent
 
   ],
   imports: [
@@ -114,7 +114,6 @@ import { AnimalMedcardComponent } from './components/animalComponents/animal-med
     EditAddressComponent,
     CreateEmployeeComponent,
     MainAnimalComponent
-
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

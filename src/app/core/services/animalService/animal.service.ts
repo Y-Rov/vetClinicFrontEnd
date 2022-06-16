@@ -13,24 +13,15 @@ export class AnimalService {
     })
   };
 
-  private apiUrl: string = 'https://6277a9bc2f94a1d70610db55.mockapi.io/animal';
+  private apiUrl: string = 'https://localhost:7283/api/animals';
   constructor(
     private http: HttpClient) { }
 
   getAnimals(): Observable<Animal[]> {
-    return this.http.get<Animal[]>(this.apiUrl)
+    return this.http.get<Animal[]>(this.apiUrl,this.httpOption)
       .pipe(
         tap(_ => console.log('Fetched animals')),
         catchError(this.handleError<Animal[]>('getAnimals',[]))
-      );
-  }
-
-  getAnimal(id:number):Observable<Animal>{
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Animal>(url)
-      .pipe(
-        tap(_ => console.log(`Animal with id = ${id}`)),
-        catchError(this.handleError<Animal>(`getAnimal /w id = ${id}`))
       );
   }
 
@@ -38,7 +29,7 @@ export class AnimalService {
     return this.http.post<Animal>(this.apiUrl,animal,this.httpOption)
       .pipe(
         tap(_ =>console.log("Animal")),
-        catchError(this.handleError<Animal>('addAddress'))
+        catchError(this.handleError<Animal>('addAnimal'))
       );
   }
 
