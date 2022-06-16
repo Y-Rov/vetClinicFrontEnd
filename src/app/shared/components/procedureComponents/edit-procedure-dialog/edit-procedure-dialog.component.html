@@ -43,12 +43,12 @@
               <mat-label>Duration</mat-label>
               <input 
                   matInput 
-                  formControlName="duration"
+                  formControlName="durationInMinutes"
                   type="number" 
                   min="1"
                   placeholder="Duration">
               <mat-hint>Must be greater than 1</mat-hint>
-              <mat-error *ngIf="form.controls.duration.invalid">Must be greater than 1</mat-error>
+              <mat-error *ngIf="form.controls.durationInMinutes.invalid">Must be greater than 1</mat-error>
           </mat-form-field>
       </p>
     </div>

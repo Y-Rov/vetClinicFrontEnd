@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Procedure } from '../models/Procedure';
+import { Procedure } from '../../models/Procedure';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class ProcedureService {
     }),
   };
     
-  private apiUrl : string = 'https://62a63effb9b74f766a45a4cb.mockapi.io/api/sefirus/procedures';
+  private apiUrl : string = 'https://localhost:7283/api/procedures';
 
   constructor(private   http: HttpClient) { }
 
@@ -24,19 +24,24 @@ export class ProcedureService {
 
   deleteProcedure(procedure : Procedure): Observable<Procedure>{
     const url = `${this.apiUrl}/${procedure.id}`;
-    console.log(url);
     return this.http.delete<Procedure>(url);
   }
 
   deleteProcedureById(id: number): Observable<Procedure>{
     const url = `${this.apiUrl}/${id}`;
-    console.log(url);
     return this.http.delete<Procedure>(url);
   }
 
   updateProcedure(procedure: Procedure): Observable<Procedure>{
-    const url = `${this.apiUrl}/${procedure.id}`;
-    return this.http.put<Procedure>(url, procedure, this.httpOptions);
+    const ViewModel = {
+      id: procedure.id,
+      name: procedure.name,
+      cost: procedure.cost,
+      durationInMinutes: procedure.durationInMinutes,
+      description: procedure.description,
+      specializationIds: procedure.specializations.map(spec => spec.id)
+    };
+    return this.http.put<Procedure>(this.apiUrl, ViewModel, this.httpOptions);
   }
 
   addProcedure(procedure: Procedure): Observable<Procedure>{
