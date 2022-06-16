@@ -16,7 +16,7 @@ export class AppointmentService {
     }),
   };
 
-  private apiUrl : string = "https://62a9f6063b314385543f4974.mockapi.io/api/appointment/Appointments";
+  private apiUrl : string = "https://localhost:7283/api/appointments";
 
   constructor(private   http: HttpClient) { }
 
@@ -29,13 +29,15 @@ export class AppointmentService {
   }
 
   updateAppointment(appointment: Appointment): Observable<Appointment>{
-    const url = `${this.apiUrl}/${appointment.id}`;
-    return this.http.put<Appointment>(url, appointment, this.httpOptions);
+    const ViewModel = {
+      id: appointment.id,
+      
+    }
+    return this.http.put<Appointment>(this.apiUrl, appointment, this.httpOptions);
   }
 
   deleteAppointmentById(id: number): Observable<Appointment>{
     const url = `${this.apiUrl}/${id}`;
-    console.log(url);
     return this.http.delete<Appointment>(url);
   }
 }
