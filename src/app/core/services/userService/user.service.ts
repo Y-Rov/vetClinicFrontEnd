@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 })
 export class UserService {
   private url: string = 'https://62a66c1d430ba53411d495fe.mockapi.io/api/users';
+  // private url: string = 'https://localhost:7283/api/users';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

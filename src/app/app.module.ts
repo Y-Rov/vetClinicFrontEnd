@@ -16,6 +16,7 @@ import { EditUserComponent } from './shared/components/userComponents/edit-user/
 import { UsersComponent } from './shared/components/userComponents/users/users.component';
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
+import { DoctorsComponent } from './shared/components/userComponents/doctors/doctors.component';
 
 import {MainAnimalComponent} from "./shared/components/animalComponents/main-animal/main-animal.component";
 
@@ -54,6 +55,10 @@ const appRoutes: Routes = [
   {
     path: 'users/:id/edit',
     component: EditUserComponent
+  },
+  {
+    path: 'doctors',
+    component: DoctorsComponent
   },
   {
     path: 'animals',
