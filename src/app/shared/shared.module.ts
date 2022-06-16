@@ -36,6 +36,7 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
+import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
 
 @NgModule({
 
@@ -56,7 +57,8 @@ import { MatSelectModule } from '@angular/material/select';
     ExceptionDetailPageComponent,
     ExceptionStatsPageComponent, 
     ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent
+    ExceptionTodayPageComponent,
+    DoctorsComponent
   ],
   imports: [
     CommonModule,

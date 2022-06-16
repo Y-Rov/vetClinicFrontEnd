@@ -5,4 +5,7 @@ export interface User {
     email: string;
     phoneNumber: string;
     birthDate: Date;
+    role?: string;
+    portfolio?: string;
+    specializations?: string[];
 }

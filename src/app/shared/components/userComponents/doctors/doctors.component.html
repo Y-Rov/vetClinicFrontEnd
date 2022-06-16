@@ -1,0 +1,17 @@
+<div class="content">
+    <h1>Our specialists</h1>
+    <div id="doctors">
+        <div *ngFor="let doctor of doctors">
+            <div class="profile-pic"></div>
+                <div class="doc-info">
+                    <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
+                    <div class="specializations">
+                        <span *ngFor="let spec of doctor.specializations">{{spec}} </span>
+                        asdfkjhakjdsfasdf
+                    </div>
+                    <div class="portfolio">{{doctor.portfolio}}asdfasfsadf</div>
+                </div>
+            <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
+        </div>
+    </div>
+</div>
