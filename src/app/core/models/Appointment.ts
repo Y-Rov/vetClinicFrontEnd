@@ -1,4 +1,5 @@
 import { Procedure } from "./Procedure";
+import { User } from "./User";
 
 
 export interface Appointment{
@@ -7,4 +8,5 @@ export interface Appointment{
     meetHasOccureding: boolean;
     disease: string;
     procedures: Procedure[];
+    users: User[];
 }
