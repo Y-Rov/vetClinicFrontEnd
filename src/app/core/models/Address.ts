@@ -1,8 +1,8 @@
 export interface Address {
-    userId: number,
-    city: string,
-    street: string,
-    house: string,
-    apartmentNumber: number | null,
-    zipCode: string | null
-  }
+  userId: number;
+  city?: string | null;
+  street?: string | null;
+  house?: string | null;
+  apartmentNumber?: number | null;
+  zipCode?: string | null;
+}

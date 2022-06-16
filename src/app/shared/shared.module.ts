@@ -33,22 +33,24 @@ import { DeleteProcedureDialogComponent } from './components/procedureComponents
 import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
 
   declarations: [
-    ProceduresPageComponent, 
-    SpecializationListComponent, 
-    DeleteProcedureDialogComponent, 
-    NewProcedureDialogComponent, 
-    EditProcedureDialogComponent, 
+    ProceduresPageComponent,
+    SpecializationListComponent,
+    DeleteProcedureDialogComponent,
+    NewProcedureDialogComponent,
+    EditProcedureDialogComponent,
     MultiSelectComponent,
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
+    EditAddressComponent,
     CreateEmployeeComponent,
     ExceptionPageComponent, 
     ExceptionDetailPageComponent,
@@ -75,7 +77,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatTabsModule,
     MatNativeDateModule,
-    MatAutocompleteModule, 
+    MatAutocompleteModule,
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
@@ -92,6 +94,7 @@ import { MatSelectModule } from '@angular/material/select';
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
+    EditAddressComponent,
     CreateEmployeeComponent
   ],
   providers: [
