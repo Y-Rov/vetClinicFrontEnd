@@ -36,6 +36,7 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
 
@@ -52,11 +53,12 @@ import { MatSelectModule } from '@angular/material/select';
     DeleteUserComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    ExceptionPageComponent, 
+    ExceptionPageComponent,
     ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, 
+    ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent
+    ExceptionTodayPageComponent,
+    AboutComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +83,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   exports: [
     ProceduresPageComponent,
