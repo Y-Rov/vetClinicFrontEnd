@@ -20,7 +20,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
-import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
+import { SpecializationListComponent } from './components/specializationComponent/specialization-list/specialization-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -52,9 +52,9 @@ import { MatSelectModule } from '@angular/material/select';
     DeleteUserComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    ExceptionPageComponent, 
+    ExceptionPageComponent,
     ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, 
+    ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent
   ],

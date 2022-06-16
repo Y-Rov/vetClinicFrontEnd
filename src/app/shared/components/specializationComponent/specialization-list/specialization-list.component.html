@@ -53,11 +53,21 @@
           </div>
         </mat-expansion-panel-header>
 
-        procedure
+        <ng-template ngFor let-procedure [ngForOf] = "specialization.procedures" let-i = "index">
+
+          <mat-panel-title>
+            {{procedure.name}}
+          </mat-panel-title>
+
+          <mat-panel-description>
+            {{procedure.description}}
+          </mat-panel-description>
+
         <button mat-icon-button>
           <mat-icon color="warn">cancel</mat-icon>
         </button>
 
+        </ng-template>
       </mat-expansion-panel>
 
 

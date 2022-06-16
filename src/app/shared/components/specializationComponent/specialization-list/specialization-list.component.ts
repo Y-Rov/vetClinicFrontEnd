@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Specialization} from "../../../core/models/Specialization";
-import {SpecializationService} from "../../../core/services/specialization/specialization.service";
+import {Specialization} from "../../../../core/models/Specialization";
+import {SpecializationService} from "../../../../core/services/specialization/specialization.service";
 
 @Component({
   selector: 'app-specialization-list',
@@ -26,7 +26,6 @@ export class SpecializationListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAll()
       .subscribe((spec => this.specializations = spec));
-    console.log(this.specializations[0]);
   }
 
 }
