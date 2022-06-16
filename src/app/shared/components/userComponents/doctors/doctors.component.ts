@@ -13,8 +13,23 @@ export class DoctorsComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getDoctors();
+  }
+
+  private getDoctors(): void {
     this.userService.getAllUsers().subscribe(
       users => this.doctors = users.filter(u => u.role === 'Doctor'));
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+
+    if (filterValue === '') {
+      this.getDoctors();
+    } else {
+      this.doctors = this.doctors.filter(
+        d => d.firstName.toLowerCase().includes(filterValue) || 
+        d.lastName.toLowerCase().includes(filterValue));
+    }
+  }
 }
