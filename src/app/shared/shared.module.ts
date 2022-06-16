@@ -36,6 +36,7 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AboutComponent } from './about/about.component';
 
 import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
@@ -67,13 +68,14 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
-
     AddAnimalComponent,
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
+    
     //AnimalMedcardComponent
-
+    
+    AboutComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +100,7 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   exports: [
     ProceduresPageComponent,
