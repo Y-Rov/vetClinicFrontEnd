@@ -3,37 +3,21 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedure.service'; 
+import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
 import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
 
 const SAMPLE_DATA: Specialization[] =  [
   {
-    "id" :  1,
-    "name" : "first spec",
+    "id": 5,
+    "name": "555555string"
   },
   {
-    "id" :  2,
-    "name" : "second spec",
+    "id": 6,
+    "name": "2 Demo Specialization"
   },
   {
-    "id" :  3,
-    "name" : "third spec",
-  },
-  {
-    "id" :  4,
-    "name" : "fouth spec",
-  },
-  {
-    "id" :  5,
-    "name" : "fifth spec",
-  },
-  {
-    "id" :  6,
-    "name" : "six spec",
-  },
-  {
-    "id" :  7,
-    "name" : "sevens spec",
+    "id": 7,
+    "name": "string"
   }
 ]
 
@@ -60,7 +44,7 @@ export class EditProcedureDialogComponent implements OnInit {
     name: new FormControl("", Validators.minLength(5)),
     description: new FormControl("", Validators.minLength(5)),
     cost: new FormControl(0, Validators.min(1)),
-    duration: new FormControl(0, Validators.min(1))
+    durationInMinutes: new FormControl(0, Validators.min(1))
   });
 
   ngOnInit(): void {
@@ -71,8 +55,10 @@ export class EditProcedureDialogComponent implements OnInit {
     this.data.name = this.form.value.name!;
     this.data.description = this.form.value.description!;
     this.data.cost = this.form.value.cost!;
-    this.data.duration = this.form.value.duration!;
-    this.data.specializations = this.selectedSpec;
+    this.data.durationInMinutes = this.form.value.durationInMinutes!;
+    if(this.isSelectionChanged){
+      this.data.specializations = this.selectedSpec;
+    }
     this.procedureService.updateProcedure(this.data).subscribe(() => this.dialogRef.close(true));
   }
 
@@ -81,7 +67,6 @@ export class EditProcedureDialogComponent implements OnInit {
   }
 
   onMultiSelectSubmit(event : any) : void{
-    console.log(...event.data);
     this.selectedSpec = [...event.data ] as Specialization[];
     this.isSelectionChanged = event.isChanged;
   }

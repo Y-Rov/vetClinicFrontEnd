@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedure.service'; 
+import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteProcedureDialogComponent } from '../delete-procedure-dialog/delete-procedure-dialog.component';
 import { EditProcedureDialogComponent } from '../edit-procedure-dialog/edit-procedure-dialog.component';

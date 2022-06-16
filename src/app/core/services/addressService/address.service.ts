@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { catchError, Observable, of, tap } from "rxjs";
 import { Address} from "../../models/Address";
 import { Location } from "@angular/common";
@@ -14,7 +14,7 @@ export class AddressService {
     }),
   };
 
-  private apiURL: string = 'https://62a83e00943591102b9d0fd0.mockapi.io/api/address';
+  private apiURL: string = 'https://localhost:7283/api/addresses';
   constructor(
     private http: HttpClient,
     private location: Location
@@ -28,7 +28,7 @@ export class AddressService {
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET address by id. Will 404 if id not found */
   getAddress(id: number): Observable<Address> {
     const url = `${this.apiURL}/${id}`;
     return this.http.get<Address>(url)
@@ -38,7 +38,7 @@ export class AddressService {
       );
   }
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new address to the current user */
   addAddress(address: Address): Observable<Address> {
     return this.http.post<Address>(this.apiURL, address, this.httpOptions)
       .pipe(
@@ -47,17 +47,16 @@ export class AddressService {
       );
   }
 
-  /** PUT: update the hero on the server */
-  updateAddress(address: Address): Observable<any> {
-    const url = `${this.apiURL}/${address.userId}`;
-    return this.http.put(url, address, this.httpOptions)
+  /** PUT: update the current user's address */
+  updateAddress(address: Address): Observable<Address> {
+    return this.http.put<Address>(this.apiURL, address, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Updated address with id = ${address.userId}`)),
-        catchError(this.handleError<any>('updateAddress'))
+        catchError(this.handleError<Address>('updateAddress'))
       );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the user's address from the server */
   deleteAddress(id: number): Observable<Address> {
     const url = `${this.apiURL}/${id}`;
 
@@ -76,13 +75,21 @@ export class AddressService {
    * @param result - optional value to return as the observable result
    */
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
+    return (error: HttpErrorResponse): Observable<T> => {
+      switch (error.status) {
+        case 0:
+          // A client-side or network error occurred. Handle it accordingly.
+          console.error('A client-side error occurred: ', error.error);
+          break;
+        case 404:
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong.
+          console.warn(`Backend returned code ${error.status}, body was: `, error.error);
+          break;
+        case 500:
+          console.error('Something went wrong on the server!');
+          break;
+      }
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
