@@ -38,7 +38,6 @@ import { EditAnimalComponent } from './components/animalComponents/edit-animal/e
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
 
@@ -86,7 +85,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
-    NgbModule
   ],
   exports: [
     ProceduresPageComponent,
