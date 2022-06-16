@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -18,48 +18,60 @@ export class GenericService<T extends { id: number }> {
   getAll(): Observable<T[]> {
     return this.http.get<T[]>(this.url)
       .pipe(
-        catchError(this.handleError<T[]>('getAll'))
+        catchError(this.handleError<T[]>('getAll', []))
       );
   }
 
   getById(id: number): Observable<T> {
-    const userUrl = `${this.url}/${id}`;
+    const url = `${this.url}/${id}`;
 
-    return this.http.get<T>(userUrl)
+    return this.http.get<T>(url)
       .pipe(
         catchError(this.handleError<T>('getById'))
       );
   }
 
-  create(user: T): Observable<T> {
-    return this.http.post<T>(this.url, user, this.httpOptions)
+  create(entity: T): Observable<T> {
+    return this.http.post<T>(this.url, entity, this.httpOptions)
       .pipe(
-        catchError(this.handleError<T>('create'))
+        catchError(this.handleError<T>('create', entity))
       );
   }
 
-  update(user: T): Observable<T> {
-    const userUrl = `${this.url}/${user.id}`;
-    return this.http.put<T>(userUrl, user, this.httpOptions)
+  update(entity: T): Observable<T> {
+    const url = `${this.url}/${entity.id}`;
+    return this.http.put<T>(url, entity, this.httpOptions)
       .pipe(
-        catchError(this.handleError<T>('update'))
+        catchError(this.handleError<T>('update', entity))
       );
   }
 
-  delete(user: T): Observable<T> {
-    const userUrl = `${this.url}/${user.id}`;
-    return this.http.delete<T>(userUrl, this.httpOptions)
+  delete(entity: T): Observable<T> {
+    const url = `${this.url}/${entity.id}`;
+    return this.http.delete<T>(url, this.httpOptions)
       .pipe(
-        catchError(this.handleError<T>('delete'))
+        catchError(this.handleError<T>('delete', entity))
       );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      console.log(`${operation} failed: ${error.message}`);
+  private handleError<T>(operation: string = 'operation', result?: T) {
+    return (error: HttpErrorResponse): Observable<T> => {
+      switch (error.status) {
+        case 0:
+          console.error('A client-side error occurred: ', error.error);
+          break;
+        case 401:
+          console.warn(`Unauthorized access, code ${error.status}, body was: `, error.error);
+          break;
+        case 404:
+          console.warn(`Resource not availab,e code ${error.status}, body was: `, error.error);
+          break;
+        case 500:
+          console.error('Something went wrong on the server!');
+          break;
+      }
 
       return of(result as T);
-    };
+    }
   }
 }
