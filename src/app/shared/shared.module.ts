@@ -38,6 +38,12 @@ import { CreateEmployeeComponent } from './components/userComponents/create-empl
 import { MatSelectModule } from '@angular/material/select';
 import { AboutComponent } from './about/about.component';
 
+import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
+import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
+import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
+import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
+
 @NgModule({
 
   declarations: [
@@ -51,6 +57,10 @@ import { AboutComponent } from './about/about.component';
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
+    ExceptionPageComponent, ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
     ExceptionPageComponent,
@@ -58,6 +68,13 @@ import { AboutComponent } from './about/about.component';
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
+    AddAnimalComponent,
+    EditAnimalComponent,
+    DeleteAnimalComponent,
+    MainAnimalComponent,
+    
+    //AnimalMedcardComponent
+    
     AboutComponent
   ],
   imports: [
@@ -97,7 +114,8 @@ import { AboutComponent } from './about/about.component';
     EditUserComponent,
     DeleteUserComponent,
     EditAddressComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    MainAnimalComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
