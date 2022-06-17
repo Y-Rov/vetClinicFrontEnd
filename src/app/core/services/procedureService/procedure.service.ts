@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Address} from "../../models/Address";
+import { Location } from "@angular/common";
 import { Procedure } from '../../models/Procedure';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { ResourceService } from '../resourceService/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProcedureService {
+export class ProcedureService extends ResourceService<Procedure> {
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
+  constructor(
+    private httpClient: HttpClient,
+    private currentLocation: Location
+  ) {
+    super(httpClient, currentLocation, Procedure, 'https://localhost:5001/api/procedures');
+  }
 
-  private apiUrl : string = 'https://localhost:5001/api/procedures';
-
-  constructor(private   http: HttpClient) { }
-
-  getProcedures(): Observable<Procedure[]>{
+  /*getProcedures(): Observable<Procedure[]>{
     return this.http?.get<Procedure[]>(this.apiUrl, this.httpOptions);
   }
 
@@ -32,6 +32,11 @@ export class ProcedureService {
     return this.http.delete<Procedure>(url);
   }
 
+  
+  addProcedure(procedure: Procedure): Observable<Procedure>{
+    return this.http.post<Procedure>(this.apiUrl, procedure, this.httpOptions);
+  }*/
+
   updateProcedure(procedure: Procedure): Observable<Procedure>{
     const ViewModel = {
       id: procedure.id,
@@ -39,12 +44,8 @@ export class ProcedureService {
       cost: procedure.cost,
       durationInMinutes: procedure.durationInMinutes,
       description: procedure.description,
-      specializationIds: procedure.specializations.map(spec => spec.id)
+      specializationIds: procedure.specializations!.map(spec => spec.id)
     };
-    return this.http.put<Procedure>(this.apiUrl, ViewModel, this.httpOptions);
-  }
-
-  addProcedure(procedure: Procedure): Observable<Procedure>{
-    return this.http.post<Procedure>(this.apiUrl, procedure, this.httpOptions);
+    return this.httpClient.put<Procedure>(this.apiUrl, ViewModel, this.httpOptions);
   }
 }

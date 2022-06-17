@@ -18,6 +18,8 @@
     "@angular/forms": "^14.0.2",
     "@angular/localize": "^14.0.2",
     "@angular/material": "^14.0.1",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.3",
     "@angular/platform-browser": "^14.0.2",
     "@angular/platform-browser-dynamic": "^14.0.2",
     "@angular/router": "^14.0.2",

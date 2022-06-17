@@ -25,7 +25,7 @@ export class DeleteProcedureDialogComponent implements OnInit {
   }
 
   onDeleteProcedure(): void{
-    this.procedureService.deleteProcedureById(this.id).subscribe(() => this.dialogRef.close(true));
+    this.procedureService.deleteById(this.id).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {
