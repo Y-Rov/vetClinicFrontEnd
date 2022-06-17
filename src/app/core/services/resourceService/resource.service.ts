@@ -45,11 +45,12 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
       );
   }
 
-  update(entity: T): Observable<T> {
-    return this.http.put<T>(this.apiUrl, entity, this.httpOptions)
+  updateById(id: number): Observable<T> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put<T>(url, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),
-        catchError(this.handleError<T>('update', entity))
+        catchError(this.handleError<T>('update'))
       );
   }
 

@@ -53,7 +53,7 @@ export class EditAddressComponent implements OnInit {
 
   updateUserAddress(): void {
     if (this.isAddressGetRequestSuccessful) {
-      this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
+      this.addressService.updateById(this.userId)
         .subscribe(() => this.addressService.goToPreviousPage());
     } else {
       if (this.editUserAddressForm.valid) {

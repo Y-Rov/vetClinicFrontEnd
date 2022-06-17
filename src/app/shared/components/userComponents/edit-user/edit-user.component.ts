@@ -57,7 +57,7 @@ export class EditUserComponent implements OnInit {
     this.user.phoneNumber = this.editUserForm.value.phoneNumber!;
     this.user.birthDate = new Date(this.editUserForm.value.birthDate!);
 
-    this.userService.update(this.user).subscribe();
+    this.userService.updateById(this.user.id!).subscribe();
     this.goToPreviousPage();
   }
 
