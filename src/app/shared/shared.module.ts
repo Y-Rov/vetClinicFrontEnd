@@ -35,23 +35,51 @@ import { EditProcedureDialogComponent } from './components/procedureComponents/e
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
 import { LoginComponent } from './components/authComponents/login-page/login.component';
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
+import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
+import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
+import { MatSelectModule } from '@angular/material/select';
+import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
+import { AboutComponent } from './about/about.component';
+import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
+import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
+import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
+import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
   declarations: [
-    ProceduresPageComponent, 
-    SpecializationListComponent, 
-    DeleteProcedureDialogComponent, 
-    NewProcedureDialogComponent, 
-    EditProcedureDialogComponent, 
+    ProceduresPageComponent,
+    SpecializationListComponent,
+    DeleteProcedureDialogComponent,
+    NewProcedureDialogComponent,
+    EditProcedureDialogComponent,
     MultiSelectComponent,
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, ExceptionTodayStatsPageComponent,ExceptionTodayPageComponent, 
     LoginComponent, SignupComponent
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
+    EditAddressComponent,
+    CreateEmployeeComponent,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
+    DoctorsComponent,
+    AddAnimalComponent,
+    EditAnimalComponent,
+    DeleteAnimalComponent,
+    MainAnimalComponent,
+    
+    //AnimalMedcardComponent
+    
+    AboutComponent
   ],
   imports: [
     CommonModule,
@@ -72,10 +100,11 @@ import { SignupComponent } from './components/authComponents/signup-page/signup.
     MatDatepickerModule,
     MatTabsModule,
     MatNativeDateModule,
-    MatAutocompleteModule, 
+    MatAutocompleteModule,
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
+    MatSelectModule,
   ],
   exports: [
     ProceduresPageComponent,
@@ -87,7 +116,10 @@ import { SignupComponent } from './components/authComponents/signup-page/signup.
     UsersComponent,
     UserProfileInfoComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    EditAddressComponent,
+    CreateEmployeeComponent,
+    MainAnimalComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

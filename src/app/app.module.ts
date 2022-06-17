@@ -22,6 +22,11 @@ import { AuthGuard } from './helpers/auth-guard/auth.guard';
 import { LoginComponent } from './shared/components/authComponents/login-page/login.component';
 import { SignupComponent } from './shared/components/authComponents/signup-page/signup.component';
 import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
+import { DoctorsComponent } from './shared/components/userComponents/doctors/doctors.component';
+
+import {MainAnimalComponent} from "./shared/components/animalComponents/main-animal/main-animal.component";
+
+import {AboutComponent} from "./shared/about/about.component";
 
 const appRoutes: Routes = [
   {
@@ -76,6 +81,18 @@ const appRoutes: Routes = [
     component: SignupComponent,
     canActivate: [UnauthGuard]
   },
+  {
+    path: 'doctors',
+    component: DoctorsComponent
+  },
+  {
+    path: 'animals',
+    component: MainAnimalComponent
+  },
+  {
+    path:'about',
+    component: AboutComponent
+  }
 ];
 
 @NgModule({

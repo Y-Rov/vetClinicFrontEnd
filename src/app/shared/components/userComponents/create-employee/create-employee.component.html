@@ -1,0 +1,65 @@
+<div [formGroup]="employeeForm">
+    <div class="mat-title">New Employee</div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" type="string" minlength="2" placeholder="First Naame">
+            <mat-hint>Must be at least 2 characters long</mat-hint>
+            <mat-error *ngIf="employeeForm.controls.firstName.invalid">Length must be greater than 2</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" type="string" minlength="2" placeholder="Last Name">
+            <mat-hint>Must be at least 2 characters long</mat-hint>
+            <mat-error *ngIf="employeeForm.controls.lastName.invalid">Must be at least 2 characters long</mat-error>
+          </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="string" placeholder="email@email.com">
+            <mat-hint>Must be of a valid format</mat-hint>
+            <mat-error *ngIf="employeeForm.controls.email.invalid">Must be of a valid format</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phoneNumber" type="string" placeholder="+(380)93-238-5416">
+            <mat-hint>Must be at least 10 characters long</mat-hint>
+            <mat-error *ngIf="employeeForm.controls.phoneNumber.invalid">Must be at least 10 characters long</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+              <mat-option *ngFor="let role of rolesList" [value]="role">{{role}}</mat-option>
+            </mat-select>
+            <mat-hint>Required</mat-hint>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" placeholder="">
+            <mat-hint>Must be at least 6 characters long</mat-hint>
+            <mat-error *ngIf="employeeForm.controls.password.invalid">Must be at least 6 characters long</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput formControlName="confirmPassword" type="password" placeholder="">
+            <mat-hint>Must be at least 6 characters long</mat-hint>
+            <mat-error *ngIf="employeeForm.controls.confirmPassword.invalid">Must be at least 6 characters long</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="controls">
+        <button mat-flat-button class="discard-btn" (click)="onDiscard()">Discard</button>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!employeeForm.valid" (click)="onCreateEmployee()">Add</button>
+    </div>
+  </div>
+  

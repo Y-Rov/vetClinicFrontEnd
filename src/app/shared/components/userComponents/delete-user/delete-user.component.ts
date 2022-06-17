@@ -23,7 +23,7 @@ export class DeleteUserComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data : {id: number, firstName: string, lastName: string},
     public dialogRef: MatDialogRef<UsersComponent>,
-    private userService : UserService) { 
+    private userService : UserService) {
       this.user.id = this.data.id;
       this.user.firstName = this.data.firstName;
       this.user.lastName = this.data.lastName;
@@ -33,8 +33,8 @@ export class DeleteUserComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.userService.getUserById(this.user.id).subscribe(user => this.user = user);
-    this.userService.deleteUser(this.user).subscribe(() => this.dialogRef.close(true));
+    //this.userService.getById(this.user.id!).subscribe(user => this.user = user);
+    this.userService.deleteById(this.user.id!).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {
