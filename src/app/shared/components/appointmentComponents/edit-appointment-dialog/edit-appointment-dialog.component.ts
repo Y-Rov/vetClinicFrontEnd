@@ -32,24 +32,24 @@ const SAMPLE_DATA_PROCEDURES: Procedure[] =  [
     }]}
   ]
 
-//   const SAMPLE_DATA_USERS: User[] =  [
-//     {
-//       "id" :  1,
-//       "firstName" : "Ivan",
-//       "lastName" : "Ivanov",
-//       "email" : "Ivanov@gmail.com",
-//       "phoneNumber" :"0987654432",
-//       "birthDate": new Date()
-//   },
+  const SAMPLE_DATA_USERS: User[] =  [
+    {
+      "id" :  1,
+      "firstName" : "Ivan",
+      "lastName" : "Ivanov",
+      "email" : "Ivanov@gmail.com",
+      "phoneNumber" :"0987654432",
+      "birthDate": new Date()
+  },
   
-//   {
-//     "id" :  2,
-//     "firstName" : "Vasya",
-//     "lastName" : "Pypkin",
-//     "email" : "Vasya123@gmail.com",
-//     "phoneNumber" :"09844355645",
-//     "birthDate": new Date()
-// }]
+  {
+    "id" :  2,
+    "firstName" : "Vasya",
+    "lastName" : "Pypkin",
+    "email" : "Vasya123@gmail.com",
+    "phoneNumber" :"09844355645",
+    "birthDate": new Date()
+}]
     
   
 
@@ -65,8 +65,8 @@ export class EditAppointmentDialogComponent implements OnInit {
   selectedprocedure: Procedure[] = [];
   isSelectionChanged: boolean = false;
 
-  // users: User[] = [];
-  // selectedUser: User[]=[];
+  users: User[] = [];
+  selectedUser: User[]=[];
 
   constructor(
     @Inject(FormBuilder) private formBuilder: FormBuilder,
@@ -74,7 +74,7 @@ export class EditAppointmentDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AppointmentsPageComponent>,
     private appointmentService : AppointmentService) {  
       this.procedures = SAMPLE_DATA_PROCEDURES;
-      // this.users = SAMPLE_DATA_USERS;
+      this.users = SAMPLE_DATA_USERS;
     }
 
   form = new FormGroup({
@@ -91,7 +91,7 @@ export class EditAppointmentDialogComponent implements OnInit {
     this.data.date = this.form.value.date!;
     this.data.disease = this.form.value.disease!;
     this.data.procedures = this.selectedprocedure;
-    // this.data.users = this.selectedUser;
+    this.data.users = this.selectedUser;
     this.appointmentService.updateAppointment(this.data).subscribe(() => this.dialogRef.close(true));
 }
     
@@ -100,11 +100,11 @@ export class EditAppointmentDialogComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  // onMultiSelectSubmitProcedure(event : any) : void{ // add also users
-  //   console.log(...event.data);
-  //   this.selectedprocedure = [...event.data ] as Procedure[];
-  //   this.isSelectionChanged = event.isChanged;
-  // }
+  onMultiSelectSubmitProcedure(event : any) : void{ // add also users
+    console.log(...event.data);
+    this.selectedprocedure = [...event.data ] as Procedure[];
+    this.isSelectionChanged = event.isChanged;
+  }
 
   
   // onMultiSelectSubmitDoctor(event : any) : void{ // add also users
