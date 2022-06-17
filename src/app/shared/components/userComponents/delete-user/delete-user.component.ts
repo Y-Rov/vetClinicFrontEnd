@@ -33,8 +33,8 @@ export class DeleteUserComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.userService.getById(this.user.id!).subscribe(user => this.user = user);
-    this.userService.delete(this.user).subscribe(() => this.dialogRef.close(true));
+    //this.userService.getById(this.user.id!).subscribe(user => this.user = user);
+    this.userService.deleteById(this.user.id!).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {

@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
-import {ResourceModel} from "../../models/ResourceModel";
 import {map} from "rxjs/operators";
 import {Location} from "@angular/common";
+import {ResourceModel} from "../../models/ResourceModel";
 
-export abstract class GenericService<T extends ResourceModel<T>> {
+export abstract class ResourceService<T extends ResourceModel<T>> {
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -53,8 +53,8 @@ export abstract class GenericService<T extends ResourceModel<T>> {
       );
   }
 
-  delete(entity: T): Observable<void> {
-    const url = `${this.apiUrl}/${entity.id}`;
+  deleteById(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url, this.httpOptions)
       .pipe(
         catchError(this.handleError<void>('delete'))

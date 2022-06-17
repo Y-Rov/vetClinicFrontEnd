@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { Address} from "../../models/Address";
 import { Location } from "@angular/common";
-import {GenericService} from "../genericService/generic.service";
+import {ResourceService} from "../resourceService/resource.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddressService extends GenericService<Address> {
+export class AddressService extends ResourceService<Address> {
 
   constructor(
     private httpClient: HttpClient,

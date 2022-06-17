@@ -51,12 +51,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
 import { Location } from '@angular/common';
-import { GenericService } from '../genericService/generic.service';
+import { ResourceService } from '../resourceService/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends GenericService<User> {
+export class UserService extends ResourceService<User> {
   constructor(
     http: HttpClient,
     currentLocation: Location

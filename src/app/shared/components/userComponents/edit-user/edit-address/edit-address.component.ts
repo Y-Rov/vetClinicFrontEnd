@@ -44,7 +44,6 @@ export class EditAddressComponent implements OnInit {
             zipCode: address.zipCode
           });
           this.isAddressGetRequestSuccessful = true;
-          console.log(address);
         }
         else {
           this.isAddressGetRequestSuccessful = false;
@@ -54,9 +53,8 @@ export class EditAddressComponent implements OnInit {
 
   updateUserAddress(): void {
     if (this.isAddressGetRequestSuccessful) {
-      console.log({id: this.userId, ...this.editUserAddressForm.value});
       this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
-        .subscribe();
+        .subscribe(() => this.addressService.goToPreviousPage());
     } else {
       if (this.editUserAddressForm.valid) {
         this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})

@@ -1,6 +1,6 @@
 import {ResourceModel} from "./ResourceModel";
 
-export class Address extends ResourceModel<Address> {
+export class Address extends ResourceModel<Address>{
   city?: string | null;
   street?: string | null;
   house?: string | null;
