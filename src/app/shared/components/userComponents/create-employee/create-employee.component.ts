@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from 'src/app/core/services/userService/user.service';
 import { UsersComponent } from '../users/users.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { User } from 'src/app/core/models/User';
+import { RegisterEmployeeModel } from 'src/app/core/models/RegisterEmployeeModel';
 
 @Component({
   selector: 'app-create-employee',
@@ -31,7 +31,15 @@ export class CreateEmployeeComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
     ]),
-    role: new FormControl('', Validators.required)
+    role: new FormControl('', Validators.required),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ])
   });
 
   constructor(
@@ -41,8 +49,8 @@ export class CreateEmployeeComponent implements OnInit {
   ngOnInit(): void { }
 
   onCreateEmployee(): void {
-    const user = this.employeeForm.value as User;
-    this.userService.create(user).subscribe(() => this.dialogRef.close(true));
+    const employee = this.employeeForm.value as RegisterEmployeeModel;
+    this.userService.createEmployee(employee).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {
