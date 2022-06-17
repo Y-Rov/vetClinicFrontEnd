@@ -1,4 +1,4 @@
-<div [formGroup]="form">
+<div [formGroup]="form" (keyup.enter)="onSaveForm()">
     <div class="mat-title">Edit Procedure</div>
     <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
       <mat-label>Procedure name</mat-label>

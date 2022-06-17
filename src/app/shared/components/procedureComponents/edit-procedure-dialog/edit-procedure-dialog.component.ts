@@ -39,6 +39,12 @@ export class EditProcedureDialogComponent implements OnInit {
   }
 
   onSaveForm(): void{
+    if(!this.form.valid) {
+      return;
+    }
+    if(!(this.form.dirty || this.isSelectionChanged)) {
+      this.dialogRef.close(false);
+    }
     this.data.name = this.form.value.name!;
     this.data.description = this.form.value.description!;
     this.data.cost = this.form.value.cost!;
