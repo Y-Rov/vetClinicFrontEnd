@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Procedure } from '../../models/Procedure';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class ProcedureService {
       'Content-Type': 'application/json',
     }),
   };
-    
-  private apiUrl : string = 'https://localhost:7283/api/procedures';
+
+  private apiUrl : string = 'https://localhost:5001/api/procedures';
 
   constructor(private   http: HttpClient) { }
 

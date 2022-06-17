@@ -8,7 +8,7 @@ import {Specialization} from "../../models/Specialization";
 })
 export class SpecializationService {
 
-  url: string = "https://localhost:7283/api/specialization";
+  url: string = "https://localhost:5001/api/specialization";
 
   constructor(private httpClient : HttpClient) { }
 
