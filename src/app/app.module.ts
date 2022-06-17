@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,40 +16,66 @@ import { EditUserComponent } from './shared/components/userComponents/edit-user/
 import { UsersComponent } from './shared/components/userComponents/users/users.component';
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { RolesGuard } from './helpers/roles-guard/roles.guard';
+import { AuthGuard } from './helpers/auth-guard/auth.guard';
+import { LoginComponent } from './shared/components/authComponents/login-page/login.component';
+import { SignupComponent } from './shared/components/authComponents/signup-page/signup.component';
+import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: ProceduresPageComponent
+    component: ProceduresPageComponent,  
   },
   {
     path: 'procedures',
-    component: ProceduresPageComponent
+    component: ProceduresPageComponent,
   },
   {
     path: 'specializations',
-    component: SpecializationListComponent
+    component: SpecializationListComponent,
+    canActivate: [RolesGuard],
+    data: {allowedRoles: ['Admin']}
   },
   {
     path: 'exceptions',
-    component: ExceptionPageComponent
+    component: ExceptionPageComponent,
+    canActivate: [RolesGuard],
+    data: {allowedRoles: ['Admin']}
   },
   {
     path: 'exceptions/:id',
-    component:  ExceptionDetailPageComponent
+    component:  ExceptionDetailPageComponent,
+    canActivate: [RolesGuard],
+    data: {allowedRoles: ['Admin']}
   },
-{
+  {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent,
+    canActivate: [RolesGuard],
+    data: {allowedRoles: ['Admin']}
   },
   {
     path: 'users/:id',
-    component: UserProfileInfoComponent
+    component: UserProfileInfoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'users/:id/edit',
-    component: EditUserComponent
-  }
+    component: EditUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent,
+    canActivate: [UnauthGuard]
+  },
+  {
+    path: 'auth/signup',
+    component: SignupComponent,
+    canActivate: [UnauthGuard]
+  },
 ];
 
 @NgModule({
@@ -63,9 +89,15 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     LayoutModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
