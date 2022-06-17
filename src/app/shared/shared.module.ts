@@ -60,7 +60,7 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
-    LoginComponent, SignupComponent
+    LoginComponent, SignupComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
