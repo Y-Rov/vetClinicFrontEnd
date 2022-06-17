@@ -1,7 +1,11 @@
 import {Procedure} from "./Procedure";
+import {ResourceModel} from "./ResourceModel";
 
-export interface Specialization{
-  id: number;
-  name: string;
+export class Specialization extends ResourceModel<Specialization>{
+  name?: string;
   procedures?: Procedure[];
+
+  constructor(model?: Partial<Specialization>) {
+  super(model);
+}
 }

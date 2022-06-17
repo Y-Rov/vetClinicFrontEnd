@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Specialization} from "../../../../core/models/Specialization";
 import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
+import {AddSpecializationDialogComponent} from "../add-specialization-dialog/add-specialization-dialog.component";
 
 @Component({
   selector: 'app-specializationService-list',
@@ -12,16 +14,12 @@ export class SpecializationListComponent implements OnInit {
 
   private service: SpecializationService;
 
-   specializations!: Specialization[]
-  // = [
-  //   {id: 0, name: "doctor"},
-  //   {id: 1, name: "surgeon"},
-  //   {id: 2, name: "manager"},
-  //   {id: 3, name: "cleaner"}
-  // ]
-  columnsToDisplay = ["name","procedures"];
+   specializations!: Specialization[];
 
-  constructor(specializationService: SpecializationService) {
+  columnsToDisplay = ["name","procedures","users", "edit", "delete"];
+
+  constructor(private specializationService: SpecializationService,
+              private matDialog: MatDialog) {
     this.service = specializationService;
   }
 
@@ -33,6 +31,18 @@ export class SpecializationListComponent implements OnInit {
   }
 
   onAddSpecialization(){
+    const dialog = this.matDialog.open(AddSpecializationDialogComponent);
+
+    dialog.afterClosed()
+      .subscribe((reuireReload: boolean) =>
+      {if(reuireReload) this.ngOnInit()});
+  }
+
+  onEditSpecialization(specialization : Specialization) : void {
+
+  }
+
+  onDeleteSpecialization(specializationId: number): void{
 
   }
 }
