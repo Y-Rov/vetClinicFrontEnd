@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, SimpleChanges, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -43,6 +43,10 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
     );    
   }
 
+  ngOnChanges() {
+    if(this.data.length !== this.rawData.length) this.ngOnInit();
+  }
+
   ngOnInit(): void {
     if(this.alreadySelected == undefined) this.alreadySelected = [];
     this.data.forEach((item: T) => {
@@ -51,9 +55,11 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
         this.toggleSelection(this.rawData[this.rawData.length - 1], true);
       }
     });
-  }
-
-  ngAfterViewInit(): void{
+    this.filteredData = this.selectControl.valueChanges.pipe(
+      startWith<string>(''),
+      map(value => typeof value === 'string' ? value : this.filterString),
+      map(filter => this.filter(filter))
+    );   
   }
 
   filter(filter: string): Array<ItemData<T>>{
@@ -88,7 +94,7 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
     if(!initializing) this.emitAdjustedData();
   };
 
-  emitAdjustedData = (): void => {
+  emitAdjustedData(): void{
     const results: Array<T> = []
     this.selectData.forEach((data: ItemData<T>) => {
       results.push(data.item);
@@ -96,7 +102,7 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
     this.result.emit({ key: this.key, data: results, isChanged: true });
   };
 
-  removeChip = (data: ItemData<T>): void => {
+  removeChip(data: ItemData<T>): void {
     this.toggleSelection(data);
   };
 }
