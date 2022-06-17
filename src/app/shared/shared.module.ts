@@ -42,6 +42,7 @@ import { AddAnimalComponent } from './components/animalComponents/add-animal/add
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+import { AddSpecializationDialogComponent } from './components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component';
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
@@ -75,7 +76,8 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     
     //AnimalMedcardComponent
     
-    AboutComponent
+    AboutComponent,
+          AddSpecializationDialogComponent
   ],
   imports: [
     CommonModule,

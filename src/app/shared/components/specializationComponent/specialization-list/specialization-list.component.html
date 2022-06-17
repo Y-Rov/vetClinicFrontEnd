@@ -1,78 +1,41 @@
-<mat-accordion>
+<table mat-table [dataSource]="specializations">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let spec">{{spec.name}}</td>
+  </ng-container>
 
-  <ng-template ngFor let-specialization [ngForOf]="specializations">
+  <ng-container matColumnDef="procedures">
+    <th mat-header-cell *matHeaderCellDef>Procedures</th>
+    <td mat-cell *matCellDef = "let specialization">
+      <mat-accordion>
 
-    <mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Procedures
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{specialization.name}}
-        </mat-panel-title>
-
-        <div class="button-wrapper">
-          <button mat-icon-button>
-            <mat-icon color="primary">edit</mat-icon>
-          </button>
-
-          <button mat-icon-button>
-            <mat-icon color="warn">delete</mat-icon>
-          </button>
-        </div>
-      </mat-expansion-panel-header>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Doctors
-          </mat-panel-title>
-
-          <div>
-            <button mat-icon-button>
-              <mat-icon color="primary">add</mat-icon>
-            </button>
-          </div>
-
-        </mat-expansion-panel-header>
-
-        doctor
-        <button mat-icon-button>
-          <mat-icon color="warn">cancel</mat-icon>
-        </button>
-
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Procedures
-          </mat-panel-title>
-          <div>
-            <button mat-icon-button>
-              <mat-icon color="primary">add</mat-icon>
-            </button>
-          </div>
-        </mat-expansion-panel-header>
-
-        <ng-template ngFor let-procedure [ngForOf] = "specialization.procedures" let-i = "index">
-
-          <mat-panel-title>
-            {{procedure.name}}
-          </mat-panel-title>
+          <ng-template ngFor let-procedure [ngForOf] = "specialization.procedures" let-i = "index">
 
           <mat-panel-description>
-            {{procedure.description}}
+            {{procedure.name}}
           </mat-panel-description>
 
-        <button mat-icon-button>
-          <mat-icon color="warn">cancel</mat-icon>
-        </button>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </td>
+  </ng-container>
 
-        </ng-template>
-      </mat-expansion-panel>
 
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
 
-    </mat-expansion-panel>
-
-  </ng-template>
-
-</mat-accordion>
+<button (click)="onAddSpecialization()"
+        class="add-button mat-elevation-z8"
+        mat-stroked-button>
+  Add specialization
+  <mat-icon color="accent">add</mat-icon>
+</button>

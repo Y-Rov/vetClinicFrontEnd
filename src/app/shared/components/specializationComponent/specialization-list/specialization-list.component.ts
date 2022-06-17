@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Specialization} from "../../../../core/models/Specialization";
-import {SpecializationService} from "../../../../core/services/specialization/specialization.service";
+import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
-  selector: 'app-specialization-list',
+  selector: 'app-specializationService-list',
   templateUrl: './specialization-list.component.html',
   styleUrls: ['./specialization-list.component.sass']
 })
@@ -18,6 +19,7 @@ export class SpecializationListComponent implements OnInit {
   //   {id: 2, name: "manager"},
   //   {id: 3, name: "cleaner"}
   // ]
+  columnsToDisplay = ["name","procedures"];
 
   constructor(specializationService: SpecializationService) {
     this.service = specializationService;
@@ -25,7 +27,12 @@ export class SpecializationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAll()
-      .subscribe((spec => this.specializations = spec));
+      .subscribe((specializations =>
+        this.specializations = specializations
+      ));
   }
 
+  onAddSpecialization(){
+
+  }
 }
