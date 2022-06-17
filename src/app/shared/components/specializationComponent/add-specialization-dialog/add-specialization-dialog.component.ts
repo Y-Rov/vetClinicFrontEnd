@@ -26,7 +26,7 @@ export class AddSpecializationDialogComponent implements OnInit {
               private dialog: MatDialogRef<SpecializationListComponent>,
               private specializationService: SpecializationService,
               private  procedureService: ProcedureService) {
-    procedureService.getProcedures().subscribe((procedures) =>
+    procedureService.getAll().subscribe((procedures) =>
     this.procedures = procedures);
   }
 
@@ -36,7 +36,7 @@ export class AddSpecializationDialogComponent implements OnInit {
       .subscribe(() => this.dialog.close(true));
   }
 
-  onCancelClick() : void{
+  onCancelClick() : void {
     this.dialog.close(false);
   }
 

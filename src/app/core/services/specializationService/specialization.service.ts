@@ -11,7 +11,7 @@ import {Location} from "@angular/common";
 export class SpecializationService extends ResourceService<Specialization>{
 
   constructor(private httpClient : HttpClient,
-              currentLocation: Location) {
+              private currentLocation: Location) {
     super(httpClient, currentLocation, Specialization, "https://localhost:5001/api/specialization");
   }
 

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 interface Named {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 
 interface ItemData<TEntity extends Named> {
@@ -21,17 +21,17 @@ interface ItemData<TEntity extends Named> {
 export class MultiSelectComponent<T extends Named> implements OnInit {
 
   @Output() result = new EventEmitter<{ key: string, data: Array<T>, isChanged: boolean}>();
-  
+
   @Input() placeholder: string = 'Select specializations';
   @Input() data: Array<T> = [];
   @Input() alreadySelected: Array<T> = [];
   @Input() key: string = '';
-  
+
   selectControl = new FormControl();
-  
+
   rawData: Array<ItemData<T>> = [];
   selectData: Array<ItemData<T>> = [];
-  
+
   filteredData: Observable<Array<ItemData<T>>>;
   filterString: string = '';
 
@@ -40,7 +40,7 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
       startWith<string>(''),
       map(value => typeof value === 'string' ? value : this.filterString),
       map(filter => this.filter(filter))
-    );    
+    );
   }
 
   ngOnChanges() {
@@ -59,20 +59,20 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
       startWith<string>(''),
       map(value => typeof value === 'string' ? value : this.filterString),
       map(filter => this.filter(filter))
-    );   
+    );
   }
 
   filter(filter: string): Array<ItemData<T>>{
     this.filterString = filter;
     if (filter.length > 0) {
       return this.rawData.filter(option => {
-        return option.item.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+        return option.item.name!.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
       });
     } else {
       return this.rawData.slice();
     }
   };
-  
+
   displayFn = (): string => '';
 
   optionClicked = (data: ItemData<T>, event: Event): void => {
@@ -82,14 +82,14 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
 
   toggleSelection(data: ItemData<T>, initializing: boolean = false): void {
     data.selected = !data.selected;
-  
+
     if (data.selected === true) {
       this.selectData.push(data);
     } else {
       const i = this.selectData.findIndex(value => value.item === data.item);
       this.selectData.splice(i, 1);
     }
-  
+
     this.selectControl.setValue(this.selectData);
     if(!initializing) this.emitAdjustedData();
   };

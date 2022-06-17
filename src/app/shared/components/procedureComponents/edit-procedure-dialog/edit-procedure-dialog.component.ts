@@ -14,8 +14,8 @@ import {SpecializationService} from "../../../../core/services/specializationSer
 })
 export class EditProcedureDialogComponent implements OnInit {
 
-  specializations: Specialization[] = [];
-  selectedSpec: Specialization[] = [];
+  specializations: Specialization[];
+  selectedSpec: Specialization[];
   isSelectionChanged: boolean = false;
 
   constructor(
@@ -24,6 +24,8 @@ export class EditProcedureDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ProceduresPageComponent>,
     private procedureService : ProcedureService,
     private specializationService: SpecializationService) {
+    this.specializations = [];
+    this.selectedSpec = [];
       specializationService.getAll().subscribe((data) => this.specializations = data);
     }
 
