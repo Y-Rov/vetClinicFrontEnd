@@ -17,7 +17,7 @@ export class DoctorsComponent implements OnInit {
   }
 
   private getDoctors(): void {
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAll().subscribe(
       users => this.doctors = users.filter(u => u.role === 'Doctor'));
   }
 
@@ -28,8 +28,8 @@ export class DoctorsComponent implements OnInit {
       this.getDoctors();
     } else {
       this.doctors = this.doctors.filter(
-        d => d.firstName.toLowerCase().includes(filterValue) || 
-        d.lastName.toLowerCase().includes(filterValue));
+        d => d.firstName?.toLowerCase().includes(filterValue) ||
+        d.lastName?.toLowerCase().includes(filterValue));
     }
   }
 }

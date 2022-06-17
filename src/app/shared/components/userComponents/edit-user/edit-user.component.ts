@@ -38,7 +38,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.user.id)
+    this.userService.getById(this.user.id!)
       .subscribe(user => {
         this.user = {...user};
 
@@ -57,7 +57,7 @@ export class EditUserComponent implements OnInit {
     this.user.phoneNumber = this.editUserForm.value.phoneNumber!;
     this.user.birthDate = new Date(this.editUserForm.value.birthDate!);
 
-    this.userService.updateUser(this.user).subscribe();
+    this.userService.update(this.user).subscribe();
     this.goToPreviousPage();
   }
 

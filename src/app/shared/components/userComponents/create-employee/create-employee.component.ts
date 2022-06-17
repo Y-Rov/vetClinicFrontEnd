@@ -42,7 +42,7 @@ export class CreateEmployeeComponent implements OnInit {
 
   onCreateEmployee(): void {
     const user = this.employeeForm.value as User;
-    this.userService.createUser(user).subscribe(() => this.dialogRef.close(true));
+    this.userService.create(user).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {
