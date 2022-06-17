@@ -17,13 +17,8 @@ export class DoctorsComponent implements OnInit {
   }
 
   private getDoctors(): void {
-    // this.userService.getAll().subscribe(
-    //   users => this.doctors = users.filter(u => u.role === 'Doctor'));
-    this.userService.getAll().subscribe(
-      users => {
-        this.doctors = users.filter(u => u.role === 'Doctor');
-        console.log(users);
-      });
+    this.userService.getAll().subscribe(users => 
+      this.doctors = users.filter(u => u.role === 'Doctor'));
   }
 
   applyFilter(event: Event) {
