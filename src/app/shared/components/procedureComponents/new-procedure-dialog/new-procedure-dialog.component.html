@@ -57,7 +57,7 @@
     [data]="specializations"
     (result)="onMultiSelectSubmit($event)"
     [alreadySelected]="[]"
-    [hidden]="true"></app-multi-select>
+    [hidden]="false"></app-multi-select>
     <div class="buttons-div">
       <button mat-flat-button (click)="onNoClick()">Discard</button>
       <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid" (click)="onSaveForm()">Save</button>
