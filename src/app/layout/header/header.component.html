@@ -4,10 +4,11 @@
   <a mat-button routerLink="/doctors">Docrors</a>
   <a mat-button routerLink="/appointments">My Appointments</a>
   <a mat-button routerLink="/procedures">My Work</a>
-  <a mat-button routerLink="/specializations">Specializations</a>
-  <a mat-button routerLink="/exceptions">Exceptions</a>
+  <a mat-button *ngIf="authService.isInRole('Admin')" routerLink="/specializations">Specializations</a>
+  <a mat-button *ngIf="authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
   <div class="user-operations-container">
-    <a mat-button>Sign up</a>
-    <a mat-button>Login</a>
+    <a mat-button *ngIf="!authService.isAuthorized()" routerLink="auth/signup">Sign up</a>
+    <a mat-button *ngIf="!authService.isAuthorized()" routerLink="auth/login">Login</a>
+    <a mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
   </div>
 </mat-toolbar>
