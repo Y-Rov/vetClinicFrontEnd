@@ -36,6 +36,14 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
+import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
+import { AboutComponent } from './about/about.component';
+
+import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
+import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
+import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
+import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
@@ -50,13 +58,26 @@ import { MatSelectModule } from '@angular/material/select';
     UserProfileInfoComponent,
     EditUserComponent,
     DeleteUserComponent,
+    ExceptionPageComponent, ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    ExceptionTodayPageComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    ExceptionPageComponent, 
+    ExceptionPageComponent,
     ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent, 
+    ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent
+    ExceptionTodayPageComponent,
+    DoctorsComponent,
+    AddAnimalComponent,
+    EditAnimalComponent,
+    DeleteAnimalComponent,
+    MainAnimalComponent,
+    
+    //AnimalMedcardComponent
+    
+    AboutComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +102,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   exports: [
     ProceduresPageComponent,
@@ -95,7 +116,8 @@ import { MatSelectModule } from '@angular/material/select';
     EditUserComponent,
     DeleteUserComponent,
     EditAddressComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    MainAnimalComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
