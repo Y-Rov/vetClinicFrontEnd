@@ -1,13 +1,17 @@
 <mat-toolbar color="primary" class="header-container">
-  <a mat-button routerLink="/home">VetClinic</a>
-  <a mat-button routerLink="/procedures">Procedures</a>
-  <a mat-button routerLink="/doctors">Docrors</a>
-  <a mat-button routerLink="/appointments">My Appointments</a>
-  <a mat-button routerLink="/procedures">My Work</a>
-  <a mat-button routerLink="/specializations">Specializations</a>
-  <a mat-button routerLink="/exceptions">Exceptions</a>
+  <div class="btns">
+    <a mat-button routerLinkActive="active" routerLink="/home">VetClinic</a>
+    <a mat-button routerLinkActive="active" routerLink="/procedures">Procedures</a>
+    <a mat-button routerLinkActive="active" routerLink="/doctors">Doctors</a>
+    <a mat-button routerLinkActive="active" routerLink="/appointments">My Appointments</a>
+    <a mat-button routerLinkActive="active">My Work</a>
+    <a mat-button routerLinkActive="active" routerLink="/specializations">Specializations</a>
+    <a mat-button routerLinkActive="active" routerLink="/exceptions">Exceptions</a>
+  </div>
   <div class="user-operations-container">
     <a mat-button>Sign up</a>
     <a mat-button>Login</a>
   </div>
 </mat-toolbar>
+
+

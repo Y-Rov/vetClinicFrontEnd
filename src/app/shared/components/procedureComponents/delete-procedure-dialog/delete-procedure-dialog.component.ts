@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProcedureService } from '../../../../core/services/procedure.service';
+import { ProcedureService } from '../../../../core/services/procedureService/procedure.service';
 import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
 
 @Component({

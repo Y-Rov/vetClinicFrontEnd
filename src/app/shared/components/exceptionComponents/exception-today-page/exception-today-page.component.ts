@@ -46,7 +46,7 @@ export class ExceptionTodayPageComponent implements OnInit {
   }
 
   private updateList(): void {
-    this.exceptionService.getExceptions().subscribe((data) => {
+    this.exceptionService.getExceptionsToday().subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });

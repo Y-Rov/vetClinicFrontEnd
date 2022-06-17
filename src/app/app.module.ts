@@ -16,7 +16,14 @@ import { EditUserComponent } from './shared/components/userComponents/edit-user/
 import { UsersComponent } from './shared/components/userComponents/users/users.component';
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
+
 import { AppointmentsPageComponent } from './shared/components/appointmentComponents/appointments-page/appointments-page.component';
+
+import { DoctorsComponent } from './shared/components/userComponents/doctors/doctors.component';
+
+import {MainAnimalComponent} from "./shared/components/animalComponents/main-animal/main-animal.component";
+
+import {AboutComponent} from "./shared/about/about.component";
 
 const appRoutes: Routes = [
   {
@@ -54,6 +61,19 @@ const appRoutes: Routes = [
   {
     path: 'appointments',
     component: AppointmentsPageComponent
+  },
+  {
+    path: 'doctors',
+    component: DoctorsComponent
+  },
+  {
+    path: 'animals',
+    component: MainAnimalComponent
+  },
+  {
+    path:'about',
+    component: AboutComponent
+
   }
 ];
 
@@ -68,7 +88,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     LayoutModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { CreateEmployeeComponent } from '../create-employee/create-employee.component';
 
 @Component({
   selector: 'app-users',
@@ -25,7 +26,7 @@ export class UsersComponent implements OnInit {
     private matDialog: MatDialog) { }
 
   private updateList(): void {
-    this.userService.getAllUsers().subscribe(users => {
+    this.userService.getAll().subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
     });
@@ -37,13 +38,6 @@ export class UsersComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator!;
-  }
-
-  getAll(): void {
-    this.userService.getAllUsers().subscribe(users => {
-      this.dataSource.data = users;
-      this.dataSource.sort = this.sort!;
-    });
   }
 
   onDelete(user: User): void {
@@ -64,7 +58,13 @@ export class UsersComponent implements OnInit {
   }
 
   onNewEmployee(): void {
+    const dialogRef = this.matDialog.open(CreateEmployeeComponent);
 
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {
+      if (requireReload) {
+        this.updateList();
+      }
+    });
   }
 
   applyFilter(event: Event) {
