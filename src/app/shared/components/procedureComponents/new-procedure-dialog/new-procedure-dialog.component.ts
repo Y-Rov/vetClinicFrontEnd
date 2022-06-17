@@ -38,7 +38,7 @@ export class NewProcedureDialogComponent implements OnInit {
   onSaveForm(): void{
     const finalData : Procedure = this.form.value as Procedure;
     finalData.specializations = this.selectedSpec;
-    this.procedureService.addProcedure(finalData).subscribe(() => this.dialogRef.close(true));
+    this.procedureService.create(finalData).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {
