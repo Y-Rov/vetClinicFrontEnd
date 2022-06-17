@@ -16,7 +16,7 @@ export class AppointmentService {
     }),
   };
 
-  private apiUrl : string = "https://localhost:7283/api/appointments";
+  private apiUrl : string = "https://localhost:5001/api/appointments";
 
   constructor(private   http: HttpClient) { }
 
@@ -31,7 +31,10 @@ export class AppointmentService {
   updateAppointment(appointment: Appointment): Observable<Appointment>{
     const ViewModel = {
       id: appointment.id,
-      
+      disease: appointment.disease,
+      meetHasOccureding: appointment.meetHasOccureding,
+      procedureIds: appointment.procedures.map(proc => proc.id),
+      userIds:appointment.users.map(user=>user.id)
     }
     return this.http.put<Appointment>(this.apiUrl, appointment, this.httpOptions);
   }
