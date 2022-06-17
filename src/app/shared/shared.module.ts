@@ -33,12 +33,13 @@ import { DeleteProcedureDialogComponent } from './components/procedureComponents
 import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+import { LoginComponent } from './components/authComponents/login-page/login.component';
+import { SignupComponent } from './components/authComponents/signup-page/signup.component';
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
 import { AboutComponent } from './about/about.component';
-
 import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
@@ -59,6 +60,7 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
+    LoginComponent, SignupComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
