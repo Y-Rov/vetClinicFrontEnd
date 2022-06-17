@@ -15,6 +15,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
@@ -37,6 +38,7 @@ import { DeleteUserComponent } from './components/userComponents/delete-user/del
 import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
 import { UsersComponent } from './components/userComponents/users/users.component';
+
 
 
 @NgModule({
@@ -84,7 +86,8 @@ import { UsersComponent } from './components/userComponents/users/users.componen
     MatAutocompleteModule, 
     MatCardModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   exports: [
     ProceduresPageComponent,

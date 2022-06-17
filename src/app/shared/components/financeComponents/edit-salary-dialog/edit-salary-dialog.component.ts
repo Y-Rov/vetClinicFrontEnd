@@ -22,7 +22,7 @@ export class EditSalaryDialogComponent implements OnInit {
   }
 
   form = new FormGroup({
-    Value: new FormControl(0, Validators.min(1))
+    value: new FormControl(0, Validators.min(1))
   });
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class EditSalaryDialogComponent implements OnInit {
 
   onSaveForm(): void {
 
-    this.data.Value = this.form.value.Value!;
+    this.data.value = this.form.value.value!;
     this.salaryService.updateSalary(this.data).subscribe(() => this.dialogRef.close(true));
   }
 

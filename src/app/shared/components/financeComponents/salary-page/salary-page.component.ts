@@ -17,7 +17,7 @@ import { NewSalaryDialogComponent } from '../new-salary-dialog/new-salary-dialog
 export class SalaryPageComponent implements OnInit {
 
   dataSource: MatTableDataSource<Salary> = new MatTableDataSource();
-  displayedColumns: string[] = ['emloyeeId', 'value', 'edit', 'delete'];
+  displayedColumns: string[] = ['emloyeeId', 'name', 'value', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -49,7 +49,8 @@ export class SalaryPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(DeleteSalaryDialogComponent, {
       autoFocus: false,
       data: {
-        id: salary.EmloyeeId
+        id: salary.id,
+        name: salary.name
       }
     });
 

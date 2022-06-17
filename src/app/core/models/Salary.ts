@@ -1,4 +1,6 @@
 export interface Salary {
-  EmloyeeId: number,
-  Value: number
+  id: number,
+  emloyeeId: number,
+  value: number,
+  name: string
 }
