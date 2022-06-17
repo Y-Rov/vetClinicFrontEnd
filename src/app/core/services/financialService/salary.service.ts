@@ -45,6 +45,11 @@ export class SalaryService {
     return this.http.post<Salary>(url, salary, this.httpOptions);
   }
 
+  getEmployeebyId(employeeId: number): Observable<Employee>  {
+    const url = `${this.apiUrl}/employees/${employeeId}`;
+    return this.http?.get<Employee>(url, this.httpOptions);
+  }
+
   getEmployee(): Observable<Employee[]> {
     const url = `${this.apiUrl}/employees`;
     return this.http?.get<Employee[]>(url, this.httpOptions);
