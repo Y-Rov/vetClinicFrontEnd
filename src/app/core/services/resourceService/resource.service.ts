@@ -29,7 +29,6 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
 
   getById(id: number): Observable<T> {
     const url = `${this.apiUrl}/${id}`;
-
     return this.http.get<T>(url)
       .pipe(
         map((result) => new this.tConstructor(result)),
@@ -45,9 +44,9 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
       );
   }
 
-  updateById(id: number): Observable<T> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.put<T>(url, this.httpOptions)
+  update(entity: T): Observable<T> {
+    const url = `${this.apiUrl}/${entity.id}`;
+    return this.http.put<T>(url, entity, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),
         catchError(this.handleError<T>('update'))
