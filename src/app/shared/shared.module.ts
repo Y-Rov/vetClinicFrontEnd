@@ -23,6 +23,7 @@ import { ProceduresPageComponent } from "./components/procedureComponents/proced
 import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UsersComponent } from './components/userComponents/users/users.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
@@ -103,6 +104,7 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     MatChipsModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatTooltipModule
   ],
   exports: [
     ProceduresPageComponent,
