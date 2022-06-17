@@ -36,6 +36,7 @@ import { MultiSelectComponent } from './components/procedureComponents/multi-sel
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
+import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
 import { AboutComponent } from './about/about.component';
 
 import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
@@ -69,6 +70,7 @@ import { AddSpecializationDialogComponent } from './components/specializationCom
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
+    DoctorsComponent,
     AddAnimalComponent,
     EditAnimalComponent,
     DeleteAnimalComponent,

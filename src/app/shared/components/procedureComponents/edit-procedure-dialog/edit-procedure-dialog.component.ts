@@ -4,22 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
 import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
+import { SpecializationService } from '../../../../core/services/specialization/specialization.service';
 import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
-
-const SAMPLE_DATA: Specialization[] =  [
-  {
-    "id": 5,
-    "name": "555555string"
-  },
-  {
-    "id": 6,
-    "name": "2 Demo Specialization"
-  },
-  {
-    "id": 7,
-    "name": "string"
-  }
-]
 
 @Component({
   selector: 'app-edit-procedure-dialog',
@@ -36,8 +22,9 @@ export class EditProcedureDialogComponent implements OnInit {
     @Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data : Procedure,
     public dialogRef: MatDialogRef<ProceduresPageComponent>,
-    private procedureService : ProcedureService) {  
-      this.specializations = SAMPLE_DATA;
+    private procedureService : ProcedureService,
+    private specializationService: SpecializationService) {  
+      specializationService.getAll().subscribe((data) => this.specializations = data);
     }
 
   form = new FormGroup({
