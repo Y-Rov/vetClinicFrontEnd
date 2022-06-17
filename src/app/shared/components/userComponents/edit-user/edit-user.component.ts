@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/core/models/User';
 import { UserService } from 'src/app/core/services/userService/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AddressService } from 'src/app/core/services/addressService/address.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,7 +10,6 @@ import { AddressService } from 'src/app/core/services/addressService/address.ser
   styleUrls: ['./edit-user.component.sass']
 })
 export class EditUserComponent implements OnInit {
-  subscription: Subscription | null = null;
 
   user: User = {
     id: 0,
@@ -20,7 +17,8 @@ export class EditUserComponent implements OnInit {
     lastName: '',
     email: '',
     phoneNumber: '',
-    birthDate: new Date()
+    birthDate: new Date(),
+    role: ''
   };
 
   editUserForm = new FormGroup({
@@ -35,14 +33,12 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private addressService: AddressService,
-    private router: Router,
     private activatedRoute: ActivatedRoute) {
-        this.subscription = this.activatedRoute.params.subscribe(params => this.user.id = +params['id']);
+        this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.user.id)
+    this.userService.getById(this.user.id!)
       .subscribe(user => {
         this.user = {...user};
 
@@ -61,8 +57,8 @@ export class EditUserComponent implements OnInit {
     this.user.phoneNumber = this.editUserForm.value.phoneNumber!;
     this.user.birthDate = new Date(this.editUserForm.value.birthDate!);
 
-    this.userService.updateUser(this.user).subscribe();
-    this.router.navigate([`users`, this.user.id]);
+    this.userService.update(this.user).subscribe();
+    this.goToPreviousPage();
   }
 
   goToPreviousPage(): void {

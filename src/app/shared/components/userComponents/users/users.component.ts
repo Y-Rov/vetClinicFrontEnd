@@ -26,7 +26,7 @@ export class UsersComponent implements OnInit {
     private matDialog: MatDialog) { }
 
   private updateList(): void {
-    this.userService.getAllUsers().subscribe(users => {
+    this.userService.getAll().subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
     });

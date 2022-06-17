@@ -1,0 +1,21 @@
+<div class="content">
+    <h1>Our specialists</h1>
+    <mat-form-field class="row" appearance="outline">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Placeholder">
+    </mat-form-field>
+    <div id="doctors">
+        <div *ngFor="let doctor of doctors">
+            <div class="profile-pic"></div>
+                <div class="doc-info">
+                    <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
+                    <div class="specializations">
+                        <span *ngFor="let spec of doctor.specializations">{{spec}} </span>
+                        asdfkjhakjdsfasdf
+                    </div>
+                    <div class="portfolio">{{doctor.portfolio}}asdfasfsadf</div>
+                </div>
+            <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
+        </div>
+    </div>
+</div>
