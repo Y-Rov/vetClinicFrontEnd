@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { CreateEmployeeComponent } from '../create-employee/create-employee.component';
 
 @Component({
   selector: 'app-users',
@@ -14,8 +15,7 @@ import { DeleteUserComponent } from '../delete-user/delete-user.component';
 })
 export class UsersComponent implements OnInit {
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 
-    'phoneNumber', 'role', 'edit', 'delete'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phoneNumber', 'birthDate', 'role', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -24,33 +24,26 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateList(): void {
-    this.userService.getAllUsers().subscribe(users => {
+  private updateUsers(): void {
+    this.userService.getAll().subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
     });
   }
 
   ngOnInit(): void {
-    this.updateList();
+    this.updateUsers();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator!;
   }
 
-  getAll(): void {
-    this.userService.getAllUsers().subscribe(users => {
-      this.dataSource.data = users;
-      this.dataSource.sort = this.sort!;
-    });
-  }
-
   onDelete(user: User): void {
     const dialogRef = this.matDialog.open(DeleteUserComponent, {
       autoFocus: false,
       data: {
-        id: user.id ,
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName
       }
@@ -58,13 +51,19 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((requireReload: boolean) => {
       if (requireReload) {
-        this.updateList();
+        this.updateUsers();
       }
     });
   }
 
-  onNewEmployee(): void {
+  onCreateEmployee(): void {
+    const dialogRef = this.matDialog.open(CreateEmployeeComponent);
 
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {
+      if (requireReload) {
+        this.updateUsers();
+      }
+    });
   }
 
   applyFilter(event: Event) {

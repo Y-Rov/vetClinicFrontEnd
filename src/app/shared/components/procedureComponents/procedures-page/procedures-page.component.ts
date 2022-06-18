@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedure.service'; 
+import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteProcedureDialogComponent } from '../delete-procedure-dialog/delete-procedure-dialog.component';
 import { EditProcedureDialogComponent } from '../edit-procedure-dialog/edit-procedure-dialog.component';
@@ -27,12 +27,13 @@ export class ProceduresPageComponent implements OnInit {
   constructor(
     private procedureService: ProcedureService,
     private matDialog: MatDialog) {
-      this.updateList();
+      //this.updateList();
      }
 
   private updateList(): void {
-    this.procedureService.getProcedures().subscribe((data) => {
+    this.procedureService.getAll().subscribe(data => {
       this.dataSource.data = data;
+      console.log(data);
       this.dataSource.sort = this.sort!;
     });
   }

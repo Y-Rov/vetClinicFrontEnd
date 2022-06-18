@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Specialization} from "../../../core/models/Specialization";
+import {SpecializationService} from "../../../core/services/specialization/specialization.service";
 
 @Component({
   selector: 'app-specialization-list',
@@ -8,16 +9,24 @@ import {Specialization} from "../../../core/models/Specialization";
 })
 export class SpecializationListComponent implements OnInit {
 
-  specializations: Specialization[] = [
-    {id: 0, name: "doctor"},
-    {id: 1, name: "surgeon"},
-    {id: 2, name: "manager"},
-    {id: 3, name: "cleaner"}
-  ]
+  private service: SpecializationService;
 
-  constructor() { }
+   specializations!: Specialization[]
+  // = [
+  //   {id: 0, name: "doctor"},
+  //   {id: 1, name: "surgeon"},
+  //   {id: 2, name: "manager"},
+  //   {id: 3, name: "cleaner"}
+  // ]
+
+  constructor(specializationService: SpecializationService) {
+    this.service = specializationService;
+  }
 
   ngOnInit(): void {
+    this.service.getAll()
+      .subscribe((spec => this.specializations = spec));
+    console.log(this.specializations[0]);
   }
 
 }

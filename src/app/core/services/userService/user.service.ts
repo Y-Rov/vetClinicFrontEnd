@@ -1,48 +1,43 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { User } from '../../models/User';
 import { Location } from '@angular/common';
+import { ResourceService } from '../resourceService/resource.service';
+import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { RegisterEmployeeModel } from '../../models/RegisterEmployeeModel';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  private url: string = 'https://62a66c1d430ba53411d495fe.mockapi.io/api/users';
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-
+export class UserService extends ResourceService<User> {
   constructor(
-    private http: HttpClient,
-    private location: Location) { }
+    http: HttpClient,
+    currentLocation: Location) {
+      super(http, currentLocation, User, 'https://localhost:5001/api/users');
+    }
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url);
-  }
+    getDoctors(): Observable<User[]> {
+      const url = 'https://localhost:5001/api/users/doctors';
+      return this.http.get<User[]>(url);
+    }
 
-  getUserById(id: number): Observable<User> {
-    const userUrl = `${this.url}/${id}`;
-    return this.http.get<User>(userUrl);
-  }
+  createEmployee(regForm: RegisterEmployeeModel): Observable<User> {
+    const url = `https://localhost:5001/api/users/register/${regForm.role?.toLowerCase()}`;
 
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url, user, this.httpOptions);
-  }
+    this.httpOptions.headers.append('body', JSON.stringify({
+      firstName: regForm.firstName,
+      lastName: regForm.lastName,
+      phoneNumber: regForm.phoneNumber,
+      email: regForm.email,
+      password: regForm.password,
+      confirmPassword: regForm.confirmPassword
+    }));
 
-  updateUser(user: User): Observable<User> {
-    const userUrl = `${this.url}/${user.id}`;
-    return this.http.put<User>(userUrl, user, this.httpOptions);
-  }
-
-  deleteUser(user: User): Observable<User> {
-    const userUrl = `${this.url}/${user.id}`;
-    return this.http.delete<User>(userUrl, this.httpOptions);
-  }
-
-  goToPreviousPage(): void {
-    this.location.back();
+    return this.http.post<User>(url, regForm, this.httpOptions)
+      .pipe(
+        map((result) => new this.tConstructor(result)),
+        catchError(super.handleError<User>('createEmployee', regForm))
+      );
   }
 }

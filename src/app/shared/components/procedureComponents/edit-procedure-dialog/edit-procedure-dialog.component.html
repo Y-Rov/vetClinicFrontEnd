@@ -1,4 +1,4 @@
-<div [formGroup]="form">
+<div [formGroup]="form" (keyup.enter)="onSaveForm()">
     <div class="mat-title">Edit Procedure</div>
     <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
       <mat-label>Procedure name</mat-label>
@@ -43,12 +43,12 @@
               <mat-label>Duration</mat-label>
               <input 
                   matInput 
-                  formControlName="duration"
+                  formControlName="durationInMinutes"
                   type="number" 
                   min="1"
                   placeholder="Duration">
               <mat-hint>Must be greater than 1</mat-hint>
-              <mat-error *ngIf="form.controls.duration.invalid">Must be greater than 1</mat-error>
+              <mat-error *ngIf="form.controls.durationInMinutes.invalid">Must be greater than 1</mat-error>
           </mat-form-field>
       </p>
     </div>
@@ -56,7 +56,7 @@
       key="specializations"
       [data]="specializations"
       (result)="onMultiSelectSubmit($event)"
-      [alreadySelected]="data.specializations"></app-multi-select>
+      [alreadySelected]="data.specializations!"></app-multi-select>
     <div class="buttons-div">
       <button mat-flat-button (click)="onNoClick()">Discard</button>
       <button mat-raised-button type="submit" color="primary" [disabled]="!isButtonEnabled()" (click)="onSaveForm()">Save</button>
