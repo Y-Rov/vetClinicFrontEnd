@@ -63,6 +63,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
+    LoginComponent, SignupComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
