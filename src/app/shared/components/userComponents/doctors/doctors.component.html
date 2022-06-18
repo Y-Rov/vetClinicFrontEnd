@@ -9,9 +9,7 @@
             <div class="profile-pic"></div>
                 <div class="doc-info">
                     <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
-                    <div class="specializations">
-                        <span *ngFor="let spec of doctor.specializations">{{spec}} </span>
-                    </div>
+                    <div class="specializations">{{doctor.specializations?.join(', ')}}</div>
                     <div class="portfolio">{{doctor.portfolio}}</div>
                 </div>
             <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
