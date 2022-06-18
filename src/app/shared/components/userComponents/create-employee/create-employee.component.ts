@@ -31,6 +31,7 @@ export class CreateEmployeeComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
     ]),
+    birthDate: new FormControl('', Validators.required),
     role: new FormControl('', Validators.required),
     password: new FormControl('', [
       Validators.required,
