@@ -18,25 +18,6 @@ export class ProcedureService extends ResourceService<Procedure> {
     super(httpClient, currentLocation, Procedure, 'https://localhost:5001/api/procedures');
   }
 
-  /*getProcedures(): Observable<Procedure[]>{
-    return this.http?.get<Procedure[]>(this.apiUrl, this.httpOptions);
-  }
-
-  deleteProcedure(procedure : Procedure): Observable<Procedure>{
-    const url = `${this.apiUrl}/${procedure.id}`;
-    return this.http.delete<Procedure>(url);
-  }
-
-  deleteProcedureById(id: number): Observable<Procedure>{
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<Procedure>(url);
-  }
-
-  
-  addProcedure(procedure: Procedure): Observable<Procedure>{
-    return this.http.post<Procedure>(this.apiUrl, procedure, this.httpOptions);
-  }*/
-
   createProcedure(procedure: Procedure): Observable<Procedure>{
     const viewModel = {
       id: procedure.id,
