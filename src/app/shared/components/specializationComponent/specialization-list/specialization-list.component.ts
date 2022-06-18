@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Specialization} from "../../../../core/models/Specialization";
 import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
 import {MatTableDataSource} from "@angular/material/table";
@@ -7,6 +7,8 @@ import {AddSpecializationDialogComponent} from "../add-specialization-dialog/add
 import {
   SpecializationDeleteDialogComponent
 } from "../specialization-delete-dialog/specialization-delete-dialog.component";
+import {SpecializationEditDialogComponent} from "../specialization-edit-dialog/specialization-edit-dialog.component";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-specializationService-list',
@@ -17,9 +19,13 @@ export class SpecializationListComponent implements OnInit {
 
   private service: SpecializationService;
 
-   specializations!: Specialization[];
+  specializations: MatTableDataSource<Specialization>
+    = new MatTableDataSource();
+    //Specialization[];
 
   columnsToDisplay = ["name","procedures","users", "edit", "delete"];
+
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   constructor(private specializationService: SpecializationService,
               private matDialog: MatDialog) {
@@ -29,20 +35,29 @@ export class SpecializationListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAll()
       .subscribe((specializations =>
-        this.specializations = specializations
+        this.specializations.data = specializations
       ));
+  }
+
+  ngAfterViewInit() {
+    this.specializations.paginator = this.paginator!;
   }
 
   onAddSpecialization(){
     const dialog = this.matDialog.open(AddSpecializationDialogComponent);
 
     dialog.afterClosed()
-      .subscribe((reuireReload: boolean) =>
-      {if(reuireReload) this.ngOnInit()});
+      .subscribe((requireReload: boolean) =>
+        requireReload && this.ngOnInit());
   }
 
   onEditSpecialization(specialization : Specialization) : void {
+    const editDialog = this.matDialog.open(SpecializationEditDialogComponent,{
+      data: specialization
+    });
 
+    editDialog.afterClosed()
+      .subscribe((requireReload: boolean) => requireReload && this.ngOnInit());
   }
 
   onDeleteSpecialization(specializationId : number, specializationName : string): void{
@@ -55,6 +70,6 @@ export class SpecializationListComponent implements OnInit {
     });
 
     deleteDialog.afterClosed()
-      .subscribe((requireReload: boolean) => {if(requireReload) this.ngOnInit()});
+      .subscribe((requireReload: boolean) => requireReload && this.ngOnInit());
   }
 }
