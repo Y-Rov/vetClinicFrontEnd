@@ -43,7 +43,10 @@ import { AddAnimalComponent } from './components/animalComponents/add-animal/add
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+import { HomeComponent } from './home/home.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
+
 
 @NgModule({
 
@@ -74,10 +77,11 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
-    
+
     //AnimalMedcardComponent
-    
-    AboutComponent
+
+    AboutComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -103,6 +107,7 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     MatChipsModule,
     MatCheckboxModule,
     MatSelectModule,
+    NgbModule
   ],
   exports: [
     ProceduresPageComponent,
@@ -117,7 +122,8 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     DeleteUserComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    MainAnimalComponent
+    MainAnimalComponent,
+    HomeComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
