@@ -1,25 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
 import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
 import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
-
-const SAMPLE_DATA: Specialization[] =  [
-  {
-    "id": 5,
-    "name": "555555string"
-  },
-  {
-    "id": 6,
-    "name": "2 Demo Specialization"
-  },
-  {
-    "id": 7,
-    "name": "string"
-  }
-]
+import { SpecializationService } from '../../../../core/services/specialization/specialization.service';
 
 @Component({
   selector: 'app-new-procedure-dialog',
@@ -34,8 +20,9 @@ export class NewProcedureDialogComponent implements OnInit {
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ProceduresPageComponent>,
-    private procedureService : ProcedureService) {  
-      this.specializations = SAMPLE_DATA;
+    private procedureService : ProcedureService,
+    private specializationService: SpecializationService) {  
+      specializationService.getAll().subscribe((data) => this.specializations = data);
     }
 
   form = new FormGroup({
@@ -49,9 +36,15 @@ export class NewProcedureDialogComponent implements OnInit {
   }
 
   onSaveForm(): void{
+    if(!this.form.valid) {
+      return;
+    }
+    if(!(this.form.dirty || this.isSelectionChanged)) {
+      this.dialogRef.close(false);
+    }    
     const finalData : Procedure = this.form.value as Procedure;
     finalData.specializations = this.selectedSpec;
-    this.procedureService.addProcedure(finalData).subscribe(() => this.dialogRef.close(true));
+    this.procedureService.createProcedure(finalData).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {

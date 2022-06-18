@@ -13,9 +13,9 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
   };
 
   protected constructor(
-    private http: HttpClient,
-    private location: Location,
-    private tConstructor: { new (m: Partial<T>): T },
+    protected http: HttpClient,
+    protected location: Location,
+    protected tConstructor: { new (m: Partial<T>): T },
     protected apiUrl: string
   ) { }
 
@@ -61,7 +61,7 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
       );
   }
 
-  private handleError<T>(operation: string = 'operation', result?: T) {
+  protected handleError<T>(operation: string = 'operation', result?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       switch (error.status) {
         case 0:

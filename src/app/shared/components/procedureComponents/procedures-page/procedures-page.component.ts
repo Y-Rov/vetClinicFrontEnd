@@ -27,12 +27,13 @@ export class ProceduresPageComponent implements OnInit {
   constructor(
     private procedureService: ProcedureService,
     private matDialog: MatDialog) {
-      this.updateList();
+      //this.updateList();
      }
 
   private updateList(): void {
-    this.procedureService.getProcedures().subscribe((data) => {
+    this.procedureService.getAll().subscribe(data => {
       this.dataSource.data = data;
+      console.log(data);
       this.dataSource.sort = this.sort!;
     });
   }

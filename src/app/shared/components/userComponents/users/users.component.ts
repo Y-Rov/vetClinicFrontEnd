@@ -15,8 +15,7 @@ import { CreateEmployeeComponent } from '../create-employee/create-employee.comp
 })
 export class UsersComponent implements OnInit {
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 
-    'phoneNumber', 'role', 'edit', 'delete'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phoneNumber', 'birthDate', 'role', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -25,7 +24,7 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateList(): void {
+  private updateUsers(): void {
     this.userService.getAll().subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
@@ -33,7 +32,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updateList();
+    this.updateUsers();
   }
 
   ngAfterViewInit(): void {
@@ -44,7 +43,7 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.matDialog.open(DeleteUserComponent, {
       autoFocus: false,
       data: {
-        id: user.id ,
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName
       }
@@ -52,17 +51,17 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((requireReload: boolean) => {
       if (requireReload) {
-        this.updateList();
+        this.updateUsers();
       }
     });
   }
 
-  onNewEmployee(): void {
+  onCreateEmployee(): void {
     const dialogRef = this.matDialog.open(CreateEmployeeComponent);
 
     dialogRef.afterClosed().subscribe((requireReload: boolean) => {
       if (requireReload) {
-        this.updateList();
+        this.updateUsers();
       }
     });
   }

@@ -17,16 +17,24 @@ export class ExceptionService {
     }),
   };
 
-  private apiUrlexception : string = 'https://62a722cebedc4ca6d7c2eafe.mockapi.io/api/exceptions';
-  private apiUrlestats: string = 'https://62a722cebedc4ca6d7c2eafe.mockapi.io/api/stats';
+  private apiUrlexception : string = 'https://localhost:5001/api/exceptions';
 
   constructor(private http: HttpClient) { }
 
   getExceptions(): Observable<Exception[]>{
     return this.http?.get<Exception[]>(this.apiUrlexception, this.httpOptions);
   }
+  getExceptionsToday(): Observable<Exception[]>{
+    const url = `${this.apiUrlexception}/today`;
+    return this.http?.get<Exception[]>(url, this.httpOptions);
+  }
+  getExceptionsStatsToday(): Observable<ExceptionStats[]>{
+    const url = `${this.apiUrlexception}/stats/today`;
+    return this.http?.get<ExceptionStats[]>(url, this.httpOptions);
+  }
   getExceptionsStats(): Observable<ExceptionStats[]>{
-    return this.http?.get<ExceptionStats[]>(this.apiUrlestats, this.httpOptions);
+    const url = `${this.apiUrlexception}/stats`;
+    return this.http?.get<ExceptionStats[]>(url, this.httpOptions);
   }
   getExceptionById(id:number): Observable<Exception>{
     const url = `${this.apiUrlexception}/${id}`;

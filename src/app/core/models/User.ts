@@ -1,4 +1,4 @@
-import {ResourceModel} from "./ResourceModel";
+import { ResourceModel } from "./ResourceModel";
 
 export class User extends ResourceModel<User> {
   firstName?: string | null;
