@@ -63,7 +63,7 @@
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef>Delete</th>
     <td mat-cell *matCellDef="let specialization">
-      <button mat-mini-fab color="warn" class="tableRow" (click)="onEditSpecialization(specialization)">
+      <button mat-mini-fab color="warn" class="tableRow" (click)="onDeleteSpecialization(specialization.id, specialization.name)">
         <mat-icon class="white-icon">delete</mat-icon>
       </button>
     </td>

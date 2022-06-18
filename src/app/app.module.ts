@@ -31,7 +31,7 @@ import {AboutComponent} from "./shared/about/about.component";
 const appRoutes: Routes = [
   {
     path: '',
-    component: ProceduresPageComponent,  
+    component: ProceduresPageComponent,
   },
   {
     path: 'procedures',
@@ -39,9 +39,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'specializations',
-    component: SpecializationListComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
+    component: SpecializationListComponent
+    //canActivate: [RolesGuard],
+    //data: {allowedRoles: ['Admin']}
   },
   {
     path: 'exceptions',

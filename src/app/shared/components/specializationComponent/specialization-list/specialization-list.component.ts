@@ -4,6 +4,9 @@ import {SpecializationService} from "../../../../core/services/specializationSer
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {AddSpecializationDialogComponent} from "../add-specialization-dialog/add-specialization-dialog.component";
+import {
+  SpecializationDeleteDialogComponent
+} from "../specialization-delete-dialog/specialization-delete-dialog.component";
 
 @Component({
   selector: 'app-specializationService-list',
@@ -42,7 +45,16 @@ export class SpecializationListComponent implements OnInit {
 
   }
 
-  onDeleteSpecialization(specializationId: number): void{
+  onDeleteSpecialization(specializationId : number, specializationName : string): void{
+    const deleteDialog = this.matDialog.open(SpecializationDeleteDialogComponent,{
+      autoFocus: false,
+      data:{
+        id: specializationId,
+        name: specializationName
+      }
+    });
 
+    deleteDialog.afterClosed()
+      .subscribe((requireReload: boolean) => {if(requireReload) this.ngOnInit()});
   }
 }
