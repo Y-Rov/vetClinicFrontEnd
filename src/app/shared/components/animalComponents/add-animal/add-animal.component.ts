@@ -32,6 +32,10 @@ export class AddAnimalComponent implements OnInit {
 
   onSaveForm() : void {
     const finalData : Animal = this.form.value as Animal;
+    if(finalData.birthDate==null)
+    {
+      finalData.birthDate = new Date(Date.now());
+    }
     this.animalService.createAnimal(finalData).subscribe(() => this.dialogRef.close(true));
   }
 }
