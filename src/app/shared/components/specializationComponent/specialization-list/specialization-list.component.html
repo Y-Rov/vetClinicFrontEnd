@@ -14,6 +14,7 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Procedures
+              <mat-icon color="primary" (click)="onAddProcedure(specialization)">add</mat-icon>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -21,6 +22,7 @@
 
           <mat-panel-description>
             {{procedure.name}}
+            <mat-icon color="warn" (click)="onRemoveProcedure(procedure.id, specialization.id)">cancel</mat-icon>
           </mat-panel-description>
 
           </ng-template>

@@ -9,6 +9,9 @@ import {
 } from "../specialization-delete-dialog/specialization-delete-dialog.component";
 import {SpecializationEditDialogComponent} from "../specialization-edit-dialog/specialization-edit-dialog.component";
 import {MatPaginator} from "@angular/material/paginator";
+import {
+  SpecializationAddProcedureComponent
+} from "../specialization-add-procedure/specialization-add-procedure.component";
 
 @Component({
   selector: 'app-specializationService-list',
@@ -71,5 +74,21 @@ export class SpecializationListComponent implements OnInit {
 
     deleteDialog.afterClosed()
       .subscribe((requireReload: boolean) => requireReload && this.ngOnInit());
+  }
+
+  onAddProcedure(specialization : Specialization) : void{
+    const current = specialization;
+    const dialog = this.matDialog
+      .open(SpecializationAddProcedureComponent, {
+        data: current
+      });
+
+    dialog.afterClosed()
+      .subscribe((requireReload: boolean) => requireReload && this.ngOnInit());
+  }
+
+  onRemoveProcedure(procedureId: number,specializationId : number) : void{
+    this.specializationService.removeProcedure(procedureId, specializationId)
+      .subscribe(() => this.ngOnInit());
   }
 }
