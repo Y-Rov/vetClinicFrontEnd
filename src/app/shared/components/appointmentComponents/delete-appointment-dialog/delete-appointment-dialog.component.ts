@@ -24,7 +24,7 @@ export class DeleteAppointmentDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDeleteProcedure(): void{
+  onDeleteAppointment(): void{
     this.appointmentService.deleteAppointmentById(this.id).subscribe(() => this.dialogRef.close(true));
   }
 

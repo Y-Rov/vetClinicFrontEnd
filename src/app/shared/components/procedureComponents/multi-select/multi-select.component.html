@@ -2,7 +2,7 @@
     <mat-chip-list #chipList>
       <ng-container *ngFor="let select of selectData">
         <mat-chip class="cardinal-colors" (click)="removeChip(select)">
-          {{ select.item.name }}
+          {{ select.item.name == null ? select.item.firstName! + " " + select.item.lastName! : select.item.name!}}
           <mat-icon class="mat-chip-remove">cancel</mat-icon>
         </mat-chip>
       </ng-container>
@@ -26,7 +26,7 @@
           (change)="toggleSelection(data)"
           (click)="$event.stopPropagation()"
           color="primary">
-          {{ data.item.name }}
+          {{ data.item.name == null ? data.item.firstName! + " " + data.item.lastName! : data.item.name! }}
         </mat-checkbox>
       </div>
     </mat-option>
