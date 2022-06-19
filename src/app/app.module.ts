@@ -27,11 +27,12 @@ import { DoctorsComponent } from './shared/components/userComponents/doctors/doc
 import {MainAnimalComponent} from "./shared/components/animalComponents/main-animal/main-animal.component";
 
 import {AboutComponent} from "./shared/about/about.component";
+import {HomeComponent} from "./shared/home/home.component";
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: ProceduresPageComponent,  
+    component: HomeComponent,
   },
   {
     path: 'procedures',

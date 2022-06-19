@@ -34,7 +34,9 @@
               "src/custom-theme.scss",
               "src/styles.sass"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
