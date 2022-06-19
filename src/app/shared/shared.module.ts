@@ -20,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AboutComponent } from './about/about.component';
 import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
@@ -49,13 +50,7 @@ import { EditAddressComponent } from './components/userComponents/edit-user/edit
 import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
 import { UsersComponent } from './components/userComponents/users/users.component';
-import { AboutComponent } from './about/about.component';
-import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
-import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
-import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
-import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
@@ -129,7 +124,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatCheckboxModule,
     MatSelectModule,
     MatSelectModule,
-    MatTooltipModule
     MatTooltipModule,
     NgbModule
   ],
