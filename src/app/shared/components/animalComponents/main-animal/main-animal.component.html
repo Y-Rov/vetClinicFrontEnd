@@ -3,7 +3,8 @@
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z8 row"
-    matSort>
+    matSort
+    *ngIf="dataSource.data.length>0">
 
     <ng-container matColumnDef="nickName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nick name </th>
@@ -53,7 +54,10 @@
 
   <mat-paginator class="mat-elevation-z6 row"
                  [pageSizeOptions]="[3]"
-                 aria-label="Select page of users"></mat-paginator>
+                 aria-label="Select page of users"
+                 *ngIf="dataSource.data.length>0">
+
+  </mat-paginator>
 
   <button class="new-animal-button mat-elevation-z8"
           mat-stroked-button
@@ -63,27 +67,5 @@
     New Animal
   </button>
 </div>
-
-<!--<div class="main">-->
-<!--  <div class="keen-slider" #sliderRef>-->
-<!--    <ng-container *ngFor="let animal of animals">-->
-<!--      <div class="keen-slider__slide main-box">-->
-<!--        <div class="photo-main">-->
-<!--          <div class="photo-temp"></div>-->
-<!--        </div>-->
-<!--        <div class="info-main">-->
-<!--          <p>Name: {{animal.nickName}}</p>-->
-<!--          <p>Date of Birth: {{animal.birthDate}}</p>-->
-<!--        </div>-->
-<!--        <div class="btn-main">-->
-<!--          <button class="blue" (click)="onEditAnimal(animal)">Edit</button>-->
-<!--          <button class="red" (click)="onDeleteAnimal(animal)">Delete</button>-->
-<!--          <button class="green" (click)="onViewMedCard(animal.id)">View med card</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </ng-container>-->
-<!--  </div>-->
-<!--  <button class="green" (click)="onNewAnimal()">Add Animal</button>-->
-<!--</div>-->
 
 

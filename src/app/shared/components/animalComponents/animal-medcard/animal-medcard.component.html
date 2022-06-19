@@ -1,28 +1,33 @@
-<div class="wrapper">
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8 row"
-    matSort>
+<ng-container *ngIf="dataSource.data.length>0">
+  <div class="wrapper">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8 row"
+      matSort>
 
-    <ng-container matColumnDef="data">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
-      <td mat-cell *matCellDef="let element"> {{element.date | date:'mediumDate'}} </td>
-    </ng-container>
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+        <td mat-cell *matCellDef="let element"> {{element.date | date:'mediumDate'}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="disease">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Disease</th>
-      <td mat-cell *matCellDef="let element"> {{element.disease}} </td>
-    </ng-container>
+      <ng-container matColumnDef="disease">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Disease</th>
+        <td mat-cell *matCellDef="let element"> {{element.disease}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator class="mat-elevation-z6 row"
-                 [pageSizeOptions]="[3]"
-                 aria-label="Select page of users">
-  </mat-paginator>
-</div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator class="mat-elevation-z6 row"
+                   [pageSizeOptions]="[3]"
+                   aria-label="Select page of users">
+    </mat-paginator>
+  </div>
+</ng-container>
+<ng-container *ngIf="dataSource.data.length<=0">
+  <p>Medcard is empty</p>
+</ng-container>
 <div class="buttons-div">
   <button mat-flat-button (click)="onNoClick()">Discard</button>
 </div>
