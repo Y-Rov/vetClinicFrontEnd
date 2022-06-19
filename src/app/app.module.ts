@@ -28,11 +28,12 @@ import { SalaryPageComponent } from './shared/components/financeComponents/salar
 import {MainAnimalComponent} from "./shared/components/animalComponents/main-animal/main-animal.component";
 
 import {AboutComponent} from "./shared/about/about.component";
+import {HomeComponent} from "./shared/home/home.component";
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: ProceduresPageComponent,  
+    component: HomeComponent,
   },
   {
     path: 'procedures',

@@ -49,7 +49,13 @@ import { EditAddressComponent } from './components/userComponents/edit-user/edit
 import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
 import { UsersComponent } from './components/userComponents/users/users.component';
-
+import { AboutComponent } from './about/about.component';
+import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
+import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
+import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
+import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+import { HomeComponent } from './home/home.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
@@ -92,10 +98,11 @@ import { UsersComponent } from './components/userComponents/users/users.componen
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
-    
+
     //AnimalMedcardComponent
-    
-    AboutComponent
+
+    AboutComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -123,6 +130,8 @@ import { UsersComponent } from './components/userComponents/users/users.componen
     MatSelectModule,
     MatSelectModule,
     MatTooltipModule
+    MatTooltipModule,
+    NgbModule
   ],
   exports: [
     ProceduresPageComponent,
@@ -141,7 +150,8 @@ import { UsersComponent } from './components/userComponents/users/users.componen
     NewSalaryDialogComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    MainAnimalComponent
+    MainAnimalComponent,
+    HomeComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
