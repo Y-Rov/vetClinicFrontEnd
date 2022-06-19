@@ -93,7 +93,6 @@ const appRoutes: Routes = [
   {
     path:'about',
     component: AboutComponent
-    component: EditUserComponent
   },
   {
     path: 'salaries',

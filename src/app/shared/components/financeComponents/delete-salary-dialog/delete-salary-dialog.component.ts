@@ -25,7 +25,7 @@ export class DeleteSalaryDialogComponent implements OnInit {
   }
 
   onDeleteSalary(): void {
-    this.salaryService.deleteSalaryById(this.id).subscribe(() => this.dialogRef.close(true));
+    this.salaryService.deleteById(this.id).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {

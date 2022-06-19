@@ -29,7 +29,7 @@ export class SalaryPageComponent implements OnInit {
   }
 
   private updateList(): void {
-    this.salaryService.getSalary().subscribe((data) => {
+    this.salaryService.getAll().subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });

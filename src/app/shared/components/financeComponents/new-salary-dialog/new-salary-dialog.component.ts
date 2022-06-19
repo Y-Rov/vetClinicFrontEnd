@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Employee } from '../../../../core/models/Employees';
 import { Salary } from '../../../../core/models/Salary';
+import { EmployeeService } from '../../../../core/services/financialService/employee.service';
 import { SalaryService } from '../../../../core/services/financialService/salary.service';
 import { SalaryPageComponent } from '../salary-page/salary-page.component';
 
@@ -22,7 +23,8 @@ export class NewSalaryDialogComponent implements OnInit {
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<SalaryPageComponent>,
-    private salaryService: SalaryService) {
+    private salaryService: SalaryService,
+    private  employeeService: EmployeeService) {
     this.UpdateList();
   }
 
@@ -35,16 +37,16 @@ export class NewSalaryDialogComponent implements OnInit {
     this.UpdateList();
   }
   public UpdateList(): void {
-    this.salaryService.getEmployee().subscribe((data) => {
+    this.employeeService.getAll().subscribe((data) => {
       this.employeeList$ = data;
     });
   }
 
   onSaveForm(): void {
     const finalData: Salary = this.form.value as Salary;
-    finalData.emloyeeId = this.selectedId;
+    finalData.id = this.selectedId;
     finalData.name = this.employeeName;
-    this.salaryService.addSalary(finalData).subscribe(() => this.dialogRef.close(true));
+    this.salaryService.create(finalData).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {

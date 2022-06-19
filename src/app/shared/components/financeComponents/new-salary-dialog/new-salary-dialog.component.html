@@ -4,7 +4,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Select an employee</mat-label>
     <mat-select (selectionChange)="selectedValue($event)">
-      <mat-option *ngFor="let employee of employeeList$" [value]="employee.employeeId">
+      <mat-option *ngFor="let employee of employeeList$" [value]="employee.id">
         {{ employee.name }}
       </mat-option>
     </mat-select>
