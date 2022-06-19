@@ -45,13 +45,13 @@ export class CreateEmployeeComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
-    private userService : UserService) { }
+    private userService: UserService) { }
 
   ngOnInit(): void { }
 
   onCreateEmployee(): void {
     const employee = this.employeeForm.value as RegisterEmployeeModel;
-    this.userService.createEmployee(employee).subscribe(() => this.dialogRef.close(true));
+    this.userService.registerEmployee(employee).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {

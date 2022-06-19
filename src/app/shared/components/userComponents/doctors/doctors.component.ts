@@ -26,8 +26,8 @@ export class DoctorsComponent implements OnInit {
     if (filterValue === '') {
       this.getDoctors();
     } else {
-      this.doctors = this.doctors.filter(
-        d => d.firstName?.toLowerCase().includes(filterValue) ||
+      this.doctors = this.doctors.filter(d => 
+        d.firstName?.toLowerCase().includes(filterValue) ||
         d.lastName?.toLowerCase().includes(filterValue));
     }
   }

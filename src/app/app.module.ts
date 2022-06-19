@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProceduresPageComponent } from './shared/components/procedureComponents/procedures-page/procedures-page.component';
 import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
-import { SpecializationListComponent } from "./shared/components/specializationComponent/specialization-list/specialization-list.component";
+import { SpecializationListComponent } from "./shared/components/specialization-list/specialization-list.component";
 
 import { UserProfileInfoComponent } from './shared/components/userComponents/user-profile-info/user-profile-info.component';
 import { EditUserComponent } from './shared/components/userComponents/edit-user/edit-user.component';
@@ -27,11 +27,12 @@ import { DoctorsComponent } from './shared/components/userComponents/doctors/doc
 import {MainAnimalComponent} from "./shared/components/animalComponents/main-animal/main-animal.component";
 
 import {AboutComponent} from "./shared/about/about.component";
+import {HomeComponent} from "./shared/home/home.component";
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: ProceduresPageComponent,
+    component: HomeComponent,
   },
   {
     path: 'procedures',
@@ -39,9 +40,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'specializations',
-    component: SpecializationListComponent
-    //canActivate: [RolesGuard],
-    //data: {allowedRoles: ['Admin']}
+    component: SpecializationListComponent,
+    canActivate: [RolesGuard],
+    data: {allowedRoles: ['Admin']}
   },
   {
     path: 'exceptions',
