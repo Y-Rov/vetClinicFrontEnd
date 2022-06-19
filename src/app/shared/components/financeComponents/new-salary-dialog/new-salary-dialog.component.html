@@ -3,7 +3,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Select an employee</mat-label>
-    <mat-select (selectionChange)="selectedValue($event)">
+    <mat-select (selectionChange)="selectedValue($event)" required>
       <mat-option *ngFor="let employee of employeeList$" [value]="employee.id">
         {{ employee.name }}
       </mat-option>
@@ -26,6 +26,6 @@
 
   <div class="buttons-div">
     <button mat-flat-button (click)="onNoClick()">Discard</button>
-    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid" (click)="onSaveForm()">Save</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid||!isDropChanged" (click)="onSaveForm()">Save</button>
   </div>
 </div>

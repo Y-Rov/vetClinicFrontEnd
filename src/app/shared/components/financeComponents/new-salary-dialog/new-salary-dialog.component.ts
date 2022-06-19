@@ -19,7 +19,8 @@ export class NewSalaryDialogComponent implements OnInit {
   employeeList$!: Employee[];
   selectedId = 0;
   employeeName = '';
-  isSelectionChanged: boolean = false;
+  /*isSelectionChanged: boolean = false;*/
+  isDropChanged: boolean = false;
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<SalaryPageComponent>,
@@ -53,12 +54,13 @@ export class NewSalaryDialogComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  isButtonEnabled(): boolean {
-    return this.form.valid && (this.form.dirty || this.isSelectionChanged);
-  }
+  //isButtonEnabled(): boolean {
+  //  return this.form.valid && this.isDropChanged;
+  //}
 
   selectedValue(event: MatSelectChange) {
     this.selectedId = event.value;
     this.employeeName = event.source.triggerValue;
+    this.isDropChanged = true;
   }
 }
