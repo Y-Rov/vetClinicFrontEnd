@@ -88,7 +88,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'animals',
-    component: MainAnimalComponent
+    component: MainAnimalComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'about',

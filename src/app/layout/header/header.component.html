@@ -9,6 +9,7 @@
     <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/users">Users</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/specializations">Specializations</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
+    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/animals">Animals</a>
   </div>
 
   <div class="user-operations-container">

@@ -29,8 +29,12 @@ export class EditAnimalComponent implements OnInit {
   }
 
   onSaveForm(): void{
-    this.data.nickName = this.form.value.nickname!;
-    this.data.birthDate = this.form.value.birthDate;
+    if(this.form.value.nickname != "") {
+      this.data.nickName = this.form.value.nickname!;
+    }
+    if(this.form.value.birthDate != null){
+      this.data.birthDate = this.form.value.birthDate;
+    }
     this.animalService.updateAnimal(this.data).subscribe(() => this.dialogRef.close(true));
   }
 

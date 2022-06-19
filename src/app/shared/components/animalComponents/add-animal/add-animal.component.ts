@@ -19,7 +19,8 @@ export class AddAnimalComponent implements OnInit {
   ) { }
 
   form = new FormGroup({
-    nickname: new FormControl("", Validators.minLength(1))
+    nickName: new FormControl("", Validators.minLength(1)),
+    birthDate: new FormControl()
   });
 
   ngOnInit(): void {
@@ -31,7 +32,7 @@ export class AddAnimalComponent implements OnInit {
 
   onSaveForm() : void {
     const finalData : Animal = this.form.value as Animal;
-    this.animalService.addAnimal(finalData).subscribe(() => this.dialogRef.close(true));
+    this.animalService.createAnimal(finalData).subscribe(() => this.dialogRef.close(true));
   }
 }
 

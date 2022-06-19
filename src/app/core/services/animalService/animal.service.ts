@@ -2,21 +2,52 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {Animal} from "../../models/Animal";
+import { ResourceService } from "../resourceService/resource.service";
+import { Location } from "@angular/common";
+import {AuthService} from "../authService/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnimalService {
-  httpOption = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    })
-  };
+export class AnimalService extends ResourceService<Animal>{
 
-  private apiUrl: string = 'https://localhost:7283/api/animals';
   constructor(
-    private http: HttpClient) { }
+    private httpClient: HttpClient,
+    private currentLocation: Location,
+    private authService : AuthService)
+  {
+    super(httpClient,currentLocation,Animal,'https://localhost:5001/api/animals');
+  }
 
+  createAnimal(newAnimal :Animal) : Observable<Animal>{
+    const animalVM = {
+      id: newAnimal.id,
+      ownerId: this.authService.getUserId(),
+      nickName: newAnimal.nickName,
+      birthDate: newAnimal.birthDate
+    };
+
+    return this.httpClient.post<Animal>(this.apiUrl,animalVM,this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Animal>('createAnimal'))
+      );
+  }
+
+  updateAnimal(newAnimal : Animal) : Observable<Animal>{
+    const animalVM = {
+      id: newAnimal.id,
+      ownerId: this.authService.getUserId(),
+      nickName: newAnimal.nickName,
+      birthDate: newAnimal.birthDate
+    };
+
+    return this.httpClient.put<Animal>(this.apiUrl,animalVM,this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Animal>('createAnimal'))
+      );
+  }
+
+  /*
   getAnimals(): Observable<Animal[]> {
     return this.http.get<Animal[]>(this.apiUrl,this.httpOption)
       .pipe(
@@ -57,5 +88,5 @@ export class AnimalService {
       console.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
-  }
+  }*/
 }
