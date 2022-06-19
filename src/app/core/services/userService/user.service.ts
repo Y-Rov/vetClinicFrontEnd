@@ -15,12 +15,12 @@ export class UserService extends ResourceService<User> {
     http: HttpClient,
     currentLocation: Location) {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
-    }
+  }
 
-    getDoctors(): Observable<User[]> {
-      const url = `${this.apiUrl}/doctors`;
-      return this.http.get<User[]>(url);
-    }
+  getDoctors(): Observable<User[]> {
+    const url = `${this.apiUrl}/doctors`;
+    return this.http.get<User[]>(url);
+  }
 
   registerEmployee(regForm: RegisterEmployeeModel): Observable<User> {
     const url = `${this.apiUrl}/register/${regForm.role?.toLowerCase()}`;
