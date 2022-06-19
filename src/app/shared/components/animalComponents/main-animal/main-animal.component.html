@@ -41,7 +41,7 @@
     <ng-container matColumnDef="viewmedcard">
       <th mat-header-cell *matHeaderCellDef> View Med Card </th>
       <td mat-cell *matCellDef="let element" class="btn">
-        <button mat-mini-fab color="primary" (click)="onViewMedCard(element)">
+        <button mat-mini-fab color="primary" (click)="onViewMedCard(element.id)">
           <mat-icon class="white-icon">assessment</mat-icon>
         </button>
       </td>
@@ -55,7 +55,7 @@
                  [pageSizeOptions]="[3]"
                  aria-label="Select page of users"></mat-paginator>
 
-  <button class="new-procedure-button mat-elevation-z8"
+  <button class="new-animal-button mat-elevation-z8"
           mat-stroked-button
           (click)="onNewAnimal()"
           color="primary">

@@ -8,6 +8,7 @@ import {AddAnimalComponent} from "../add-animal/add-animal.component";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
+import {AnimalMedcardComponent} from "../animal-medcard/animal-medcard.component";
 
 @Component({
   selector: 'app-main-animal',
@@ -70,6 +71,11 @@ export class MainAnimalComponent implements OnInit {
   }
 
   onViewMedCard(id: number) {
+    const dialogRef = this.matDialog.open(AnimalMedcardComponent,{
+      autoFocus:false,
+      data:id
+    });
 
+    dialogRef.afterClosed().subscribe((reuireReload:boolean)=>{if(reuireReload) this.updateList()});
   }
 }

@@ -5,6 +5,7 @@ import {Animal} from "../../models/Animal";
 import { ResourceService } from "../resourceService/resource.service";
 import { Location } from "@angular/common";
 import {AuthService} from "../authService/auth.service";
+import {Appointment} from "../../models/Appointment";
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,11 @@ export class AnimalService extends ResourceService<Animal>{
       .pipe(
         catchError(this.handleError<Animal>('createAnimal'))
       );
+  }
+
+  getMedCard(id:number) : Observable<any>{
+    const url = `${this.apiUrl}/medcard/${id}`;
+    return this.httpClient.get(url, this.httpOptions);
   }
 
   /*

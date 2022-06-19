@@ -23,7 +23,7 @@ import { ProceduresPageComponent } from "./components/procedureComponents/proced
 import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UsersComponent } from './components/userComponents/users/users.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
@@ -46,8 +46,8 @@ import { EditAnimalComponent } from './components/animalComponents/edit-animal/e
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
@@ -80,7 +80,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     DeleteAnimalComponent,
     MainAnimalComponent,
 
-    //AnimalMedcardComponent
+    AnimalMedcardComponent,
 
     AboutComponent,
     HomeComponent
@@ -132,4 +132,5 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]
 })
-export class SharedModule { }
+
+export class SharedModule {}
