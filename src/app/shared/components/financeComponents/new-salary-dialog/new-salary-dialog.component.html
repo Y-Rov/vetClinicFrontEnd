@@ -11,7 +11,6 @@
   </mat-form-field>
 
 
-  <div class="value mat-title ">
     <p>
       <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline">
         <mat-label>Value</mat-label>
@@ -24,7 +23,6 @@
         <mat-error *ngIf="form.controls.value.invalid">Must be greater than 1</mat-error>
       </mat-form-field>
     </p>
-  </div>
 
   <div class="buttons-div">
     <button mat-flat-button (click)="onNoClick()">Discard</button>
