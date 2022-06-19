@@ -5,11 +5,11 @@
     <button type="button" data-bs-target="#animalCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-    <div *ngFor="let imageUrl of images; let i = index" [ngClass]="i === 0 ? 'carousel-item active': 'carousel-item'">
-      <img src="assets/images/carousel-{{imageUrl}}-image.jpg" class="d-block w-100 darken-image" alt="carousel-{{imageUrl}}-image">
+    <div *ngFor="let imagePartialUrl of images; let i = index" [ngClass]="i === 0 ? 'carousel-item active': 'carousel-item'">
+      <img src="assets/images/carousel-{{imagePartialUrl}}-image.jpg" class="d-block w-100 darken-image" alt="carousel-{{imagePartialUrl}}-image">
       <div class="carousel-caption d-none d-md-block">
         <h4>Here is a slide label</h4>
-        <p>Some representative placeholder content for the {{imageUrl}} slide.</p>
+        <p>Some representative placeholder content for the {{imagePartialUrl}} slide.</p>
       </div>
     </div>
   </div>
@@ -25,8 +25,6 @@
 
 <div class="divider"></div>
 
-
-
 <div class="px-4 pt-5 my-5 text-center border-bottom">
   <h1 class="display-4 fw-bold mb-3">Heading 1</h1>
   <div class="col-lg-6 mx-auto">
@@ -34,9 +32,8 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cum eum nostrum odit quam quis sapiente vel
       veritatis! A, ab aperiam est expedita hic incidunt itaque officiis porro reprehenderit unde!
     </p>
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
-      <button class="mat-elevation-z1 rounded-3" mat-raised-button color="primary">
-        <a class="text-decoration-none text-white" routerLink="/procedures">Our services</a></button>
+    <div class="mb-4">
+      <a mat-raised-button color="primary" class="text-decoration-none custom-link" routerLink="/procedures">Our services</a>
     </div>
   </div>
   <div class="overflow-hidden">
@@ -55,15 +52,13 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cum eum nostrum odit quam quis sapiente vel
       veritatis! A, ab aperiam est expedita hic incidunt itaque officiis porro reprehenderit unde!
     </p>
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
-      <button class="mat-elevation-z1 rounded-3" mat-raised-button color="primary">
-        <a class="text-decoration-none text-white" routerLink="/doctors">Our specialists</a>
-      </button>
+    <div class="mb-4">
+      <a mat-raised-button color="primary" class="text-decoration-none custom-link" routerLink="/doctors">Our specialists</a>
     </div>
   </div>
   <div class="overflow-hidden">
     <div class="container px-5">
-      <img src="assets/images/doctors-image.png" class="border rounded-3 shadow-lg mb-5" alt="Doctors' image" loading="lazy">
+      <img src="assets/images/doctors-image.png" class="border rounded-3 shadow-lg" alt="Doctors' image" loading="lazy">
     </div>
   </div>
 </div>

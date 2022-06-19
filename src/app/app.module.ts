@@ -32,7 +32,7 @@ import {HomeComponent} from "./shared/home/home.component";
 const appRoutes: Routes = [
   {
     path: '',
-    component: ProceduresPageComponent,  
+    component: HomeComponent,
   },
   {
     path: 'procedures',
@@ -93,10 +93,6 @@ const appRoutes: Routes = [
   {
     path:'about',
     component: AboutComponent
-  },
-  {
-    path:'home',
-    component: HomeComponent
   }
 ];
 
