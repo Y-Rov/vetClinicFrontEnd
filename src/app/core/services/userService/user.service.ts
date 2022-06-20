@@ -15,15 +15,15 @@ export class UserService extends ResourceService<User> {
     http: HttpClient,
     currentLocation: Location) {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
-    }
+  }
 
-    getDoctors(): Observable<User[]> {
-      const url = 'https://localhost:5001/api/users/doctors';
-      return this.http.get<User[]>(url);
-    }
+  getDoctors(): Observable<User[]> {
+    const url = `${this.apiUrl}/doctors`;
+    return this.http.get<User[]>(url);
+  }
 
-  createEmployee(regForm: RegisterEmployeeModel): Observable<User> {
-    const url = `https://localhost:5001/api/users/register/${regForm.role?.toLowerCase()}`;
+  registerEmployee(regForm: RegisterEmployeeModel): Observable<User> {
+    const url = `${this.apiUrl}/register/${regForm.role?.toLowerCase()}`;
 
     this.httpOptions.headers.append('body', JSON.stringify({
       firstName: regForm.firstName,
@@ -37,7 +37,7 @@ export class UserService extends ResourceService<User> {
     return this.http.post<User>(url, regForm, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),
-        catchError(super.handleError<User>('createEmployee', regForm))
+        catchError(super.handleError<User>('registerEmployee', regForm))
       );
   }
 }

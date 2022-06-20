@@ -21,14 +21,13 @@ export class DoctorsComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
 
-    if (filterValue === '') {
-      this.getDoctors();
+    if (filterValue !== '') {
+      this.doctors = this.doctors.filter(d => 
+        d.specializations?.find(s => s.toLowerCase().includes(filterValue)));
     } else {
-      this.doctors = this.doctors.filter(
-        d => d.firstName?.toLowerCase().includes(filterValue) ||
-        d.lastName?.toLowerCase().includes(filterValue));
+      this.getDoctors();
     }
   }
 }

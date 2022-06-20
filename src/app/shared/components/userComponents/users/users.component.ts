@@ -15,7 +15,9 @@ import { CreateEmployeeComponent } from '../create-employee/create-employee.comp
 })
 export class UsersComponent implements OnInit {
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phoneNumber', 'birthDate', 'role', 'edit', 'delete'];
+  displayedColumns: string[] = [
+    'firstName', 'lastName', 'email', 'phoneNumber', 'birthDate', 'role', 'edit', 'delete'
+  ];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;

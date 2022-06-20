@@ -1,0 +1,31 @@
+<div [formGroup]="form">
+  <div class="mat-title">New Salary</div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select an employee</mat-label>
+    <mat-select (selectionChange)="selectedValue($event)" required>
+      <mat-option *ngFor="let employee of employeeList$" [value]="employee.id">
+        {{ employee.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+    <p>
+      <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline">
+        <mat-label>Value</mat-label>
+        <input matInput
+               formControlName="value"
+               type="number"
+               min="1"
+               placeholder="Value">
+        <mat-hint>Must be greater than 1</mat-hint>
+        <mat-error *ngIf="form.controls.value.invalid">Must be greater than 1</mat-error>
+      </mat-form-field>
+    </p>
+
+  <div class="buttons-div">
+    <button mat-flat-button (click)="onNoClick()">Discard</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid||!isDropChanged" (click)="onSaveForm()">Save</button>
+  </div>
+</div>

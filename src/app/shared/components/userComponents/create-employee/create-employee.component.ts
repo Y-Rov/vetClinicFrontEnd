@@ -11,7 +11,7 @@ import { RegisterEmployeeModel } from 'src/app/core/models/RegisterEmployeeModel
   styleUrls: ['./create-employee.component.sass']
 })
 export class CreateEmployeeComponent implements OnInit {
-  rolesList: string[] = ['Doctor', 'Accountant', 'Administrator'];
+  rolesList: string[] = ['Doctor', 'Accountant', 'Admin'];
   isSelectionChanged: boolean = false;
 
   employeeForm = new FormGroup({
@@ -31,7 +31,7 @@ export class CreateEmployeeComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
     ]),
-    birthDate: new FormControl('', Validators.required),
+    birthDate: new FormControl(new Date(''), Validators.required),
     role: new FormControl('', Validators.required),
     password: new FormControl('', [
       Validators.required,
@@ -45,13 +45,13 @@ export class CreateEmployeeComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
-    private userService : UserService) { }
+    private userService: UserService) { }
 
   ngOnInit(): void { }
 
   onCreateEmployee(): void {
     const employee = this.employeeForm.value as RegisterEmployeeModel;
-    this.userService.createEmployee(employee).subscribe(() => this.dialogRef.close(true));
+    this.userService.registerEmployee(employee).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {

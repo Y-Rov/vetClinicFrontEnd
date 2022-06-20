@@ -41,13 +41,16 @@
           </div>
 
           <div class="controls">
-            <button mat-raised-button class="submit-btn" color="primary" (click)="updateUser()">Submit</button>
+            <button mat-raised-button class="submit-btn" color="primary" (click)="onUpdateUser()">Submit</button>
             <button mat-raised-button color="warn" (click)="goToPreviousPage()">Cancel</button>
           </div>
         </form>
       </mat-tab>
       <mat-tab class="mat-tab" label="Address">
         <app-edit-address></app-edit-address>
+      </mat-tab>
+      <mat-tab *ngIf="authService.isInRole('Doctor')" class="mat-tab" label="Portfolio">
+        <app-edit-portfolio></app-edit-portfolio>
       </mat-tab>
     </mat-tab-group>
   </div>

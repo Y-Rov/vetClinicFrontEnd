@@ -3,9 +3,9 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
-import { SpecializationService } from '../../../../core/services/specialization/specialization.service';
+import { ProcedureService } from '../../../../core/services/procedureService/procedure.service';
 import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
+import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
 
 @Component({
   selector: 'app-edit-procedure-dialog',
@@ -14,8 +14,8 @@ import { ProceduresPageComponent } from '../procedures-page/procedures-page.comp
 })
 export class EditProcedureDialogComponent implements OnInit {
 
-  specializations: Specialization[] = [];
-  selectedSpec: Specialization[] = [];
+  specializations: Specialization[];
+  selectedSpec: Specialization[];
   isSelectionChanged: boolean = false;
 
   constructor(
@@ -23,7 +23,9 @@ export class EditProcedureDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data : Procedure,
     public dialogRef: MatDialogRef<ProceduresPageComponent>,
     private procedureService : ProcedureService,
-    private specializationService: SpecializationService) {  
+    private specializationService: SpecializationService) {
+    this.specializations = [];
+    this.selectedSpec = [];
       specializationService.getAll().subscribe((data) => this.specializations = data);
     }
 
@@ -65,6 +67,6 @@ export class EditProcedureDialogComponent implements OnInit {
   }
 
   isButtonEnabled(): boolean{
-    return this.form.valid && (this.form.dirty || this.isSelectionChanged); 
+    return this.form.valid && (this.form.dirty || this.isSelectionChanged);
   }
 }

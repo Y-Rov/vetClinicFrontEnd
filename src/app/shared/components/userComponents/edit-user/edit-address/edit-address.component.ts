@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AddressService } from "src/app/core/services/addressService/address.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-address',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 export class EditAddressComponent implements OnInit {
 
   userId: number;
-  isAddressGetRequestSuccessful?: boolean;
+  isAddressGetRequestSuccessful: boolean = false;
 
   editUserAddressForm = new FormGroup({
     'city': new FormControl<string>('', Validators.required),
@@ -23,7 +24,9 @@ export class EditAddressComponent implements OnInit {
 
   constructor(
     private addressService: AddressService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
@@ -45,22 +48,32 @@ export class EditAddressComponent implements OnInit {
           });
           this.isAddressGetRequestSuccessful = true;
         }
-        else {
-          this.isAddressGetRequestSuccessful = false;
-        }
       });
   }
 
   updateUserAddress(): void {
-    if (this.isAddressGetRequestSuccessful) {
+    if (this.isAddressGetRequestSuccessful && this.editUserAddressForm.dirty) {
       this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
-        .subscribe(() => this.addressService.goToPreviousPage());
+        .subscribe(() => {
+          this.showSnackBar('updated');
+        });
     } else {
       if (this.editUserAddressForm.valid) {
         this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})
-          .subscribe(() => this.addressService.goToPreviousPage());
+          .subscribe(() => {
+            this.showSnackBar('created');
+          });
       }
     }
+  }
+
+  showSnackBar(verb: string) {
+    this.snackBar.open(`Your address was ${verb} successfully!`, 'Close', {
+      duration: 4000,
+      panelClass: ['green-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 
   goToPreviousPage(): void {
