@@ -42,7 +42,7 @@ export class EditProcedureDialogComponent implements OnInit {
     this.data.name = this.form.value.name!;
     this.data.description = this.form.value.description!;
     this.data.cost = this.form.value.cost!;
-    this.data.durationInMinutes = this.form.value.durationInMinutes!;
+    //this.data.durationInMinutes = this.form.value.durationInMinutes!;
     if(this.isSelectionChanged){
       this.data.specializations = this.selectedSpec;
     }
