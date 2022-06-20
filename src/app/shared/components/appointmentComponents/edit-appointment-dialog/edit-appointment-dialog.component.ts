@@ -55,21 +55,21 @@ import { AppointmentsPageComponent } from '../appointments-page/appointments-pag
 // }]
  
 
-// const SAMPLE_DATA_ANIMAL: Animal[] =  [
-//   {
-//     "id" :  1,
-//     "ownerId" :  1,
-//     "nickName" :  "Tom",
-//     "birthDate" :   new Date()
-//   },
-//   {
-//     "id" :  2,
-//     "ownerId" :  1,
-//     "nickName" :  "Jerry",
-//     "birthDate" :   new Date()
-//   }
+const SAMPLE_DATA_ANIMAL: Animal[] =  [
+  {
+    "id" :  1,
+    "ownerId" :  1,
+    "nickName" :  "Tom",
+    "birthDate" :   new Date()
+  },
+  {
+    "id" :  2,
+    "ownerId" :  1,
+    "nickName" :  "Jerry",
+    "birthDate" :   new Date()
+  }
 
-// ]
+]
 
 
 @Component({
@@ -98,6 +98,7 @@ export class EditAppointmentDialogComponent implements OnInit {
     private userService : UserService) {  
       this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
       this.userService.getAll().subscribe((data: User[]) => this.users = data)
+      this.animals$ = SAMPLE_DATA_ANIMAL;
     }
 
   form = new FormGroup({

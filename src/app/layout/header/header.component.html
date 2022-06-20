@@ -7,7 +7,8 @@
     <a mat-button routerLinkActive="active" routerLink="/appointments">My Appointments</a>
     <a mat-button routerLinkActive="active">My Work</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/users">Users</a>
-    <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/specializations">Specializations</a>
+    <a mat-button routerLinkActive="active" routerLink="/specializations">Specializations</a>
+    <!-- <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/specializations">Specializations</a> -->
     <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
   </div>
 

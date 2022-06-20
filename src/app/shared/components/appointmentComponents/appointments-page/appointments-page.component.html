@@ -11,7 +11,7 @@
     
       <ng-container matColumnDef="animalName">
         <th mat-header-cell *matHeaderCellDef > Animal name </th>
-        <td mat-cell *matCellDef="let element"> {{element.animalName}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.animalViewModel.nickName}} </td>
       </ng-container>
     
       <ng-container matColumnDef="disease">
@@ -21,17 +21,35 @@
       
       <ng-container matColumnDef="procedureName">
         <th mat-header-cell *matHeaderCellDef > Procedure name </th>
-        <td mat-cell *matCellDef="let element"> {{element.procedureName}} </td>
+        <td mat-cell *matCellDef="let element">
+            <mat-expansion-panel  *ngFor="let procedure of element.procedures">
+           <mat-expansion-panel-header>
+            <mat-panel-title>
+              List of procedures
+            </mat-panel-title>
+          </mat-expansion-panel-header >
+          <p>{{procedure.name }}</p>
+        </mat-expansion-panel> </td>
       </ng-container>
 
       <ng-container matColumnDef="doctorName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor name </th>
-        <td mat-cell *matCellDef="let element"> {{element.doctorName}} </td>
+        <th mat-header-cell *matHeaderCellDef > Doctor name </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-expansion-panel  *ngFor="let doctor of element.users">
+           <mat-expansion-panel-header>
+            <mat-panel-title>
+              List of doctors
+            </mat-panel-title>
+          </mat-expansion-panel-header >
+          <p>{{doctor.firstName }}
+            {{doctor.lastName }}
+          </p>
+        </mat-expansion-panel> </td>
       </ng-container>
     
       <ng-container matColumnDef="appointmentDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Appointment Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.dateAndTime}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.date | date: 'mediumDate'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="edit">

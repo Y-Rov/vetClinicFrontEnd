@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { Animal } from 'src/app/core/models/Animal';
 import { Appointment } from 'src/app/core/models/Appointment';
 import { Procedure } from 'src/app/core/models/Procedure';
@@ -102,7 +103,7 @@ export class NewAppointmentDialogComponent implements OnInit {
 
   form = new FormGroup({
 
-    date: new FormControl(new Date(), Validators.min(30)), 
+    dateAndTime: new FormControl(new Date(), Validators.min(30)), 
     disease: new FormControl("", [Validators.minLength(3),Validators.maxLength(255)])
   });
   
@@ -120,6 +121,9 @@ export class NewAppointmentDialogComponent implements OnInit {
     finalData.procedures = this.selectedprocedure;
     finalData.users = this.selectedUser;
     finalData.animal = this.selectedAnimal;
+    console.log("ACVFD");
+    // finalData.dateAndTime = this
+    console.log(finalData);
     this.appointmentService.addAppointment(finalData).subscribe(() => this.dialogRef.close(true));
   }
 
@@ -140,9 +144,11 @@ export class NewAppointmentDialogComponent implements OnInit {
     this.isSelectionChanged = event.isChanged;
   }
 
-  selectedAnimalForNew(event: any) {
-    this.selectedAnimal = event.data as Animal;
-    this.isSelectionChanged = event.isChanged;
+  selectedAnimalForNew(event: MatSelectChange) {
+    this.selectedAnimal = event.value;
+    console.log(this.selectedAnimal);
+    this.isSelectionChanged = true;
+
   }
 
   isButtonEnabled(): boolean{

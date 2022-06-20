@@ -26,7 +26,7 @@ export class AppointmentService extends ResourceService<Appointment>{
     private httpClient: HttpClient,
     private currentLocation: Location
   ) {
-    super(httpClient, currentLocation, Appointment, 'https://62a9f6063b314385543f4974.mockapi.io/api/appointment/');
+    super(httpClient, currentLocation, Appointment, 'https://localhost:5001/api/appointments');
   }
 
   // getAppointments(): Observable<Appointment[]>{
@@ -37,15 +37,18 @@ export class AppointmentService extends ResourceService<Appointment>{
   //   return this.http.post<Appointment>(this.apiUrl, appointment, this.httpOptions);
   // }
   addAppointment(appointment: Appointment): Observable<Appointment>{
+    console.log(appointment);
     const viewModel = {
-      id: appointment.id,
+
       disease: appointment.disease,
-      meetHasOccureding: appointment.meetHasOccureding,
+      meetHasOccureding: false,
       animalId: appointment.animal?.id,
+      date: appointment.dateAndTime,
       procedureIds: appointment.procedures?.map(proc => proc.id),
       userIds:appointment.users?.map(user=>user.id)
     }
-    return this.http.post<Appointment>(this.apiUrl, appointment, this.httpOptions)
+    console.log(viewModel);
+    return this.http.post<Appointment>(this.apiUrl, viewModel, this.httpOptions)
     .pipe(
       map((result) => new this.tConstructor(result)),
       catchError(this.handleError<Appointment>('getById'))
@@ -55,14 +58,16 @@ export class AppointmentService extends ResourceService<Appointment>{
 
   updateAppointment(appointment: Appointment): Observable<Appointment>{
     const ViewModel = {
+
       id: appointment.id,
       disease: appointment.disease,
       meetHasOccureding: appointment.meetHasOccureding,
+      date: appointment.dateAndTime!,
       animalId: appointment.animal?.id,
       procedureIds: appointment.procedures?.map(proc => proc.id),
       userIds:appointment.users?.map(user=>user.id)
     }
-    return this.http.put<Appointment>(this.apiUrl, appointment, this.httpOptions)
+    return this.http.put<Appointment>(this.apiUrl, ViewModel, this.httpOptions)
     .pipe(
       map((result) => new this.tConstructor(result)),
       catchError(this.handleError<Appointment>('getById'))

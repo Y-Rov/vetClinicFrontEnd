@@ -30,6 +30,7 @@ export class AppointmentsPageComponent implements OnInit {
 
   private updateList(): void {
     this.appointmentService.getAll().subscribe(data => {
+      console.log(data);
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });

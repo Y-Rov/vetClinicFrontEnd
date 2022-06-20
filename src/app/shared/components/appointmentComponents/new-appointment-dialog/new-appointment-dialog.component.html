@@ -35,7 +35,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Animal name</mat-label>
           <mat-select (selectionChange)="selectedAnimalForNew($event)" required>
-            <mat-option *ngFor="let animal of animals$" [value]="animal.nickName">
+            <mat-option *ngFor="let animal of animals$" [value]="animal">
               {{animal.nickName}}
             </mat-option>
           </mat-select>
@@ -47,7 +47,7 @@
             <mat-label>Appointment Date</mat-label>
             <input
               matInput
-              formControlName="date"
+              formControlName="dateAndTime"
               type="date"
               placeholder="Appointment Date">
           </mat-form-field>
