@@ -45,7 +45,6 @@ import { EditAnimalComponent } from './components/animalComponents/edit-animal/e
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {
