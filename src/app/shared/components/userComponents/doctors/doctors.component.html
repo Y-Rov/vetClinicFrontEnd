@@ -2,7 +2,7 @@
     <h1>Our specialists</h1>
     <mat-form-field appearance="outline">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Placeholder">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Specialization">
     </mat-form-field>
     <div id="doctors">
         <div *ngFor="let doctor of doctors">
