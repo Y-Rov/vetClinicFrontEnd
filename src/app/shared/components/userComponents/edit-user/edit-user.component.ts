@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/core/models/User';
 import { UserService } from 'src/app/core/services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';
+import {AuthService} from "../../../../core/services/authService/auth.service";
 
 @Component({
   selector: 'app-edit-user',
@@ -32,6 +33,7 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    public authService: AuthService,
     private activatedRoute: ActivatedRoute) {
         this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }

@@ -49,6 +49,9 @@
       <mat-tab class="mat-tab" label="Address">
         <app-edit-address></app-edit-address>
       </mat-tab>
+      <mat-tab *ngIf="authService.isInRole('Doctor')" class="mat-tab" label="Portfolio">
+        <app-edit-portfolio></app-edit-portfolio>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>
