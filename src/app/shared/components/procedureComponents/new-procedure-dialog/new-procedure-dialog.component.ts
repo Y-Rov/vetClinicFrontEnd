@@ -3,9 +3,9 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 import { Procedure } from '../../../../core/models/Procedure';
 import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
+import { ProcedureService } from '../../../../core/services/procedureService/procedure.service';
 import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
-import { SpecializationService } from '../../../../core/services/specialization/specialization.service';
+import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
 
 @Component({
   selector: 'app-new-procedure-dialog',
@@ -21,7 +21,7 @@ export class NewProcedureDialogComponent implements OnInit {
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ProceduresPageComponent>,
     private procedureService : ProcedureService,
-    private specializationService: SpecializationService) {  
+    private specializationService: SpecializationService) {
       specializationService.getAll().subscribe((data) => this.specializations = data);
     }
 
@@ -58,6 +58,6 @@ export class NewProcedureDialogComponent implements OnInit {
   }
 
   isButtonEnabled(): boolean{
-    return this.form.valid && (this.form.dirty || this.isSelectionChanged); 
+    return this.form.valid && (this.form.dirty || this.isSelectionChanged);
   }
 }

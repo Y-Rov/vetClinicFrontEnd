@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <div class="mat-title">Edit specialization</div>
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <mat-label>Specialization name</mat-label>
+    <input
+      matInput
+    formControlName = "name"
+    type="string"
+    minlength="5"
+    placeholder="Specialization name">
+    <mat-hint>Length must be greater than 4</mat-hint>
+    <mat-error *ngIf="form.controls.name.invalid">Length must be greater than 4</mat-error>
+  </mat-form-field>
+  <div class="buttons-div">
+    <button mat-raised-button type="submit" color="primary" (click)="onSaveForm()">Save</button>
+    <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+  </div>
+</form>

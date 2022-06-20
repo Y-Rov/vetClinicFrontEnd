@@ -1,33 +1,33 @@
 <div class="chip-list-wrapper">
-    <mat-chip-list #chipList>
-      <ng-container *ngFor="let select of selectData">
-        <mat-chip class="cardinal-colors" (click)="removeChip(select)">
-          {{ select.item.name }}
-          <mat-icon class="mat-chip-remove">cancel</mat-icon>
-        </mat-chip>
-      </ng-container>
-    </mat-chip-list>
-  </div>
-  
+  <mat-chip-list #chipList>
+    <ng-container *ngFor="let select of selectData">
+      <mat-chip class="cardinal-colors" (click)="removeChip(select)">
+        {{ select.item.name == null ? select.item.firstName! + " " + select.item.lastName! : select.item.name!}}
+        <mat-icon class="mat-chip-remove">cancel</mat-icon>
+      </mat-chip>
+    </ng-container>
+  </mat-chip-list>
+</div>
 
-  <mat-form-field class="full-width" 
-    appearance="outline">
-    <mat-label>{{placeholder}}</mat-label>
-    <input matInput type="text"
-    [placeholder]="placeholder"
-    [matAutocomplete]="auto"
-    [formControl]="selectControl">
-    </mat-form-field>
-  
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-    <mat-option *ngFor="let data of filteredData | async">
-      <div (click)="optionClicked(data, $event)">
-        <mat-checkbox [checked]="data.selected" 
-          (change)="toggleSelection(data)"
-          (click)="$event.stopPropagation()"
-          color="primary">
-          {{ data.item.name }}
-        </mat-checkbox>
-      </div>
-    </mat-option>
-  </mat-autocomplete>
+
+<mat-form-field class="full-width"
+                appearance="outline">
+  <mat-label>{{placeholder}}</mat-label>
+  <input matInput type="text"
+         [placeholder]="placeholder"
+         [matAutocomplete]="auto"
+         [formControl]="selectControl">
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let data of filteredData | async">
+    <div (click)="optionClicked(data, $event)">
+      <mat-checkbox [checked]="data.selected"
+                    (change)="toggleSelection(data)"
+                    (click)="$event.stopPropagation()"
+                    color="primary">
+        {{ data.item.name == null ? data.item.firstName! + " " + data.item.lastName! : data.item.name! }}
+      </mat-checkbox>
+    </div>
+  </mat-option>
+</mat-autocomplete>
