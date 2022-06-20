@@ -1,0 +1,66 @@
+<div id="animalCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#animalCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#animalCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#animalCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div *ngFor="let imagePartialUrl of images; let i = index" [ngClass]="i === 0 ? 'carousel-item active': 'carousel-item'">
+      <img src="assets/images/carousel-{{imagePartialUrl}}-image.jpg" class="d-block w-100 darken-image" alt="carousel-{{imagePartialUrl}}-image">
+      <div class="carousel-caption d-none d-md-block">
+        <h4>Here is a slide label</h4>
+        <p>Some representative placeholder content for the {{imagePartialUrl}} slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#animalCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#animalCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="divider"></div>
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold mb-3">Heading 1</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cum eum nostrum odit quam quis sapiente vel
+      veritatis! A, ab aperiam est expedita hic incidunt itaque officiis porro reprehenderit unde!
+    </p>
+    <div class="mb-4">
+      <a mat-raised-button color="primary" class="text-decoration-none custom-link" routerLink="/procedures">Our services</a>
+    </div>
+  </div>
+  <div class="overflow-hidden">
+    <div class="container px-5">
+      <img src="assets/images/procedures-image.jpg" class="border rounded-3 shadow-lg" alt="Procedure image" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold mb-3">Heading 2</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cum eum nostrum odit quam quis sapiente vel
+      veritatis! A, ab aperiam est expedita hic incidunt itaque officiis porro reprehenderit unde!
+    </p>
+    <div class="mb-4">
+      <a mat-raised-button color="primary" class="text-decoration-none custom-link" routerLink="/doctors">Our specialists</a>
+    </div>
+  </div>
+  <div class="overflow-hidden">
+    <div class="container px-5">
+      <img src="assets/images/doctors-image.png" class="border rounded-3 shadow-lg" alt="Doctors' image" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>

@@ -23,6 +23,7 @@ import { ProceduresPageComponent } from "./components/procedureComponents/proced
 import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UsersComponent } from './components/userComponents/users/users.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
@@ -33,22 +34,24 @@ import { DeleteProcedureDialogComponent } from './components/procedureComponents
 import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
 import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
-
 import { AppointmentsPageComponent } from './components/appointmentComponents/appointments-page/appointments-page.component';
 import { DeleteAppointmentDialogComponent } from './components/appointmentComponents/delete-appointment-dialog/delete-appointment-dialog.component';
 import { EditAppointmentDialogComponent } from './components/appointmentComponents/edit-appointment-dialog/edit-appointment-dialog.component';
 import { NewAppointmentDialogComponent } from './components/appointmentComponents/new-appointment-dialog/new-appointment-dialog.component';
 
+import { LoginComponent } from './components/authComponents/login-page/login.component';
+import { SignupComponent } from './components/authComponents/signup-page/signup.component';
 import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
 import { AboutComponent } from './about/about.component';
-
 import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+import { HomeComponent } from './home/home.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 
@@ -75,6 +78,7 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     EditAppointmentDialogComponent, 
     NewAppointmentDialogComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
+    LoginComponent, SignupComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
@@ -90,10 +94,11 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
-    
+
     //AnimalMedcardComponent
-    
-    AboutComponent
+
+    AboutComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -119,6 +124,8 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     MatChipsModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatTooltipModule,
+    NgbModule
   ],
   exports: [
     ProceduresPageComponent,
@@ -137,7 +144,8 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     NewAppointmentDialogComponent,
     EditAddressComponent,
     CreateEmployeeComponent,
-    MainAnimalComponent
+    MainAnimalComponent,
+    HomeComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

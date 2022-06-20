@@ -36,9 +36,15 @@ export class NewProcedureDialogComponent implements OnInit {
   }
 
   onSaveForm(): void{
+    if(!this.form.valid) {
+      return;
+    }
+    if(!(this.form.dirty || this.isSelectionChanged)) {
+      this.dialogRef.close(false);
+    }    
     const finalData : Procedure = this.form.value as Procedure;
     finalData.specializations = this.selectedSpec;
-    this.procedureService.addProcedure(finalData).subscribe(() => this.dialogRef.close(true));
+    this.procedureService.createProcedure(finalData).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {

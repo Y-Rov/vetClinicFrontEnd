@@ -29,7 +29,7 @@ export class AppointmentsPageComponent implements OnInit {
      }
 
   private updateList(): void {
-    this.appointmentService.getAppointments().subscribe((data) => {
+    this.appointmentService.getAll().subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });

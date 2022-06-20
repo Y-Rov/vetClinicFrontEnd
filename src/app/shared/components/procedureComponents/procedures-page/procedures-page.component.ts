@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Procedure } from '../../../../core/models/Procedure';
-import { Specialization } from '../../../../core/models/Specialization';
 import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteProcedureDialogComponent } from '../delete-procedure-dialog/delete-procedure-dialog.component';
@@ -10,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'; 
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { AuthService } from 'src/app/core/services/authService/auth.service';
 
 @Component({
   selector: 'app-procedures-page',
@@ -26,13 +26,15 @@ export class ProceduresPageComponent implements OnInit {
 
   constructor(
     private procedureService: ProcedureService,
+    public authService : AuthService,
     private matDialog: MatDialog) {
-      this.updateList();
+      //this.updateList();
      }
 
   private updateList(): void {
-    this.procedureService.getProcedures().subscribe((data) => {
+    this.procedureService.getAll().subscribe(data => {
       this.dataSource.data = data;
+      console.log(data);
       this.dataSource.sort = this.sort!;
     });
   }

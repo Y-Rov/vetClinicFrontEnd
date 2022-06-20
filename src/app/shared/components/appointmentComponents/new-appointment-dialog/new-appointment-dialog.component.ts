@@ -6,52 +6,54 @@ import { Appointment } from 'src/app/core/models/Appointment';
 import { Procedure } from 'src/app/core/models/Procedure';
 import { User } from 'src/app/core/models/User';
 import { AppointmentService } from 'src/app/core/services/appointmentService/appointment.service';
+import { ProcedureService } from 'src/app/core/services/procedureService/procedure.service';
+import { UserService } from 'src/app/core/services/userService/user.service';
 import { AppointmentsPageComponent } from '../appointments-page/appointments-page.component';
 
-const SAMPLE_DATA_PROCEDURES: Procedure[] =  [
-  {
-    "id" :  1,
-    "name" : "first procedure",
-    "description" : "operation",
-    "durationInMinutes" : 15,
-    "cost" : 100,
+// const SAMPLE_DATA_PROCEDURES: Procedure[] =  [
+//   {
+//     "id" :  1,
+//     "name" : "first procedure",
+//     "description" : "operation",
+//     "durationInMinutes" : 15,
+//     "cost" : 100,
 
-    specializations : [{
-      "id" :  1,
-      "name" : "first spec" 
-    }]},
+//     specializations : [{
+//       "id" :  1,
+//       "name" : "first spec" 
+//     }]},
 
-  {
-      "id" :  2,
-      "name" : "second procedure",
-      "description" : "operation",
-      "durationInMinutes" : 10,
-      "cost" : 300,
+//   {
+//       "id" :  2,
+//       "name" : "second procedure",
+//       "description" : "operation",
+//       "durationInMinutes" : 10,
+//       "cost" : 300,
       
-      specializations : [{
-        "id" :  1,
-        "name" : "first spec"
-    }]}
-  ]
+//       specializations : [{
+//         "id" :  1,
+//         "name" : "first spec"
+//     }]}
+//   ]
 
-  const SAMPLE_DATA_USERS: User[] =  [
-    {
-      "id" :  1,
-      "firstName" : "Ivan",
-      "lastName" : "Ivanov",
-      "email" : "Ivanov@gmail.com",
-      "phoneNumber" :"0987654432",
-      "birthDate": new Date()
-  },
+//   const SAMPLE_DATA_USERS: User[] =  [
+//     {
+//       "id" :  1,
+//       "firstName" : "Ivan",
+//       "lastName" : "Ivanov",
+//       "email" : "Ivanov@gmail.com",
+//       "phoneNumber" :"0987654432",
+//       "birthDate": new Date()
+//   },
   
-  {
-    "id" :  2,
-    "firstName" : "Vasya",
-    "lastName" : "Pypkin",
-    "email" : "Vasya123@gmail.com",
-    "phoneNumber" :"09844355645",
-    "birthDate": new Date()
-}]
+//   {
+//     "id" :  2,
+//     "firstName" : "Vasya",
+//     "lastName" : "Pypkin",
+//     "email" : "Vasya123@gmail.com",
+//     "phoneNumber" :"09844355645",
+//     "birthDate": new Date()
+// }]
 
 const SAMPLE_DATA_ANIMAL: Animal[] =  [
   {
@@ -89,9 +91,12 @@ export class NewAppointmentDialogComponent implements OnInit {
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
   public dialogRef: MatDialogRef<AppointmentsPageComponent>,
-  private appointmentService : AppointmentService) {  
-    this.procedures = SAMPLE_DATA_PROCEDURES;
-    this.users = SAMPLE_DATA_USERS;
+  private appointmentService : AppointmentService,
+  private procedureService : ProcedureService,
+  private userService : UserService) {  
+
+    this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
+    this.userService.getAll().subscribe((data: User[]) => this.users = data)
     this.animals$=SAMPLE_DATA_ANIMAL;
   }
 
@@ -105,6 +110,12 @@ export class NewAppointmentDialogComponent implements OnInit {
   }
 
   onSaveForm(): void{
+    if(!this.form.valid) {
+      return;
+    }
+    if(!(this.form.dirty || this.isSelectionChanged)) {
+      this.dialogRef.close(false);
+    }  
     const finalData : Appointment = this.form.value as Appointment;
     finalData.procedures = this.selectedprocedure;
     finalData.users = this.selectedUser;

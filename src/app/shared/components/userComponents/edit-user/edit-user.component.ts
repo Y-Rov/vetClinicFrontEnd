@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-user.component.sass']
 })
 export class EditUserComponent implements OnInit {
-
   user: User = {
     id: 0,
     firstName: '',
@@ -38,20 +37,19 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getById(this.user.id!)
-      .subscribe(user => {
-        this.user = {...user};
+    this.userService.getById(this.user.id!).subscribe(user => {
+      this.user = {...user};
 
-        this.editUserForm.patchValue({
-          firstName: this.user.firstName,
-          lastName: this.user.lastName,
-          phoneNumber: this.user.phoneNumber,
-          birthDate: this.user.birthDate
-        });
+      this.editUserForm.patchValue({
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        phoneNumber: this.user.phoneNumber,
+        birthDate: this.user.birthDate
       });
+    });
   }
 
-  updateUser(): void {
+  onUpdateUser(): void {
     this.user.firstName = this.editUserForm.value.firstName!;
     this.user.lastName = this.editUserForm.value.lastName!;
     this.user.phoneNumber = this.editUserForm.value.phoneNumber!;

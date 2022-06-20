@@ -96,8 +96,8 @@ export class EditAppointmentDialogComponent implements OnInit {
     private appointmentService : AppointmentService,
     private procedureService : ProcedureService,
     private userService : UserService) {  
-      // this.procedureService.getAll().subscribe((data: []) => this.procedures = data)
-      // userService.getAll().subscribe((data: []) => this.users = data)
+      this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
+      this.userService.getAll().subscribe((data: User[]) => this.users = data)
     }
 
   form = new FormGroup({
@@ -111,13 +111,19 @@ export class EditAppointmentDialogComponent implements OnInit {
   }
 
   onSaveForm(): void{
+    if(!this.form.valid) {
+      return;
+    }
+    if(!(this.form.dirty || this.isSelectionChanged)) {
+      this.dialogRef.close(false);
+    }
     this.data.dateAndTime = new Date(this.form.value.date!);
     this.data.disease = this.form.value.disease!;
     this.data.procedures = this.selectedprocedure;
     
     this.data.users = this.selectedUser;
     this.data.animal= this.selectedAnimal;
-    // this.appointmentService.updateAppointment(this.data).subscribe(() => this.dialogRef.close(true));
+    this.appointmentService.updateAppointment(this.data).subscribe(() => this.dialogRef.close(true));
 }
     
 

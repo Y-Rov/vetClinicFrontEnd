@@ -1,50 +1,52 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
+import { map } from "rxjs/operators";
+import { Location } from "@angular/common";
 import { Procedure } from '../../models/Procedure';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { ResourceService } from '../resourceService/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProcedureService {
+export class ProcedureService extends ResourceService<Procedure> {
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-    
-  private apiUrl : string = 'https://localhost:7283/api/procedures';
-
-  constructor(private   http: HttpClient) { }
-
-  getProcedures(): Observable<Procedure[]>{
-    return this.http?.get<Procedure[]>(this.apiUrl, this.httpOptions);
+  constructor(
+    private httpClient: HttpClient,
+    private currentLocation: Location
+  ) {
+    super(httpClient, currentLocation, Procedure, 'https://localhost:5001/api/procedures');
   }
 
-  deleteProcedure(procedure : Procedure): Observable<Procedure>{
-    const url = `${this.apiUrl}/${procedure.id}`;
-    return this.http.delete<Procedure>(url);
-  }
-
-  deleteProcedureById(id: number): Observable<Procedure>{
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<Procedure>(url);
-  }
-
-  updateProcedure(procedure: Procedure): Observable<Procedure>{
-    const ViewModel = {
+  createProcedure(procedure: Procedure): Observable<Procedure>{
+    const viewModel = {
       id: procedure.id,
       name: procedure.name,
       cost: procedure.cost,
       durationInMinutes: procedure.durationInMinutes,
       description: procedure.description,
-      specializationIds: procedure.specializations.map(spec => spec.id)
+      specializationIds: procedure.specializations!.map(spec => spec.id)
     };
-    return this.http.put<Procedure>(this.apiUrl, ViewModel, this.httpOptions);
+    return this.httpClient.post<Procedure>(this.apiUrl, viewModel, this.httpOptions)
+    .pipe(
+      map((result) => new this.tConstructor(result)),
+      catchError(this.handleError<Procedure>('getById'))
+    );
   }
 
-  addProcedure(procedure: Procedure): Observable<Procedure>{
-    return this.http.post<Procedure>(this.apiUrl, procedure, this.httpOptions);
+  updateProcedure(procedure: Procedure): Observable<Procedure>{
+    const viewModel = {
+      id: procedure.id,
+      name: procedure.name,
+      cost: procedure.cost,
+      durationInMinutes: procedure.durationInMinutes,
+      description: procedure.description,
+      specializationIds: procedure.specializations!.map(spec => spec.id)
+    };
+    return this.httpClient.put<Procedure>(this.apiUrl, viewModel, this.httpOptions)
+    .pipe(
+      map((result) => new this.tConstructor(result)),
+      catchError(this.handleError<Procedure>('getById'))
+    );
   }
 }
