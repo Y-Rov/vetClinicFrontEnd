@@ -5,7 +5,9 @@ import { map, startWith } from 'rxjs/operators';
 
 interface Named {
   id?: number;
-  name?: string;
+  name?: string | null;
+  firstName?: string | null;
+  lastName?:string | null;
 }
 
 interface ItemData<TEntity extends Named> {
@@ -66,7 +68,7 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
     this.filterString = filter;
     if (filter.length > 0) {
       return this.rawData.filter(option => {
-        return option.item.name!.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+        return (option.item.name == null ? option.item.firstName! + option.item.lastName! : option.item.name!).toLowerCase().indexOf(filter.toLowerCase()) >= 0;
       });
     } else {
       return this.rawData.slice();

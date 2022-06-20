@@ -18,7 +18,7 @@ export class SpecializationService extends ResourceService<Specialization>{
   }
 
   removeProcedure(procedureId: number, specializationId: number) : Observable<void>{
-    const requestUrl = `${this.apiUrl}/removeProc/${specializationId}/${procedureId}`;
+    const requestUrl = `${this.apiUrl}/removeProcedure/${specializationId}/${procedureId}`;
     return this.http.put<void>(requestUrl, this.httpOptions)
       .pipe(
         catchError(this.handleError<void>('delete'))
@@ -38,17 +38,25 @@ export class SpecializationService extends ResourceService<Specialization>{
       );
   }
 
-  addUser(specialization: Specialization) : Observable<void>{
+  addUsers(specialization: Specialization) : Observable<void>{
     const  requestUrl = `${this.apiUrl}/addUsers/${specialization.id}`;
     const viewModel = {
       id: specialization.id,
       name: specialization.name,
-      userIds: specialization.users!.map(user => user.id)
+      usersIds: specialization.users!.map(user => user.id)
     };
 
     return this.http.put<void>(requestUrl,viewModel, this.httpOptions)
       .pipe(
         catchError(this.handleError<void>('update'))
+      );
+  }
+
+  removeUser(userId : number, specializationId : number){
+    const requestUrl = `${this.apiUrl}/removeUser/${specializationId}/${userId}`;
+    return this.http.put<void>(requestUrl, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<void>('delete'))
       );
   }
 

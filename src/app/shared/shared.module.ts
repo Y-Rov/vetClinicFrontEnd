@@ -20,7 +20,6 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
-import { SpecializationListComponent } from './components/specialization-list/specialization-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -45,11 +44,29 @@ import { AddAnimalComponent } from './components/animalComponents/add-animal/add
 import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
+import {
+  SpecializationListComponent
+} from "./components/specializationComponent/specialization-list/specialization-list.component";
+import {
+  SpecializationEditDialogComponent
+} from "./components/specializationComponent/specialization-edit-dialog/specialization-edit-dialog.component";
+import {
+  AddSpecializationDialogComponent
+} from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
+import {
+  SpecializationAddProcedureComponent
+} from "./components/specializationComponent/specialization-add-procedure/specialization-add-procedure.component";
+import {
+  SpecializationDeleteDialogComponent
+} from "./components/specializationComponent/specialization-delete-dialog/specialization-delete-dialog.component";
+import {HomeComponent} from "./home/home.component";
+import { SpecializationAddUserDialogComponent } from './components/specializationComponent/specialization-add-user-dialog/specialization-add-user-dialog.component';
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
   declarations: [
+    HomeComponent,
     ProceduresPageComponent,
     SpecializationListComponent,
     DeleteProcedureDialogComponent,
@@ -77,10 +94,14 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
-
+    MultiSelectComponent,
+    SpecializationEditDialogComponent,
+    AddSpecializationDialogComponent,
+    SpecializationAddProcedureComponent,
+    SpecializationDeleteDialogComponent,
+    AboutComponent,
+    SpecializationAddUserDialogComponent
     //AnimalMedcardComponent
-
-    AboutComponent
   ],
   imports: [
     CommonModule,

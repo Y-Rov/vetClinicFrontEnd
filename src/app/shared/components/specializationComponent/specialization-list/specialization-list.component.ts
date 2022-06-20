@@ -12,6 +12,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {
   SpecializationAddProcedureComponent
 } from "../specialization-add-procedure/specialization-add-procedure.component";
+import {
+  SpecializationAddUserDialogComponent
+} from "../specialization-add-user-dialog/specialization-add-user-dialog.component";
 
 @Component({
   selector: 'app-specializationService-list',
@@ -77,10 +80,9 @@ export class SpecializationListComponent implements OnInit {
   }
 
   onAddProcedure(specialization : Specialization) : void{
-    const current = specialization;
     const dialog = this.matDialog
       .open(SpecializationAddProcedureComponent, {
-        data: current
+        data: specialization
       });
 
     dialog.afterClosed()
@@ -89,6 +91,21 @@ export class SpecializationListComponent implements OnInit {
 
   onRemoveProcedure(procedureId: number,specializationId : number) : void{
     this.specializationService.removeProcedure(procedureId, specializationId)
+      .subscribe(() => this.ngOnInit());
+  }
+
+  onAddUser(specialization: Specialization) : void{
+    const dialog = this.matDialog
+      .open(SpecializationAddUserDialogComponent, {
+        data: specialization
+      });
+
+    dialog.afterClosed()
+      .subscribe((requireReload: boolean) => requireReload && this.ngOnInit());
+  }
+
+  onRemoveUser(userId: number, specializationId: number) : void{
+    this.specializationService.removeUser(userId, specializationId)
       .subscribe(() => this.ngOnInit());
   }
 }
