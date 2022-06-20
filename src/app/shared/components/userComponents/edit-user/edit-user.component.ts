@@ -27,7 +27,7 @@ export class EditUserComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
     ]),
-    'birthDate': new FormControl(new Date())
+    'birthDate': new FormControl(new Date(''))
   });
 
   constructor(
@@ -53,7 +53,7 @@ export class EditUserComponent implements OnInit {
     this.user.firstName = this.editUserForm.value.firstName!;
     this.user.lastName = this.editUserForm.value.lastName!;
     this.user.phoneNumber = this.editUserForm.value.phoneNumber!;
-    this.user.birthDate = new Date(this.editUserForm.value.birthDate!);
+    this.user.birthDate = this.editUserForm.value.birthDate!;
 
     this.userService.update(this.user).subscribe();
     this.goToPreviousPage();
