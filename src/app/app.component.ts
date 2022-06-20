@@ -13,16 +13,16 @@ export class AppComponent {
   constructor(
     private iconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
-    this.iconRegistry.addSvgIcon(
-      'facebook',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/facebook.svg'));
+      this.iconRegistry.addSvgIcon(
+        'facebook',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/facebook.svg'));
 
-    this.iconRegistry.addSvgIcon(
-      'telegram',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/telegram.svg'));
+      this.iconRegistry.addSvgIcon(
+        'telegram',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/telegram.svg'));
 
-    this.iconRegistry.addSvgIcon(
-      'instagram',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/instagram.svg'));
+      this.iconRegistry.addSvgIcon(
+        'instagram',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/instagram.svg'));
   }
 }
