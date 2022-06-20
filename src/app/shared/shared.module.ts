@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from "@angular/material/icon";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from '@angular/material/card';
@@ -51,7 +55,8 @@ import { EditUserComponent } from './components/userComponents/edit-user/edit-us
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
 import { UsersComponent } from './components/userComponents/users/users.component';
 import { HomeComponent } from './home/home.component';
-
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { EditPortfolioComponent } from './components/userComponents/edit-user/edit-portfolio/edit-portfolio.component';
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
@@ -82,6 +87,7 @@ import { HomeComponent } from './home/home.component';
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
     EditAddressComponent,
+    EditPortfolioComponent,
     CreateEmployeeComponent,
     ExceptionPageComponent,
     ExceptionDetailPageComponent,
@@ -93,9 +99,7 @@ import { HomeComponent } from './home/home.component';
     EditAnimalComponent,
     DeleteAnimalComponent,
     MainAnimalComponent,
-
     //AnimalMedcardComponent
-
     AboutComponent,
     HomeComponent
   ],
@@ -104,6 +108,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MatSnackBarModule,
     MatIconModule,
     MatExpansionModule,
     MatButtonModule,
