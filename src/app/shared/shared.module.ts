@@ -13,9 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatExpansionModule } from "@angular/material/expansion";
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,7 +21,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterModule } from '@angular/router';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AboutComponent } from './about/about.component';
 import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
@@ -55,7 +52,6 @@ import { EditUserComponent } from './components/userComponents/edit-user/edit-us
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
 import { UsersComponent } from './components/userComponents/users/users.component';
 import { HomeComponent } from './home/home.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { EditPortfolioComponent } from './components/userComponents/edit-user/edit-portfolio/edit-portfolio.component';
 //import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
