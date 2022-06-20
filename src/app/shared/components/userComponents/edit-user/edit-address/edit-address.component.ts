@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AddressService } from "src/app/core/services/addressService/address.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -25,6 +25,7 @@ export class EditAddressComponent implements OnInit {
   constructor(
     private addressService: AddressService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar
   ) {
     this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -51,31 +52,28 @@ export class EditAddressComponent implements OnInit {
   }
 
   updateUserAddress(): void {
-    if (this.isAddressGetRequestSuccessful) {
+    if (this.isAddressGetRequestSuccessful && this.editUserAddressForm.dirty) {
       this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
         .subscribe(() => {
-          this.addressService.goToPreviousPage();
-          this.snackBar.open('Your address was updated successfully!', 'Close', {
-            duration: 4000,
-            panelClass: ['green-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-          });
+          this.showSnackBar('updated');
         });
     } else {
       if (this.editUserAddressForm.valid) {
         this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})
           .subscribe(() => {
-            this.addressService.goToPreviousPage();
-            this.snackBar.open('Your address was created successfully!', 'Close', {
-              duration: 4000,
-              panelClass: ['green-snackbar'],
-              horizontalPosition: 'center',
-              verticalPosition: 'top'
-            });
+            this.showSnackBar('created');
           });
       }
     }
+  }
+
+  showSnackBar(verb: string) {
+    this.snackBar.open(`Your address was ${verb} successfully!`, 'Close', {
+      duration: 4000,
+      panelClass: ['green-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 
   goToPreviousPage(): void {

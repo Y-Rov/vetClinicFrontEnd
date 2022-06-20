@@ -38,31 +38,28 @@ export class EditPortfolioComponent implements OnInit {
   }
 
   updateUserPortfolio(): void {
-    if (this.isPortfolioGetRequestSuccessful) {
+    if (this.isPortfolioGetRequestSuccessful && this.description.dirty) {
       this.portfolioService.update({id: this.userId, description: this.description.value})
         .subscribe(() => {
-          this.portfolioService.goToPreviousPage();
-          this.snackBar.open('Your portfolio was updated successfully!', 'Close', {
-            duration: 4000,
-            panelClass: ['green-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-          });
+          this.showSnackBar('updated');
         });
     } else {
       if (this.description.valid) {
         this.portfolioService.create({id: this.userId, description: this.description.value})
           .subscribe(() => {
-            this.portfolioService.goToPreviousPage();
-            this.snackBar.open('Your portfolio was created successfully!', 'Close', {
-              duration: 4000,
-              panelClass: ['green-snackbar'],
-              horizontalPosition: 'center',
-              verticalPosition: 'top'
-            });
+            this.showSnackBar('created');
           });
       }
     }
+  }
+
+  showSnackBar(verb: string) {
+    this.snackBar.open(`Your portfolio was ${verb} successfully!`, 'Close', {
+      duration: 4000,
+      panelClass: ['green-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 
   goToPreviousPage(): void {
