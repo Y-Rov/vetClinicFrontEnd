@@ -8,6 +8,7 @@ import {AddAnimalComponent} from "../add-animal/add-animal.component";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
+import {AnimalMedcardComponent} from "../animal-medcard/animal-medcard.component";
 
 @Component({
   selector: 'app-main-animal',
@@ -15,42 +16,9 @@ import {MatPaginator} from "@angular/material/paginator";
   styleUrls: ['./main-animal.component.sass']
 })
 export class MainAnimalComponent implements OnInit {
-/*
-  animals : Animal[] | null = null;
-
-  @ViewChild("sliderRef") sliderRef!: ElementRef<HTMLElement>
-  slider: KeenSliderInstance | null = null
-
-  constructor(
-    private animalService : AnimalService,
-    private matDialog: MatDialog)
-  {
-    this.updateList();
-  }
-
-  private updateList(){
-    this.animalService.getAnimals().subscribe((animals)=>{
-      this.animals = animals;
-    });
-  }
-
-  ngOnInit(): void {
-    this.updateList();
-  }
-
-  ngAfterViewInit(){
-    this.slider = new KeenSlider(this.sliderRef.nativeElement,{
-      loop:true,
-    })
-  }
-
-  ngOnDestroy() {
-    if (this.slider) this.slider.destroy()
-  }
-*/
 
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource();
-  displayedColumns: string[] = ['nickname','ownerId','birthdate', 'delete', 'edit', 'viewmedcard'];
+  displayedColumns: string[] = ['nickName','ownerId','birthDate', 'delete', 'edit', 'viewmedcard'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -58,11 +26,11 @@ export class MainAnimalComponent implements OnInit {
   constructor(
     private animalService: AnimalService,
     private matDialog: MatDialog) {
-    this.updateList();
   }
 
   private updateList(): void {
-    this.animalService.getAnimals().subscribe((data) => {
+    this.animalService.getAll().subscribe((data) => {
+      console.log(data);
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });
@@ -103,6 +71,11 @@ export class MainAnimalComponent implements OnInit {
   }
 
   onViewMedCard(id: number) {
+    const dialogRef = this.matDialog.open(AnimalMedcardComponent,{
+      autoFocus:false,
+      data:id
+    });
 
+    dialogRef.afterClosed().subscribe((reuireReload:boolean)=>{if(reuireReload) this.updateList()});
   }
 }

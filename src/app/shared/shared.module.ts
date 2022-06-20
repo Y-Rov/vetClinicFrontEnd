@@ -22,7 +22,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UsersComponent } from './components/userComponents/users/users.component';
 import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
@@ -45,6 +45,7 @@ import { EditAnimalComponent } from './components/animalComponents/edit-animal/e
 import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
+import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {
   SpecializationListComponent
@@ -73,7 +74,6 @@ import {EditPortfolioComponent} from "./components/userComponents/edit-user/edit
 import {
   AddSpecializationDialogComponent
 } from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
-//import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 
 @NgModule({
 
@@ -115,7 +115,7 @@ import {
     DeleteAnimalComponent,
     MainAnimalComponent,
 
-    //AnimalMedcardComponent
+    AnimalMedcardComponent,
 
     AboutComponent,
     HomeComponent, EditPortfolioComponent
@@ -167,4 +167,5 @@ import {
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]
 })
-export class SharedModule { }
+
+export class SharedModule {}
