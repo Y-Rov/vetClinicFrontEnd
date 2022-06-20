@@ -46,6 +46,7 @@ import { DeleteAnimalComponent } from './components/animalComponents/delete-anim
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
 import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {
   SpecializationListComponent
@@ -145,7 +146,8 @@ import {
     MatCheckboxModule,
     MatSelectModule,
     MatTooltipModule,
-    NgbModule
+    NgbModule,
+    MatSnackBarModule
   ],
   exports: [
     ProceduresPageComponent,
