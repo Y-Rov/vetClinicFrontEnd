@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Location } from "@angular/common";
 import { Employee } from '../../models/Employees';
 import { ResourceService } from '../resourceService/resource.service';
+import { User } from '../../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeService extends ResourceService<Employee>{
+export class EmployeeService extends ResourceService<User>{
 
   constructor(
     private httpClient: HttpClient,

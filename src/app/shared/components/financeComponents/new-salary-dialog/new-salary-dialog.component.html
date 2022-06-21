@@ -5,7 +5,8 @@
     <mat-label>Select an employee</mat-label>
     <mat-select (selectionChange)="selectedValue($event)" required>
       <mat-option *ngFor="let employee of employeeList$" [value]="employee.id">
-        {{ employee.name }}
+        {{employee.firstName}}
+        {{employee.lastName}}
       </mat-option>
     </mat-select>
   </mat-form-field>
