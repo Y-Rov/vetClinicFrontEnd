@@ -17,8 +17,8 @@ export class UserService extends ResourceService<User> {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
   }
 
-  getDoctors(): Observable<User[]> {
-    const url = `${this.apiUrl}/doctors`;
+  getDoctors(specialization: string = ""): Observable<User[]> {
+    const url = `${this.apiUrl}/doctors?specialization=${specialization}`;
     return this.http.get<User[]>(url);
   }
 
