@@ -16,18 +16,12 @@ export class DoctorsComponent implements OnInit {
     this.getDoctors();
   }
 
-  private getDoctors(): void {
-    this.userService.getDoctors().subscribe(doctors => this.doctors = doctors);
+  private getDoctors(specialization: string = ""): void {
+    this.userService.getDoctors(specialization).subscribe(doctors => this.doctors = doctors);
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-
-    if (filterValue !== '') {
-      this.doctors = this.doctors.filter(d => 
-        d.specializations?.find(s => s.toLowerCase().includes(filterValue)));
-    } else {
-      this.getDoctors();
-    }
+    this.getDoctors(filterValue);
   }
 }
