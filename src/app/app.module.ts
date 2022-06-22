@@ -100,7 +100,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'salaries',
-    component: SalaryPageComponent
+    component: SalaryPageComponent,
+    canActivate: [RolesGuard],
+    data: { allowedRoles: ['Accountant'] }
   }
 ];
 
