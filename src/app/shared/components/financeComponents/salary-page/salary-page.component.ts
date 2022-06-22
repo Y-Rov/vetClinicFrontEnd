@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Salary } from '../../../../core/models/Salary';
-import { SalaryService } from '../../../../core/services/financialService/salary.service'; 
+import { SalaryService } from '../../../../core/services/financialService/salary.service';
 import { DeleteSalaryDialogComponent } from '../delete-salary-dialog/delete-salary-dialog.component';
 import { EditSalaryDialogComponent } from '../edit-salary-dialog/edit-salary-dialog.component';
 import { NewSalaryDialogComponent } from '../new-salary-dialog/new-salary-dialog.component';

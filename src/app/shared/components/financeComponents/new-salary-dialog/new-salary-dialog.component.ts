@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
-import { Employee } from '../../../../core/models/Employees';
 import { Salary } from '../../../../core/models/Salary';
+import { User } from '../../../../core/models/User';
 import { EmployeeService } from '../../../../core/services/financialService/employee.service';
 import { SalaryService } from '../../../../core/services/financialService/salary.service';
 import { SalaryPageComponent } from '../salary-page/salary-page.component';
@@ -16,10 +16,9 @@ import { SalaryPageComponent } from '../salary-page/salary-page.component';
 })
 export class NewSalaryDialogComponent implements OnInit {
 
-  employeeList$!: Employee[];
+  employeeList$!: User[];
   selectedId = 0;
   employeeName = '';
-  /*isSelectionChanged: boolean = false;*/
   isDropChanged: boolean = false;
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
@@ -54,9 +53,6 @@ export class NewSalaryDialogComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  //isButtonEnabled(): boolean {
-  //  return this.form.valid && this.isDropChanged;
-  //}
 
   selectedValue(event: MatSelectChange) {
     this.selectedId = event.value;
