@@ -19,6 +19,10 @@ export class DoctorsComponent implements OnInit {
   private getDoctors(specialization: string = ""): void {
     this.userService.getDoctors(specialization).subscribe(doctors => this.doctors = doctors);
   }
+  
+  getDoctorSpecializations(doctor: User): string {
+    return doctor.specializations!.map(s => s.name)?.join(', ');
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
