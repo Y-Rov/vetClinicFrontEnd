@@ -9,8 +9,8 @@
             <div class="profile-pic"></div>
                 <div class="doc-info">
                     <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
-                    <div class="specializations">{{doctor.specializations?.join(', ')}}</div>
-                    <div class="portfolio">{{doctor.portfolio}}</div>
+                    <div class="specializations">{{getDoctorSpecializations(doctor)}}</div>
+                    <div class="portfolio">{{doctor.portfolio?.description}}</div>
                 </div>
             <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
         </div>
