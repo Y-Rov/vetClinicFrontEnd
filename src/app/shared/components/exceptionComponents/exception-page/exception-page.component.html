@@ -38,8 +38,19 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
-                    <mat-paginator class="mat-elevation-z8 row" [pageSizeOptions]="[5, 10, 25, 100]"
+                    <mat-paginator class=" row" [pageSizeOptions]="[5, 10, 25, 100] "
                         aria-label="Select page of users"></mat-paginator>
+                        <div class="pagginator row mat-elevation-z8">
+                            <select id="cars" name="cars">
+                                <option value="volvo">1</option>
+                                <option value="saab">3</option>
+                                <option value="fiat">5</option>
+                                <option value="audi">10</option>
+                              </select>
+                              
+                            <button (click)="onPrevButtonInfoClick()" color="info" >Prev</button>
+                            <button  color="info" >Next</button>
+                        </div>
                 </div>
                 <div class="stats">
                     <app-exception-stats-page></app-exception-stats-page>
