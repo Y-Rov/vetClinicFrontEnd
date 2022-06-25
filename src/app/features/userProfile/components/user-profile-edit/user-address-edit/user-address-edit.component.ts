@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AddressService } from "src/app/core/services/addressService/address.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AddressService} from "../../../services/addressService/address.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-edit-address',
-  templateUrl: './edit-address.component.html',
-  styleUrls: ['../edit-user.component.sass']
+  selector: 'app-user-address-edit',
+  templateUrl: './user-address-edit.component.html',
+  styleUrls: ['../user-base-edit.component.sass']
 })
-export class EditAddressComponent implements OnInit {
+export class UserAddressEditComponent implements OnInit {
 
   userId: number;
   isAddressGetRequestSuccessful: boolean = false;

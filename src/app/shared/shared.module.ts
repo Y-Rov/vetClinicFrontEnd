@@ -25,8 +25,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UsersComponent } from './components/userComponents/users/users.component';
-import { UserProfileInfoComponent } from './components/userComponents/user-profile-info/user-profile-info.component';
-import { EditUserComponent } from './components/userComponents/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/userComponents/delete-user/delete-user.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DeleteProcedureDialogComponent } from './components/procedureComponents/delete-procedure-dialog/delete-procedure-dialog.component';
@@ -35,7 +33,6 @@ import { EditProcedureDialogComponent } from './components/procedureComponents/e
 import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
 import { LoginComponent } from './components/authComponents/login-page/login.component';
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
-import { EditAddressComponent } from './components/userComponents/edit-user/edit-address/edit-address.component';
 import { CreateEmployeeComponent } from './components/userComponents/create-employee/create-employee.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DoctorsComponent } from './components/userComponents/doctors/doctors.component';
@@ -46,7 +43,6 @@ import { DeleteAnimalComponent } from './components/animalComponents/delete-anim
 import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
 import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {
   SpecializationListComponent
@@ -71,7 +67,6 @@ import {
 import {
   EditSalaryDialogComponent
 } from "./components/financeComponents/edit-salary-dialog/edit-salary-dialog.component";
-import {EditPortfolioComponent} from "./components/userComponents/edit-user/edit-portfolio/edit-portfolio.component";
 import {
   AddSpecializationDialogComponent
 } from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
@@ -95,15 +90,12 @@ import {
     EditProcedureDialogComponent,
     MultiSelectComponent,
     UsersComponent,
-    UserProfileInfoComponent,
-    EditUserComponent,
     DeleteUserComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     LoginComponent, SignupComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
-    EditAddressComponent,
     CreateEmployeeComponent,
     ExceptionPageComponent,
     ExceptionDetailPageComponent,
@@ -119,7 +111,7 @@ import {
     AnimalMedcardComponent,
 
     AboutComponent,
-    HomeComponent, EditPortfolioComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -146,8 +138,7 @@ import {
     MatCheckboxModule,
     MatSelectModule,
     MatTooltipModule,
-    NgbModule,
-    MatSnackBarModule
+    NgbModule
   ],
   exports: [
     ProceduresPageComponent,
@@ -157,10 +148,7 @@ import {
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     UsersComponent,
-    UserProfileInfoComponent,
-    EditUserComponent,
     DeleteUserComponent,
-    EditAddressComponent,
     CreateEmployeeComponent,
     MainAnimalComponent,
     HomeComponent

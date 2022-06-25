@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ResourceService } from "../resourceService/resource.service";
-import { Portfolio } from "../../models/Portfolio";
+import { ResourceService } from "../../../../core/services/resourceService/resource.service";
+import { Portfolio } from "../../../../core/models/Portfolio";
 import { HttpClient } from "@angular/common/http";
 import { Location } from "@angular/common";
 

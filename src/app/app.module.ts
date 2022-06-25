@@ -7,11 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProceduresPageComponent } from './shared/components/procedureComponents/procedures-page/procedures-page.component';
+import {UserProfileModule} from "./features/userProfile/user-profile.module";
 import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
 
-import { UserProfileInfoComponent } from './shared/components/userComponents/user-profile-info/user-profile-info.component';
-import { EditUserComponent } from './shared/components/userComponents/edit-user/edit-user.component';
 import { UsersComponent } from './shared/components/userComponents/users/users.component';
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
@@ -66,16 +65,6 @@ const appRoutes: Routes = [
     data: {allowedRoles: ['Admin']}
   },
   {
-    path: 'users/:id',
-    component: UserProfileInfoComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'users/:id/edit',
-    component: EditUserComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'auth/login',
     component: LoginComponent,
     canActivate: [UnauthGuard]
@@ -116,6 +105,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    UserProfileModule,
     LayoutModule,
     SharedModule,
   ],

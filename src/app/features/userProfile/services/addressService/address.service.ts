@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { Address} from "../../models/Address";
+import { Address} from "../../../../core/models/Address";
 import { Location } from "@angular/common";
-import {ResourceService} from "../resourceService/resource.service";
+import {ResourceService} from "../../../../core/services/resourceService/resource.service";
 
 @Injectable({
   providedIn: 'root'

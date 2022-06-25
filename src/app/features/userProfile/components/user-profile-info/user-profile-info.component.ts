@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/core/models/User';
-import { UserService } from 'src/app/core/services/userService/user.service';
-import { ActivatedRoute } from '@angular/router';
+import {User} from "../../../../core/models/User";
+import {UserService} from "../../../../core/services/userService/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-profile-info',
@@ -13,10 +13,10 @@ export class UserProfileInfoComponent implements OnInit {
   user: User | null = null;
 
   constructor(
-    private userService: UserService, 
-    private activatedRoute: ActivatedRoute) { 
-      this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    }
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute) {
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit(): void {
     this.getUser(this.id);

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/core/models/User';
-import { UserService } from 'src/app/core/services/userService/user.service';
-import { ActivatedRoute } from '@angular/router';
+import {User} from "../../../../core/models/User";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../../../core/services/userService/user.service";
 import {AuthService} from "../../../../core/services/authService/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.sass']
+  selector: 'app-user-profile-edit',
+  templateUrl: './user-base-edit.component.html',
+  styleUrls: ['./user-base-edit.component.sass']
 })
-export class EditUserComponent implements OnInit {
+export class UserBaseEditComponent implements OnInit {
   user: User = {
     id: 0,
     firstName: '',
@@ -35,7 +35,7 @@ export class EditUserComponent implements OnInit {
     private userService: UserService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute) {
-        this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
