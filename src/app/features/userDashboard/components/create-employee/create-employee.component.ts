@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { UserService } from 'src/app/core/services/userService/user.service';
-import { UsersComponent } from '../users/users.component';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { RegisterEmployeeModel } from 'src/app/core/models/RegisterEmployeeModel';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatDialogRef} from "@angular/material/dialog";
+import {UsersComponent} from "../users/users.component";
+import {UserService} from "../../services/userService/user.service";
+import {RegisterEmployeeModel} from "../../../../core/models/RegisterEmployeeModel";
 
 @Component({
   selector: 'app-create-employee',
@@ -59,6 +59,6 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   isButtonEnabled(): boolean{
-    return this.employeeForm.valid && (this.employeeForm.dirty || this.isSelectionChanged); 
+    return this.employeeForm.valid && (this.employeeForm.dirty || this.isSelectionChanged);
   }
 }

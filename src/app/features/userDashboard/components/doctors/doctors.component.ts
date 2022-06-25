@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/core/models/User';
-import { UserService } from 'src/app/core/services/userService/user.service';
+import {User} from "../../../../core/models/User";
+import {UserService} from "../../services/userService/user.service";
 
 @Component({
   selector: 'app-doctors',
@@ -19,7 +19,7 @@ export class DoctorsComponent implements OnInit {
   private getDoctors(specialization: string = ""): void {
     this.userService.getDoctors(specialization).subscribe(doctors => this.doctors = doctors);
   }
-  
+
   getDoctorSpecializations(doctor: User): string {
     return doctor.specializations!.map(s => s.name)?.join(', ');
   }

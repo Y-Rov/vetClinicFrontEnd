@@ -1,11 +1,11 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../../models/User';
+import { User } from '../../../../core/models/User';
 import { Location } from '@angular/common';
-import { ResourceService } from '../resourceService/resource.service';
+import { ResourceService } from '../../../../core/services/resourceService/resource.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { RegisterEmployeeModel } from '../../models/RegisterEmployeeModel';
+import { RegisterEmployeeModel } from '../../../../core/models/RegisterEmployeeModel';
 
 @Injectable({
   providedIn: 'root'

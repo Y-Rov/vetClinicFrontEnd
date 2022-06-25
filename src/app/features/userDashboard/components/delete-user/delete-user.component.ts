@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/app/core/models/User';
-import { UserService } from 'src/app/core/services/userService/user.service';
-import { UsersComponent } from '../users/users.component';
+import {Component, Inject, OnInit} from '@angular/core';
+import {User} from "../../../../core/models/User";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {UsersComponent} from "../users/users.component";
+import {UserService} from "../../services/userService/user.service";
 
 @Component({
   selector: 'app-delete-user',
@@ -24,10 +23,10 @@ export class DeleteUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: { id: number, firstName: string, lastName: string },
     public dialogRef: MatDialogRef<UsersComponent>,
     private userService: UserService) {
-      this.user.id = this.data.id;
-      this.user.firstName = this.data.firstName;
-      this.user.lastName = this.data.lastName;
-    }
+    this.user.id = this.data.id;
+    this.user.firstName = this.data.firstName;
+    this.user.lastName = this.data.lastName;
+  }
 
   ngOnInit(): void { }
 

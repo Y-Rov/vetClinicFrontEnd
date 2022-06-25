@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProceduresPageComponent } from './shared/components/procedureComponents/procedures-page/procedures-page.component';
-import {UserProfileModule} from "./features/userProfile/user-profile.module";
 import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
 
-import { UsersComponent } from './shared/components/userComponents/users/users.component';
+// Separated modules
+import {UserProfileModule} from "./features/userProfile/user-profile.module";
+import {UserDashboardModule} from "./features/userDashboard/user-dashboard.module";
+
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
@@ -20,7 +22,6 @@ import { AuthGuard } from './helpers/auth-guard/auth.guard';
 import { LoginComponent } from './shared/components/authComponents/login-page/login.component';
 import { SignupComponent } from './shared/components/authComponents/signup-page/signup.component';
 import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
-import { DoctorsComponent } from './shared/components/userComponents/doctors/doctors.component';
 import { SalaryPageComponent } from './shared/components/financeComponents/salary-page/salary-page.component';
 
 import { MainAnimalComponent } from "./shared/components/animalComponents/main-animal/main-animal.component";
@@ -59,12 +60,6 @@ const appRoutes: Routes = [
     data: {allowedRoles: ['Admin']}
   },
   {
-    path: 'users',
-    component: UsersComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
-  },
-  {
     path: 'auth/login',
     component: LoginComponent,
     canActivate: [UnauthGuard]
@@ -73,10 +68,6 @@ const appRoutes: Routes = [
     path: 'auth/signup',
     component: SignupComponent,
     canActivate: [UnauthGuard]
-  },
-  {
-    path: 'doctors',
-    component: DoctorsComponent
   },
   {
     path: 'animals',
@@ -106,6 +97,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     UserProfileModule,
+    UserDashboardModule,
     LayoutModule,
     SharedModule,
   ],
@@ -118,7 +110,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-
-export class AppModule {
-
-}
+export class AppModule {}
