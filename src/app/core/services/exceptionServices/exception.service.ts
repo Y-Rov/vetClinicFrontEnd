@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Exception } from '../../models/Exception';
 import { ExceptionStats } from '../../models/ExceptionStats';
 
@@ -39,5 +39,9 @@ export class ExceptionService {
   getExceptionById(id:number): Observable<Exception>{
     const url = `${this.apiUrlexception}/${id}`;
     return this.http?.get<Exception>(url, this.httpOptions);
+  }
+  getPagginatorOptions():Observable<HttpResponse<any>> {
+    
+    return this.http?.get<any>("https://localhost:5001/api/exceptions", {observe: 'response'});
   }
 }
