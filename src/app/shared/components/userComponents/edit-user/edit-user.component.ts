@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/core/models/User';
 import { UserService } from 'src/app/core/services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';
-import {AuthService} from "../../../../core/services/authService/auth.service";
+import { AuthService } from "../../../../core/services/authService/auth.service";
 
 @Component({
   selector: 'app-edit-user',
@@ -18,6 +18,7 @@ export class EditUserComponent implements OnInit {
     email: '',
     phoneNumber: '',
     birthDate: new Date(),
+    profilePicture: '',
     role: ''
   };
 
@@ -35,7 +36,7 @@ export class EditUserComponent implements OnInit {
     private userService: UserService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute) {
-        this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+      this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
@@ -49,6 +50,18 @@ export class EditUserComponent implements OnInit {
         birthDate: this.user.birthDate
       });
     });
+  }
+
+  handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const bytes = e.target.result.split('base64,')[1];
+      this.user.profilePicture = bytes;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   onUpdateUser(): void {

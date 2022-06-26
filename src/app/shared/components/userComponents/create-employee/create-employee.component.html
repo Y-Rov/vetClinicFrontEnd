@@ -63,6 +63,12 @@
             <mat-error *ngIf="employeeForm.controls.confirmPassword.invalid">Must be at least 6 characters long</mat-error>
         </mat-form-field>
     </div>
+    <div>
+      <button id="profile-pic-btn" type="button" mat-raised-button (click)="fileInput.click()">Add Profile Picture</button>
+      <input hidden (change)="handleFileChange($event)" #fileInput type="file">
+      <span id="profile-pic-hint" *ngIf="profilePicture.length > 0">Picture has been selected</span>
+    </div>
+    
     <div class="controls">
         <button mat-flat-button class="discard-btn" (click)="onDiscard()">Discard</button>
         <button mat-raised-button type="submit" color="primary" [disabled]="!employeeForm.valid" (click)="onCreateEmployee()">Add</button>
