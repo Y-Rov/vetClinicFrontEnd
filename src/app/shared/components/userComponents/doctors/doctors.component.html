@@ -6,12 +6,14 @@
     </mat-form-field>
     <div id="doctors">
         <div *ngFor="let doctor of doctors">
-            <div class="profile-pic"></div>
-                <div class="doc-info">
-                    <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
-                    <div class="specializations">{{getDoctorSpecializations(doctor)}}</div>
-                    <div class="portfolio">{{doctor.portfolio?.description}}</div>
-                </div>
+            <div class="img-wrapper">
+                <img src="data:image/png;base64,{{doctor?.profilePicture}}" alt="">
+            </div>
+            <div class="doc-info">
+                <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
+                <div class="specializations">{{getDoctorSpecializations(doctor)}}</div>
+                <div class="portfolio">{{doctor.portfolio?.description}}</div>
+            </div>
             <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
         </div>
     </div>
