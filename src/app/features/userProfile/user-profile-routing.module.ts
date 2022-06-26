@@ -7,12 +7,12 @@ import {UserBaseEditComponent} from "./components/user-profile-edit/user-base-ed
 
 const routes: Routes = [
   {
-    path: 'users/:id',
+    path: '',
     component: UserProfileInfoComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'users/:id/edit',
+    path: 'edit',
     component: UserBaseEditComponent,
     canActivate: [AuthGuard]
   },

@@ -11,8 +11,6 @@ import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
 
 // Separated modules
-import {UserProfileModule} from "./features/userProfile/user-profile.module";
-import {UserDashboardModule} from "./features/userDashboard/user-dashboard.module";
 
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
@@ -96,8 +94,6 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    UserProfileModule,
-    UserDashboardModule,
     LayoutModule,
     SharedModule,
   ],

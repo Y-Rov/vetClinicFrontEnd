@@ -16,6 +16,7 @@ import { CreateEmployeeComponent } from './components/create-employee/create-emp
 import { DeleteUserComponent } from './components/delete-user/delete-user.component';
 import { DoctorsComponent } from './components/doctors/doctors.component';
 import { UsersComponent } from './components/users/users.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UsersComponent } from './components/users/users.component';
     MatTableModule,
     MatSortModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTabsModule
   ]
 })
 export class UserDashboardModule { }
