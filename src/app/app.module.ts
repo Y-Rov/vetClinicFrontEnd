@@ -10,8 +10,6 @@ import { ProceduresPageComponent } from './shared/components/procedureComponents
 import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
 
-// Separated modules
-
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
@@ -29,6 +27,7 @@ import {HomeComponent} from "./shared/home/home.component";
 import {
   SpecializationListComponent
 } from "./shared/components/specializationComponent/specialization-list/specialization-list.component";
+
 
 const appRoutes: Routes = [
   {
@@ -95,7 +94,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     LayoutModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [
     {

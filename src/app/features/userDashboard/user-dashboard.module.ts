@@ -10,19 +10,19 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTabsModule} from "@angular/material/tabs";
+
 import { UserDashboardRoutingModule } from './user-dashboard-routing.module';
 
 import { CreateEmployeeComponent } from './components/create-employee/create-employee.component';
 import { DeleteUserComponent } from './components/delete-user/delete-user.component';
-import { DoctorsComponent } from './components/doctors/doctors.component';
 import { UsersComponent } from './components/users/users.component';
-import {MatTabsModule} from "@angular/material/tabs";
+
 
 @NgModule({
   declarations: [
     CreateEmployeeComponent,
     DeleteUserComponent,
-    DoctorsComponent,
     UsersComponent
   ],
   imports: [
