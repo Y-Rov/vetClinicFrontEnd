@@ -13,6 +13,7 @@ import {RegisterEmployeeModel} from "../../../../core/models/RegisterEmployeeMod
 export class CreateEmployeeComponent implements OnInit {
   rolesList: string[] = ['Doctor', 'Accountant', 'Admin'];
   isSelectionChanged: boolean = false;
+  profilePicture: string = '';
 
   employeeForm = new FormGroup({
     firstName: new FormControl('', [
@@ -51,11 +52,24 @@ export class CreateEmployeeComponent implements OnInit {
 
   onCreateEmployee(): void {
     const employee = this.employeeForm.value as RegisterEmployeeModel;
+    employee.profilePicture = this.profilePicture;
     this.userService.registerEmployee(employee).subscribe(() => this.dialogRef.close(true));
   }
 
   onDiscard(): void {
     this.dialogRef.close(false);
+  }
+
+  handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const bytes = e.target.result.split('base64,')[1];
+      this.profilePicture = bytes;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   isButtonEnabled(): boolean{

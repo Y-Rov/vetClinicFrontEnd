@@ -18,6 +18,7 @@ export class UserBaseEditComponent implements OnInit {
     email: '',
     phoneNumber: '',
     birthDate: new Date(),
+    profilePicture: '',
     role: ''
   };
 
@@ -49,6 +50,18 @@ export class UserBaseEditComponent implements OnInit {
         birthDate: this.user.birthDate
       });
     });
+  }
+
+  handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const bytes = e.target.result.split('base64,')[1];
+      this.user.profilePicture = bytes;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   onUpdateUser(): void {
