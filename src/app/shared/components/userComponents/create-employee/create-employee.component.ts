@@ -13,7 +13,7 @@ import { RegisterEmployeeModel } from 'src/app/core/models/RegisterEmployeeModel
 export class CreateEmployeeComponent implements OnInit {
   rolesList: string[] = ['Doctor', 'Accountant', 'Admin'];
   isSelectionChanged: boolean = false;
-  profilePicture: any = [];
+  profilePicture: string = "";
 
   employeeForm = new FormGroup({
     firstName: new FormControl('', [
