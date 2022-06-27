@@ -55,7 +55,7 @@ export class ProceduresPageComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((reuireReload: boolean) => {if(reuireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
   }
 
   onEditProcedure(element: any){
@@ -64,13 +64,13 @@ export class ProceduresPageComponent implements OnInit {
       data: procedure
     });
 
-    dialogRef.afterClosed().subscribe((reuireReload: boolean) => {if(reuireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
   }
 
   onNewProcedure(){
     const dialogRef = this.matDialog.open(NewProcedureDialogComponent);
 
-    dialogRef.afterClosed().subscribe((reuireReload: boolean) => {if(reuireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
   }
 
   applyFilter(event: Event) {

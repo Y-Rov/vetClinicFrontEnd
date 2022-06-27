@@ -7,7 +7,7 @@ import {catchError, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class ProcedureService extends ResourceService<Procedure> {
 
