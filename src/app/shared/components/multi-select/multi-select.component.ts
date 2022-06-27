@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, SimpleChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -85,7 +85,7 @@ export class MultiSelectComponent<T extends Named> implements OnInit {
   toggleSelection(data: ItemData<T>, initializing: boolean = false): void {
     data.selected = !data.selected;
 
-    if (data.selected === true) {
+    if (data.selected) {
       this.selectData.push(data);
     } else {
       const i = this.selectData.findIndex(value => value.item === data.item);
