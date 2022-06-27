@@ -58,14 +58,6 @@ import {
 import {
   SpecializationEditDialogComponent
 } from "./components/specializationComponent/specialization-edit-dialog/specialization-edit-dialog.component";
-import {SalaryPageComponent} from "./components/financeComponents/salary-page/salary-page.component";
-import {NewSalaryDialogComponent} from "./components/financeComponents/new-salary-dialog/new-salary-dialog.component";
-import {
-  DeleteSalaryDialogComponent
-} from "./components/financeComponents/delete-salary-dialog/delete-salary-dialog.component";
-import {
-  EditSalaryDialogComponent
-} from "./components/financeComponents/edit-salary-dialog/edit-salary-dialog.component";
 import {
   AddSpecializationDialogComponent
 } from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
@@ -80,10 +72,6 @@ import {
     SpecializationDeleteDialogComponent,
     SpecializationEditDialogComponent,
     AddSpecializationDialogComponent,
-    SalaryPageComponent,
-    DeleteSalaryDialogComponent,
-    EditSalaryDialogComponent,
-    NewSalaryDialogComponent,
     DeleteProcedureDialogComponent,
     NewProcedureDialogComponent,
     EditProcedureDialogComponent,
