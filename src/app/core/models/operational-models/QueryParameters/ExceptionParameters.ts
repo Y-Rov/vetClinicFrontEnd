@@ -1,4 +1,4 @@
-export interface PagingParameters{
+export interface ExceptionParameters{
     TotalCount: number;
     PageSize: number;
     CurrentPage: number;
