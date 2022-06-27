@@ -10,9 +10,6 @@ import { ProceduresPageComponent } from './shared/components/procedureComponents
 import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
 
-import { UserProfileInfoComponent } from './shared/components/userComponents/user-profile-info/user-profile-info.component';
-import { EditUserComponent } from './shared/components/userComponents/edit-user/edit-user.component';
-import { UsersComponent } from './shared/components/userComponents/users/users.component';
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
@@ -21,7 +18,6 @@ import { AuthGuard } from './helpers/auth-guard/auth.guard';
 import { LoginComponent } from './shared/components/authComponents/login-page/login.component';
 import { SignupComponent } from './shared/components/authComponents/signup-page/signup.component';
 import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
-import { DoctorsComponent } from './shared/components/userComponents/doctors/doctors.component';
 import { SalaryPageComponent } from './shared/components/financeComponents/salary-page/salary-page.component';
 
 import { MainAnimalComponent } from "./shared/components/animalComponents/main-animal/main-animal.component";
@@ -31,6 +27,7 @@ import {HomeComponent} from "./shared/home/home.component";
 import {
   SpecializationListComponent
 } from "./shared/components/specializationComponent/specialization-list/specialization-list.component";
+
 
 const appRoutes: Routes = [
   {
@@ -60,22 +57,6 @@ const appRoutes: Routes = [
     data: {allowedRoles: ['Admin']}
   },
   {
-    path: 'users',
-    component: UsersComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
-  },
-  {
-    path: 'users/:id',
-    component: UserProfileInfoComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'users/:id/edit',
-    component: EditUserComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'auth/login',
     component: LoginComponent,
     canActivate: [UnauthGuard]
@@ -84,10 +65,6 @@ const appRoutes: Routes = [
     path: 'auth/signup',
     component: SignupComponent,
     canActivate: [UnauthGuard]
-  },
-  {
-    path: 'doctors',
-    component: DoctorsComponent
   },
   {
     path: 'animals',
@@ -117,7 +94,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     LayoutModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [
     {
@@ -128,7 +105,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-
-export class AppModule {
-
-}
+export class AppModule {}
