@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { Location } from "@angular/common";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class PortfolioService extends ResourceService<Portfolio> {
 
