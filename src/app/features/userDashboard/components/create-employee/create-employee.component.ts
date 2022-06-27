@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatDialogRef} from "@angular/material/dialog";
-import {UsersComponent} from "../users/users.component";
-import {UserService} from "../../services/userService/user.service";
-import {RegisterEmployeeModel} from "../../../../core/models/RegisterEmployeeModel";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { UsersComponent } from "../users/users.component";
+import { UserService } from "../../services/userService/user.service";
+import { RegisterEmployeeModel } from "../../../../core/models/RegisterEmployeeModel";
 
 @Component({
   selector: 'app-create-employee',
