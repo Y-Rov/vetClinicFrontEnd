@@ -25,15 +25,6 @@ export class UserService extends ResourceService<User> {
   registerEmployee(regForm: RegisterEmployeeModel): Observable<User> {
     const url = `${this.apiUrl}/register/${regForm.role?.toLowerCase()}`;
 
-    this.httpOptions.headers.append('body', JSON.stringify({
-      firstName: regForm.firstName,
-      lastName: regForm.lastName,
-      phoneNumber: regForm.phoneNumber,
-      email: regForm.email,
-      password: regForm.password,
-      confirmPassword: regForm.confirmPassword
-    }));
-
     return this.http.post<User>(url, regForm, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {UsersComponent} from "./components/users/users.component";
-import {RolesGuard} from "../../helpers/roles-guard/roles.guard";
+import { UsersComponent } from "./components/users/users.component";
+import { RolesGuard } from "../../helpers/roles-guard/roles.guard";
 
 const routes: Routes = [
   {
