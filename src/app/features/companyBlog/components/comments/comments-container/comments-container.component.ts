@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CommentService} from "../../../services/commentService/comment.service";
+import {Comment} from "../../../../../core/models/Comment";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-comments-container',
@@ -6,10 +9,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comments-container.component.sass']
 })
 export class CommentsContainerComponent implements OnInit {
+  @Input() currentArticleId?: number
 
-  constructor() { }
+  form = new FormGroup({
+    content: new FormControl("", Validators.minLength(1)),
+  })
+
+  comments: Comment[] = [];
+
+  constructor(private commentService: CommentService) { }
+
+  updateList(): void{
+    this.commentService
+      .getByArticleId(this.currentArticleId!)
+      .subscribe(data =>{
+        this.comments = data;
+      })
+  }
 
   ngOnInit(): void {
+  }
+
+  onDeleteComment(event: any): void{
+    this.comments = this.comments.filter(c => c.id !== event.data.id);
+  }
+
+  ngOnChanges(): void{
+    this.updateList();
+  }
+
+  onPostComment(event: any): void{
+    event.stopPropagation();
+    let finalData: Comment = this.form.value as Comment;
+    finalData.articleId = this.currentArticleId!;
+    this.commentService.postComment(finalData).subscribe((created) => {
+      this.form.value.content = '';
+      this.comments.push(created);
+    })
   }
 
 }

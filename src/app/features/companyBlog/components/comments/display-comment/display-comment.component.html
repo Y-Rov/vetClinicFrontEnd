@@ -1,1 +1,29 @@
-<p>display-comment works!</p>
+<div class="comment mat-elevation-z6">
+  <div class="comment-title">
+    <img src="assets/images/carousel-first-image.jpg" alt="Profile picture">
+    <div class="name-time">
+      <span class="mat-subheading-2 alt">Admin Admin</span>
+      <span class="mat-body-1">{{dateService.getDateTimeString(comment!.createdAt)}}</span>
+    </div>
+    <button class="menu-button"
+            mat-icon-button
+            (click)="stopEventProp($event)"
+            [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onEditComment($event)">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="onDeleteComment($event)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="comment-body">
+    <span>{{comment!.content}}</span>
+  </div>
+</div>

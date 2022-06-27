@@ -12,6 +12,13 @@ import { ViewArticleComponent } from './components/articles/view-article/view-ar
 import { PreviewArticleComponent } from './components/articles/preview-article/preview-article.component';
 import { ArticlesPageComponent } from './components/articles/articles-page/articles-page.component';
 import {CompanyBlogRoutingModule} from "./company-blog-routing.module";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
+import {MatDividerModule} from "@angular/material/divider";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
 
 
 
@@ -31,7 +38,14 @@ import {CompanyBlogRoutingModule} from "./company-blog-routing.module";
   ],
   imports: [
     CommonModule,
-    CompanyBlogRoutingModule
+    CompanyBlogRoutingModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule
   ]
 })
 export class CompanyBlogModule { }
