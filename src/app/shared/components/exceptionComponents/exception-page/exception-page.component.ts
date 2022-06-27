@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { R3SelectorScopeMode } from '@angular/compiler';
 import { Subject } from 'rxjs';
-import { PagingParameters } from 'src/app/core/models/operational-models/Paging/PagingParameters';
+import { ExceptionParameters } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParameters';
 
 @Component({
   selector: 'app-exception-page',
@@ -23,7 +23,7 @@ export class ExceptionPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   displayedColumns: string[] = ['name', 'date', 'path', 'button'];
   displayedPagginationOptions: string[] = ['5', '10']
-  paggingInfo: PagingParameters | null = null;
+  paggingInfo: ExceptionParameters | null = null;
   itemsPerPage: number = 5;
   options = [
     { name: "5", value: 5 },
@@ -60,7 +60,7 @@ export class ExceptionPageComponent implements OnInit {
 
     if (this.paggingInfo?.HasPrevious) {
 
-      this.updateList(this.paggingInfo!.CurrentPage - 1, this.paggingInfo!.PageSize);
+      this.updateList(this.paggingInfo!.CurrentPage - 1, this.paggingInfo!.PageSize); 
       this.updatePaggingInfo(this.paggingInfo!.CurrentPage - 1, this.paggingInfo!.PageSize);
     }
 
@@ -94,14 +94,14 @@ export class ExceptionPageComponent implements OnInit {
     if (name == "") {
       this.exceptionService.getPagginatorExceptionsOptions(CurrentPage, PageSize).subscribe(resp => {
 
-        this.paggingInfo = <PagingParameters>JSON.parse(resp.headers.get('x-pagination')!);
+        this.paggingInfo = <ExceptionParameters>JSON.parse(resp.headers.get('x-pagination')!);
         console.log(this.paggingInfo);
       });
     }
     else {
       this.exceptionService.getPagginatorExceptionsOptions(CurrentPage, PageSize, name).subscribe(resp => {
 
-        this.paggingInfo = <PagingParameters>JSON.parse(resp.headers.get('x-pagination')!);
+        this.paggingInfo = <ExceptionParameters>JSON.parse(resp.headers.get('x-pagination')!);
         console.log(this.paggingInfo);
       });
     }

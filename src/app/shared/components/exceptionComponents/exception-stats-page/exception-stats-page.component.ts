@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ExceptionStats } from 'src/app/core/models/ExceptionStats';
 import { ExceptionService } from 'src/app/core/services/exceptionServices/exception.service';
-import { PagingParameters } from 'src/app/core/models/operational-models/Paging/PagingParameters';
+import { ExceptionParameters } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParameters';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ export class ExceptionStatsPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   displayedColumns: string[] = ['name', 'count'];    //List of column names to be displayed
   displayedPagginationOptions: string[] = ['5', '10']
-  paggingInfo: PagingParameters | null = null;
+  paggingInfo: ExceptionParameters | null = null;
   itemsPerPage: number = 5;
   options = [
     { name: "5", value: 5 },
@@ -84,14 +84,14 @@ export class ExceptionStatsPageComponent implements OnInit {
     if (name == "") {
       this.exceptionService.getPagginatorExceptionsStatsOptions(CurrentPage, PageSize).subscribe(resp => {
 
-        this.paggingInfo = <PagingParameters>JSON.parse(resp.headers.get('x-pagination')!);
+        this.paggingInfo = <ExceptionParameters>JSON.parse(resp.headers.get('x-pagination')!);
         console.log(this.paggingInfo);
       });
     }
     else {
       this.exceptionService.getPagginatorExceptionsStatsOptions(CurrentPage, PageSize, name).subscribe(resp => {
 
-        this.paggingInfo = <PagingParameters>JSON.parse(resp.headers.get('x-pagination')!);
+        this.paggingInfo = <ExceptionParameters>JSON.parse(resp.headers.get('x-pagination')!);
         console.log(this.paggingInfo);
       });
     }
