@@ -22,16 +22,12 @@ import { ExceptionTodayPageComponent } from './components/exceptionComponents/ex
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import { ProceduresPageComponent } from "./components/procedureComponents/procedures-page/procedures-page.component";
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { DeleteProcedureDialogComponent } from './components/procedureComponents/delete-procedure-dialog/delete-procedure-dialog.component';
-import { NewProcedureDialogComponent } from './components/procedureComponents/new-procedure-dialog/new-procedure-dialog.component';
-import { EditProcedureDialogComponent } from './components/procedureComponents/edit-procedure-dialog/edit-procedure-dialog.component';
-import { MultiSelectComponent } from './components/procedureComponents/multi-select/multi-select.component';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { LoginComponent } from './components/authComponents/login-page/login.component';
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -73,7 +69,6 @@ import {
 @NgModule({
 
   declarations: [
-    ProceduresPageComponent,
     SpecializationListComponent,
     SpecializationAddProcedureComponent,
     SpecializationAddUserDialogComponent,
@@ -84,9 +79,6 @@ import {
     DeleteSalaryDialogComponent,
     EditSalaryDialogComponent,
     NewSalaryDialogComponent,
-    DeleteProcedureDialogComponent,
-    NewProcedureDialogComponent,
-    EditProcedureDialogComponent,
     MultiSelectComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     LoginComponent, SignupComponent,
@@ -135,20 +127,20 @@ import {
     MatTooltipModule,
     NgbModule
   ],
-  exports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ProceduresPageComponent,
-    SpecializationListComponent,
-    ExceptionPageComponent,
-    ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
-    MainAnimalComponent,
-    HomeComponent
-  ],
+    exports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        SpecializationListComponent,
+        ExceptionPageComponent,
+        ExceptionDetailPageComponent,
+        ExceptionStatsPageComponent,
+        ExceptionTodayStatsPageComponent,
+        MainAnimalComponent,
+        HomeComponent,
+        MultiSelectComponent
+    ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]

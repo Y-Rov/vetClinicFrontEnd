@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Procedure } from '../../../../core/models/Procedure';
-import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedureService/procedure.service';
-import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Specialization} from "../../../../core/models/Specialization";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatDialogRef} from "@angular/material/dialog";
 import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {Procedure} from "../../../../core/models/Procedure";
+import {ProceduresPageComponent} from "../procedures-page/procedures-page.component";
+import {ProcedureService} from "../../services/procedureService/procedure.service";
 
 @Component({
   selector: 'app-new-procedure-dialog',
@@ -19,11 +19,11 @@ export class NewProcedureDialogComponent implements OnInit {
   isSelectionChanged: boolean = false;
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<ProceduresPageComponent>,
-    private procedureService : ProcedureService,
-    private specializationService: SpecializationService) {
-      specializationService.getAll().subscribe((data) => this.specializations = data);
-    }
+              public dialogRef: MatDialogRef<ProceduresPageComponent>,
+              private procedureService : ProcedureService,
+              private specializationService: SpecializationService) {
+    specializationService.getAll().subscribe((data) => this.specializations = data);
+  }
 
   form = new FormGroup({
     name: new FormControl("", Validators.minLength(5)),
@@ -41,7 +41,7 @@ export class NewProcedureDialogComponent implements OnInit {
     }
     if(!(this.form.dirty || this.isSelectionChanged)) {
       this.dialogRef.close(false);
-    }    
+    }
     const finalData : Procedure = this.form.value as Procedure;
     finalData.specializations = this.selectedSpec;
     this.procedureService.createProcedure(finalData).subscribe(() => this.dialogRef.close(true));
@@ -57,7 +57,4 @@ export class NewProcedureDialogComponent implements OnInit {
     this.isSelectionChanged = event.isChanged;
   }
 
-  isButtonEnabled(): boolean{
-    return this.form.valid && (this.form.dirty || this.isSelectionChanged);
-  }
 }
