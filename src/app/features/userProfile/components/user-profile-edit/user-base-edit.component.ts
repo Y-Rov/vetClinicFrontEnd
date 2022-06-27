@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../../userDashboard/services/userService/user.service";
 import { AuthService } from "../../../../core/services/authService/auth.service";
 import { ActivatedRoute } from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -35,7 +36,8 @@ export class UserBaseEditComponent implements OnInit {
   constructor(
     private userService: UserService,
     public authService: AuthService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    public domSanitazer: DomSanitizer) {
     this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
