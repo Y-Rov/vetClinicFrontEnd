@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Procedure } from '../../../../core/models/Procedure';
-import { ProcedureService } from '../../../../core/services/procedureService/procedure.service'; 
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteProcedureDialogComponent } from '../delete-procedure-dialog/delete-procedure-dialog.component';
-import { EditProcedureDialogComponent } from '../edit-procedure-dialog/edit-procedure-dialog.component';
-import { NewProcedureDialogComponent } from '../new-procedure-dialog/new-procedure-dialog.component';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table'; 
-import { ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { AuthService } from 'src/app/core/services/authService/auth.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {Procedure} from "../../../../core/models/Procedure";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
+import {ProcedureService} from "../../../../core/services/procedureService/procedure.service";
+import {AuthService} from "../../../../core/services/authService/auth.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteProcedureDialogComponent} from "../delete-procedure-dialog/delete-procedure-dialog.component";
+import {EditProcedureDialogComponent} from "../edit-procedure-dialog/edit-procedure-dialog.component";
+import {NewProcedureDialogComponent} from "../new-procedure-dialog/new-procedure-dialog.component";
 
 @Component({
   selector: 'app-procedures-page',
@@ -28,13 +27,11 @@ export class ProceduresPageComponent implements OnInit {
     private procedureService: ProcedureService,
     public authService : AuthService,
     private matDialog: MatDialog) {
-      //this.updateList();
-     }
+  }
 
   private updateList(): void {
     this.procedureService.getAll().subscribe(data => {
       this.dataSource.data = data;
-      console.log(data);
       this.dataSource.sort = this.sort!;
     });
   }
@@ -54,7 +51,7 @@ export class ProceduresPageComponent implements OnInit {
       autoFocus: false,
       data:{
         name: procedure.name,
-        id: procedure.id 
+        id: procedure.id
       }
     });
 
