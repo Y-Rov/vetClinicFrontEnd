@@ -37,7 +37,7 @@ export class UserBaseEditComponent implements OnInit {
     private userService: UserService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    public domSanitazer: DomSanitizer) {
+    public domSanitizer: DomSanitizer) {
     this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
