@@ -39,7 +39,15 @@ export class ArticlesPageComponent implements OnInit {
   }
 
   updateList(): void{
-    this.articleService.getAll().subscribe(data => {
+    if(this.authService.isAuthorized() && this.authService.isInRole('Admin')){
+      this.articleService.getAll().subscribe(data => {
+        this.articles = data;
+        this.dataSource.data = data;
+        this.dataSource.sort = this.sort!;
+      });
+      return;
+    }
+    this.articleService.getPublished().subscribe(data => {
       this.articles = data;
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
