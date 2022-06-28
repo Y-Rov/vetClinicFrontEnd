@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {ArticlesPageComponent} from "./components/articles/articles-page/articles-page.component";
 import {ViewArticleComponent} from "./components/articles/view-article/view-article.component";
 import {PreviewArticleComponent} from "./components/articles/preview-article/preview-article.component";
+import {RolesGuard} from "../../helpers/roles-guard/roles.guard";
 
 const routes: Routes = [
     {
@@ -15,7 +16,9 @@ const routes: Routes = [
     },
     {
       path: 'preview/:id',
-      component: PreviewArticleComponent
+      component: PreviewArticleComponent,
+      canActivate: [RolesGuard],
+      data: {allowedRoles: ['Admin']}
     }
   ];
 
