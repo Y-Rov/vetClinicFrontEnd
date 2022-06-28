@@ -5,7 +5,7 @@ import { Location } from "@angular/common";
 import {ResourceService} from "../../../../core/services/resourceService/resource.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class AddressService extends ResourceService<Address> {
 
