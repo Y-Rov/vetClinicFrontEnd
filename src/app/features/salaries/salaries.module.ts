@@ -9,7 +9,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatIconModule } from "@angular/material/icon";
-import { SharedModule } from "../../shared/shared.module";
+import { MatButtonModule } from "@angular/material/button";
 
 import { SalariesRoutingModule } from './salaries-routing.module';
 import { SalaryPageComponent } from './components/salary-page/salary-page.component';
@@ -37,7 +37,7 @@ import { NewSalaryDialogComponent } from './components/new-salary-dialog/new-sal
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
-    SharedModule
+    MatButtonModule
   ]
 })
 export class SalariesModule { }
