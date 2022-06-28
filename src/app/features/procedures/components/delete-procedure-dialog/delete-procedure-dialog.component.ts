@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProcedureService } from '../../../../core/services/procedureService/procedure.service';
-import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {ProceduresPageComponent} from "../procedures-page/procedures-page.component";
+import {ProcedureService} from "../../services/procedureService/procedure.service";
 
 @Component({
   selector: 'app-delete-procedure-dialog',
@@ -19,7 +19,7 @@ export class DeleteProcedureDialogComponent implements OnInit {
     private procedureService : ProcedureService) {
     this.id = data.id;
     this.name = data.name;
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -31,4 +31,5 @@ export class DeleteProcedureDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close(false);
   }
+
 }

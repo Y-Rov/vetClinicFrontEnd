@@ -33,6 +33,23 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator class="mat-elevation-z8 row" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
-    </mat-paginator>
+   
+
+    <div class="pagginator row mat-elevation-z8 ">
+        <div class="paginatorElemetnPostion">items per page </div>
+        <div class="paginatorElemetnPostion">
+            <select (change)="selectOption()" [(ngModel)]="itemsPerPage">
+                <option *ngFor="let o of options">
+                    {{o.name}}
+                </option>
+            </select>
+        </div>
+        <div class="paginatorElemetnPostion">{{paggingInfo!.CurrentPage}} of {{paggingInfo!.TotalPages}}
+        </div>
+        <div class="paginatorElemetnPostion"> <button mat-raised-button [disabled]="!paggingInfo!.HasPrevious"
+                (click)="onPrevButtonInfoClick()" color="info">Prev</button></div>
+        <div class="paginatorElemetnPostion"> <button mat-raised-button [disabled]="!paggingInfo!.HasNext"
+                (click)="onNextButtonInfoClick()" color="info">Next</button></div>
+    </div>
+    
 </div>

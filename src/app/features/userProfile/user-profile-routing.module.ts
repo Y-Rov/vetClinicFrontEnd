@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import {UserProfileInfoComponent} from "./components/user-profile-info/user-profile-info.component";
-import {AuthGuard} from "../../helpers/auth-guard/auth.guard";
-import {UserBaseEditComponent} from "./components/user-profile-edit/user-base-edit.component";
+import { UserProfileInfoComponent } from "./components/user-profile-info/user-profile-info.component";
+import { AuthGuard } from "../../helpers/auth-guard/auth.guard";
+import { UserBaseEditComponent } from "./components/user-profile-edit/user-base-edit.component";
 
 const routes: Routes = [
   {
