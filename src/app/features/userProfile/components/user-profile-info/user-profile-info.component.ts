@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from "../../../../core/models/User";
 import { UserService } from "../../../userDashboard/services/userService/user.service";
 import { ActivatedRoute } from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -14,7 +15,8 @@ export class UserProfileInfoComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    public domSanitizer: DomSanitizer) {
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 

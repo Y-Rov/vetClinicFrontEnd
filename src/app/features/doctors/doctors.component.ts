@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { User } from "../../core/models/User";
 import { UserService } from "../userDashboard/services/userService/user.service";
 
@@ -10,7 +11,9 @@ import { UserService } from "../userDashboard/services/userService/user.service"
 export class DoctorsComponent implements OnInit {
   doctors: User[] = [];
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    public domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getDoctors();
