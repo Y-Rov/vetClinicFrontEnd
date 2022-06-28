@@ -43,7 +43,9 @@ export class ViewArticleComponent implements OnInit {
         this.articleService
           .getPublished()
           .subscribe(data => {
-            this.otherArticles = data.splice(0, 5);
+            this.otherArticles = data
+                                     .filter(art => art.id != this.currentArticle!.id!)
+                                     .splice(0, 5);
         });
       });
   }
