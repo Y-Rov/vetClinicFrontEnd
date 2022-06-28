@@ -5,6 +5,7 @@ import {DateTimeService} from "../../../services/dateTimeService/date-time.servi
 import { Comment } from "../../../../../core/models/Comment";
 import {EditCommentDialogComponent} from "../edit-comment-dialog/edit-comment-dialog.component";
 import {AuthService} from "../../../../../core/services/authService/auth.service";
+import {UserService} from "../../../../userDashboard/services/userService/user.service";
 
 @Component({
   selector: 'app-display-comment',
@@ -16,13 +17,24 @@ export class DisplayCommentComponent implements OnInit {
 
   @Input() comment?: Comment
 
+  profilePickTemp: string = '';
+
+  get profilePick(): string{
+    if(this.profilePickTemp == null){
+      return '/assets/images/default_profile_pic.jpg';
+    }
+    return `data:image/png;base64,${this.profilePickTemp}`
+  }
+
   constructor(private commentService: CommentService,
               private matDialog: MatDialog,
               public dateService: DateTimeService,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              public userService: UserService) { }
 
   ngOnInit(): void {
     this.comment!.createdAt = new Date(this.comment!.createdAt!)
+    this.getProfilePick();
   }
 
   onDeleteComment(event: any): void{
@@ -60,4 +72,9 @@ export class DisplayCommentComponent implements OnInit {
   stopEventProp(event: Event): void{
     event.stopPropagation();
   }
+
+  getProfilePick(): void{
+    this.userService.getById(this.comment!.authorId!).subscribe(data => this.profilePickTemp = data.profilePicture!);
+  }
+
 }
