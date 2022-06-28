@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Procedure } from '../../../../core/models/Procedure';
-import { Specialization } from '../../../../core/models/Specialization';
-import { ProcedureService } from '../../../../core/services/procedureService/procedure.service';
-import { ProceduresPageComponent } from '../procedures-page/procedures-page.component';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Specialization} from "../../../../core/models/Specialization";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Procedure} from "../../../../core/models/Procedure";
 import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {ProceduresPageComponent} from "../procedures-page/procedures-page.component";
+import {ProcedureService} from "../../services/procedureService/procedure.service";
 
 @Component({
   selector: 'app-edit-procedure-dialog',
@@ -26,8 +26,8 @@ export class EditProcedureDialogComponent implements OnInit {
     private specializationService: SpecializationService) {
     this.specializations = [];
     this.selectedSpec = [];
-      specializationService.getAll().subscribe((data) => this.specializations = data);
-    }
+    specializationService.getAll().subscribe((data) => this.specializations = data);
+  }
 
   form = new FormGroup({
     name: new FormControl("", Validators.minLength(5)),
