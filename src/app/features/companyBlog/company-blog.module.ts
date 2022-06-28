@@ -19,6 +19,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {AngularEditorModule} from "@kolkov/angular-editor";
+import {MatCardModule} from "@angular/material/card";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -45,7 +50,12 @@ import {MatInputModule} from "@angular/material/input";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    AngularEditorModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule
   ]
 })
 export class CompanyBlogModule { }

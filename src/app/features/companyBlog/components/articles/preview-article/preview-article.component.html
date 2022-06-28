@@ -1,1 +1,17 @@
-<p>preview-article works!</p>
+<div class="page-wrapper">
+  <div class="side-menu mat-elevation-z6">
+    <button mat-raised-button color="primary" (click)="onPublish($event)">Publish</button>
+    <button mat-button>Exit</button>
+  </div>
+  <div class="centred-div mat-elevation-z23">
+    <p class="mat-display-1 title">{{currentArticle!.title}}</p>
+    <div class="author-time-block">
+      <label>Admin Admin</label>
+      <label>{{dateService.getDateTimeString(currentArticle!.createdAt!)}}</label>
+    </div>
+    <mat-divider></mat-divider>
+    <div [innerHtml]="currentArticle!.body"></div>
+    <br><br>
+    <p class="mat-headline">Publish the article to see comments</p>
+  </div>
+</div>

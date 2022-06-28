@@ -1,1 +1,8 @@
-<p>delete-article-dialog works!</p>
+<div class="mat-title">Delete article</div>
+<div class="mat-display-5">Do you want to delete article <b>{{truncateTitle()}}</b> with id {{this.data.id}}?</div>
+<div class="buttons-div">
+  <button mat-button (click)="onNoClick()">Discard</button>
+  <button mat-raised-button color="warn" (click)="onDeleteArticle()">
+    Delete
+  </button>
+</div>

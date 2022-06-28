@@ -1,1 +1,13 @@
-<p>article-card works!</p>
+<mat-card (click)="onOpenArticle($event)" class="mat-elevation-z23">
+  <mat-card-title>
+    <span class="title-span">{{article!.title}}</span>
+    <app-article-menu
+      [(article)]="article!"
+      (deletedArticle)="onDeleteArticle()"
+      *ngIf="authService.isAuthorized() && authService.isInRole('Admin')"></app-article-menu>
+  </mat-card-title>
+  <mat-divider inset></mat-divider>
+  <mat-card-content>
+    <p [innerHtml]="article!.body"></p>
+  </mat-card-content>
+</mat-card>

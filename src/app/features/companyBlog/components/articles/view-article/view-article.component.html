@@ -1,1 +1,23 @@
-<p>view-article works!</p>
+<div class="page-wrapper">
+  <div class="side-menu mat-elevation-z6">
+    <span class="mat-title">See also:</span>
+    <ng-container *ngFor="let element of otherArticles">
+      <mat-divider></mat-divider>
+      <button mat-flat-button
+              class="link-button"
+              (click)="onOpenArticle(element, $event)">
+        {{element.title!}}
+      </button>
+    </ng-container>
+  </div>
+  <div class="centred-div mat-elevation-z23">
+    <p class="mat-display-1 title">{{currentArticle!.title!}}</p>
+    <div class="author-time-block">
+      <label>Admin Admin</label>
+      <label>{{dateService.getDateTimeString(currentArticle!.createdAt!)}}</label>
+    </div>
+    <mat-divider></mat-divider>
+    <div [innerHtml]="currentArticle!.body!"></div>
+    <app-comments-container [currentArticleId]="currentArticle.id!"></app-comments-container>
+  </div>
+</div>

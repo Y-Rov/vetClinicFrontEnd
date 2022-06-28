@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'procedures',
     loadChildren: () => import('./features/procedures/procedures.module').then(m => m.ProceduresModule)
+  },
+  {
+    path: 'blog',
+    loadChildren: () => import('./features/companyBlog/company-blog.module').then(m => m.CompanyBlogModule)
   }
 ];
 

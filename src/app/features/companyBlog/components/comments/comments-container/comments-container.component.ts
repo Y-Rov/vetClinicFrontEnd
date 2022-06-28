@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CommentService} from "../../../services/commentService/comment.service";
 import {Comment} from "../../../../../core/models/Comment";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../../../core/services/authService/auth.service";
 
 @Component({
   selector: 'app-comments-container',
@@ -17,7 +18,8 @@ export class CommentsContainerComponent implements OnInit {
 
   comments: Comment[] = [];
 
-  constructor(private commentService: CommentService) { }
+  constructor(private commentService: CommentService,
+              public authService: AuthService) { }
 
   updateList(): void{
     this.commentService

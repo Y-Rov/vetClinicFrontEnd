@@ -1,1 +1,23 @@
-<p>new-article-dialog works!</p>
+<div class="wrapper">
+  <div [formGroup]="form">
+    <div class="mat-title">New Article</div>
+    <mat-form-field appearance="outline">
+      <mat-label>Article title</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        type="string"
+        minlength="5"
+        placeholder="Article title">
+      <mat-hint>Length must be greater than 5</mat-hint>
+      <mat-error *ngIf="form.controls.title.invalid">Length must be greater than 5</mat-error>
+    </mat-form-field>
+    <angular-editor formControlName="body" [config]="editorConfig"></angular-editor>
+    <div class="buttons-div">
+      <button mat-flat-button (click)="onNoClick()">Discard</button>
+      <button mat-flat-button [disabled]="!form.valid" (click)="onSaveDraft()">Save Draft</button>
+      <button mat-flat-button [disabled]="!form.valid">Preview</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="onPublish()">Publish</button>
+    </div>
+  </div>
+</div>

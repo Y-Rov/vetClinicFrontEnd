@@ -8,11 +8,13 @@
       formControlName="content"
       type="string"
       minlength="5"
-      placeholder="Write your comment here"></textarea>
+      placeholder="Write your comment here"
+      [disabled]="!authService.isAuthorized()"></textarea>
   </mat-form-field>
   <button mat-fab color="primary" (click)="onPostComment($event)">
     <mat-icon class="white-icon">send</mat-icon>
   </button>
+  <mat-error *ngIf="!authService.isAuthorized()">Authorize to write a comment</mat-error>
 </form>
 
 <ng-container *ngFor="let select of comments">
