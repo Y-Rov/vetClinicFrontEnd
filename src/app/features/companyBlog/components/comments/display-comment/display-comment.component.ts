@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DateTimeService} from "../../../services/dateTimeService/date-time.service";
 import { Comment } from "../../../../../core/models/Comment";
 import {EditCommentDialogComponent} from "../edit-comment-dialog/edit-comment-dialog.component";
+import {AuthService} from "../../../../../core/services/authService/auth.service";
 
 @Component({
   selector: 'app-display-comment',
@@ -17,7 +18,8 @@ export class DisplayCommentComponent implements OnInit {
 
   constructor(private commentService: CommentService,
               private matDialog: MatDialog,
-              public dateService: DateTimeService) { }
+              public dateService: DateTimeService,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
     this.comment!.createdAt = new Date(this.comment!.createdAt!)

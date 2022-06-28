@@ -39,6 +39,8 @@ export class CommentService extends ResourceService<Comment>{
       id: comment.id
     }
 
+    console.log(viewModel);
+
     return this.httpClient.put<Comment>(this.apiUrl, viewModel, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),

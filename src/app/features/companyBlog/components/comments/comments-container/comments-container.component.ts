@@ -44,9 +44,11 @@ export class CommentsContainerComponent implements OnInit {
     event.stopPropagation();
     let finalData: Comment = this.form.value as Comment;
     finalData.articleId = this.currentArticleId!;
-    this.commentService.postComment(finalData).subscribe((created) => {
-      this.form.value.content = '';
-      this.comments.push(created);
+    this.commentService
+      .postComment(finalData)
+      .subscribe(() => {
+        this.form.value.content = '';
+        this.updateList();
     })
   }
 
