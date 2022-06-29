@@ -17,7 +17,6 @@ import { AuthGuard } from './helpers/auth-guard/auth.guard';
 import { LoginComponent } from './shared/components/authComponents/login-page/login.component';
 import { SignupComponent } from './shared/components/authComponents/signup-page/signup.component';
 import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
-import { SalaryPageComponent } from './shared/components/financeComponents/salary-page/salary-page.component';
 
 import { MainAnimalComponent } from "./shared/components/animalComponents/main-animal/main-animal.component";
 
@@ -69,12 +68,6 @@ const appRoutes: Routes = [
   {
     path:'about',
     component: AboutComponent
-  },
-  {
-    path: 'salaries',
-    component: SalaryPageComponent,
-    canActivate: [RolesGuard],
-    data: { allowedRoles: ['Accountant'] }
   }
 ];
 

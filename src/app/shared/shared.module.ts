@@ -39,47 +39,11 @@ import { MainAnimalComponent } from './components/animalComponents/main-animal/m
 import { HomeComponent } from './home/home.component';
 import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {
-  SpecializationListComponent
-} from "../features/specializations/components/specialization-list/specialization-list.component";
-import {
-  SpecializationAddProcedureComponent
-} from "../features/specializations/components/specialization-add-procedure/specialization-add-procedure.component";
-import {
-  SpecializationAddUserDialogComponent
-} from "../features/specializations/components/specialization-add-user-dialog/specialization-add-user-dialog.component";
-import {
-  SpecializationDeleteDialogComponent
-} from "../features/specializations/components/specialization-delete-dialog/specialization-delete-dialog.component";
-import {
-  SpecializationEditDialogComponent
-} from "../features/specializations/components/specialization-edit-dialog/specialization-edit-dialog.component";
-import {SalaryPageComponent} from "./components/financeComponents/salary-page/salary-page.component";
-import {NewSalaryDialogComponent} from "./components/financeComponents/new-salary-dialog/new-salary-dialog.component";
-import {
-  DeleteSalaryDialogComponent
-} from "./components/financeComponents/delete-salary-dialog/delete-salary-dialog.component";
-import {
-  EditSalaryDialogComponent
-} from "./components/financeComponents/edit-salary-dialog/edit-salary-dialog.component";
-import {
-  AddSpecializationDialogComponent
-} from "../features/specializations/components/add-specialization-dialog/add-specialization-dialog.component";
-import {SpecializationModule} from "../features/specializations/specialization.module";
+
 
 @NgModule({
 
   declarations: [
-    // SpecializationListComponent,
-    // SpecializationAddProcedureComponent,
-    // SpecializationAddUserDialogComponent,
-    // SpecializationDeleteDialogComponent,
-    // SpecializationEditDialogComponent,
-    // AddSpecializationDialogComponent,
-    SalaryPageComponent,
-    DeleteSalaryDialogComponent,
-    EditSalaryDialogComponent,
-    NewSalaryDialogComponent,
     MultiSelectComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     LoginComponent, SignupComponent,
@@ -128,19 +92,19 @@ import {SpecializationModule} from "../features/specializations/specialization.m
     MatTooltipModule,
     NgbModule
   ],
-    exports: [
-        CommonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        ExceptionPageComponent,
-        ExceptionDetailPageComponent,
-        ExceptionStatsPageComponent,
-        ExceptionTodayStatsPageComponent,
-        MainAnimalComponent,
-        HomeComponent,
-        MultiSelectComponent
-    ],
+  exports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    MainAnimalComponent,
+    HomeComponent,
+    MultiSelectComponent
+  ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]

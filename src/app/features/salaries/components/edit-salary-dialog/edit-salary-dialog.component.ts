@@ -36,7 +36,7 @@ export class EditSalaryDialogComponent implements OnInit {
     if (!(this.form.dirty || this.isSelectionChanged)) {
       this.dialogRef.close(false);
     }
-      this.data.value = this.form.value.value!;
+    this.data.value = this.form.value.value!;
     this.salaryService.updateSalary(this.data).subscribe(() => this.dialogRef.close(true));
   }
 

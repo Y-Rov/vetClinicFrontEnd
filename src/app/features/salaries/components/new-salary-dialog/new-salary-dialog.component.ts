@@ -8,7 +8,6 @@ import { EmployeeService } from '../../../../core/services/financialService/empl
 import { SalaryService } from '../../../../core/services/financialService/salary.service';
 import { SalaryPageComponent } from '../salary-page/salary-page.component';
 
-
 @Component({
   selector: 'app-new-salary-dialog',
   templateUrl: './new-salary-dialog.component.html',
@@ -24,7 +23,7 @@ export class NewSalaryDialogComponent implements OnInit {
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<SalaryPageComponent>,
     private salaryService: SalaryService,
-    private  employeeService: EmployeeService) {
+    private employeeService: EmployeeService) {
     this.UpdateList();
   }
 
@@ -60,3 +59,4 @@ export class NewSalaryDialogComponent implements OnInit {
     this.isDropChanged = true;
   }
 }
+
