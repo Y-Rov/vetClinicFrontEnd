@@ -25,7 +25,7 @@ export class CommentsContainerComponent implements OnInit {
     this.commentService
       .getByArticleId(this.currentArticleId!)
       .subscribe(data =>{
-        this.comments = data;
+        this.comments = data.reverse();
       })
   }
 
