@@ -55,7 +55,7 @@ export class ArticleService extends ResourceService<Article>{
     return this.httpClient.get<Article[]>(url, this.httpOptions)
       .pipe(
         map((result) => result.map((i) => new this.tConstructor(i))),
-        catchError(this.handleError<Article[]>('getAll', []))
+        catchError(this.handleError<Article[]>('getPublished', []))
       );
   }
 }

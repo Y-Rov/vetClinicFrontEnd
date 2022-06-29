@@ -14,13 +14,13 @@ import {EditArticleDialogComponent} from "../edit-article-dialog/edit-article-di
 export class ArticleMenuComponent implements OnInit {
 
   @Output() deletedArticle = new EventEmitter<Article>();
-
-  currentArticle?: Article;
+  @Output() articleChange : EventEmitter<Article> = new EventEmitter<Article>();
 
   @Input() set article(value : Article){
     this.currentArticle = value;
   }
-  @Output() articleChange : EventEmitter<Article> = new EventEmitter<Article>();
+
+  currentArticle?: Article;
 
   constructor(private articleService: ArticleService,
               private router: Router,
@@ -28,6 +28,7 @@ export class ArticleMenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   stopEventProp(event: Event): void{
     event.stopPropagation();
   }

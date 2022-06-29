@@ -3,6 +3,7 @@ import {ArticleService} from "../../../services/articleService/article.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Article} from "../../../../../core/models/Article";
 import {DateTimeService} from "../../../services/dateTimeService/date-time.service";
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-preview-article',
@@ -24,7 +25,8 @@ export class PreviewArticleComponent implements OnInit {
   constructor(private articleService: ArticleService,
               private router: Router,
               private route: ActivatedRoute,
-              public dateService: DateTimeService){
+              public dateService: DateTimeService,
+              private location: Location){
     this.updateContent();
   }
 
@@ -52,5 +54,10 @@ export class PreviewArticleComponent implements OnInit {
       console.log(this.route.url);
       this.router.navigateByUrl(`$blog/${this.currentArticle!.id}`);
     });
+  }
+
+  onExit(event: Event): void{
+    event.stopPropagation();
+    this.location.back();
   }
 }

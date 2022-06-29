@@ -15,7 +15,7 @@
     </mat-form-field>
     <div class="buttons-div">
       <button mat-flat-button (click)="onNoClick()">Discard</button>
-      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="onSave()">Save</button>
+      <button mat-raised-button type="submit" [disabled]="!(form.valid && form.dirty)" (click)="onSave()">Save</button>
     </div>
   </div>
 </div>

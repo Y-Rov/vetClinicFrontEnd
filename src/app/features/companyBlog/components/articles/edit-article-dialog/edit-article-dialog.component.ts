@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {ArticleService} from "../../../services/articleService/article.service";
 import {Article} from "../../../../../core/models/Article";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {EditorConfigProviderService} from "../../../services/editorConfigProvider/editor-config-provider.service";
 
 @Component({
   selector: 'app-edit-article-dialog',
@@ -17,62 +17,12 @@ export class EditArticleDialogComponent<T> implements OnInit {
     body: new FormControl("", Validators.minLength(5))
   });
 
-  editorConfig: AngularEditorConfig = {
-    rawPaste: false,
-    outline: false,
-    editable: true,
-    spellcheck: true,
-    minHeight: '15rem',
-    maxHeight: '30rem',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    sanitize: false,
-    toolbarPosition: 'top',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: 'roboto',
-    fonts: [],
-    customClasses: [
-      {
-        name: 'Title',
-        class: 'mat-title',
-        tag: 'h2'
-      }
-    ],
-    toolbarHiddenButtons: [
-      [
-        'strikeThrough',
-        'subscript',
-        'superscript',
-        'justifyLeft',
-        'justifyCenter',
-        'justifyRight',
-        'justifyFull',
-        'indent',
-        'outdent',
-        'insertOrderedList',
-        'heading',
-        'fontName',
-        'link',
-        'unlink'
-      ],
-      [
-        'fontSize',
-        'textColor',
-        'backgroundColor',
-        'insertImage',
-        'insertVideo',
-        'insertHorizontalRule',
-        'removeFormat',
-        'toggleEditorMode',
-      ]
-    ]
-  };
-
   constructor(
     @Inject(FormBuilder) private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<T>,
     @Inject(MAT_DIALOG_DATA) public data : Article,
-    private articleService : ArticleService
+    private articleService : ArticleService,
+    public editorConfig: EditorConfigProviderService
   ) {
     this.form.patchValue(this.data);
   }

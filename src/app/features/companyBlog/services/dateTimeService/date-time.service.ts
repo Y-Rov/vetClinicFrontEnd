@@ -14,17 +14,20 @@ export class DateTimeService {
   }
 
   getDateTimeString(date: Date): string{
-    let d = new Date(date);
+    let tempDate = new Date(date);
     let now = new Date();
-    if(now.getFullYear() == d.getFullYear())
-      return (this.getTimeString(d) + " " + this.getDateString(d)).slice(0, 11)
-    return this.getTimeString(d) + " " + this.getDateString(d);
+    if(now.getFullYear() == tempDate.getFullYear())
+      return (this.getTimeString(tempDate) + " " + this.getDateString(tempDate, false))
+    return this.getTimeString(tempDate) + " " + this.getDateString(tempDate, true);
   }
 
-  public getDateString(date: Date): string{
+  public getDateString(date: Date, includeYear: boolean): string{
     let m = date.getMonth() + 1;
     let d = date.getDate();
 
-    return `${(d>9 ? '' : '0') + d}.${(m>9 ? '' : '0') + m}.${date.getFullYear()}`;
+    if(includeYear)
+      return `${(d>9 ? '' : '0') + d}.${(m>9 ? '' : '0') + m}.${date.getFullYear()}`;
+    return `${(d>9 ? '' : '0') + d}.${(m>9 ? '' : '0') + m}`;
+
   }
 }

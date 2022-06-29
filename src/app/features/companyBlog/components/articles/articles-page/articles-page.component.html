@@ -16,7 +16,7 @@
     </mat-form-field>
   </div>
 
-  <ng-container *ngIf="selected.value == 'grid'; else templateA">
+  <ng-container *ngIf="selected.value == 'grid'; else listView">
     <!--Grid of cards view-->
     <div class="article-grid-wrapper">
       <app-article-card *ngFor="let select of articles" [article]="select"
@@ -38,7 +38,7 @@
     </div>
   </ng-container>
 
-  <ng-template #templateA>
+  <ng-template #listView>
     <table
       mat-table
       [dataSource]="dataSource"

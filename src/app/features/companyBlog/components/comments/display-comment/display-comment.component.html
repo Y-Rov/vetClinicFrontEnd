@@ -5,6 +5,7 @@
       <span class="mat-subheading-2 alt">{{comment!.authorName!}}</span>
       <span class="mat-body-1">{{dateService.getDateTimeString(comment!.createdAt!)}}</span>
     </div>
+    <!--Menu is displayed when the user is the author of the comment or an admin -->
     <button class="menu-button"
             mat-icon-button
             (click)="stopEventProp($event)"
@@ -12,7 +13,7 @@
             *ngIf="authService.isAuthorized() && (authService.getUserId() == comment!.authorId! || authService.isInRole('Admin'))">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu  #menu="matMenu">
+    <mat-menu #menu="matMenu">
       <button mat-menu-item
               (click)="onEditComment($event)"
               *ngIf="authService.getUserId() == comment!.authorId!">

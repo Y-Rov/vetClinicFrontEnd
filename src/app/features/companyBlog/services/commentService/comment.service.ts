@@ -29,7 +29,7 @@ export class CommentService extends ResourceService<Comment>{
     return this.httpClient.post<Comment>(this.apiUrl, viewModel, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),
-        catchError(this.handleError<Comment>('getById'))
+        catchError(this.handleError<Comment>('postComment'))
       );
   }
 
@@ -39,22 +39,20 @@ export class CommentService extends ResourceService<Comment>{
       id: comment.id
     }
 
-    console.log(viewModel);
-
     return this.httpClient.put<Comment>(this.apiUrl, viewModel, this.httpOptions)
       .pipe(
         map((result) => new this.tConstructor(result)),
-        catchError(this.handleError<Comment>('getById'))
+        catchError(this.handleError<Comment>('updateComment'))
       );
   }
 
   getByArticleId(articleId: number): Observable<Comment[]>{
-    const url: string = this.apiUrl + `/article/${articleId}`
+    const url: string = `${this.apiUrl}/article/${articleId}`
 
     return this.httpClient.get<Comment[]>(url, this.httpOptions)
       .pipe(
         map((result) => result.map((i) => new this.tConstructor(i))),
-        catchError(this.handleError<Comment[]>('getAll', []))
+        catchError(this.handleError<Comment[]>('getByArticleId', []))
       );
 }
 }

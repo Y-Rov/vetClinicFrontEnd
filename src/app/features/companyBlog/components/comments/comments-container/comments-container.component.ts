@@ -51,5 +51,4 @@ export class CommentsContainerComponent implements OnInit {
         this.updateList();
     })
   }
-
 }

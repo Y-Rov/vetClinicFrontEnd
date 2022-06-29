@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommentService} from "../../../services/commentService/comment.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DateTimeService} from "../../../services/dateTimeService/date-time.service";
-import { Comment } from "../../../../../core/models/Comment";
+import {Comment} from "../../../../../core/models/Comment";
 import {EditCommentDialogComponent} from "../edit-comment-dialog/edit-comment-dialog.component";
 import {AuthService} from "../../../../../core/services/authService/auth.service";
 import {UserService} from "../../../../userDashboard/services/userService/user.service";
@@ -74,7 +74,8 @@ export class DisplayCommentComponent implements OnInit {
   }
 
   getProfilePick(): void{
-    this.userService.getById(this.comment!.authorId!).subscribe(data => this.profilePickTemp = data.profilePicture!);
+    this.userService
+      .getById(this.comment!.authorId!)
+      .subscribe(data => this.profilePickTemp = data.profilePicture!);
   }
-
 }
