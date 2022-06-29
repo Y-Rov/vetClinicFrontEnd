@@ -13,10 +13,9 @@ export class DeleteSalaryDialogComponent implements OnInit {
   id: number;
   name: string;
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { id: number, name: string } ,
+    @Inject(MAT_DIALOG_DATA) private data: { id: number, name: string },
     public dialogRef: MatDialogRef<SalaryPageComponent>,
-    private salaryService: SalaryService)
-  {
+    private salaryService: SalaryService) {
     this.id = data.id;
     this.name = data.name;
   }
@@ -33,3 +32,4 @@ export class DeleteSalaryDialogComponent implements OnInit {
   }
 
 }
+
