@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Specialization} from "../../../../core/models/Specialization";
-import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {SpecializationService} from "../../services/specializationService/specialization.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {AddSpecializationDialogComponent} from "../add-specialization-dialog/add-specialization-dialog.component";

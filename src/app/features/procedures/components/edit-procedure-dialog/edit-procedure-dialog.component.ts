@@ -3,7 +3,7 @@ import {Specialization} from "../../../../core/models/Specialization";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Procedure} from "../../../../core/models/Procedure";
-import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {SpecializationService} from "../../../specializations/services/specializationService/specialization.service";
 import {ProceduresPageComponent} from "../procedures-page/procedures-page.component";
 import {ProcedureService} from "../../services/procedureService/procedure.service";
 
