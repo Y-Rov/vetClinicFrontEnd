@@ -1,0 +1,42 @@
+<!--Comment field when the user is authorized-->
+<ng-container *ngIf="authService.isAuthorized(); else forbiddenCommentTemplate">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Comment</mat-label>
+      <textarea
+        [maxlength]="400"
+        [(ngModel)]="form.value.content"
+        matInput
+        formControlName="content"
+        type="string"
+        minlength="5"
+        placeholder="Write your comment here"></textarea>
+      <mat-hint>Length must be greater than 1</mat-hint>
+    </mat-form-field>
+    <button mat-fab color="primary" (click)="onPostComment($event)">
+      <mat-icon class="white-icon">send</mat-icon>
+    </button>
+  </form>
+</ng-container>
+
+<!--Comment field when the user is NOT authorized-->
+<ng-template #forbiddenCommentTemplate>
+  <mat-form-field>
+    <mat-label>Authorize to write a comment</mat-label>
+    <textarea
+      [disabled]="true"
+      matInput
+      type="string"
+      placeholder="Authorize to write a comment"></textarea>
+    <mat-hint>Length must be greater than 1</mat-hint>
+  </mat-form-field>
+  <button mat-fab color="primary" [disabled]="true" (click)="onPostComment($event)">
+    <mat-icon class="white-icon">send</mat-icon>
+  </button></ng-template>
+
+<ng-container *ngFor="let select of comments">
+  <div class="single-comment-container">
+    <app-display-comment (deletedComment)="onDeleteComment($event)" [comment]="select"></app-display-comment>
+  </div>
+</ng-container>
+

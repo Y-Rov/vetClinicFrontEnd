@@ -1,0 +1,33 @@
+<div class="comment mat-elevation-z6">
+  <div class="comment-title">
+    <img src="{{profilePick}}" alt="Profile picture">
+    <div class="name-time">
+      <span class="mat-subheading-2 alt">{{comment!.authorName!}}</span>
+      <span class="mat-body-1">{{dateService.getDateTimeString(comment!.createdAt!)}}</span>
+    </div>
+    <!--Menu is displayed when the user is the author of the comment or an admin -->
+    <button class="menu-button"
+            mat-icon-button
+            (click)="stopEventProp($event)"
+            [matMenuTriggerFor]="menu"
+            *ngIf="authService.isAuthorized() && (authService.getUserId() == comment!.authorId! || authService.isInRole('Admin'))">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              (click)="onEditComment($event)"
+              *ngIf="authService.getUserId() == comment!.authorId!">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="onDeleteComment($event)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="comment-body">
+    <span>{{comment!.content}}</span>
+  </div>
+</div>

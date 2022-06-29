@@ -1,0 +1,28 @@
+<div class="page-wrapper">
+  <div class="side-menu mat-elevation-z6"
+  *ngIf="otherArticles.length != 0">
+    <span class="mat-title">See also:</span>
+    <ng-container *ngFor="let element of otherArticles">
+      <mat-divider></mat-divider>
+      <button mat-flat-button
+              class="link-button"
+              (click)="onOpenArticle(element, $event)">
+        {{element.title!}}
+      </button>
+    </ng-container>
+  </div>
+
+  <div class="centred-div mat-elevation-z23">
+    <p class="mat-display-1 title">{{currentArticle!.title!}}</p>
+    <div class="author-time-block">
+      <label>{{currentArticle!.authorName!}}</label>
+      <div>
+        <label *ngIf="currentArticle!.edited!"><i style="margin-right: 15px">edited</i></label>
+        <label>{{dateService.getDateTimeString(currentArticle!.createdAt!)}}</label>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div [innerHtml]="currentArticle!.body!"></div>
+    <app-comments-container [currentArticleId]="currentArticle.id!"></app-comments-container>
+  </div>
+</div>
