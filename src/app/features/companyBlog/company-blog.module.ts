@@ -11,19 +11,19 @@ import { ArticleMenuComponent } from './components/articles/article-menu/article
 import { ViewArticleComponent } from './components/articles/view-article/view-article.component';
 import { PreviewArticleComponent } from './components/articles/preview-article/preview-article.component';
 import { ArticlesPageComponent } from './components/articles/articles-page/articles-page.component';
-import {CompanyBlogRoutingModule} from "./company-blog-routing.module";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {MatDividerModule} from "@angular/material/divider";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
-import {AngularEditorModule} from "@kolkov/angular-editor";
-import {MatCardModule} from "@angular/material/card";
-import {MatTableModule} from "@angular/material/table";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatSelectModule} from "@angular/material/select";
+import { CompanyBlogRoutingModule } from "./company-blog-routing.module";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import { MatDividerModule } from "@angular/material/divider";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { AngularEditorModule } from "@kolkov/angular-editor";
+import { MatCardModule } from "@angular/material/card";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSelectModule } from "@angular/material/select";
 
 
 
