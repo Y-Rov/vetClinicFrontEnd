@@ -42,8 +42,8 @@ const appRoutes: Routes = [
   {
     path: 'specializations',
     component: SpecializationListComponent,
-    // canActivate: [RolesGuard],
-    // data: {allowedRoles: ['Admin']}
+    canActivate: [RolesGuard],
+    data: {allowedRoles: ['Admin']}
   },
   {
     path: 'exceptions',

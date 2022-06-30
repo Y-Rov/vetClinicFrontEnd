@@ -13,7 +13,7 @@ export class AnimalService {
     })
   };
 
-  private apiUrl: string = 'https://localhost:7283/api/animals';
+  private apiUrl: string = 'https://localhost:5001/api/animals';
   constructor(
     private http: HttpClient) { }
 

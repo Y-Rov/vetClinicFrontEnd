@@ -5,71 +5,28 @@ import { Animal } from 'src/app/core/models/Animal';
 import { Appointment } from 'src/app/core/models/Appointment';
 import { Procedure } from 'src/app/core/models/Procedure';
 import { User } from 'src/app/core/models/User';
+import { AnimalService } from 'src/app/core/services/animalService/animal.service';
 import { AppointmentService } from 'src/app/core/services/appointmentService/appointment.service';
 import { ProcedureService } from 'src/app/core/services/procedureService/procedure.service';
 import { UserService } from 'src/app/core/services/userService/user.service';
 import { AppointmentsPageComponent } from '../appointments-page/appointments-page.component';
 
-// const SAMPLE_DATA_PROCEDURES: Procedure[] =  [
+
+// const SAMPLE_DATA_ANIMAL: Animal[] =  [
 //   {
 //     "id" :  1,
-//     "name" : "first procedure",
-//     "description" : "operation",
-//     "durationInMinutes" : 15,
-//     "cost" : 100,
-
-//     specializations : [{
-//       "id" :  1,
-//       "name" : "first spec" 
-//     }]},
-
-//   {
-//       "id" :  2,
-//       "name" : "second procedure",
-//       "description" : "operation",
-//       "durationInMinutes" : 10,
-//       "cost" : 300,
-      
-//       specializations : [{
-//         "id" :  1,
-//         "name" : "first spec"
-//     }]}
-//   ]
-//   const SAMPLE_DATA_USERS: User[] =  [
-//     {
-//       "id" :  1,
-//       "firstName" : "Ivan",
-//       "lastName" : "Ivanov",
-//       "email" : "Ivanov@gmail.com",
-//       "phoneNumber" :"0987654432",
-//       "birthDate": new Date()
+//     "ownerId" :  1,
+//     "nickName" :  "Tom",
+//     "birthDate" :   new Date()
 //   },
-  
 //   {
 //     "id" :  2,
-//     "firstName" : "Vasya",
-//     "lastName" : "Pypkin",
-//     "email" : "Vasya123@gmail.com",
-//     "phoneNumber" :"09844355645",
-//     "birthDate": new Date()
-// }]
- 
+//     "ownerId" :  1,
+//     "nickName" :  "Jerry",
+//     "birthDate" :   new Date()
+//   }
 
-const SAMPLE_DATA_ANIMAL: Animal[] =  [
-  {
-    "id" :  1,
-    "ownerId" :  1,
-    "nickName" :  "Tom",
-    "birthDate" :   new Date()
-  },
-  {
-    "id" :  2,
-    "ownerId" :  1,
-    "nickName" :  "Jerry",
-    "birthDate" :   new Date()
-  }
-
-]
+// ]
 
 
 @Component({
@@ -86,7 +43,7 @@ export class EditAppointmentDialogComponent implements OnInit {
   users: User[] = [];
   selectedUser: User[]=[];
 
-  animals$: Animal[] = [];
+  animals: Animal[] = [];
   selectedAnimal: Animal= {} as Animal;
 
   constructor(
@@ -95,10 +52,12 @@ export class EditAppointmentDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AppointmentsPageComponent>,
     private appointmentService : AppointmentService,
     private procedureService : ProcedureService,
-    private userService : UserService) {  
+    private userService : UserService,
+    private animalService : AnimalService
+    ) {  
       this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
       this.userService.getAll().subscribe((data: User[]) => this.users = data)
-      this.animals$ = SAMPLE_DATA_ANIMAL;
+      this.animalService.getAnimals().subscribe((data: Animal[]) => this.animals = data);
     }
 
   form = new FormGroup({
@@ -124,6 +83,7 @@ export class EditAppointmentDialogComponent implements OnInit {
     
     this.data.users = this.selectedUser;
     this.data.animal= this.selectedAnimal;
+    console.log(this.data);
     this.appointmentService.updateAppointment(this.data).subscribe(() => this.dialogRef.close(true));
 }
     
@@ -146,8 +106,10 @@ export class EditAppointmentDialogComponent implements OnInit {
   }
 
   selectedAnimalForEdit(event: any) {
-    this.selectedAnimal = event.data as Animal;
+    this.selectedAnimal = event.value;
     this.isSelectionChanged = event.isChanged;
+    console.log(event);
+    console.log(this.selectedAnimal);
   }
 
   isButtonEnabled(): boolean{

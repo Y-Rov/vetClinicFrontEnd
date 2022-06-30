@@ -25,7 +25,6 @@ export class AppointmentsPageComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private matDialog: MatDialog) {
-      this.updateList();
      }
 
   private updateList(): void {
@@ -52,13 +51,10 @@ export class AppointmentsPageComponent implements OnInit {
       data:{
         id: appointment.id,
         disease: appointment.disease,
-        //date: appointment.date,
-        //meetHasOccureding: appointment.meetHasOccureding,
-        //procedures: appointment.procedures
       }
     });
 
-    dialogRef.afterClosed().subscribe((reuireReload: boolean) => {if(reuireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
   }
 
   onEditAppointment(element: any){
@@ -67,13 +63,13 @@ export class AppointmentsPageComponent implements OnInit {
       data: appointment
     });
 
-    dialogRef.afterClosed().subscribe((reuireReload: boolean) => {if(reuireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
   }
 
   onNewAppointment(){
     const dialogRef = this.matDialog.open(NewAppointmentDialogComponent);
 
-    dialogRef.afterClosed().subscribe((reuireReload: boolean) => {if(reuireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
   }
 
   applyFilter(event: Event) {
