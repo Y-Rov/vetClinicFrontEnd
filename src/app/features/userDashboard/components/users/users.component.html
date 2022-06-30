@@ -6,7 +6,6 @@
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 elem" matSort>
       <ng-container matColumnDef="firstName">
-        <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th> -->
         <th mat-header-cell *matHeaderCellDef><button (click)="orderBy('FirstName')">First Name</button></th>
         <td mat-cell *matCellDef="let user">{{user.firstName}}</td>
       </ng-container>

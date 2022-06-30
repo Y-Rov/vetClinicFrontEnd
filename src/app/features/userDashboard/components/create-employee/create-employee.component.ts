@@ -53,6 +53,7 @@ export class CreateEmployeeComponent implements OnInit {
   onCreateEmployee(): void {
     const employee = this.employeeForm.value as RegisterEmployeeModel;
     employee.profilePicture = this.profilePicture;
+    
     this.userService.registerEmployee(employee).subscribe(() => this.dialogRef.close(true));
   }
 

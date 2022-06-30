@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="img-wrapper">
-    <img [src]="this.domSanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.user.profilePicture!)" alt="">
+    <img [src]="this.domSanitizer.bypassSecurityTrustUrl(this.user.profilePicture!)" alt="">
   </div>
   <div>
     <mat-tab-group dynamicHeight>
