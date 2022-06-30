@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Animal } from "../../../../core/models/Animal";
-import {AnimalService} from "../../../../core/services/animalService/animal.service";
+import {AnimalService} from "../../animalService/animal.service";
 import {MainAnimalComponent} from "../main-animal/main-animal.component";
 
 

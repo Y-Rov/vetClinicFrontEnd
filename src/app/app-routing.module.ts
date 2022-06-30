@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'blog',
     loadChildren: () => import('./features/companyBlog/company-blog.module').then(m => m.CompanyBlogModule)
+  },
+  {
+    path: 'animals',
+    loadChildren: ()=> import('./features/animal/animal.module').then(m=>m.AnimalModule)
   }
 ];
 
