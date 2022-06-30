@@ -1,0 +1,101 @@
+<div class="wrapper">
+<table
+  mat-table [dataSource]="specializations"
+  class="mat-elevation-z8 row">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let spec">
+
+      <span #tooltip="matTooltip"
+            matTooltip="{{spec.name}}"
+            matTooltipPosition="right"
+            matTooltipHideDelay="100">
+              {{ (spec.name.length>25)? (spec.name | slice:0:25)+'..':(spec.name) }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="procedures">
+    <th mat-header-cell *matHeaderCellDef>Procedures</th>
+    <td mat-cell width="20%"  *matCellDef = "let specialization">
+      <mat-accordion>
+        <mat-expansion-panel class="tableRow">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Procedures
+              <mat-icon color="primary" (click)="onAddProcedure(specialization)">add</mat-icon>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng-template ngFor let-procedure [ngForOf] = "specialization.procedures" let-i = "index">
+
+          <mat-panel-description>
+            {{procedure.name}}
+            <mat-icon color="warn" (click)="onRemoveProcedure(procedure.id, specialization.id)">cancel</mat-icon>
+          </mat-panel-description>
+
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="users">
+    <th mat-header-cell *matHeaderCellDef>Users</th>
+    <td mat-cell *matCellDef = "let specialization">
+      <mat-accordion class="row-accordion">
+        <mat-expansion-panel class="tableRow">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Users
+              <mat-icon color="primary" (click)="onAddUser(specialization)">add</mat-icon>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng-template ngFor let-user [ngForOf] = "specialization.users" let-i = "index">
+
+            <mat-panel-description>
+              {{user.firstName}}
+              {{user.lastName}}
+              <mat-icon color="warn" (click)="onRemoveUser(user.id, specialization.id)">cancel</mat-icon>
+            </mat-panel-description>
+
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Edit</th>
+    <td mat-cell *matCellDef="let specialization">
+      <button class="tableRow" mat-mini-fab color="primary" (click)="onEditSpecialization(specialization)">
+        <mat-icon class="white-icon">edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Delete</th>
+    <td mat-cell *matCellDef="let specialization">
+      <button mat-mini-fab color="warn" class="tableRow" (click)="onDeleteSpecialization(specialization.id, specialization.name)">
+        <mat-icon class="white-icon">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
+
+<mat-paginator class="mat-elevation-z6 row"
+               [pageSizeOptions]="[4,8,12,16,100]"
+               aria-label="Select page of specializations"></mat-paginator>
+
+<button (click)="onAddSpecialization()"
+        class="add-button mat-elevation-z8"
+        mat-stroked-button>
+  Add specialization
+  <mat-icon color="accent">add</mat-icon>
+</button>
+</div>

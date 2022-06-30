@@ -1,0 +1,37 @@
+<form [formGroup]="editUserAddressForm">
+  <div>
+    <mat-form-field class="first-form-field form-field" appearance="outline">
+      <mat-label>City</mat-label>
+      <input matInput placeholder="Enter the name of your city" formControlName="city">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Street</mat-label>
+      <input matInput placeholder="Enter the name of your street" formControlName="street">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>House</mat-label>
+      <input matInput placeholder="Enter your house number" formControlName="house">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Apartment number</mat-label>
+      <input matInput placeholder="Enter your apartment number, if you live in a high-rise building" formControlName="apartmentNumber">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Postcode</mat-label>
+      <input matInput placeholder="Enter your zip code" formControlName="zipCode">
+    </mat-form-field>
+  </div>
+
+  <div class="controls">
+    <button mat-raised-button class="submit-btn" color="primary" (click)="updateUserAddress()">Submit</button>
+    <button mat-raised-button color="warn" (click)="goToPreviousPage()">Cancel</button>
+  </div>
+</form>

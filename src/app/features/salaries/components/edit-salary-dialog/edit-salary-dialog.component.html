@@ -1,0 +1,21 @@
+<div [formGroup]="form">
+  <div class="mat-title">Edit Salary</div>
+
+  <div class=" value-div">
+    <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline">
+      <mat-label>Value</mat-label>
+      <input matInput
+             formControlName="value"
+             type="number"
+             min="1"
+             placeholder="value">
+      <mat-hint>Must be greater than 1</mat-hint>
+      <mat-error *ngIf="form.controls.value.invalid">Must be greater than 1</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="buttons-div">
+    <button mat-flat-button (click)="onNoClick()">Discard</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!isButtonEnabled()" (click)="onSaveForm()">Save</button>
+  </div>
+</div>

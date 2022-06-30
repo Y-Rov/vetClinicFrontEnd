@@ -1,0 +1,19 @@
+<script src="add-specialization-dialog.component.ts"></script>
+<div [formGroup]="form">
+  <div class="mat-title">Add specialization</div>
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <input
+      matInput
+      formControlName="name"
+      type="string"
+      minlength="4"
+      placeholder="Specialization name">
+    <mat-hint>Length must be greater than 4</mat-hint>
+    <mat-error *ngIf="form.controls.name.invalid">Length must be greater than 4</mat-error>
+  </mat-form-field>
+
+  <div class = "buttons-div">
+    <button mat-raised-button type="submit" color="primary" (click)="onSaveForm()">Add</button>
+    <button color="primary" mat-raised-button class="cancel-button" (click) = "onCancelClick()">Cancel</button>
+  </div>
+</div>

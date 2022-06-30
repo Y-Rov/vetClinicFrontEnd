@@ -9,7 +9,7 @@ import { User } from 'src/app/core/models/User';
 import { AnimalService } from 'src/app/core/services/animalService/animal.service';
 import { AppointmentService } from 'src/app/core/services/appointmentService/appointment.service';
 import { ProcedureService } from 'src/app/core/services/procedureService/procedure.service';
-import { UserService } from 'src/app/core/services/userService/user.service';
+import { UserService } from 'src/app/features/userDashboard/services/userService/user.service';
 import { AppointmentsPageComponent } from '../appointments-page/appointments-page.component';
 
 
@@ -56,7 +56,7 @@ export class NewAppointmentDialogComponent implements OnInit {
 
     this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
     this.userService.getAll().subscribe((data: User[]) => this.users = data)
-    this.animalService.getAnimals().subscribe((data: Animal[]) => this.animals = data);
+    this.animalService.getAll().subscribe((data: Animal[]) => this.animals = data);
   }
 
   form = new FormGroup({

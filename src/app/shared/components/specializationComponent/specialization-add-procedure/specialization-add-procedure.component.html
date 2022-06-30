@@ -1,0 +1,14 @@
+<div>
+  <div class="mat-title">Add procedures to {{data.name}}</div>
+  <app-multi-select
+  placeholder="Select procedures"
+  [data]="procedures"
+  (result)="onMultiSelectSubmit($event)"
+  [alreadySelected]="data.procedures!">
+  </app-multi-select>
+
+  <div class="buttons-div">
+    <button mat-raised-button type="submit" color="primary" (click)="onSave()">Save</button>
+    <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+  </div>
+</div>

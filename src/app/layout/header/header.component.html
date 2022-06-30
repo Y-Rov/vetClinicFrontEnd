@@ -5,11 +5,19 @@
     <a mat-button routerLinkActive="active" routerLink="/procedures">Procedures</a>
     <a mat-button routerLinkActive="active" routerLink="/doctors">Doctors</a>
     <a mat-button routerLinkActive="active" routerLink="/appointments">My Appointments</a>
-    <a mat-button routerLinkActive="active">My Work</a>
-    <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/users">Users</a>
-    <a mat-button routerLinkActive="active" routerLink="/specializations">Specializations</a>
-    <!-- <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/specializations">Specializations</a> -->
-    <a mat-button routerLinkActive="active" *ngIf="authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
+
+    <a mat-button routerLinkActive="active" routerLink="/blog">Blog</a>
+   <!-- <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/appointments">My Appointments</a> --> 
+    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()">My Work</a>
+    <a mat-button routerLinkActive="active"
+       *ngIf="authService.isAuthorized() && authService.isInRole('Accountant')" routerLink="/salaries">Salary</a>
+    <a mat-button routerLinkActive="active"
+       *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/users">Users</a>
+    <a mat-button routerLinkActive="active"
+       *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/specializations">Specializations</a>
+    <a mat-button routerLinkActive="active"
+       *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
+    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/animals">Animals</a>
   </div>
 
   <div class="user-operations-container">
@@ -18,5 +26,3 @@
     <a mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
   </div>
 </mat-toolbar>
-
-

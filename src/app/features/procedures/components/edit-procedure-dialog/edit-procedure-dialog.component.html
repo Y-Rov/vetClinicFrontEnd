@@ -1,0 +1,63 @@
+<div [formGroup]="form" (keyup.enter)="onSaveForm()">
+  <div class="mat-title">Edit Procedure</div>
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <mat-label>Procedure name</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      type="string"
+      placeholder="Procedure name">
+    <mat-hint>Length must be greater than 5</mat-hint>
+    <mat-error *ngIf="form.controls.name.invalid">Length must be greater than 5</mat-error>
+  </mat-form-field>
+  <p>
+    <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+      <mat-label>Procedure description</mat-label>
+      <input
+        matInput
+        formControlName="description"
+        type="string"
+        minlength="5"
+        placeholder="Procedure description">
+      <mat-hint>Length must be greater than 5</mat-hint>
+      <mat-error *ngIf="form.controls.description.invalid">Length must be greater than 5</mat-error>
+    </mat-form-field>
+  </p>
+  <div class="cost-duration-div">
+    <p>
+      <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline" >
+        <mat-label>Cost</mat-label>
+        <input
+          matInput
+          formControlName="cost"
+          type="number"
+          min="1"
+          placeholder="Cost">
+        <mat-hint>Must be greater than 1</mat-hint>
+        <mat-error *ngIf="form.controls.cost.invalid">Must be greater than 1</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field [ngStyle]="{'width':'150px'}" appearance="outline">
+        <mat-label>Duration</mat-label>
+        <input
+          matInput
+          formControlName="durationInMinutes"
+          type="number"
+          min="1"
+          placeholder="Duration">
+        <mat-hint>Must be greater than 1</mat-hint>
+        <mat-error *ngIf="form.controls.durationInMinutes.invalid">Must be greater than 1</mat-error>
+      </mat-form-field>
+    </p>
+  </div>
+  <app-multi-select placeholder="Select specializations"
+                    key="specializations"
+                    [data]="specializations"
+                    (result)="onMultiSelectSubmit($event)"
+                    [alreadySelected]="data.specializations!"></app-multi-select>
+  <div class="buttons-div">
+    <button mat-flat-button (click)="onNoClick()">Discard</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!isButtonEnabled()" (click)="onSaveForm()">Save</button>
+  </div>
+</div>

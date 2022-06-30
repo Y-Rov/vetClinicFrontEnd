@@ -4,19 +4,21 @@
     <mat-label>Animal nickname</mat-label>
     <input
       matInput
-      formControlName="nickname"
+      formControlName="nickName"
       type="string"
       minlength="1"
       placeholder="Animal nick name">
     <mat-hint>Length must be greater than 1</mat-hint>
-    <mat-error *ngIf="form.controls.nickname.invalid">Length must be greater than 1</mat-error>
+    <mat-error *ngIf="form.controls.nickName.invalid">Length must be greater than 1</mat-error>
   </mat-form-field>
   <p>
     <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
       <mat-label>Animal birth date</mat-label>
       <input
         matInput
+        formControlName="birthDate"
         type="date"
+        min="1978-01-01"
         placeholder="Animal birth date">
     </mat-form-field>
   </p>

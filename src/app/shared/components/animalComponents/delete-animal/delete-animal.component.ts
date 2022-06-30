@@ -26,7 +26,7 @@ export class DeleteAnimalComponent implements OnInit {
   }
 
   onDeleteProcedure(): void{
-    this.animalService.deleteAnimal(this.id).subscribe(() => this.dialogRef.close(true));
+    this.animalService.deleteById(this.id).subscribe(() => this.dialogRef.close(true));
   }
 
   onNoClick(): void {

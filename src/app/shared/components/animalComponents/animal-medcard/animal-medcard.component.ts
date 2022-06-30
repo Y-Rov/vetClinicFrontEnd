@@ -1,82 +1,50 @@
-// import {Component, OnInit, ViewChild} from '@angular/core';
-// import {MatTableDataSource} from "@angular/material/table";
-// import {Animal} from "../../../../core/models/Animal";
-// import {MatSort} from "@angular/material/sort";
-// import {MatPaginator} from "@angular/material/paginator";
-// import {AnimalService} from "../../../../core/services/animalService/animal.service";
-// import {MatDialog} from "@angular/material/dialog";
-// import {DeleteAnimalComponent} from "../delete-animal/delete-animal.component";
-// import {EditAnimalComponent} from "../edit-animal/edit-animal.component";
-// import {AddAnimalComponent} from "../add-animal/add-animal.component";
-//
-// @Component({
-//   selector: 'app-animal-medcard',
-//   templateUrl: './animal-medcard.component.html',
-//   styleUrls: ['./animal-medcard.component.sass']
-// })
-//
-// export interface App{
-//   Disease : string;
-//   Date : Date;
-// }
-//
-// export class AnimalMedcardComponent implements OnInit {
-//
-//   dataSource: MatTableDataSource<Animal> = new MatTableDataSource();
-//   displayedColumns: string[] = ['nickname', 'disease', 'date'];
-//
-//   @ViewChild(MatSort) sort?: MatSort;
-//   @ViewChild(MatPaginator) paginator?: MatPaginator;
-//
-//   constructor(
-//     private animalService: AnimalService,
-//     private matDialog: MatDialog) {
-//     this.updateList();
-//   }
-//
-//   private updateList(): void {
-//     this.animalService.getAnimals().subscribe((data) => {
-//       this.dataSource.data = data;
-//       this.dataSource.sort = this.sort!;
-//     });
-//   }
-//
-//   ngOnInit(): void {
-//     this.updateList();
-//   }
-//
-//   ngAfterViewInit() {
-//     this.dataSource.paginator = this.paginator!;
-//   }
-//
-//   onDeleteAnimal(animal:Animal){
-//     const dialogRef = this.matDialog.open(DeleteAnimalComponent,{
-//       autoFocus:false,
-//       data:{
-//         id: animal.id
-//       }
-//     });
-//
-//     dialogRef.afterClosed().subscribe((reuireReload:boolean)=>{if(reuireReload) this.updateList()});
-//   }
-//
-//   onEditAnimal(animal:Animal){
-//     const dialogRef = this.matDialog.open(EditAnimalComponent,{
-//       autoFocus:false,
-//       data:animal
-//     });
-//
-//     dialogRef.afterClosed().subscribe((reuireReload:boolean)=>{if(reuireReload) this.updateList()});
-//   }
-//
-//   onNewAnimal(){
-//     const dialogRef = this.matDialog.open(AddAnimalComponent);
-//
-//     dialogRef.afterClosed().subscribe((reuireReload:boolean)=>{if(reuireReload) this.updateList()});
-//   }
-//
-//   onViewMedCard(id: number) {
-//
-//   }
-//
-// }
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
+import {AnimalService} from "../../../../core/services/animalService/animal.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Appointment} from "../../../../core/models/Appointment";
+import {MainAnimalComponent} from "../main-animal/main-animal.component";
+
+@Component({
+  selector: 'app-animal-medcard',
+  templateUrl: './animal-medcard.component.html',
+  styleUrls: ['./animal-medcard.component.sass']
+})
+
+export class AnimalMedcardComponent implements OnInit {
+
+  dataSource: MatTableDataSource<Appointment> = new MatTableDataSource();
+  displayedColumns: string[] = ['data','disease'];
+
+  @ViewChild(MatSort) sort?: MatSort;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data : number,
+    private animalService: AnimalService,
+    public dialogRef: MatDialogRef<MainAnimalComponent>)
+  {}
+
+  private updateList(): void {
+    this.animalService.getMedCard(this.data).subscribe((data) => {
+      this.dataSource.data = data;
+      console.log(data);
+      this.dataSource.sort = this.sort!;
+    });
+  }
+
+  ngOnInit(): void {
+    this.updateList();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator!;
+  }
+
+  onNoClick(): void{
+    this.dialogRef.close(false);
+  }
+
+}
