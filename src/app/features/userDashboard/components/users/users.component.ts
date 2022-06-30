@@ -34,8 +34,8 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateUsers(takeCount: number | null, skipCount: number = 0): void {
-    this.userService.getAllUsers(takeCount, skipCount).subscribe(users => {
+  private updateUsers(takeCount?: number, skipCount: number = 0, orderByParam?: string): void {
+    this.userService.getAllUsers(takeCount, skipCount, orderByParam).subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
     });
@@ -90,5 +90,9 @@ export class UsersComponent implements OnInit {
   selectPageSizeOption(): void {
     this.updateUsers(this.currentPageSize);
     this.currentPageNumber = 1;
+  }
+
+  orderBy(orderByParam: string): void {
+    this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1), orderByParam);
   }
 }
