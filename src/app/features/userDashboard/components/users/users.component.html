@@ -50,7 +50,25 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator class="mat-elevation-z8 elem" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <div class="paginator mat-elevation-z8 elem">
+      <div>Items per page</div>
+      <div>
+          <select (change)="selectPageSizeOption()" [(ngModel)]="currentPageSize">
+              <option *ngFor="let sizeOption of pageSizeOptions">
+                  {{sizeOption.name}}
+              </option>
+          </select>
+      </div>
+      <div>Page: {{this.currentPageNumber}}</div>
+      <div>
+        <button mat-raised-button [disabled]="currentPageNumber == 1" 
+          (click)="onPrevPageClick()" color="info">Prev</button>
+      </div>
+      <div class="next-btn">
+        <button mat-raised-button [disabled]="dataSource.data.length < currentPageSize"
+          (click)="onNextPageClick()" color="info">Next</button>
+      </div>
+    </div>
 
     <button class="new-emp-btn mat-elevation-z8" mat-stroked-button (click)="onCreateEmployee()" color="primary">
       <mat-icon class="add-icon">add</mat-icon>
