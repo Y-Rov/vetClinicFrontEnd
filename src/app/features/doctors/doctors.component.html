@@ -7,7 +7,7 @@
   <div id="doctors">
     <div *ngFor="let doctor of doctors">
       <div class="img-wrapper">
-        <img [src]="this.domSanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + doctor?.profilePicture!)" >
+        <img [src]="this.domSanitizer.bypassSecurityTrustUrl(doctor?.profilePicture!)" >
       </div>
       <div class="doc-info">
         <div class="doc-credentials">{{doctor.firstName}} {{doctor.lastName}}</div>
