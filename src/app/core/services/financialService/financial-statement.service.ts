@@ -12,7 +12,7 @@ export class FinancialStatementService {
   readonly finStateUrl ="https://localhost:5001/api/financialStatements";
   constructor(
     protected http: HttpClient,
-    protected tConstructor: { new(m: Partial<FinancialStatement>): FinancialStatement }  ) { }
+    ) { }
 
   protected handleError<T>(operation: string = 'operation', result?: T) {
     return (error: HttpErrorResponse): Observable<FinancialStatement> => {
@@ -38,8 +38,8 @@ export class FinancialStatementService {
   getFinancialStatement(data: MyDate): Observable<FinancialStatement> {
     return this.http.put<FinancialStatement>(this.finStateUrl, data)
       .pipe(
-        map((result) => new this.tConstructor(result)),
-        catchError(this.handleError<FinancialStatement>('update')))
-
+        map((result) => new FinancialStatement(),
+          catchError(this.handleError<FinancialStatement>('update')))
+      );
   }
 }
