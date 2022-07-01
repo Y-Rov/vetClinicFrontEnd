@@ -2,11 +2,11 @@
   <div>
     <mat-form-field class="elem" appearance="outline">
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Placeholder">
+      <input matInput (keyup)="applyFilter($event)" placeholder="First Name/Last Name/Email/Phone Number">
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 elem" matSort>
       <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef><button (click)="orderBy('FirstName')">First Name</button></th>
+        <th mat-header-cell *matHeaderCellDef>First Name</th>
         <td mat-cell *matCellDef="let user">{{user.firstName}}</td>
       </ng-container>
       <ng-container matColumnDef="lastName">

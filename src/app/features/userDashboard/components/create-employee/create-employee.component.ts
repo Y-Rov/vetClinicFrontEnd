@@ -50,11 +50,31 @@ export class CreateEmployeeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onCreateEmployee(): void {
+  async onCreateEmployee() {
     const employee = this.employeeForm.value as RegisterEmployeeModel;
-    employee.profilePicture = this.profilePicture;
+
+    if (this.profilePicture.length == 0) {
+      const response: Response = await fetch('/assets/images/default_profile_pic.jpg');
+      const data: Blob = await response.blob();
+      const metadata = {type: 'image/jpeg'};
+      const file = new File([data], 'default_profile_pic.jpg', metadata);
+      
+      this.convertFileToBase64(file);
+    }
     
+    employee.profilePicture = this.profilePicture;
     this.userService.registerEmployee(employee).subscribe(() => this.dialogRef.close(true));
+  }
+
+  private convertFileToBase64(file: File): void {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const base64 = e.target.result.split('base64,')[1];
+      this.profilePicture = base64;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   onDiscard(): void {
@@ -63,14 +83,7 @@ export class CreateEmployeeComponent implements OnInit {
 
   handleFileChange(event: Event) {
     const file = (event.target as HTMLInputElement).files![0];
-    const reader = new FileReader();
-
-    reader.onload = (e: any) => {
-      const bytes = e.target.result.split('base64,')[1];
-      this.profilePicture = bytes;
-    };
-
-    reader.readAsDataURL(file);
+    this.convertFileToBase64(file);
   }
 
   isButtonEnabled(): boolean{

@@ -34,8 +34,8 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateUsers(takeCount?: number, skipCount: number = 0, orderByParam?: string): void {
-    this.userService.getAllUsers(takeCount, skipCount, orderByParam).subscribe(users => {
+  private updateUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam?: string): void {
+    this.userService.getAllUsers(takeCount, skipCount, filterParam, orderByParam).subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
     });
@@ -73,8 +73,8 @@ export class UsersComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.updateUsers(this.currentPageSize, 0, filterValue);
   }
 
   onPrevPageClick(): void {

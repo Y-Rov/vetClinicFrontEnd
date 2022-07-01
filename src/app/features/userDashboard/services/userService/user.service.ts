@@ -17,11 +17,15 @@ export class UserService extends ResourceService<User> {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
   }
 
-  getAllUsers(takeCount?: number, skipCount: number = 0, orderByParam?: string): Observable<User[]> {
-    let url = `${this.apiUrl}?skipCount=${skipCount}`;
+  getAllUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam?: string): Observable<User[]> {
+    let url = `${this.apiUrl}?SkipCount=${skipCount}`;
 
     if (takeCount !== null) {
-      url += `&takeCount=${takeCount}`;
+      url += `&TakeCount=${takeCount}`;
+    }
+
+    if (filterParam !== null) {
+      url += `&FilterParam=${filterParam}`;
     }
 
     if (orderByParam !== null) {
