@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Specialization} from "../../../../core/models/Specialization";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
-import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {SpecializationService} from "../../../specializations/services/specializationService/specialization.service";
 import {Procedure} from "../../../../core/models/Procedure";
 import {ProceduresPageComponent} from "../procedures-page/procedures-page.component";
 import {ProcedureService} from "../../services/procedureService/procedure.service";

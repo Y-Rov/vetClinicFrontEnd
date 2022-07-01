@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {SpecializationListComponent} from "../specialization-list/specialization-list.component";
-import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {SpecializationService} from "../../services/specializationService/specialization.service";
 
 @Component({
   selector: 'app-specialization-delete-dialog',

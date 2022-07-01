@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Procedure} from "../../../../core/models/Procedure";
 import {FormBuilder} from "@angular/forms";
 import {ProcedureService} from "../../../../core/services/procedureService/procedure.service";
-import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {SpecializationService} from "../../services/specializationService/specialization.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {SpecializationListComponent} from "../specialization-list/specialization-list.component";
 import {Specialization} from "../../../../core/models/Specialization";
