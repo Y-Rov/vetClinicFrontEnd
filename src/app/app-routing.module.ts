@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'specializations',
     loadChildren: () => import('./features/specializations/specialization.module').then(m => m.SpecializationModule)
+  },
+  {
+    path: 'blog',
+    loadChildren: () => import('./features/companyBlog/company-blog.module').then(m => m.CompanyBlogModule)
   }
 ];
 

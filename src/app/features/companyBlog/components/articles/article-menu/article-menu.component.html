@@ -1,0 +1,27 @@
+<button mat-icon-button
+        (click)="stopEventProp($event)"
+        [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onEditArticle($event)">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+  </button>
+  <button mat-menu-item *ngIf="currentArticle!.published" (click)="onUnublish($event)">
+    <mat-icon class="flipped-icon">publish</mat-icon>
+    <span>Unpublish</span>
+  </button>
+  <button mat-menu-item *ngIf="!currentArticle!.published" (click)="onDeleteArticle($event)">
+    <mat-icon>delete</mat-icon>
+    <span>Delete</span>
+  </button>
+  <button *ngIf="!currentArticle!.published" (click)="onPublish($event)" mat-menu-item>
+    <mat-icon>publish</mat-icon>
+    <span>Publish</span>
+  </button>
+  <button *ngIf="!currentArticle!.published" (click)="onPreview($event)" mat-menu-item>
+    <mat-icon>visibility</mat-icon>
+    <span>Preview</span>
+  </button>
+</mat-menu>

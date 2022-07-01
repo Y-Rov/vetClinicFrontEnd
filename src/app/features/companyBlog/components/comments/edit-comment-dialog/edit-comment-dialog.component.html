@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div [formGroup]="form">
+    <div class="mat-title">Edit Comment</div>
+    <mat-form-field appearance="outline">
+      <mat-label>Comment</mat-label>
+      <textarea
+        [maxlength]="400"
+        matInput
+        formControlName="content"
+        type="string"
+        minlength="5"
+        placeholder="Article title"></textarea>
+      <mat-hint>Length must be greater than 5</mat-hint>
+      <mat-error *ngIf="form.controls.content.invalid">Length must be greater than 5</mat-error>
+    </mat-form-field>
+    <div class="buttons-div">
+      <button mat-flat-button (click)="onNoClick()">Discard</button>
+      <button mat-raised-button type="submit" [disabled]="!(form.valid && form.dirty)" (click)="onSave()">Save</button>
+    </div>
+  </div>
+</div>
+
