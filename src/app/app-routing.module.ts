@@ -21,7 +21,8 @@ const routes: Routes = [
   {
     path: 'blog',
     loadChildren: () => import('./features/companyBlog/company-blog.module').then(m => m.CompanyBlogModule)
-  }
+  },
+  { path: 'financialStatement', loadChildren: () => import('./features/financialStatements/financial-statement/financial-statement.module').then(m => m.FinancialStatementModule) }
 ];
 
 @NgModule({
