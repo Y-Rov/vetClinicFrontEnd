@@ -22,6 +22,7 @@ export class FinancialStatementPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   IsEnable(): boolean {
     if (this.range.value.start?.getDate != null &&
       this.range.value.end?.getDate) {
