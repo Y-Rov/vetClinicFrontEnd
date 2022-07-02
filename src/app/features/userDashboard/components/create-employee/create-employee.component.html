@@ -65,8 +65,8 @@
   </div>
   <div>
     <button id="profile-pic-btn" type="button" mat-raised-button (click)="fileInput.click()">Add Profile Picture</button>
-    <input hidden (change)="handleFileChange($event)" #fileInput type="file">
-    <span id="profile-pic-hint" *ngIf="profilePicture.length > 0">Picture has been selected</span>
+    <input id="hidden-input" hidden (change)="handleFileChange($event)" #fileInput type="file">
+    <span id="profile-pic-hint" *ngIf="isCustomPictureAdded">Picture has been selected</span>
   </div>
 
   <div class="controls">
