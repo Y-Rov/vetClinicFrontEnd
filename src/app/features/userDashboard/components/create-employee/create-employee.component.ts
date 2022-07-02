@@ -14,6 +14,7 @@ export class CreateEmployeeComponent implements OnInit {
   rolesList: string[] = ['Doctor', 'Accountant', 'Admin'];
   isSelectionChanged: boolean = false;
   profilePicture: string = '';
+  isCustomPictureAdded: boolean = false;
 
   employeeForm = new FormGroup({
     firstName: new FormControl('', [
@@ -48,21 +49,19 @@ export class CreateEmployeeComponent implements OnInit {
     public dialogRef: MatDialogRef<UsersComponent>,
     private userService: UserService) { }
 
-  ngOnInit(): void { }
-
-  async onCreateEmployee() {
-    const employee = this.employeeForm.value as RegisterEmployeeModel;
-
-    if (this.profilePicture.length == 0) {
-      const response: Response = await fetch('/assets/images/default_profile_pic.jpg');
+  async ngOnInit(): Promise<void> { 
+    const response: Response = await fetch('/assets/images/default_profile_pic.jpg');
       const data: Blob = await response.blob();
       const metadata = {type: 'image/jpeg'};
       const file = new File([data], 'default_profile_pic.jpg', metadata);
       
       this.convertFileToBase64(file);
-    }
-    
+  }
+
+  async onCreateEmployee() {
+    const employee = this.employeeForm.value as RegisterEmployeeModel;
     employee.profilePicture = this.profilePicture;
+    
     this.userService.registerEmployee(employee).subscribe(() => this.dialogRef.close(true));
   }
 
@@ -84,6 +83,8 @@ export class CreateEmployeeComponent implements OnInit {
   handleFileChange(event: Event) {
     const file = (event.target as HTMLInputElement).files![0];
     this.convertFileToBase64(file);
+
+    this.isCustomPictureAdded = true;
   }
 
   isButtonEnabled(): boolean{
