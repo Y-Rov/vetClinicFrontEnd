@@ -13,7 +13,7 @@ import {SpecializationListComponent} from "../specialization-list/specialization
 export class SpecializationEditDialogComponent implements OnInit {
 
   form = new FormGroup({
-    name: new FormControl("", Validators.minLength(4))
+    name: new FormControl(this.data.name, Validators.minLength(4))
   });
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
