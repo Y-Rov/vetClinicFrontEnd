@@ -13,8 +13,10 @@ import { RegisterEmployeeModel } from "../../../../core/models/RegisterEmployeeM
 export class CreateEmployeeComponent implements OnInit {
   rolesList: string[] = ['Doctor', 'Accountant', 'Admin'];
   isSelectionChanged: boolean = false;
-  profilePicture: string = '';
+  profilePicture: string | null = null;
   isCustomPictureAdded: boolean = false;
+  hidePassword: boolean = true;
+  hideConfirmPassword: boolean = true;
 
   employeeForm = new FormGroup({
     firstName: new FormControl('', [
@@ -49,14 +51,7 @@ export class CreateEmployeeComponent implements OnInit {
     public dialogRef: MatDialogRef<UsersComponent>,
     private userService: UserService) { }
 
-  async ngOnInit(): Promise<void> { 
-    const response: Response = await fetch('/assets/images/default_profile_pic.jpg');
-      const data: Blob = await response.blob();
-      const metadata = {type: 'image/jpeg'};
-      const file = new File([data], 'default_profile_pic.jpg', metadata);
-      
-      this.convertFileToBase64(file);
-  }
+  ngOnInit(): void { }
 
   async onCreateEmployee() {
     const employee = this.employeeForm.value as RegisterEmployeeModel;
