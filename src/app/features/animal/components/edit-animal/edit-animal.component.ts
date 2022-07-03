@@ -32,8 +32,6 @@ export class EditAnimalComponent implements OnInit {
   }
 
   onSaveForm(): void{
-    console.log("bef");
-    console.log(this.data);
     if(this.form.value.nickname != "") {
       this.data.nickName = this.form.value.nickname!;
     }
@@ -43,8 +41,6 @@ export class EditAnimalComponent implements OnInit {
     if(this.isPhotoUpdated){
       this.data.PhotoUrl = this.animalPhoto;
     }
-    console.log("aft");
-    console.log(this.data);
     this.animalService.updateAnimal(this.data).subscribe(() => this.dialogRef.close(true));
   }
 
