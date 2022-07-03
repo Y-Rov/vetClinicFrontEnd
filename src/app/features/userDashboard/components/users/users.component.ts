@@ -6,6 +6,7 @@ import { UserService } from "../../services/userService/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteUserComponent } from "../delete-user/delete-user.component";
 import { CreateEmployeeComponent } from "../create-employee/create-employee.component";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -19,14 +20,24 @@ export class UsersComponent implements OnInit {
     'firstName', 'lastName', 'email', 'phoneNumber', 'birthDate', 'role', 'edit', 'delete'
   ];
 
-  pageSizeOptions: {name: string; value: number}[] = [
+  pageSizeOptions: { name: string; value: number }[] = [
     { name: '5', value: 5 },
     { name: '10', value: 10 },
     { name: '25', value: 25 }
   ];
+
+  orderByOptions: { name: string; value: string }[] = [
+    { name: 'First Name', value: 'FirstName' },
+    { name: 'Last Name', value: 'LastName' },
+    { name: 'Email', value: 'Email' },
+    { name: 'Phone Number', value: 'PhoneNumber' },
+    { name: 'Date of Birth', value: 'BirthDate' },
+  ];
   
   currentPageSize: number = this.pageSizeOptions[0].value;
   currentPageNumber: number = 1;
+  filterValue: string | null = null;
+  currentOrderByOption: string | null = null;
 
   @ViewChild(MatSort) sort?: MatSort;
 
@@ -34,7 +45,7 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam?: string): void {
+  private updateUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam: string | null = null): void {
     this.userService.getAllUsers(takeCount, skipCount, filterParam, orderByParam).subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
@@ -73,8 +84,8 @@ export class UsersComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-    this.updateUsers(this.currentPageSize, 0, filterValue);
+    this.filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.updateUsers(this.currentPageSize, 0, this.filterValue);
   }
 
   onPrevPageClick(): void {
@@ -92,7 +103,8 @@ export class UsersComponent implements OnInit {
     this.currentPageNumber = 1;
   }
 
-  orderBy(orderByParam: string): void {
-    this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1), orderByParam);
+  selectOrderByOption(orderOption: string): void {
+    this.currentPageNumber = 1;
+    this.updateUsers(this.currentPageSize, 0, this.filterValue, orderOption);
   }
 }
