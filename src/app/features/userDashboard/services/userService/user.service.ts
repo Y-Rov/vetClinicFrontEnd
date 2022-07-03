@@ -17,6 +17,28 @@ export class UserService extends ResourceService<User> {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
   }
 
+  getAllUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam?: string): Observable<User[]> {
+    let url = `${this.apiUrl}?SkipCount=${skipCount}`;
+
+    if (takeCount !== null) {
+      url += `&TakeCount=${takeCount}`;
+    }
+
+    if (filterParam !== null) {
+      url += `&FilterParam=${filterParam}`;
+    }
+
+    if (orderByParam !== null) {
+      url += `&orderByParam=${orderByParam}`;
+    }
+
+    return this.http.get<User[]>(url)
+      .pipe(
+        map((result) => result.map((i) => new this.tConstructor(i))),
+        catchError(this.handleError<User[]>('getAll', []))
+      );
+  }
+
   getDoctors(specialization: string = ""): Observable<User[]> {
     const url = `${this.apiUrl}/doctors?specialization=${specialization}`;
     return this.http.get<User[]>(url);

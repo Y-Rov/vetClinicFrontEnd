@@ -7,7 +7,7 @@ export class RegisterEmployeeModel extends ResourceModel<RegisterEmployeeModel> 
   phoneNumber?: string;
   birthDate?: Date;
   role?: string;
-  profilePicture?: string;
+  profilePicture?: string | null;
   password?: string;
   confirmPassword?: string;
 

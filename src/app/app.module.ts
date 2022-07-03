@@ -22,7 +22,7 @@ import {AboutComponent} from "./shared/about/about.component";
 import {HomeComponent} from "./shared/home/home.component";
 import {
   SpecializationListComponent
-} from "./shared/components/specializationComponent/specialization-list/specialization-list.component";
+} from "./features/specializations/components/specialization-list/specialization-list.component";
 
 
 const appRoutes: Routes = [
@@ -30,12 +30,12 @@ const appRoutes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  {
-    path: 'specializations',
-    component: SpecializationListComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
-  },
+  // {
+  //   path: 'specializations',
+  //   component: SpecializationListComponent,
+  //   canActivate: [RolesGuard],
+  //   data: {allowedRoles: ['Admin']}
+  // },
   {
     path: 'exceptions',
     component: ExceptionPageComponent,

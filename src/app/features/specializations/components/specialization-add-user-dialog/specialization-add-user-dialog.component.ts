@@ -4,8 +4,8 @@ import {FormBuilder} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Specialization} from "../../../../core/models/Specialization";
 import {SpecializationListComponent} from "../specialization-list/specialization-list.component";
-import {UserService} from "../../../../features/userDashboard/services/userService/user.service";
-import {SpecializationService} from "../../../../core/services/specializationService/specialization.service";
+import {UserService} from "../../../userDashboard/services/userService/user.service";
+import {SpecializationService} from "../../services/specializationService/specialization.service";
 
 @Component({
   selector: 'app-specialization-add-user-dialog',

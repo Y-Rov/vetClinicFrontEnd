@@ -9,7 +9,7 @@ export class User extends ResourceModel<User> {
   phoneNumber?: string;
   birthDate?: Date;
   role?: string;
-  profilePicture?: string;
+  profilePicture?: string | null;
   portfolio?: Portfolio;
   specializations?: Specialization[];
 

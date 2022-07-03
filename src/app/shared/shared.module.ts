@@ -34,34 +34,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {
-  SpecializationListComponent
-} from "./components/specializationComponent/specialization-list/specialization-list.component";
-import {
-  SpecializationAddProcedureComponent
-} from "./components/specializationComponent/specialization-add-procedure/specialization-add-procedure.component";
-import {
-  SpecializationAddUserDialogComponent
-} from "./components/specializationComponent/specialization-add-user-dialog/specialization-add-user-dialog.component";
-import {
-  SpecializationDeleteDialogComponent
-} from "./components/specializationComponent/specialization-delete-dialog/specialization-delete-dialog.component";
-import {
-  SpecializationEditDialogComponent
-} from "./components/specializationComponent/specialization-edit-dialog/specialization-edit-dialog.component";
-import {
-  AddSpecializationDialogComponent
-} from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
+
 
 @NgModule({
 
   declarations: [
-    SpecializationListComponent,
-    SpecializationAddProcedureComponent,
-    SpecializationAddUserDialogComponent,
-    SpecializationDeleteDialogComponent,
-    SpecializationEditDialogComponent,
-    AddSpecializationDialogComponent,
     MultiSelectComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     LoginComponent, SignupComponent,
@@ -105,20 +82,18 @@ import {
     MatTooltipModule,
     NgbModule
   ],
-    exports: [
-        CommonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        SpecializationListComponent,
-        ExceptionPageComponent,
-        ExceptionDetailPageComponent,
-        ExceptionStatsPageComponent,
-        ExceptionTodayStatsPageComponent,
-
-        HomeComponent,
-        MultiSelectComponent
-    ],
+  exports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    HomeComponent,
+    MultiSelectComponent
+  ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]

@@ -12,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./user-base-edit.component.sass']
 })
 export class UserBaseEditComponent implements OnInit {
+  profilePicture: string = '';
+
   user: User = {
     id: 0,
     firstName: '',
@@ -44,6 +46,7 @@ export class UserBaseEditComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getById(this.user.id!).subscribe(user => {
       this.user = {...user};
+      this.profilePicture = this.user.profilePicture!;
 
       this.editUserForm.patchValue({
         firstName: this.user.firstName,

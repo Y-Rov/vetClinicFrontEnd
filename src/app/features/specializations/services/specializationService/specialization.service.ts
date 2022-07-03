@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Specialization} from "../../models/Specialization";
-import {ResourceService} from "../resourceService/resource.service";
+import {Specialization} from "../../../../core/models/Specialization";
+import {ResourceService} from "../../../../core/services/resourceService/resource.service";
 import {Location} from "@angular/common";
 import {catchError} from "rxjs/operators";
-import {Procedure} from "../../models/Procedure";
+import {Procedure} from "../../../../core/models/Procedure";
 
 @Injectable({
   providedIn: 'root'
