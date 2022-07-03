@@ -8,6 +8,8 @@ export class FinStatementOneMonth extends ResourceModel<FinStatementOneMonth> {
   incomes?: Income[];
   totalExpences?: number;
   totalIncomes?: number;
+  isIncomesExpanded: boolean = false;
+  isExpencesExpanded: boolean = false;
 
   constructor(model?: Partial<FinStatementOneMonth>) {
     super(model);

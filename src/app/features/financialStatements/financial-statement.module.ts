@@ -7,6 +7,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 import { FinancialStatementRoutingModule } from './financial-statement-routing.module';
@@ -28,7 +31,10 @@ import { FinancialStatementResultComponent } from './Components/financial-statem
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatListModule,
+    MatExpansionModule,
+    MatPaginatorModule
   ]
 })
 export class FinancialStatementModule { }

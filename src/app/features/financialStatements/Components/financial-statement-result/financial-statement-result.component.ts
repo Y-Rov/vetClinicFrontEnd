@@ -1,5 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Expences } from '../../../../core/models/FinancialStatement/Expences';
 import { FinancialStatement } from '../../../../core/models/FinancialStatement/FinancialStatement';
@@ -11,26 +13,42 @@ import { FinancialStatementPageComponent } from '../financial-statement-page/fin
 @Component({
   selector: 'app-financial-statement-result',
   templateUrl: './financial-statement-result.component.html',
-  styleUrls: ['./financial-statement-result.component.sass']
+  styleUrls: ['./financial-statement-result.component.sass'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class FinancialStatementResultComponent implements OnInit {
 
   dataSource: MatTableDataSource<FinStatementOneMonth> = new MatTableDataSource();
-  displayedColumns = ['month', 'totalExpences', 'totalIncomes'];
+  displayedColumns = ['month', 'totalExpences', 'totalIncomes', 'incomesDetail', 'expencesDetail'];
+  ExpandedExpences: any;
+  ExpandedIncomes: any;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
     constructor(
     @Inject(MAT_DIALOG_DATA) private date: MyDate,
     private finService: FinancialStatementService,
       public dialogRef: MatDialogRef<FinancialStatementPageComponent>) {
-      this.updateList();
 }
 
   ngOnInit(): void {
     this.updateList();
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator!;
+  }
+
   private updateList(): void {
     this.finService.getFinancialStatement(this.date).subscribe((data) => {
       this.dataSource.data = data;
     });
+  }
+  onClick(): void {
+    console.log("click");
   }
 }
