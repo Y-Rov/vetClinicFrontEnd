@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 import { Animal } from "../../../../core/models/Animal";
 import { MainAnimalComponent } from "../main-animal/main-animal.component";
-import { AnimalService } from "../../../../core/services/animalService/animal.service";
+import { AnimalService } from "../../animalService/animal.service";
 
 @Component({
   selector: 'app-add-animal',

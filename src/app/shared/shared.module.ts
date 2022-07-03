@@ -32,12 +32,7 @@ import { LoginComponent } from './components/authComponents/login-page/login.com
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AboutComponent } from './about/about.component';
-import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
-import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
-import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
-import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
-import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
@@ -55,12 +50,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
-    AddAnimalComponent,
-    EditAnimalComponent,
-    DeleteAnimalComponent,
-    MainAnimalComponent,
 
-    AnimalMedcardComponent,
 
     AboutComponent,
     HomeComponent
@@ -101,7 +91,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     ExceptionDetailPageComponent,
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
-    MainAnimalComponent,
     HomeComponent,
     MultiSelectComponent
   ],
