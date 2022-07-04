@@ -1,9 +1,7 @@
 import { Location } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Data } from "@angular/router";
 import { catchError, map, Observable, of } from 'rxjs';
-import { FinancialStatement } from '../../models/FinancialStatement/FinancialStatement';
 import { FinStatementOneMonth } from "../../models/FinancialStatement/FinStatementOneMonth";
 import { MyDate } from '../../models/FinancialStatement/MyDate';
 import { ResourceService } from '../resourceService/resource.service';

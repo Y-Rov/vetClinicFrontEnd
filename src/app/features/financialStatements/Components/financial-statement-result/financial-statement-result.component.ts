@@ -3,8 +3,6 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Expences } from '../../../../core/models/FinancialStatement/Expences';
-import { FinancialStatement } from '../../../../core/models/FinancialStatement/FinancialStatement';
 import { FinStatementOneMonth } from '../../../../core/models/FinancialStatement/FinStatementOneMonth';
 import { MyDate } from '../../../../core/models/FinancialStatement/MyDate';
 import { FinancialStatementService } from '../../../../core/services/financialService/financial-statement.service';
