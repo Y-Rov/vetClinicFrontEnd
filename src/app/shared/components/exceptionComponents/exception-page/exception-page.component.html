@@ -51,10 +51,10 @@
                         <div class="paginatorElemetnPostion">{{paggingInfo?.currentPage??0}} of {{paggingInfo?.totalPages??0}}
                         </div>
                         <div class="paginatorElemetnPostion"> <button mat-raised-button
-                                [disabled]="paggingInfo?.hasPrevious??0" (click)="onPrevButtonInfoClick()"
+                                [disabled]="!(paggingInfo?.hasPrevious??false)" (click)="onPrevButtonInfoClick()"
                                 color="info">Prev</button></div>
                         <div class="paginatorElemetnPostion"> <button mat-raised-button
-                                [disabled]="paggingInfo?.hasNext??0" (click)="onNextButtonInfoClick()"
+                                [disabled]="!(paggingInfo?.hasNext??false)" (click)="onNextButtonInfoClick()"
                                 color="info">Next</button></div>
                     </div>
 

@@ -33,7 +33,6 @@ export class ExceptionPageComponent implements OnInit {
     private exceptionService: ExceptionService,
     private router: Router,
   ) {
-    this.updateList(1, 5);
   }
 
   ngOnInit(): void {
@@ -79,9 +78,9 @@ export class ExceptionPageComponent implements OnInit {
     }
     else {
       this.exceptionService.getExceptions(CurrentPage, PageSize, name).subscribe((data) => {
+        this.updatePaggingInfo(data)
         this.dataSource.data = data.exceptionList;
         this.dataSource.sort = this.sort!;
-        this.updatePaggingInfo(data)
       });
     }
   }
