@@ -28,10 +28,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import { AppointmentsPageComponent } from './components/appointmentComponents/appointments-page/appointments-page.component';
-import { DeleteAppointmentDialogComponent } from './components/appointmentComponents/delete-appointment-dialog/delete-appointment-dialog.component';
-import { EditAppointmentDialogComponent } from './components/appointmentComponents/edit-appointment-dialog/edit-appointment-dialog.component';
-import { NewAppointmentDialogComponent } from './components/appointmentComponents/new-appointment-dialog/new-appointment-dialog.component';
+// import { AppointmentsPageComponent } from './components/appointmentComponents/appointments-page/appointments-page.component';
+// import { DeleteAppointmentDialogComponent } from './components/appointmentComponents/delete-appointment-dialog/delete-appointment-dialog.component';
+// import { EditAppointmentDialogComponent } from './components/appointmentComponents/edit-appointment-dialog/edit-appointment-dialog.component';
+// import { NewAppointmentDialogComponent } from './components/appointmentComponents/new-appointment-dialog/new-appointment-dialog.component';
 
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 
@@ -66,6 +66,12 @@ import {
   AddSpecializationDialogComponent
 } from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
 
+
+// import { AppointmentsPageComponent } from '../features/appointments/components/appointments-page/appointments-page.component';
+// import { DeleteAppointmentDialogComponent } from '../features/appointments/components/delete-appointment-dialog/delete-appointment-dialog.component';
+// import { EditAppointmentDialogComponent } from '../features/appointments/components/edit-appointment-dialog/edit-appointment-dialog.component';
+// import { NewAppointmentDialogComponent } from '../features/appointments/components/new-appointment-dialog/new-appointment-dialog.component';
+
 @NgModule({
 
   declarations: [
@@ -76,10 +82,10 @@ import {
     SpecializationEditDialogComponent,
     AddSpecializationDialogComponent,
     MultiSelectComponent,
-    AppointmentsPageComponent, 
-    DeleteAppointmentDialogComponent, 
-    EditAppointmentDialogComponent, 
-    NewAppointmentDialogComponent,
+    // AppointmentsPageComponent, 
+    // DeleteAppointmentDialogComponent, 
+    // EditAppointmentDialogComponent, 
+    // NewAppointmentDialogComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     LoginComponent, SignupComponent,
     ExceptionStatsPageComponent,
@@ -138,10 +144,10 @@ import {
         ExceptionDetailPageComponent,
         ExceptionStatsPageComponent,
         ExceptionTodayStatsPageComponent,
-        AppointmentsPageComponent,
-        DeleteAppointmentDialogComponent,
-        EditAppointmentDialogComponent,
-        NewAppointmentDialogComponent,
+        // AppointmentsPageComponent,
+        // DeleteAppointmentDialogComponent,
+        // EditAppointmentDialogComponent,
+        // NewAppointmentDialogComponent,
         MainAnimalComponent,
         HomeComponent,
         MultiSelectComponent

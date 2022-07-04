@@ -19,9 +19,15 @@ const routes: Routes = [
     loadChildren: () => import('./features/procedures/procedures.module').then(m => m.ProceduresModule)
   },
   {
+    path: 'appointments',
+    loadChildren: () => import('./features/appointments/appointments.module').then(m => m.AppointmentsModule)
+  },
+
+  {
     path: 'blog',
     loadChildren: () => import('./features/companyBlog/company-blog.module').then(m => m.CompanyBlogModule)
-  }
+  },
+  { path: 'appointments', loadChildren: () => import('./features/appointments/appointments.module').then(m => m.AppointmentsModule) }
 ];
 
 @NgModule({

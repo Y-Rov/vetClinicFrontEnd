@@ -11,7 +11,7 @@ import { SharedModule } from "./shared/shared.module";
 import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
 import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
 
-import { AppointmentsPageComponent } from './shared/components/appointmentComponents/appointments-page/appointments-page.component';
+// import { AppointmentsPageComponent } from './shared/components/appointmentComponents/appointments-page/appointments-page.component';
 
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { RolesGuard } from './helpers/roles-guard/roles.guard';
@@ -28,6 +28,10 @@ import {HomeComponent} from "./shared/home/home.component";
 import {
   SpecializationListComponent
 } from "./shared/components/specializationComponent/specialization-list/specialization-list.component";
+// import { AppointmentsPageComponent } from './features/appointments/components/appointments-page/appointments-page.component';
+// import { DeleteAppointmentDialogComponent } from './features/appointments/components/delete-appointment-dialog/delete-appointment-dialog.component';
+// import { EditAppointmentDialogComponent } from './features/appointments/components/edit-appointment-dialog/edit-appointment-dialog.component';
+// import { NewAppointmentDialogComponent } from './features/appointments/components/new-appointment-dialog/new-appointment-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -64,11 +68,11 @@ const appRoutes: Routes = [
     component: SignupComponent,
     canActivate: [UnauthGuard]
   },
-  {
+  // {
 
-    path: 'appointments',
-    component: AppointmentsPageComponent
-  },
+  //   path: 'appointments',
+  //   component: AppointmentsPageComponent
+  // },
   {
 
     path: 'animals',
@@ -84,7 +88,10 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+     AppComponent,
+    // DeleteAppointmentDialogComponent,
+    // EditAppointmentDialogComponent,
+    // NewAppointmentDialogComponent
   ],
   imports: [
     BrowserModule,
