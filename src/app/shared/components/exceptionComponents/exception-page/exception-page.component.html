@@ -48,13 +48,13 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="paginatorElemetnPostion">{{paggingInfo?.currentPage??0}} of {{paggingInfo?.totalPages??0}}
+                        <div class="paginatorElemetnPostion">{{pagingInfo?.currentPage??0}} of {{pagingInfo?.totalPages??0}}
                         </div>
                         <div class="paginatorElemetnPostion"> <button mat-raised-button
-                                [disabled]="!(paggingInfo?.hasPrevious??false)" (click)="onPrevButtonInfoClick()"
+                                [disabled]="!(pagingInfo?.hasPrevious??false)" (click)="onPrevButtonInfoClick()"
                                 color="info">Prev</button></div>
                         <div class="paginatorElemetnPostion"> <button mat-raised-button
-                                [disabled]="!(paggingInfo?.hasNext??false)" (click)="onNextButtonInfoClick()"
+                                [disabled]="!(pagingInfo?.hasNext??false)" (click)="onNextButtonInfoClick()"
                                 color="info">Next</button></div>
                     </div>
 

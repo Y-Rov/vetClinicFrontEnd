@@ -22,7 +22,7 @@ export class ExceptionPageComponent implements OnInit {
   dataSource: MatTableDataSource<Exception> = new MatTableDataSource();
   @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ['name', 'date', 'path', 'button'];
-  paggingInfo: ExceptionParameters | null = null;
+  pagingInfo: ExceptionParameters | null = null;
   itemsPerPage: number = 5;
   options = [
     { name: "5", value: 5 },
@@ -47,24 +47,24 @@ export class ExceptionPageComponent implements OnInit {
     this.router.navigateByUrl(`/exceptions/${element.id}`)
   }
   onNextButtonInfoClick() {
-    if (this.paggingInfo?.hasNext) {
+    if (this.pagingInfo?.hasNext) {
 
-      this.updateList(this.paggingInfo!.currentPage + 1, this.paggingInfo!.pageSize);
+      this.updateList(this.pagingInfo!.currentPage + 1, this.pagingInfo!.pageSize);
     }
 
   }
   onPrevButtonInfoClick() {
 
-    if (this.paggingInfo?.hasPrevious) {
+    if (this.pagingInfo?.hasPrevious) {
 
-      this.updateList(this.paggingInfo!.currentPage - 1, this.paggingInfo!.pageSize);
+      this.updateList(this.pagingInfo!.currentPage - 1, this.pagingInfo!.pageSize);
     }
 
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.updateList(this.paggingInfo!.currentPage, this.paggingInfo!.pageSize, filterValue);
+    this.updateList(this.pagingInfo!.currentPage, this.pagingInfo!.pageSize, filterValue);
 
   }
 
@@ -73,20 +73,20 @@ export class ExceptionPageComponent implements OnInit {
       this.exceptionService.getExceptions(CurrentPage, PageSize).subscribe((data) => {
         this.dataSource.data = data.exceptionList;
         this.dataSource.sort = this.sort!;
-        this.updatePaggingInfo(data)
+        this.updatePagingInfo(data)
       });
     }
     else {
       this.exceptionService.getExceptions(CurrentPage, PageSize, name).subscribe((data) => {
-        this.updatePaggingInfo(data)
+        this.updatePagingInfo(data)
         this.dataSource.data = data.exceptionList;
         this.dataSource.sort = this.sort!;
       });
     }
   }
 
-  private updatePaggingInfo(data: ExceptionParametersWithList): void {
-    this.paggingInfo = <ExceptionParameters>data;
+  private updatePagingInfo(data: ExceptionParametersWithList): void {
+    this.pagingInfo = <ExceptionParameters>data;
   }
 
   selectOption() {
