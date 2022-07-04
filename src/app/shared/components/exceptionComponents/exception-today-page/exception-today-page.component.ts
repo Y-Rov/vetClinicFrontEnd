@@ -7,6 +7,7 @@ import { ExceptionService } from 'src/app/core/services/exceptionServices/except
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { ExceptionParameters } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParameters';
+import { ExceptionParametersWithList } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParametersWithList';
 
 @Component({
   selector: 'app-exception-today-page',
@@ -17,10 +18,8 @@ import { ExceptionParameters } from 'src/app/core/models/operational-models/Quer
 export class ExceptionTodayPageComponent implements OnInit {
   dataSource: MatTableDataSource<Exception> = new MatTableDataSource();               //Special data class to handle a table
   @ViewChild(MatSort) sort?: MatSort;
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
   displayedColumns: string[] = ['name', 'date', 'path', 'button'];    //List of column names to be displayed
-  displayedPagginationOptions: string[] = ['5', '10']
-  paggingInfo: ExceptionParameters | null = null;
+  pagingInfo: ExceptionParameters | null = null;
   itemsPerPage: number = 5;
   options = [
     { name: "5", value: 5 },
@@ -30,15 +29,14 @@ export class ExceptionTodayPageComponent implements OnInit {
     private exceptionService: ExceptionService,
     private router: Router,
   ) {
-    this.updatePaggingInfo();
   }
 
   ngOnInit(): void {
-    this.selectOption();
+    this.updateList(1, 5);
   }
 
   ngAfterViewInit(): void {
-    this.updateList(this.paggingInfo?.CurrentPage, this.paggingInfo?.PageSize);
+    this.updateList(this.pagingInfo?.currentPage, this.pagingInfo?.pageSize);
   }
 
 
@@ -48,63 +46,46 @@ export class ExceptionTodayPageComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.updateList(this.paggingInfo!.CurrentPage, this.paggingInfo!.PageSize, filterValue);
-    this.updatePaggingInfo(this.paggingInfo!.CurrentPage, this.paggingInfo!.PageSize, filterValue);
+    this.updateList(this.pagingInfo!.currentPage, this.pagingInfo!.pageSize, filterValue);
   }
 
   private updateList(CurrentPage: number = 1, PageSize: number = 5, name: string = ""): void {
     if (name == "") {
       this.exceptionService.getExceptionsToday(CurrentPage, PageSize).subscribe((data) => {
-        this.dataSource.data = data;
+        this.dataSource.data = data.exceptionList;
         this.dataSource.sort = this.sort!;
-        console.log(data);
+        this.updatePagingInfo(data)
       });
     }
     else {
       this.exceptionService.getExceptionsToday(CurrentPage, PageSize, name).subscribe((data) => {
-        this.dataSource.data = data;
+        this.dataSource.data = data.exceptionList;
         this.dataSource.sort = this.sort!;
-        console.log(data);
+        this.updatePagingInfo(data)
       });
-    }
-  }
-
-  onPrevButtonInfoClick() {
-    if (this.paggingInfo?.HasPrevious) {
-
-      this.updateList(this.paggingInfo!.CurrentPage - 1, this.paggingInfo!.PageSize);
-      this.updatePaggingInfo(this.paggingInfo!.CurrentPage - 1, this.paggingInfo!.PageSize);
     }
   }
 
   onNextButtonInfoClick() {
-    if (this.paggingInfo?.HasNext) {
+    if (this.pagingInfo?.hasNext) {
 
-      this.updateList(this.paggingInfo!.CurrentPage + 1, this.paggingInfo!.PageSize);
-      this.updatePaggingInfo(this.paggingInfo!.CurrentPage + 1, this.paggingInfo!.PageSize);
+      this.updateList(this.pagingInfo!.currentPage + 1, this.pagingInfo!.pageSize);
     }
 
   }
+  onPrevButtonInfoClick() {
 
-  private updatePaggingInfo(CurrentPage: number = 1, PageSize: number = 5, name: string = ""): void {
-    if (name == "") {
-      this.exceptionService.getPagginatorExceptionsTodayOptions(CurrentPage, PageSize).subscribe(resp => {
+    if (this.pagingInfo?.hasPrevious) {
 
-        this.paggingInfo = <ExceptionParameters>JSON.parse(resp.headers.get('x-pagination')!);
-        console.log(this.paggingInfo);
-      });
+      this.updateList(this.pagingInfo!.currentPage - 1, this.pagingInfo!.pageSize);
     }
-    else {
-      this.exceptionService.getPagginatorExceptionsTodayOptions(CurrentPage, PageSize, name).subscribe(resp => {
 
-        this.paggingInfo = <ExceptionParameters>JSON.parse(resp.headers.get('x-pagination')!);
-        console.log(this.paggingInfo);
-      });
-    }
+  }
+  private updatePagingInfo(data: ExceptionParametersWithList): void {
+    this.pagingInfo = <ExceptionParameters>data;
   }
 
   selectOption() {
-    this.updatePaggingInfo(1, this.itemsPerPage);
     this.updateList(1, this.itemsPerPage);
   }
 }
