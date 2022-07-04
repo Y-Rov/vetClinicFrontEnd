@@ -5,7 +5,7 @@ import { Animal } from 'src/app/core/models/Animal';
 import { Appointment } from 'src/app/core/models/Appointment';
 import { Procedure } from 'src/app/core/models/Procedure';
 import { User } from 'src/app/core/models/User';
-import { AnimalService } from 'src/app/core/services/animalService/animal.service';
+import { AnimalService } from 'src/app/features/animal/animalService/animal.service';
 import { ProcedureService } from 'src/app/features/procedures/services/procedureService/procedure.service';
 import { UserService } from 'src/app/features/userDashboard/services/userService/user.service';
 import { AppointmentService } from '../../services/appointment.service';

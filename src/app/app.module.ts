@@ -20,18 +20,12 @@ import { LoginComponent } from './shared/components/authComponents/login-page/lo
 import { SignupComponent } from './shared/components/authComponents/signup-page/signup.component';
 import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
 
-import { MainAnimalComponent } from "./shared/components/animalComponents/main-animal/main-animal.component";
-
 import {AboutComponent} from "./shared/about/about.component";
 import {HomeComponent} from "./shared/home/home.component";
 
 import {
   SpecializationListComponent
-} from "./shared/components/specializationComponent/specialization-list/specialization-list.component";
-// import { AppointmentsPageComponent } from './features/appointments/components/appointments-page/appointments-page.component';
-// import { DeleteAppointmentDialogComponent } from './features/appointments/components/delete-appointment-dialog/delete-appointment-dialog.component';
-// import { EditAppointmentDialogComponent } from './features/appointments/components/edit-appointment-dialog/edit-appointment-dialog.component';
-// import { NewAppointmentDialogComponent } from './features/appointments/components/new-appointment-dialog/new-appointment-dialog.component';
+} from "./features/specializations/components/specialization-list/specialization-list.component";
 
 
 const appRoutes: Routes = [
@@ -39,12 +33,12 @@ const appRoutes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  {
-    path: 'specializations',
-    component: SpecializationListComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
-  },
+  // {
+  //   path: 'specializations',
+  //   component: SpecializationListComponent,
+  //   canActivate: [RolesGuard],
+  //   data: {allowedRoles: ['Admin']}
+  // },
   {
     path: 'exceptions',
     component: ExceptionPageComponent,
@@ -68,17 +62,6 @@ const appRoutes: Routes = [
     component: SignupComponent,
     canActivate: [UnauthGuard]
   },
-  // {
-
-  //   path: 'appointments',
-  //   component: AppointmentsPageComponent
-  // },
-  {
-
-    path: 'animals',
-    component: MainAnimalComponent,
-    canActivate: [AuthGuard]
-  },
   {
     path:'about',
     component: AboutComponent
@@ -88,10 +71,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-     AppComponent,
-    // DeleteAppointmentDialogComponent,
-    // EditAppointmentDialogComponent,
-    // NewAppointmentDialogComponent
+     AppComponent
   ],
   imports: [
     BrowserModule,

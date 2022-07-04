@@ -22,12 +22,18 @@ const routes: Routes = [
     path: 'appointments',
     loadChildren: () => import('./features/appointments/appointments.module').then(m => m.AppointmentsModule)
   },
-
+  {
+    path: 'specializations',
+    loadChildren: () => import('./features/specializations/specialization.module').then(m => m.SpecializationModule)
+  },
   {
     path: 'blog',
     loadChildren: () => import('./features/companyBlog/company-blog.module').then(m => m.CompanyBlogModule)
   },
-  { path: 'appointments', loadChildren: () => import('./features/appointments/appointments.module').then(m => m.AppointmentsModule) }
+  {
+    path: 'animals',
+    loadChildren: ()=> import('./features/animal/animal.module').then(m=>m.AnimalModule)
+  }
 ];
 
 @NgModule({

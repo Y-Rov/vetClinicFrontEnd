@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
 import { User } from "../../../../core/models/User";
 import { MatSort } from "@angular/material/sort";
-import { MatPaginator } from "@angular/material/paginator";
 import { UserService } from "../../services/userService/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteUserComponent } from "../delete-user/delete-user.component";
 import { CreateEmployeeComponent } from "../create-employee/create-employee.component";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -15,30 +15,45 @@ import { CreateEmployeeComponent } from "../create-employee/create-employee.comp
 })
 export class UsersComponent implements OnInit {
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
+
   displayedColumns: string[] = [
     'firstName', 'lastName', 'email', 'phoneNumber', 'birthDate', 'role', 'edit', 'delete'
   ];
 
+  pageSizeOptions: { name: string; value: number }[] = [
+    { name: '5', value: 5 },
+    { name: '10', value: 10 },
+    { name: '25', value: 25 }
+  ];
+
+  orderByOptions: { name: string; value: string }[] = [
+    { name: 'First Name', value: 'FirstName' },
+    { name: 'Last Name', value: 'LastName' },
+    { name: 'Email', value: 'Email' },
+    { name: 'Phone Number', value: 'PhoneNumber' },
+    { name: 'Date of Birth', value: 'BirthDate' },
+  ];
+  
+  currentPageSize: number = this.pageSizeOptions[0].value;
+  currentPageNumber: number = 1;
+  filterValue: string | null = null;
+  currentOrderByOption: string | null = null;
+
   @ViewChild(MatSort) sort?: MatSort;
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   constructor(
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateUsers(): void {
-    this.userService.getAll().subscribe(users => {
+  private updateUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam: string | null = null): void {
+    this.userService.getAllUsers(takeCount, skipCount, filterParam, orderByParam).subscribe(users => {
       this.dataSource.data = users;
       this.dataSource.sort = this.sort!;
     });
   }
 
   ngOnInit(): void {
-    this.updateUsers();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator!;
+    this.updateUsers(this.currentPageSize);
   }
 
   onDelete(user: User): void {
@@ -53,7 +68,7 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((requireReload: boolean) => {
       if (requireReload) {
-        this.updateUsers();
+        this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
       }
     });
   }
@@ -63,17 +78,33 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((requireReload: boolean) => {
       if (requireReload) {
-        this.updateUsers();
+        this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
       }
     });
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.updateUsers(this.currentPageSize, 0, this.filterValue);
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  onPrevPageClick(): void {
+    this.currentPageNumber -= 1;
+    this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
+  }
+
+  onNextPageClick(): void {
+    this.currentPageNumber += 1;
+    this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
+  }
+
+  selectPageSizeOption(): void {
+    this.updateUsers(this.currentPageSize);
+    this.currentPageNumber = 1;
+  }
+
+  selectOrderByOption(orderOption: string): void {
+    this.currentPageNumber = 1;
+    this.updateUsers(this.currentPageSize, 0, this.filterValue, orderOption);
   }
 }
