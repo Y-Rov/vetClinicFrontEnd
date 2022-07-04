@@ -17,7 +17,7 @@ export class UserService extends ResourceService<User> {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
   }
 
-  getAllUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam?: string): Observable<User[]> {
+  getAllUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam: string | null = null): Observable<User[]> {
     let url = `${this.apiUrl}?SkipCount=${skipCount}`;
 
     if (takeCount !== null) {
@@ -29,7 +29,7 @@ export class UserService extends ResourceService<User> {
     }
 
     if (orderByParam !== null) {
-      url += `&orderByParam=${orderByParam}`;
+      url += `&OrderByParam=${orderByParam}`;
     }
 
     return this.http.get<User[]>(url)

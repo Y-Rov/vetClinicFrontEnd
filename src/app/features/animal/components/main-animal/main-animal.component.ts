@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AnimalService} from "../../../../core/services/animalService/animal.service";
+import {AnimalService} from "../../animalService/animal.service";
 import {Animal} from "../../../../core/models/Animal";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteAnimalComponent} from "../delete-animal/delete-animal.component";

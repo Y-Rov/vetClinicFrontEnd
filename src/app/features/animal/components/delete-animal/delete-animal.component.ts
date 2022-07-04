@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {MainAnimalComponent} from "../main-animal/main-animal.component";
-import {AnimalService} from "../../../../core/services/animalService/animal.service";
+import {AnimalService} from "../../animalService/animal.service";
 
 
 @Component({

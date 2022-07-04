@@ -1,0 +1,61 @@
+<div [formGroup]="form">
+    <div class="mat-title">Edit Appointment</div>
+
+    <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+      <mat-label>Appointment disease</mat-label>
+      <input 
+          matInput 
+          formControlName="disease"
+          type="string"
+          minlength="3"
+          maxlength="255"
+          placeholder="Appointment disease">
+      <mat-hint>Length must be greater than 3 but less than 255 characters long</mat-hint>
+      <mat-error *ngIf="form.controls.disease.invalid">Length must be greater than 3 but less than 255 characters long</mat-error>
+    </mat-form-field>
+
+          
+    <app-multi-select placeholder="Procedure name"
+    key="procedures"
+    [data]="procedures"
+    (result)="onMultiSelectSubmitProcedure($event)"
+    [alreadySelected]="data.procedures!"></app-multi-select>
+
+                 
+      <app-multi-select placeholder="Doctor name"
+      key="users"
+      [data]="users"
+      (result)="onMultiSelectSubmitDoctor($event)"
+      [alreadySelected]="data.users!"></app-multi-select>
+         
+
+      <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Animal name</mat-label>
+        <mat-select (selectionChange)="selectedAnimalForEdit($event)" required>
+          <mat-option *ngFor="let animal of animals" [value]="animal">
+            {{animal.nickName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </p>
+
+      <p>
+        <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+          <mat-label>Appointment Date</mat-label>
+          <input
+            matInput
+            formControlName="date"
+            type="date"
+            placeholder="Appointment Date">
+        </mat-form-field>
+      </p>
+
+   
+   
+      <div class="buttons-div">
+        <button mat-flat-button (click)="onNoClick()">Discard</button>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!isButtonEnabled()" (click)="onSaveForm()">Save</button>
+      </div>
+  </div>
+  

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
-import {AnimalService} from "../../../../core/services/animalService/animal.service";
+import {AnimalService} from "../../animalService/animal.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Appointment} from "../../../../core/models/Appointment";
 import {MainAnimalComponent} from "../main-animal/main-animal.component";

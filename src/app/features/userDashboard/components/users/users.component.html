@@ -1,9 +1,18 @@
 <div class="content">
   <div>
-    <mat-form-field class="elem" appearance="outline">
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="First Name/Last Name/Email/Phone Number">
-    </mat-form-field>
+    <div class="collate">
+      <mat-form-field class="filter-sort" appearance="outline">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="First Name/Last Name/Email/Phone Number">
+      </mat-form-field>
+      <mat-form-field class="filter-sort" appearance="outline">
+        <mat-label>Choose an order parameter</mat-label>
+        <mat-select (selectionChange)="selectOrderByOption($event.value)">
+          <mat-option *ngFor="let orderOption of orderByOptions" [value]="orderOption.value">{{orderOption.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 elem" matSort>
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef>First Name</th>
@@ -54,9 +63,9 @@
       <div>Items per page</div>
       <div>
           <select (change)="selectPageSizeOption()" [(ngModel)]="currentPageSize">
-              <option *ngFor="let sizeOption of pageSizeOptions">
-                  {{sizeOption.name}}
-              </option>
+            <option *ngFor="let sizeOption of pageSizeOptions">
+                {{sizeOption.name}}
+            </option>
           </select>
       </div>
       <div>Page: {{this.currentPageNumber}}</div>
