@@ -59,7 +59,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <div class="paginator mat-elevation-z8 elem">
+    <!-- <div class="paginator mat-elevation-z8 elem">
       <div>Items per page</div>
       <div>
           <select (change)="selectPageSizeOption()" [(ngModel)]="currentPageSize">
@@ -77,7 +77,24 @@
         <button mat-raised-button [disabled]="dataSource.data.length < currentPageSize"
           (click)="onNextPageClick()" color="info">Next</button>
       </div>
-    </div>
+    </div> -->
+    <div class="paginator mat-elevation-z8 elem">
+      <div>Items per page</div>
+      <div>
+        <select (change)="selectPageSizeOptions()" [(ngModel)]="currentPageSize">
+            <option *ngFor="let pageSizeOption of pageSizeOptions">
+                {{pageSizeOption.name}}
+            </option>
+        </select>
+      </div>
+      <div>{{pageInfo?.currentPage ?? 0}} of {{pageInfo?.totalPages ?? 0}}</div>
+      <div>
+        <button mat-raised-button [disabled]="!(pageInfo?.hasPrevious??false)" (click)="onPrevPageClick()" color="info">Prev</button>
+      </div>
+      <div class="next-btn">
+        <button mat-raised-button [disabled]="!(pageInfo?.hasNext??false)" (click)="onNextPageClick()" color="info">Next</button>
+      </div>
+  </div>
 
     <button class="new-emp-btn mat-elevation-z8" mat-stroked-button (click)="onCreateEmployee()" color="primary">
       <mat-icon class="add-icon">add</mat-icon>

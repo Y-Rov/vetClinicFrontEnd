@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { DeleteUserComponent } from "../delete-user/delete-user.component";
 import { CreateEmployeeComponent } from "../create-employee/create-employee.component";
 import { FormControl } from '@angular/forms';
+import { UserParameters } from 'src/app/core/models/operational-models/QueryParameters/UserParameters';
 
 @Component({
   selector: 'app-users',
@@ -34,6 +35,7 @@ export class UsersComponent implements OnInit {
     { name: 'Date of Birth', value: 'BirthDate' },
   ];
   
+  pageInfo: UserParameters | null = null;
   currentPageSize: number = this.pageSizeOptions[0].value;
   currentPageNumber: number = 1;
   filterValue: string | null = null;
@@ -45,15 +47,21 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private matDialog: MatDialog) { }
 
-  private updateUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam: string | null = null): void {
-    this.userService.getAllUsers(takeCount, skipCount, filterParam, orderByParam).subscribe(users => {
-      this.dataSource.data = users;
+  private updateUsers(pageNumber: number = 1, pageSize: number = 5, filterParam: string | null = null, orderByParam: string | null = null): void {
+    this.userService.getAllUsers(pageNumber, pageSize, filterParam, orderByParam).subscribe(data => {
+      this.dataSource.data = data.users;
+      console.log(data.users);
       this.dataSource.sort = this.sort!;
+      this.updatePageInfo(data);
     });
   }
 
+  private updatePageInfo(data: UserParameters): void {
+    this.pageInfo = <UserParameters>data;
+  }
+
   ngOnInit(): void {
-    this.updateUsers(this.currentPageSize);
+    this.updateUsers(this.currentPageNumber);
   }
 
   onDelete(user: User): void {
@@ -85,26 +93,27 @@ export class UsersComponent implements OnInit {
 
   applyFilter(event: Event) {
     this.filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-    this.updateUsers(this.currentPageSize, 0, this.filterValue);
+    this.updateUsers(this.currentPageSize, 5, this.filterValue);
   }
 
   onPrevPageClick(): void {
-    this.currentPageNumber -= 1;
-    this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
+    if (this.pageInfo?.hasPrevious) {
+      this.updateUsers(this.pageInfo!.currentPage - 1, this.pageInfo!.pageSize);
+    }
   }
 
   onNextPageClick(): void {
-    this.currentPageNumber += 1;
-    this.updateUsers(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
+    if (this.pageInfo?.hasNext) {
+      this.updateUsers(this.pageInfo!.currentPage + 1, this.pageInfo!.pageSize);
+    }
   }
 
-  selectPageSizeOption(): void {
-    this.updateUsers(this.currentPageSize);
-    this.currentPageNumber = 1;
+  selectPageSizeOptions(): void {
+    this.updateUsers(1, this.currentPageSize);
   }
 
   selectOrderByOption(orderOption: string): void {
     this.currentPageNumber = 1;
-    this.updateUsers(this.currentPageSize, 0, this.filterValue, orderOption);
+    this.updateUsers(this.currentPageSize, 5, this.filterValue, orderOption);
   }
 }
