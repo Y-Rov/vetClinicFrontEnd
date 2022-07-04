@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MyDate } from '../../../../core/models/FinancialStatement/MyDate';
 import { FinancialStatementResultComponent } from '../financial-statement-result/financial-statement-result.component';
@@ -11,10 +12,29 @@ import { FinancialStatementResultComponent } from '../financial-statement-result
 })
 export class FinancialStatementPageComponent implements OnInit {
   date: MyDate = new MyDate;
-  range = new FormGroup({
-    start: new FormControl<Date|null>(null),
-    end: new FormControl<Date|null>(null),
-  });
+
+  today: Date = new Date();
+
+  startChange: boolean = false;
+  endChange: boolean = false;
+
+  @Output()
+  public monthAndYearChange = new EventEmitter<Date | null>();
+
+  public emitDateChange(event: MatDatepickerInputEvent<Date | null, unknown>): void {
+    this.monthAndYearChange.emit(event.value);
+  }
+
+  public monthChangedStart(value: any, widget: any): void {
+    this.date.startDate = value;
+    this.startChange = true;
+    widget.close();
+  }
+  public monthChangedEnd(value: any, widget: any): void {
+    this.date.endDate = value;
+    this.endChange = true;
+    widget.close();
+  }
 
   constructor(
     private matDialog: MatDialog) { }
@@ -22,23 +42,18 @@ export class FinancialStatementPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  IsEnable(): boolean {
-    if (this.range.value.start?.getDate != null &&
-      this.range.value.end?.getDate) {
+  isEnable(): boolean {
+    if (this.startChange && this.endChange) {
       return true;
     }
     return false;
   }
 
   onGenerateButton(){
-    if (this.range.value.start?.getDate != null &&
-      this.range.value.end?.getDate) {
+    if (this.isEnable()) {
 
-      this.date.startDate = this.range.value.start;
-      this.date.endDate = this.range.value.end;
+    this.Generate(this.date)    
     }
-    this.Generate(this.date)
   }
   Generate(date: MyDate) {
     const dialogRef = this.matDialog.open(FinancialStatementResultComponent, {
