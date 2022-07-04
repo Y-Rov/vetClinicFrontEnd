@@ -1,10 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
-import { Appointment } from '../../models/Appointment';
+import { Appointment } from 'src/app/core/models/Appointment';
+import { ResourceService } from 'src/app/core/services/resourceService/resource.service';
 import { Location } from "@angular/common";
-import { ResourceService } from '../resourceService/resource.service';
-
+import { catchError, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
