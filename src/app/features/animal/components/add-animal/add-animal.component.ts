@@ -38,7 +38,7 @@ export class AddAnimalComponent implements OnInit {
     {
       finalData.birthDate = new Date(Date.now());
     }
-    finalData.PhotoUrl = this.animalPhoto;
+    finalData.photoUrl = this.animalPhoto;
     this.animalService.createAnimal(finalData).subscribe(() => this.dialogRef.close(true));
   }
 

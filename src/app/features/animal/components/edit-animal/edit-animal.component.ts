@@ -39,7 +39,7 @@ export class EditAnimalComponent implements OnInit {
       this.data.birthDate = this.form.value.birthDate;
     }
     if(this.isPhotoUpdated){
-      this.data.PhotoUrl = this.animalPhoto;
+      this.data.photoUrl = this.animalPhoto;
     }
     this.animalService.updateAnimal(this.data).subscribe(() => this.dialogRef.close(true));
   }
