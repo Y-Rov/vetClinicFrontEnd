@@ -59,25 +59,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <!-- <div class="paginator mat-elevation-z8 elem">
-      <div>Items per page</div>
-      <div>
-          <select (change)="selectPageSizeOption()" [(ngModel)]="currentPageSize">
-            <option *ngFor="let sizeOption of pageSizeOptions">
-                {{sizeOption.name}}
-            </option>
-          </select>
-      </div>
-      <div>Page: {{this.currentPageNumber}}</div>
-      <div>
-        <button mat-raised-button [disabled]="currentPageNumber == 1" 
-          (click)="onPrevPageClick()" color="info">Prev</button>
-      </div>
-      <div class="next-btn">
-        <button mat-raised-button [disabled]="dataSource.data.length < currentPageSize"
-          (click)="onNextPageClick()" color="info">Next</button>
-      </div>
-    </div> -->
     <div class="paginator mat-elevation-z8 elem">
       <div>Items per page</div>
       <div>

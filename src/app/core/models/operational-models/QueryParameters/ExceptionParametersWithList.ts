@@ -5,5 +5,5 @@ export interface ExceptionParametersWithList{
     totalPages: number;
     hasNext: boolean;
     hasPrevious:boolean;
-    exceptionList:[];
+    entities:[];
 }

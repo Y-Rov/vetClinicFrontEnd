@@ -7,5 +7,5 @@ export interface UserParameters {
     totalPages: number;
     hasNext: boolean;
     hasPrevious:boolean;
-    users: User[];
+    entities: User[];
 }

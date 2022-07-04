@@ -23,8 +23,7 @@ export class UsersComponent implements OnInit {
 
   pageSizeOptions: { name: string; value: number }[] = [
     { name: '5', value: 5 },
-    { name: '10', value: 10 },
-    { name: '25', value: 25 }
+    { name: '10', value: 10 }
   ];
 
   orderByOptions: { name: string; value: string }[] = [
@@ -49,8 +48,7 @@ export class UsersComponent implements OnInit {
 
   private updateUsers(pageNumber: number = 1, pageSize: number = 5, filterParam: string | null = null, orderByParam: string | null = null): void {
     this.userService.getAllUsers(pageNumber, pageSize, filterParam, orderByParam).subscribe(data => {
-      this.dataSource.data = data.users;
-      console.log(data.users);
+      this.dataSource.data = data.entities;
       this.dataSource.sort = this.sort!;
       this.updatePageInfo(data);
     });
@@ -93,7 +91,7 @@ export class UsersComponent implements OnInit {
 
   applyFilter(event: Event) {
     this.filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-    this.updateUsers(this.currentPageSize, 5, this.filterValue);
+    this.updateUsers(this.currentPageNumber, this.currentPageSize, this.filterValue);
   }
 
   onPrevPageClick(): void {
@@ -114,6 +112,6 @@ export class UsersComponent implements OnInit {
 
   selectOrderByOption(orderOption: string): void {
     this.currentPageNumber = 1;
-    this.updateUsers(this.currentPageSize, 5, this.filterValue, orderOption);
+    this.updateUsers(this.currentPageNumber, this.currentPageSize, this.filterValue, orderOption);
   }
 }

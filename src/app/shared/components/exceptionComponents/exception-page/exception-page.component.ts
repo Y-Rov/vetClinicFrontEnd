@@ -71,7 +71,7 @@ export class ExceptionPageComponent implements OnInit {
   private updateList(CurrentPage: number = 1, PageSize: number = 5, name: string = ""): void {
     if (name == "") {
       this.exceptionService.getExceptions(CurrentPage, PageSize).subscribe((data) => {
-        this.dataSource.data = data.exceptionList;
+        this.dataSource.data = data.entities;
         this.dataSource.sort = this.sort!;
         this.updatePagingInfo(data)
       });
@@ -79,7 +79,7 @@ export class ExceptionPageComponent implements OnInit {
     else {
       this.exceptionService.getExceptions(CurrentPage, PageSize, name).subscribe((data) => {
         this.updatePagingInfo(data)
-        this.dataSource.data = data.exceptionList;
+        this.dataSource.data = data.entities;
         this.dataSource.sort = this.sort!;
       });
     }
