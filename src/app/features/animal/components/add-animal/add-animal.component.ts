@@ -12,6 +12,8 @@ import { AnimalService } from "../../animalService/animal.service";
 })
 export class AddAnimalComponent implements OnInit {
 
+  animalPhoto: string | null = null;
+
   constructor(
     @Inject(FormBuilder) private fB: FormBuilder,
     private animalService : AnimalService,
@@ -36,7 +38,24 @@ export class AddAnimalComponent implements OnInit {
     {
       finalData.birthDate = new Date(Date.now());
     }
+    finalData.photoUrl = this.animalPhoto;
     this.animalService.createAnimal(finalData).subscribe(() => this.dialogRef.close(true));
+  }
+
+  private convertFileToBase64(file: File): void {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const base64 = e.target.result.split('base64,')[1];
+      this.animalPhoto = base64;
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    this.convertFileToBase64(file);
   }
 }
 

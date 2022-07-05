@@ -6,6 +6,7 @@ import { ResourceService } from '../../../../core/services/resourceService/resou
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { RegisterEmployeeModel } from '../../../../core/models/RegisterEmployeeModel';
+import { UserParameters } from 'src/app/core/models/operational-models/QueryParameters/UserParameters';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,8 @@ export class UserService extends ResourceService<User> {
       super(http, currentLocation, User, 'https://localhost:5001/api/users');
   }
 
-  getAllUsers(takeCount?: number, skipCount: number = 0, filterParam: string | null = null, orderByParam: string | null = null): Observable<User[]> {
-    let url = `${this.apiUrl}?SkipCount=${skipCount}`;
-
-    if (takeCount !== null) {
-      url += `&TakeCount=${takeCount}`;
-    }
+  getAllUsers(pageNumber: number = 1, pageSize: number = 5, filterParam: string | null = null, orderByParam: string | null = null): Observable<UserParameters> {
+    let url = `${this.apiUrl}?PageNumber=${pageNumber}&PageSize=${pageSize}`;
 
     if (filterParam !== null) {
       url += `&FilterParam=${filterParam}`;
@@ -32,10 +29,9 @@ export class UserService extends ResourceService<User> {
       url += `&OrderByParam=${orderByParam}`;
     }
 
-    return this.http.get<User[]>(url)
+    return this.http.get<UserParameters>(url, this.httpOptions)
       .pipe(
-        map((result) => result.map((i) => new this.tConstructor(i))),
-        catchError(this.handleError<User[]>('getAll', []))
+        catchError(this.handleError<UserParameters>('getAll'))
       );
   }
 

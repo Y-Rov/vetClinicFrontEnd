@@ -2,20 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';                    //Specially for sorting
 import { ViewChild } from '@angular/core';                           //Specially for sorting
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 import { ExceptionStats } from 'src/app/core/models/ExceptionStats';
-import { ExceptionService } from 'src/app/core/services/exceptionServices/exception.service';
-import { Router } from '@angular/router';
 import { ExceptionParameters } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParameters';
+import { Router } from '@angular/router';
 import { ExceptionParametersWithList } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParametersWithList';
+import { ExceptionService } from '../../services/exception.service';
 
 @Component({
-  selector: 'app-exception-today-stats-page',
-  templateUrl: './exception-today-stats-page.component.html',
-  styleUrls: ['./exception-today-stats-page.component.sass']
+  selector: 'app-exception-stats-page',
+  templateUrl: './exception-stats-page.component.html',
+  styleUrls: ['./exception-stats-page.component.sass']
 })
 
-export class ExceptionTodayStatsPageComponent implements OnInit {
+export class ExceptionStatsPageComponent implements OnInit {
   dataSource: MatTableDataSource<ExceptionStats> = new MatTableDataSource();               //Special data class to handle a table
   @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ['name', 'count'];    //List of column names to be displayed
@@ -23,20 +22,17 @@ export class ExceptionTodayStatsPageComponent implements OnInit {
   itemsPerPage: number = 5;
   options = [
     { name: "5", value: 5 },
-    { name: "10", value: 10 }
+    { name: "10", value: 5 }
   ]
   constructor(
     private exceptionService: ExceptionService,
-    private router: Router) {
+    private router: Router,) {
   }
 
   ngOnInit(): void {
     this.updateList(1, 5);
   }
 
-  ngAfterViewInit(): void {
-    this.updateList(this.pagingInfo?.currentPage, this.pagingInfo?.pageSize);
-  }
 
 
   applyFilter(event: Event) {
@@ -46,15 +42,15 @@ export class ExceptionTodayStatsPageComponent implements OnInit {
 
   private updateList(CurrentPage: number = 1, PageSize: number = 5, name: string = ""): void {
     if (name == "") {
-      this.exceptionService.getExceptionsStatsToday(CurrentPage, PageSize).subscribe((data) => {
-        this.dataSource.data = data.exceptionList;
+      this.exceptionService.getExceptionsStats(CurrentPage, PageSize).subscribe((data) => {
+        this.dataSource.data = data.entities;
         this.dataSource.sort = this.sort!;
         this.updatePagingInfo(data)
       });
     }
     else {
-      this.exceptionService.getExceptionsStatsToday(CurrentPage, PageSize, name).subscribe((data) => {
-        this.dataSource.data = data.exceptionList;
+      this.exceptionService.getExceptionsStats(CurrentPage, PageSize, name).subscribe((data) => {
+        this.dataSource.data = data.entities;
         this.dataSource.sort = this.sort!;
         this.updatePagingInfo(data)
       });

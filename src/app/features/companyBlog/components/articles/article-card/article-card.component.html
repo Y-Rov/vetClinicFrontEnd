@@ -1,6 +1,6 @@
 <mat-card (click)="onOpenArticle($event)" class="mat-elevation-z23">
   <mat-card-title>
-    <span class="title-span">{{article!.title}}</span>
+    <span class="title-span">{{article!.title!.length > 20 ? article!.title!.slice(0, 20) + '...' : article!.title}}</span>
     <app-article-menu
       [(article)]="article!"
       (deletedArticle)="onDeleteArticle()"

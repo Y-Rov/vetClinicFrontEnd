@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../../../services/articleService/article.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Article} from "../../../../../core/models/Article";
@@ -7,7 +7,7 @@ import {DateTimeService} from "../../../services/dateTimeService/date-time.servi
 @Component({
   selector: 'app-view-article',
   templateUrl: './view-article.component.html',
-  styleUrls: ['./view-article.component.sass']
+  styleUrls: ['./view-article.component.sass'],
 })
 export class ViewArticleComponent implements OnInit {
   currentArticle: Article = {

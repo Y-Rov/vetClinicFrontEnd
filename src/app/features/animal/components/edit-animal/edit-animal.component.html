@@ -1,5 +1,5 @@
 <div [formGroup]="form">
-  <div class="mat-title">New Animal</div>
+  <div class="mat-title">Edit Animal</div>
   <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
     <mat-label>Animal nickname</mat-label>
     <input
@@ -21,6 +21,11 @@
         placeholder="Animal birth date">
     </mat-form-field>
   </p>
+  <div>
+    <button id="profile-pic-btn" type="button" mat-raised-button (click)="fileInput.click()">Add Animal Picture</button>
+    <input id="hidden-input" hidden (change)="handleFileChange($event)" #fileInput type="file">
+    <span id="profile-pic-hint" *ngIf="animalPhoto !== null">Picture has been selected</span>
+  </div>
   <div class="buttons-div">
     <button mat-flat-button (click)="onNoClick()">Discard</button>
     <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid" (click)="onSaveForm()">Save</button>
