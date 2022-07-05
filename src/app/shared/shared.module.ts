@@ -27,46 +27,24 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+// import { AppointmentsPageComponent } from './components/appointmentComponents/appointments-page/appointments-page.component';
+// import { DeleteAppointmentDialogComponent } from './components/appointmentComponents/delete-appointment-dialog/delete-appointment-dialog.component';
+// import { EditAppointmentDialogComponent } from './components/appointmentComponents/edit-appointment-dialog/edit-appointment-dialog.component';
+// import { NewAppointmentDialogComponent } from './components/appointmentComponents/new-appointment-dialog/new-appointment-dialog.component';
+
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+
 import { LoginComponent } from './components/authComponents/login-page/login.component';
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AboutComponent } from './about/about.component';
-import { AddAnimalComponent } from './components/animalComponents/add-animal/add-animal.component';
-import { EditAnimalComponent } from './components/animalComponents/edit-animal/edit-animal.component';
-import { DeleteAnimalComponent } from './components/animalComponents/delete-animal/delete-animal.component';
-import { MainAnimalComponent } from './components/animalComponents/main-animal/main-animal.component';
 import { HomeComponent } from './home/home.component';
-import { AnimalMedcardComponent } from './components/animalComponents/animal-medcard/animal-medcard.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {
-  SpecializationListComponent
-} from "./components/specializationComponent/specialization-list/specialization-list.component";
-import {
-  SpecializationAddProcedureComponent
-} from "./components/specializationComponent/specialization-add-procedure/specialization-add-procedure.component";
-import {
-  SpecializationAddUserDialogComponent
-} from "./components/specializationComponent/specialization-add-user-dialog/specialization-add-user-dialog.component";
-import {
-  SpecializationDeleteDialogComponent
-} from "./components/specializationComponent/specialization-delete-dialog/specialization-delete-dialog.component";
-import {
-  SpecializationEditDialogComponent
-} from "./components/specializationComponent/specialization-edit-dialog/specialization-edit-dialog.component";
-import {
-  AddSpecializationDialogComponent
-} from "./components/specializationComponent/add-specialization-dialog/add-specialization-dialog.component";
 
 @NgModule({
 
   declarations: [
-    SpecializationListComponent,
-    SpecializationAddProcedureComponent,
-    SpecializationAddUserDialogComponent,
-    SpecializationDeleteDialogComponent,
-    SpecializationEditDialogComponent,
-    AddSpecializationDialogComponent,
     MultiSelectComponent,
     ExceptionPageComponent, ExceptionDetailPageComponent,
     LoginComponent, SignupComponent,
@@ -78,12 +56,7 @@ import {
     ExceptionStatsPageComponent,
     ExceptionTodayStatsPageComponent,
     ExceptionTodayPageComponent,
-    AddAnimalComponent,
-    EditAnimalComponent,
-    DeleteAnimalComponent,
-    MainAnimalComponent,
 
-    AnimalMedcardComponent,
 
     AboutComponent,
     HomeComponent
@@ -115,20 +88,18 @@ import {
     MatTooltipModule,
     NgbModule
   ],
-    exports: [
-        CommonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        SpecializationListComponent,
-        ExceptionPageComponent,
-        ExceptionDetailPageComponent,
-        ExceptionStatsPageComponent,
-        ExceptionTodayStatsPageComponent,
-        MainAnimalComponent,
-        HomeComponent,
-        MultiSelectComponent
-    ],
+  exports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ExceptionPageComponent,
+    ExceptionDetailPageComponent,
+    ExceptionStatsPageComponent,
+    ExceptionTodayStatsPageComponent,
+    HomeComponent,
+    MultiSelectComponent
+  ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]
