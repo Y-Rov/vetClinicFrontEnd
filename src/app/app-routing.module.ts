@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: ()=> import('./features/animal/animal.module').then(m=>m.AnimalModule)
   },
   {
+    path: 'exceptions',
+    loadChildren: ()=> import('./features/exceptions/exceptions.module').then(m=>m.ExceptionsModule)
+  },
+  {
     path: 'financialStatement',
     loadChildren: () => import('./features/financialStatements/financial-statement.module').then(m => m.FinancialStatementModule)
   }

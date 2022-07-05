@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Exception } from '../../models/Exception';
-import { ExceptionStats } from '../../models/ExceptionStats';
-import { ExceptionParametersWithList } from '../../models/operational-models/QueryParameters/ExceptionParametersWithList';
+import { ExceptionParametersWithList } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParametersWithList';
+import { Exception } from 'src/app/core/models/Exception';
 
 
 @Injectable({

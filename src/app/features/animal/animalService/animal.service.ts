@@ -24,7 +24,8 @@ export class AnimalService extends ResourceService<Animal>{
       id: newAnimal.id,
       ownerId: this.authService.getUserId(),
       nickName: newAnimal.nickName,
-      birthDate: newAnimal.birthDate
+      birthDate: newAnimal.birthDate,
+      PhotoUrl: newAnimal.photoUrl
     };
 
     return this.httpClient.post<Animal>(this.apiUrl,animalVM,this.httpOptions)
@@ -38,12 +39,13 @@ export class AnimalService extends ResourceService<Animal>{
       id: newAnimal.id,
       ownerId: this.authService.getUserId(),
       nickName: newAnimal.nickName,
-      birthDate: newAnimal.birthDate
+      birthDate: newAnimal.birthDate,
+      PhotoUrl: newAnimal.photoUrl
     };
 
     return this.httpClient.put<Animal>(this.apiUrl,animalVM,this.httpOptions)
       .pipe(
-        catchError(this.handleError<Animal>('createAnimal'))
+        catchError(this.handleError<Animal>('updateAnimal'))
       );
   }
 

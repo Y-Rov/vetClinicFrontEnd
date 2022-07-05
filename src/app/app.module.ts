@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from "./layout/layout.module";
 import { SharedModule } from "./shared/shared.module";
 
-import { ExceptionPageComponent } from './shared/components/exceptionComponents/exception-page/exception-page.component';
-import { ExceptionDetailPageComponent } from './shared/components/exceptionComponents/exception-detail-page/exception-detail-page.component';
 
 // import { AppointmentsPageComponent } from './shared/components/appointmentComponents/appointments-page/appointments-page.component';
 
@@ -39,18 +37,6 @@ const appRoutes: Routes = [
   //   canActivate: [RolesGuard],
   //   data: {allowedRoles: ['Admin']}
   // },
-  {
-    path: 'exceptions',
-    component: ExceptionPageComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
-  },
-  {
-    path: 'exceptions/:id',
-    component:  ExceptionDetailPageComponent,
-    canActivate: [RolesGuard],
-    data: {allowedRoles: ['Admin']}
-  },
   {
 
     path: 'auth/login',
