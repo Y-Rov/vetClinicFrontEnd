@@ -14,11 +14,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatExpansionModule } from "@angular/material/expansion";
-import { ExceptionPageComponent } from './components/exceptionComponents/exception-page/exception-page.component';
-import { ExceptionDetailPageComponent } from './components/exceptionComponents/exception-detail-page/exception-detail-page.component';
-import { ExceptionStatsPageComponent } from './components/exceptionComponents/exception-stats-page/exception-stats-page.component';
-import { ExceptionTodayStatsPageComponent } from './components/exceptionComponents/exception-today-stats-page/exception-today-stats-page.component';
-import { ExceptionTodayPageComponent } from './components/exceptionComponents/exception-today-page/exception-today-page.component';
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -46,16 +42,9 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
   declarations: [
     MultiSelectComponent,
-    ExceptionPageComponent, ExceptionDetailPageComponent,
+
     LoginComponent, SignupComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent,
-    ExceptionPageComponent,
-    ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent,
+
 
 
     AboutComponent,
@@ -93,10 +82,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ExceptionPageComponent,
-    ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
     HomeComponent,
     MultiSelectComponent
   ],
