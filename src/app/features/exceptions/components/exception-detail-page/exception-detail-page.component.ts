@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Exception } from 'src/app/core/models/Exception';
-import { ExceptionService } from 'src/app/core/services/exceptionServices/exception.service';
+import { ExceptionService } from '../../services/exception.service';
 
 @Component({
   selector: 'app-exception-detail-page',

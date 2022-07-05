@@ -3,11 +3,10 @@ import { MatSort } from '@angular/material/sort';                    //Specially
 import { ViewChild } from '@angular/core';                           //Specially for sorting
 import { MatTableDataSource } from '@angular/material/table';
 import { Exception } from 'src/app/core/models/Exception';
-import { ExceptionService } from 'src/app/core/services/exceptionServices/exception.service';
-import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { ExceptionParameters } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParameters';
 import { ExceptionParametersWithList } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParametersWithList';
+import { ExceptionService } from '../../services/exception.service';
 
 @Component({
   selector: 'app-exception-today-page',

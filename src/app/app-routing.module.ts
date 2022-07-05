@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'animals',
     loadChildren: ()=> import('./features/animal/animal.module').then(m=>m.AnimalModule)
+  },
+  {
+    path: 'exceptions',
+    loadChildren: ()=> import('./features/exceptions/exceptions.module').then(m=>m.ExceptionsModule)
   }
 ];
 

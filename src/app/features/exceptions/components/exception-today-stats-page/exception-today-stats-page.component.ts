@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';                    //Specially for sorting
 import { ViewChild } from '@angular/core';                           //Specially for sorting
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 import { ExceptionStats } from 'src/app/core/models/ExceptionStats';
-import { ExceptionService } from 'src/app/core/services/exceptionServices/exception.service';
 import { Router } from '@angular/router';
 import { ExceptionParameters } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParameters';
 import { ExceptionParametersWithList } from 'src/app/core/models/operational-models/QueryParameters/ExceptionParametersWithList';
+import { ExceptionService } from '../../services/exception.service';
 
 @Component({
   selector: 'app-exception-today-stats-page',
