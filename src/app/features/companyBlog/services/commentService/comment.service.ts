@@ -47,7 +47,7 @@ export class CommentService extends ResourceService<Comment>{
   }
 
   getByArticleId(articleId: number): Observable<Comment[]>{
-    const url: string = `${this.apiUrl}/article/${articleId}`
+    const url: string = `${this.apiUrl}?ArticleId=${articleId}`
 
     return this.httpClient.get<Comment[]>(url, this.httpOptions)
       .pipe(
