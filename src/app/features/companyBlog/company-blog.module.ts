@@ -15,7 +15,7 @@ import { CompanyBlogRoutingModule } from "./company-blog-routing.module";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
@@ -43,21 +43,22 @@ import { ViewArticleContainerComponent } from './components/articles/view-articl
     ArticlesPageComponent,
     ViewArticleContainerComponent
   ],
-  imports: [
-    CommonModule,
-    CompanyBlogRoutingModule,
-    MatMenuModule,
-    MatIconModule,
-    MatDividerModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    AngularEditorModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSelectModule
-  ]
+    imports: [
+        CommonModule,
+        CompanyBlogRoutingModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDividerModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        AngularEditorModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        FormsModule
+    ]
 })
 export class CompanyBlogModule { }

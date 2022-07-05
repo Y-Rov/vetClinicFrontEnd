@@ -9,6 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {DateTimeService} from "../../../services/dateTimeService/date-time.service";
 import {NewArticleDialogComponent} from "../new-article-dialog/new-article-dialog.component";
 import {AuthService} from "../../../../../core/services/authService/auth.service";
+import {ProcedureParameters} from "../../../../../core/models/operational-models/QueryParameters/ProcedureParameters";
 
 @Component({
   selector: 'app-articles-page',
@@ -24,6 +25,17 @@ export class ArticlesPageComponent implements OnInit {
   dataSource: MatTableDataSource<Article> = new MatTableDataSource(this.articles);
   displayedColumns: string[] = ['title', 'createdAt', 'authorName'];
 
+  pageSizeOptions: { name: string; value: number }[] = [
+    { name: '5', value: 5 },
+    { name: '10', value: 10 }
+  ];
+
+  pageInfo: ProcedureParameters | null = null;
+  currentPageSize: number = this.pageSizeOptions[0].value;
+  filterValue: string | null = null;
+  currentOrderByOption: string | null = null;
+  currentOrderByDirection: string | null = 'asc';
+
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
@@ -38,24 +50,29 @@ export class ArticlesPageComponent implements OnInit {
     }
   }
 
-  updateList(): void{
-    if(this.authService.isAuthorized() && this.authService.isInRole('Admin')){
-      this.articleService.getAll().subscribe(data => {
-        this.articles = data;
-        this.dataSource.data = data;
-        this.dataSource.sort = this.sort!;
+  updateList(
+    pageNumber: number = 1,
+    pageSize: number = 5,
+    filterParam: string | null = null,
+    orderByParam: string | null = null,
+    orderByDirection: string | null = null): void{
+    this.articleService.getAllPaged(
+        pageNumber,
+        pageSize,
+        filterParam,
+        orderByParam,
+        orderByDirection,
+        !(this.authService.isAuthorized() && this.authService.isInRole('Admin')))
+      .subscribe(data => {
+        this.articles = data.entities;
+        this.dataSource.data = data.entities;
+        this.updatePageInfo(data);
       });
       return;
-    }
-    this.articleService.getPublished().subscribe(data => {
-      this.articles = data;
-      this.dataSource.data = data;
-      this.dataSource.sort = this.sort!;
-    });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator!;
+  private updatePageInfo(data: ProcedureParameters): void {
+    this.pageInfo = <ProcedureParameters>data;
   }
 
   ngOnInit(): void {
@@ -88,5 +105,42 @@ export class ArticlesPageComponent implements OnInit {
 
   onArticleChange(): void {
     this.updateList();
+  }
+
+  selectPageSizeOptions(): void {
+    this.updateList(1, this.currentPageSize);
+  }
+
+  onPrevPageClick(): void {
+    if (this.pageInfo?.hasPrevious) {
+      this.updateList(this.pageInfo!.currentPage - 1, this.pageInfo!.pageSize, this.currentOrderByOption);
+    }
+  }
+
+  onNextPageClick(): void {
+    if (this.pageInfo?.hasNext) {
+      this.updateList(this.pageInfo!.currentPage + 1, this.pageInfo!.pageSize, this.currentOrderByOption);
+    }
+  }
+
+  setOrderByProperty(column: string): void{
+    //asc => desc => no
+    if(this.currentOrderByOption === column){
+      if(this.currentOrderByDirection === 'asc'){
+        this.currentOrderByDirection = 'desc';
+      } else if(this.currentOrderByDirection === 'desc'){
+        this.currentOrderByDirection = null;
+        this.currentOrderByOption = null;
+      }
+    } else {
+      this.currentOrderByOption = column;
+      this.currentOrderByDirection = 'asc';
+    }
+    this.updateList(
+      1,
+      this.pageInfo!.pageSize!,
+      this.filterValue,
+      this.currentOrderByOption,
+      this.currentOrderByDirection);
   }
 }

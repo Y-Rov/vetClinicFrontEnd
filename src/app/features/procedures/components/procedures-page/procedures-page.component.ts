@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {Procedure} from "../../../../core/models/Procedure";
-import {MatPaginator} from "@angular/material/paginator";
 import {ProcedureService} from "../../services/procedureService/procedure.service";
 import {AuthService} from "../../../../core/services/authService/auth.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -32,8 +31,6 @@ export class ProceduresPageComponent implements OnInit {
   currentOrderByOption: string | null = null;
   currentOrderByDirection: string | null = 'asc';
 
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-
   constructor(
     private procedureService: ProcedureService,
     public authService : AuthService,
@@ -58,10 +55,6 @@ export class ProceduresPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateList();
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator!;
   }
 
   onDeleteProcedure(element:any){

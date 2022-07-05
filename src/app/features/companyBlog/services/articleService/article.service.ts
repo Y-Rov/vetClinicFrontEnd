@@ -6,6 +6,7 @@ import {Location} from "@angular/common";
 import {AuthService} from "../../../../core/services/authService/auth.service";
 import {catchError, Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {ArticleParameters} from "../../../../core/models/operational-models/QueryParameters/ArticleParameters";
 
 @Injectable({
   providedIn: 'any'
@@ -17,6 +18,37 @@ export class ArticleService extends ResourceService<Article>{
     private currentLocation: Location,
     private authService: AuthService) {
       super(httpClient, currentLocation, Article, 'https://localhost:5001/api/articles');
+  }
+
+  getAllPaged(pageNumber: number = 1,
+              pageSize: number = 5,
+              filterParam: string | null = null,
+              orderByParam: string | null = null,
+              orderByDirection: string | null = null,
+              published:boolean = false): Observable<ArticleParameters> {
+    let url: string = this.apiUrl;
+
+    if(published){
+      url += '/published';
+    }
+
+    url += `?PageNumber=${pageNumber}&PageSize=${pageSize}`;
+    if (filterParam !== null) {
+      url += `&FilterParam=${filterParam}`;
+    }
+
+    if (orderByParam !== null) {
+      url += `&OrderByParam=${orderByParam}`;
+    }
+
+    if(orderByDirection !== null){
+      url += `&OrderByDirection=${orderByDirection}`;
+    }
+
+    return this.http.get<ArticleParameters>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<ArticleParameters>('getAll'))
+      );
   }
 
   postArticle(article: Article): Observable<Article>{
