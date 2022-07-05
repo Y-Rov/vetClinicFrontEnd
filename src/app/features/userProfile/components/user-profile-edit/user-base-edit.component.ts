@@ -38,9 +38,8 @@ export class UserBaseEditComponent implements OnInit {
   constructor(
     private userService: UserService,
     public authService: AuthService,
-    private activatedRoute: ActivatedRoute,
-    public domSanitizer: DomSanitizer) {
-    this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    private activatedRoute: ActivatedRoute) {
+      this.user.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
@@ -57,8 +56,7 @@ export class UserBaseEditComponent implements OnInit {
     });
   }
 
-  handleFileChange(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
+  private toBase64String(file: File): void {
     const reader = new FileReader();
 
     reader.onload = (e: any) => {
@@ -67,6 +65,11 @@ export class UserBaseEditComponent implements OnInit {
     };
 
     reader.readAsDataURL(file);
+  }
+
+  handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    this.toBase64String(file);
   }
 
   onUpdateUser(): void {
