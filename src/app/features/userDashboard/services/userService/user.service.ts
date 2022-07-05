@@ -4,8 +4,9 @@ import { User } from '../../../../core/models/User';
 import { Location } from '@angular/common';
 import { ResourceService } from '../../../../core/services/resourceService/resource.service';
 import { catchError, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { RegisterEmployeeModel } from '../../../../core/models/RegisterEmployeeModel';
+import { RegisterFormModel } from 'src/app/core/models/operational-models/form-models/RegisterFormModel';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,18 @@ export class UserService extends ResourceService<User> {
   getDoctors(specialization: string = ""): Observable<User[]> {
     const url = `${this.apiUrl}/doctors?specialization=${specialization}`;
     return this.http.get<User[]>(url);
+  }
+
+  registerClient(regForm: RegisterFormModel): Observable<User> {
+    const url = `${this.apiUrl}/register`;
+
+    return this.http.post<User>(url, regForm, this.httpOptions)
+      .pipe(
+        map(result => new this.tConstructor(result)),
+        catchError((err) => {
+          super.handleError<User>('registerClient', regForm);
+          return throwError(err);
+        }));
   }
 
   registerEmployee(regForm: RegisterEmployeeModel): Observable<User> {
