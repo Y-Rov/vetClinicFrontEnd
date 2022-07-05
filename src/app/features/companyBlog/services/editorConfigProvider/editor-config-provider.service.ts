@@ -50,7 +50,7 @@ export class EditorConfigProviderService {
         'fontSize',
         'textColor',
         'backgroundColor',
-        'insertImage',
+        //'insertImage',
         'insertVideo',
         'insertHorizontalRule',
         'removeFormat',

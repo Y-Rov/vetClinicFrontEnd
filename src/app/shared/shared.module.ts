@@ -14,11 +14,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatExpansionModule } from "@angular/material/expansion";
-import { ExceptionPageComponent } from './components/exceptionComponents/exception-page/exception-page.component';
-import { ExceptionDetailPageComponent } from './components/exceptionComponents/exception-detail-page/exception-detail-page.component';
-import { ExceptionStatsPageComponent } from './components/exceptionComponents/exception-stats-page/exception-stats-page.component';
-import { ExceptionTodayStatsPageComponent } from './components/exceptionComponents/exception-today-stats-page/exception-today-stats-page.component';
-import { ExceptionTodayPageComponent } from './components/exceptionComponents/exception-today-page/exception-today-page.component';
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -27,7 +23,14 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+// import { AppointmentsPageComponent } from './components/appointmentComponents/appointments-page/appointments-page.component';
+// import { DeleteAppointmentDialogComponent } from './components/appointmentComponents/delete-appointment-dialog/delete-appointment-dialog.component';
+// import { EditAppointmentDialogComponent } from './components/appointmentComponents/edit-appointment-dialog/edit-appointment-dialog.component';
+// import { NewAppointmentDialogComponent } from './components/appointmentComponents/new-appointment-dialog/new-appointment-dialog.component';
+
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+
 import { LoginComponent } from './components/authComponents/login-page/login.component';
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -35,21 +38,13 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
-
 @NgModule({
 
   declarations: [
     MultiSelectComponent,
-    ExceptionPageComponent, ExceptionDetailPageComponent,
+
     LoginComponent, SignupComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent,
-    ExceptionPageComponent,
-    ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
-    ExceptionTodayPageComponent,
+
 
 
     AboutComponent,
@@ -87,10 +82,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ExceptionPageComponent,
-    ExceptionDetailPageComponent,
-    ExceptionStatsPageComponent,
-    ExceptionTodayStatsPageComponent,
     HomeComponent,
     MultiSelectComponent
   ],

@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <p>Today errors stats</p>
+    <p>All errors stats</p>
     <mat-form-field class="row" appearance="outline">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Placeholder" #input>
@@ -21,7 +21,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    
+
 
     <div class="pagginator row mat-elevation-z8 ">
         <div class="paginatorElemetnPostion">items per page </div>
@@ -32,12 +32,12 @@
                 </option>
             </select>
         </div>
-        <div class="paginatorElemetnPostion">{{paggingInfo!.CurrentPage}} of {{paggingInfo!.TotalPages}}
+        <div class="paginatorElemetnPostion">{{pagingInfo?.currentPage??0}} of {{pagingInfo?.totalPages??0}}
         </div>
-        <div class="paginatorElemetnPostion"> <button mat-raised-button [disabled]="!paggingInfo!.HasPrevious"
+        <div class="paginatorElemetnPostion"> <button mat-raised-button [disabled]="!(pagingInfo?.hasPrevious??false)"
                 (click)="onPrevButtonInfoClick()" color="info">Prev</button></div>
-        <div class="paginatorElemetnPostion"> <button mat-raised-button [disabled]="!paggingInfo!.HasNext"
+        <div class="paginatorElemetnPostion"> <button mat-raised-button [disabled]="!(pagingInfo?.hasNext??false)"
                 (click)="onNextButtonInfoClick()" color="info">Next</button></div>
     </div>
-    
+
 </div>

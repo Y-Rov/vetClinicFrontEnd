@@ -12,7 +12,9 @@
       <mat-hint>Length must be greater than 5</mat-hint>
       <mat-error *ngIf="form.controls.title.invalid">Length must be greater than 5</mat-error>
     </mat-form-field>
-    <angular-editor class="wrapper" formControlName="body" [config]="editorConfig.config"></angular-editor>
+    <mat-card class="mat-elevation-z0 wrapper">
+      <angular-editor formControlName="body" [config]="editorConfig.config"></angular-editor>
+    </mat-card>
     <div class="buttons-div">
       <button mat-flat-button (click)="onNoClick()">Discard</button>
       <button

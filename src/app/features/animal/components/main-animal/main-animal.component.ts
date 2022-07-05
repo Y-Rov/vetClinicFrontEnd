@@ -19,6 +19,7 @@ export class MainAnimalComponent implements OnInit {
 
   dataSource: MatTableDataSource<Animal> = new MatTableDataSource();
   displayedColumns: string[] = ['nickName','ownerId','birthDate', 'delete', 'edit', 'viewmedcard'];
+  animals : Animal[] |null = null;
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -32,6 +33,8 @@ export class MainAnimalComponent implements OnInit {
     this.animalService.getAll().subscribe((data) => {
       console.log(data);
       this.dataSource.data = data;
+      this.animals = data;
+      console.log(this.animals)
       this.dataSource.sort = this.sort!;
     });
   }

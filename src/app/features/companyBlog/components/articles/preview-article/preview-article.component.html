@@ -4,17 +4,6 @@
     <button mat-button (click)="onExit($event)">Exit</button>
   </div>
   <div class="centred-div mat-elevation-z23">
-    <p class="mat-display-1 title">{{currentArticle!.title}}</p>
-    <div class="author-time-block">
-      <label>{{currentArticle!.authorName!}}</label>
-      <div>
-        <label *ngIf="currentArticle!.edited!"><i style="margin-right: 15px">edited</i></label>
-        <label>{{dateService.getDateTimeString(currentArticle!.createdAt!)}}</label>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div [innerHtml]="currentArticle!.body"></div>
-    <br><br>
-    <p class="mat-headline">Publish the article to see comments</p>
+    <app-view-article-container [article]="currentArticle!"></app-view-article-container>
   </div>
 </div>

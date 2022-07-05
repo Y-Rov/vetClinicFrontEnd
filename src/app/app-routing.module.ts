@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/procedures/procedures.module').then(m => m.ProceduresModule)
   },
   {
+    path: 'appointments',
+    loadChildren: () => import('./features/appointments/appointments.module').then(m => m.AppointmentsModule)
+  },
+  {
     path: 'specializations',
     loadChildren: () => import('./features/specializations/specialization.module').then(m => m.SpecializationModule)
   },
@@ -29,6 +33,10 @@ const routes: Routes = [
   {
     path: 'animals',
     loadChildren: ()=> import('./features/animal/animal.module').then(m=>m.AnimalModule)
+  },
+  {
+    path: 'exceptions',
+    loadChildren: ()=> import('./features/exceptions/exceptions.module').then(m=>m.ExceptionsModule)
   }
 ];
 

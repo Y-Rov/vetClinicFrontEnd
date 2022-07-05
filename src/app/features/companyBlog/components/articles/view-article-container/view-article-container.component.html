@@ -1,0 +1,12 @@
+
+  <p class="mat-display-1 title">{{article!.title!}}</p>
+  <div class="author-time-block">
+    <label>{{article!.authorName!}}</label>
+    <div>
+      <label *ngIf="article!.edited!"><i style="margin-right: 15px">edited</i></label>
+      <label>{{dateService.getDateTimeString(article!.createdAt!)}}</label>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="deepContainer" [innerHtml]="article!.body!"></div>
+  <app-comments-container [currentArticleId]="article!.id!"></app-comments-container>
