@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="form-container">
-    <div class="mat-title">Signup</div>
+    <div class="mat-title">Sign Up</div>
     
     <div class="full-name">
         <mat-form-field appearance="outline" class="full-name-field">
@@ -36,6 +36,7 @@
         <mat-label>Birth date</mat-label>
         <input matInput 
             [matDatepicker]="picker"
+            [min]="minDate" [max]="maxDate"
             formControlName="birthDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -44,11 +45,30 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
+        <input 
+            formControlName="password"
+            matInput [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-      </mat-form-field>
+    </mat-form-field>
 
-    <button [disabled]="form.invalid" mat-button (click)="onSubmit()">Signup</button>
+    <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input 
+            formControlName = "confirmPassword"
+            matInput [type]="hide ? 'password' : 'text'">
+    </mat-form-field>
+
+    <mat-error 
+      *ngIf="registrationFailureMessage">
+      {{registrationFailureMessage}}
+    </mat-error>
+
+    <mat-error 
+      *ngIf="getPasswordMatchError()">
+      Passwords are different
+    </mat-error>
+
+    <button [disabled]="form.invalid" mat-button (click)="onSubmit()">Sign Up</button>
   </div>
