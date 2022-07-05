@@ -29,11 +29,10 @@ export class UserService extends ResourceService<User> {
       url += `&OrderByParam=${orderByParam}`;
     }
 
-    return this.http.get<UserParameters>(url, this.httpOptions);
-      // .pipe(
-      //   map((result) => result.map((i) => new this.tConstructor(i))),
-      //   catchError(this.handleError<User[]>('getAll', []))
-      // );
+    return this.http.get<UserParameters>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<UserParameters>('getAll'))
+      );
   }
 
   getDoctors(specialization: string = ""): Observable<User[]> {
