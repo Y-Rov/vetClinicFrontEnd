@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'animals',
     loadChildren: ()=> import('./features/animal/animal.module').then(m=>m.AnimalModule)
+  },
+  {
+    path: 'feedbacks',
+    loadChildren: () => import('./features/feedback/feedback.module').then(m => m.FeedbackModule)
   }
 ];
 

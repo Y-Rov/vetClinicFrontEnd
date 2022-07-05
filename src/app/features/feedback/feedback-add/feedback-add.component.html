@@ -1,0 +1,101 @@
+<script src="feedback-add.component.ts"></script>
+<div [formGroup]="form" class="form">
+  <div class="mat-title">Add feedback</div>
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <input
+      matInput
+      formControlName="email"
+      type="email"
+      placeholder="Email">
+    <mat-error *ngIf="form.controls.email.invalid">Email must be in valid format</mat-error>
+  </mat-form-field>
+
+  <div class="radio-input">
+  <div class="mat-radio-label-content">How would you rate our service?</div>
+  <mat-label>
+    <mat-radio-group aria-label="Select an option"
+                     formControlName = "serviceRate">
+      <mat-radio-button value= 1>
+        <mat-icon>sentiment_very_dissatisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 2>
+        <mat-icon>sentiment_dissatisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 3>
+        <mat-icon>sentiment_satisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 4>
+        <mat-icon>sentiment_very_satisfied</mat-icon>
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-label>
+  </div>
+
+
+  <div class="radio-input">
+  <div class="mat-radio-label-content">How would you rate our prices?</div>
+  <mat-label>
+    <mat-radio-group
+      formControlName = "priceRate">
+      <mat-radio-button value= 1>
+        <mat-icon>sentiment_very_dissatisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 2>
+        <mat-icon>sentiment_dissatisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 3>
+        <mat-icon>sentiment_satisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 4>
+        <mat-icon>sentiment_very_satisfied</mat-icon>
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-label>
+  </div>
+
+
+  <div class="radio-input">
+  <div class="mat-radio-label-content">How would you rate our customer support?</div>
+  <mat-label>
+    <mat-radio-group
+      formControlName = "supportRate">
+      <mat-radio-button value= 1>
+        <mat-icon>sentiment_very_dissatisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 2>
+        <mat-icon>sentiment_dissatisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 3>
+        <mat-icon>sentiment_satisfied</mat-icon>
+      </mat-radio-button>
+
+      <mat-radio-button  value= 4>
+        <mat-icon>sentiment_very_satisfied</mat-icon>
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-label>
+  </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Any suggestions or complains?</mat-label>
+      <textarea
+        formControlName="suggestions"
+        matInput
+
+        placeholder="Leave here:)"></textarea>
+    </mat-form-field>
+
+  <div class = "buttons-div">
+    <button mat-raised-button type="submit" color="primary" (click)="onSaveForm()">Add</button>
+    <button color="warn" mat-raised-button class="cancel-button" (click)="onCancelClick()">Cancel</button>
+  </div>
+
+</div>

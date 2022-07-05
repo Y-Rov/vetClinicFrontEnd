@@ -8,6 +8,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { DeleteAppointmentDialogComponent } from '../delete-appointment-dialog/delete-appointment-dialog.component';
 import { EditAppointmentDialogComponent } from '../edit-appointment-dialog/edit-appointment-dialog.component';
 import { NewAppointmentDialogComponent } from '../new-appointment-dialog/new-appointment-dialog.component';
+import {FeedbackAddComponent} from "../../../feedback/feedback-add/feedback-add.component";
 
 @Component({
   selector: 'app-appointments-page',
@@ -79,5 +80,9 @@ export class AppointmentsPageComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  leaveFeedback(){
+    const dialog = this.matDialog.open(FeedbackAddComponent);
   }
 }

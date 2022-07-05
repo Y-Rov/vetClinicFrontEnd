@@ -1,0 +1,11 @@
+:host ::ng-deep .mat-radio-container {
+  display: none;
+}
+
+.mat-radio-checked{
+  color: #00cab6;
+}
+
+.suggestions {
+  width: 100%;
+}
