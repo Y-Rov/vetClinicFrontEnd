@@ -1,23 +1,30 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as moment from "moment";
 import { TokensResponse } from '../../models/operational-models/TokensResponse';
 import jwtDecode from 'jwt-decode';
+import { RegisterFormModel } from '../../models/operational-models/form-models/RegisterFormModel';
+import { UserService } from 'src/app/features/userDashboard/services/userService/user.service';
+import { User } from '../../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  private url:string = 'http://localhost:7030/connect/token';
+  private tokenUrl: string = 'http://localhost:7030/connect/token';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+  };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
   }
 
-  login(email:string, password:string ) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  public login(email:string, password:string ): Observable<TokensResponse> {
     let body = new URLSearchParams();
     body.set('username', email);
     body.set('password', password);
@@ -26,13 +33,16 @@ export class AuthService {
     body.set('client_secret', "angular_client_secret");
     body.set('scope', 'apiAccess offline_access');
 
-    var request = this.http.post<any>(this.url, body.toString(), {headers: headers})
+    var request = this.http.post<TokensResponse>(this.tokenUrl, body, this.httpOptions)
     request.subscribe((response) => this.setSession(response))
     return request;
-}
+  }
+
+  public register(registerForm : RegisterFormModel) : Observable<User> {
+    return this.userService.registerClient(registerForm)
+  }
   
   public sendRefreshRequest(refreshToken:string){
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let body = new URLSearchParams();
     body.set('grant_type', "refresh_token");
     body.set('client_id', "angular_client");
@@ -40,7 +50,7 @@ export class AuthService {
     body.set('refresh_token', refreshToken);
     body.set('scope', 'apiAccess offline_access') 
 
-    return this.http.post<TokensResponse>(this.url, body.toString(), {headers: headers})
+    return this.http.post<TokensResponse>(this.tokenUrl, body, this.httpOptions)
   }
 
   private setSession(response:TokensResponse) {
