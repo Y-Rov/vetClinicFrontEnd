@@ -14,16 +14,21 @@ import {ConfirmDeletionDialogComponent} from "../confirm-deletion-dialog/confirm
 export class UserAddressEditComponent implements OnInit {
 
   userId: number;
-  isAddressGetRequestSuccessful: boolean = false;
   deleteButtonVisibility: boolean = false;
   submitButtonText: string = "Add";
+  readonly cityAndStreetMaxLength: number = 85;
+  readonly houseMaxLength: number = 15;
+  readonly apartmentNumberMaxLength = 5;
 
   editUserAddressForm = new FormGroup({
-    'city': new FormControl<string>('', [Validators.required, Validators.maxLength(85)]),
-    'street': new FormControl<string>('', Validators.required),
-    'house': new FormControl<string>('', Validators.required),
-    'apartmentNumber': new FormControl<number | null>(null,  Validators.min(1)),
-    'zipCode': new FormControl<string | null>(null, Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$'))
+    'city': new FormControl<string>('', [Validators.required, Validators.maxLength(this.cityAndStreetMaxLength)]),
+    'street': new FormControl<string>('', [Validators.required, Validators.minLength(3),
+        Validators.maxLength(this.cityAndStreetMaxLength)]),
+    'house': new FormControl<string>('', [Validators.required, Validators.maxLength(this.houseMaxLength),
+    Validators.pattern(/^\d+(?: ?(?:[a-z]|[/-] ?\d+[a-z]?))?$/i)]),
+    'apartmentNumber': new FormControl<number | null>(null, [Validators.min(1), Validators.max(65535),
+      Validators.pattern(/^[+]?\d{1,5}$/)]),
+    'zipCode': new FormControl<string | null>(null, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/))
   });
 
   constructor(
@@ -33,6 +38,17 @@ export class UserAddressEditComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+  }
+
+  getErrorMessage(field: string): string {
+    if (this.editUserAddressForm.get(field)?.hasError('required')) {
+      return 'This field is required';
+    }
+    if (this.editUserAddressForm.get(field)?.hasError('minlength')) {
+      return `The entered value is too short`;
+    }
+
+    return `The entered value does not match the ${field} pattern`;
   }
 
   ngOnInit(): void {
@@ -50,7 +66,6 @@ export class UserAddressEditComponent implements OnInit {
             apartmentNumber: address.apartmentNumber,
             zipCode: address.zipCode
           });
-          this.isAddressGetRequestSuccessful = true;
           this.deleteButtonVisibility = true;
           this.submitButtonText = "Update";
         }
@@ -58,17 +73,27 @@ export class UserAddressEditComponent implements OnInit {
   }
 
   updateUserAddress(): void {
-    if (this.isAddressGetRequestSuccessful && this.editUserAddressForm.dirty) {
+    if (this.editUserAddressForm.pristine) {
+      this.snackBar.open(`There is nothing to update!`, 'Close', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
+      return;
+    }
+
+    if (this.deleteButtonVisibility && this.editUserAddressForm.dirty) {
       this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
         .subscribe(() => {
           this.showSnackBar('updated');
         });
     } else {
-      if (this.editUserAddressForm.valid) {
+      if (!this.deleteButtonVisibility && this.editUserAddressForm.valid) {
         this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})
           .subscribe(() => {
             this.showSnackBar('created');
             this.submitButtonText = "Update";
+            this.deleteButtonVisibility = true;
           });
       }
     }
@@ -78,7 +103,7 @@ export class UserAddressEditComponent implements OnInit {
     let deleteDialog = this.confirmDeletionDialog.open(ConfirmDeletionDialogComponent, {
       data: "address",
       autoFocus: "dialog",
-      width: "18vw",
+      width: "17.25vw",
       height: "17.25vh"
     });
 
@@ -99,7 +124,6 @@ export class UserAddressEditComponent implements OnInit {
   showSnackBar(verb: string): void {
     this.snackBar.open(`Your address was ${verb} successfully!`, 'Close', {
       duration: 4000,
-      panelClass: ['green-snackbar'],
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });

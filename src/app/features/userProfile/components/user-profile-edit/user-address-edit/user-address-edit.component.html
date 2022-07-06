@@ -2,38 +2,45 @@
   <div>
     <mat-form-field class="first-form-field form-field" appearance="outline">
       <mat-label>City</mat-label>
-      <input matInput placeholder="Ex. Ivano-Frankivsk" formControlName="city">
-
+      <input matInput maxlength="{{cityAndStreetMaxLength}}" placeholder="Ex.: Ivano-Frankivsk" formControlName="city">
+      <mat-hint align="end">{{editUserAddressForm.value.city?.length}}/{{cityAndStreetMaxLength}}</mat-hint>
+      <mat-error *ngIf="editUserAddressForm.get('city')?.invalid">{{getErrorMessage('city')}}</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Street</mat-label>
-      <input matInput placeholder="Ex. Halytska" formControlName="street">
+      <input matInput maxlength="{{cityAndStreetMaxLength}}" placeholder="Ex. Halytska" formControlName="street">
+      <mat-hint align="end">{{editUserAddressForm.value.street?.length}}/{{cityAndStreetMaxLength}}</mat-hint>
+      <mat-error *ngIf="editUserAddressForm.get('street')?.invalid">{{getErrorMessage('street')}}</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="form-field" appearance="outline">
-      <mat-label>House</mat-label>
-      <input matInput placeholder="Ex. 123" formControlName="house">
+      <mat-label>House number</mat-label>
+      <input matInput maxlength="{{houseMaxLength}}" placeholder="Ex. 123" formControlName="house">
+      <mat-hint align="end">{{editUserAddressForm.value.house?.length}}/{{houseMaxLength}}</mat-hint>
+      <mat-error *ngIf="editUserAddressForm.get('house')?.invalid">{{getErrorMessage('house')}}</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Apartment number</mat-label>
-      <input matInput placeholder="Ex. 15" formControlName="apartmentNumber">
+      <input matInput maxlength="{{apartmentNumberMaxLength}}" placeholder="Ex. 15" formControlName="apartmentNumber">
+      <mat-error *ngIf="editUserAddressForm.get('apartmentNumber')?.invalid">{{getErrorMessage('apartmentNumber')}}</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Postcode</mat-label>
       <input matInput placeholder="Ex. 76000" formControlName="zipCode">
+      <mat-error *ngIf="editUserAddressForm.get('zipCode')?.invalid">{{getErrorMessage('zipCode')}}</mat-error>
     </mat-form-field>
   </div>
 
   <div class="controls">
     <button mat-raised-button class="submit-btn" color="primary" (click)="updateUserAddress()">{{submitButtonText}}</button>
-    <button mat-raised-button (click)="addressService.goToPreviousPage()">Cancel</button>
+    <button mat-raised-button (click)="addressService.goToPreviousPage()">Back to profile</button>
     <button *ngIf="deleteButtonVisibility" mat-raised-button color="warn" (click)="deleteAddress()">Delete</button>
   </div>
 </form>
