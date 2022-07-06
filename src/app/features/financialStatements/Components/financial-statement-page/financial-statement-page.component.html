@@ -1,0 +1,49 @@
+
+<div class="wrapper">
+<h1>Financial Statement</h1>
+
+<h3>Select date range</h3>
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Select FROM</mat-label>
+    <input 
+           matInput [(ngModel)]="date.startDate"
+           [matDatepicker]="pickerOne"
+           (dateChange)="emitDateChange($event)"
+           disabled/>
+    <mat-datepicker-toggle matSuffix
+                           [for]="pickerOne">
+    </mat-datepicker-toggle>
+    <mat-datepicker #pickerOne [startView]="'year'"
+                    disabled ="false"
+                    (monthSelected)="monthChangedStart($event, pickerOne)">
+    </mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Select TO</mat-label>
+    <input 
+           matInput [(ngModel)]="date.endDate"
+           [min]="date.startDate"
+           [max]="today"
+           [matDatepicker]="pickerTwo"
+           (dateChange)="emitDateChange($event)"
+           disabled/>
+    <mat-datepicker-toggle matSuffix
+                           [for]="pickerTwo">
+    </mat-datepicker-toggle>
+    <mat-datepicker #pickerTwo [startView]="'year'"
+                    disabled ="false"
+                    (monthSelected)="monthChangedEnd($event, pickerTwo)">
+    </mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div class="Generate-button">
+  <button mat-raised-button color="primary"
+          (click)="onGenerateButton()">Generate</button>
+</div>
+
+  </div>
