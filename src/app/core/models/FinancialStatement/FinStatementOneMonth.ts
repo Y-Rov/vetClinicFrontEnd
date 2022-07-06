@@ -4,8 +4,8 @@ import { Income } from "./Income";
 
 export class FinStatementOneMonth extends ResourceModel<FinStatementOneMonth> {
   month?: string
-  expences?: Expences[];
-  incomes?: Income[];
+  expencesList?: Expences[];
+  incomesList?: Income[];
   totalExpences?: number;
   totalIncomes?: number;
   isIncomesExpanded: boolean = false;

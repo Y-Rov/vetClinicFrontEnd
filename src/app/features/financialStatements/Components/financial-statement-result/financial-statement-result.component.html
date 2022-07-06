@@ -47,7 +47,7 @@
              [@detailExpand]="element.isIncomesExpanded ? 'expanded' : 'collapsed'">
           <mat-list>
             <div mat-header>Appoinments</div>
-            <mat-list-item *ngFor="let income of element.incomes">
+            <mat-list-item *ngFor="let income of element.incomesList">
               <div mat-line>AppoinmentID:  {{income.appointmenId}}   |Cost:  {{income.cost}}</div>
             </mat-list-item>
           </mat-list>
@@ -62,7 +62,7 @@
         <div class="row expance-element-detail"
              [@detailExpand]="element.isExpencesExpanded ? 'expanded' : 'collapsed'">
           <mat-list>
-            <mat-list-item *ngFor="let expence of element.expences">
+            <mat-list-item *ngFor="let expence of element.expencesList">
               <div mat-line>Name: {{expence.employeeName}}</div>
               <div mat-line>Salary:  {{expence.salaryValue}}  | Premium: {{expence.premium}}</div>
             </mat-list-item>
