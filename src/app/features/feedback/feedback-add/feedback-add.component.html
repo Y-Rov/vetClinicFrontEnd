@@ -88,13 +88,14 @@
       <mat-label>Any suggestions or complains?</mat-label>
       <textarea
         formControlName="suggestions"
+        class="suggestions"
         matInput
-
         placeholder="Leave here:)"></textarea>
+      <mat-error *ngIf="form.controls.suggestions.invalid">Must have less than 1000 symbols</mat-error>
     </mat-form-field>
 
   <div class = "buttons-div">
-    <button mat-raised-button type="submit" color="primary" (click)="onSaveForm()">Add</button>
+    <button mat-raised-button type="submit" [disabled]="!form.valid" color="primary" (click)="onSaveForm()">Add</button>
     <button color="warn" mat-raised-button class="cancel-button" (click)="onCancelClick()">Cancel</button>
   </div>
 

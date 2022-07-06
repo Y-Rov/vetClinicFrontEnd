@@ -1,6 +1,12 @@
 <div class="content">
 <div>
   <div class="collate">
+
+    <mat-form-field class="filter-sort" appearance="outline">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="User">
+    </mat-form-field>
+
   </div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 elem">
@@ -93,8 +99,4 @@
     </div>
   </div>
 </div>
-
-  <button mat-raised-button (click)="leaveFeedback()">
-    Add
-  </button>
 </div>

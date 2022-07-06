@@ -58,6 +58,11 @@ export class FeedbacksComponent implements OnInit {
     this.updateFeedbacks(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
   }
 
+  applyFilter(event: Event) {
+    this.filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.updateFeedbacks(1, this.currentPageSize, this.filterValue);
+  }
+
   ngOnInit(): void {
     this.updateFeedbacks(this.currentPageSize);
   }

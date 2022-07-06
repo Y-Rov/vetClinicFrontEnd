@@ -5,7 +5,7 @@ import {AuthService} from "../../../core/services/authService/auth.service";
 import {Feedback} from "../../../core/models/Feedback";
 import {UserService} from "../../userDashboard/services/userService/user.service";
 import {User} from "../../../core/models/User";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-feedback-add',
@@ -16,15 +16,16 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class FeedbackAddComponent implements OnInit {
 
   form = new FormGroup({
-    email: new FormControl("", Validators.email),
+    email: new FormControl(this.user.email, Validators.email),
     serviceRate : new FormControl(0, Validators.required),
     priceRate : new FormControl(0, Validators.required),
     supportRate : new FormControl(0, Validators.required),
-    suggestions : new FormControl("", Validators.maxLength(1000))
+    suggestions : new FormControl(null, Validators.maxLength(1000))
   });
 
   constructor(
     @Inject(FormBuilder) private  formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) private user : User,
     private dialog: MatDialogRef<Feedback>,
     private feedbackService : FeedbackService,
     private authService : AuthService) {

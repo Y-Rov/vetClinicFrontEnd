@@ -81,8 +81,4 @@ export class AppointmentsPageComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  leaveFeedback(){
-    const dialog = this.matDialog.open(FeedbackAddComponent);
-  }
 }
