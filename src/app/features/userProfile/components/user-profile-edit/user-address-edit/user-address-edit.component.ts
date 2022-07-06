@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AddressService} from "../../../services/addressService/address.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDeletionDialogComponent} from "../confirm-deletion-dialog/confirm-deletion-dialog.component";
 
 @Component({
   selector: 'app-user-address-edit',
@@ -13,9 +15,11 @@ export class UserAddressEditComponent implements OnInit {
 
   userId: number;
   isAddressGetRequestSuccessful: boolean = false;
+  deleteButtonVisibility: boolean = false;
+  submitButtonText: string = "Add";
 
   editUserAddressForm = new FormGroup({
-    'city': new FormControl<string>('', Validators.required),
+    'city': new FormControl<string>('', [Validators.required, Validators.maxLength(85)]),
     'street': new FormControl<string>('', Validators.required),
     'house': new FormControl<string>('', Validators.required),
     'apartmentNumber': new FormControl<number | null>(null,  Validators.min(1)),
@@ -23,9 +27,9 @@ export class UserAddressEditComponent implements OnInit {
   });
 
   constructor(
-    private addressService: AddressService,
+    public addressService: AddressService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private confirmDeletionDialog: MatDialog,
     private snackBar: MatSnackBar
   ) {
     this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -35,7 +39,7 @@ export class UserAddressEditComponent implements OnInit {
     this.getUserAddress();
   }
 
-  getUserAddress() {
+  getUserAddress(): void {
     this.addressService.getById(this.userId)
       .subscribe(address => {
         if (address !== undefined) {
@@ -47,6 +51,8 @@ export class UserAddressEditComponent implements OnInit {
             zipCode: address.zipCode
           });
           this.isAddressGetRequestSuccessful = true;
+          this.deleteButtonVisibility = true;
+          this.submitButtonText = "Update";
         }
       });
   }
@@ -62,21 +68,40 @@ export class UserAddressEditComponent implements OnInit {
         this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})
           .subscribe(() => {
             this.showSnackBar('created');
+            this.submitButtonText = "Update";
           });
       }
     }
   }
 
-  showSnackBar(verb: string) {
+  deleteAddress(): void {
+    let deleteDialog = this.confirmDeletionDialog.open(ConfirmDeletionDialogComponent, {
+      data: "address",
+      autoFocus: "dialog",
+      width: "18vw",
+      height: "17.25vh"
+    });
+
+    deleteDialog.afterClosed()
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.addressService.deleteById(this.userId)
+            .subscribe(() => {
+              this.showSnackBar("deleted");
+              this.editUserAddressForm.reset();
+              this.submitButtonText = "Add";
+              this.deleteButtonVisibility = false;
+            });
+        }
+      });
+  }
+
+  showSnackBar(verb: string): void {
     this.snackBar.open(`Your address was ${verb} successfully!`, 'Close', {
       duration: 4000,
       panelClass: ['green-snackbar'],
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
-  }
-
-  goToPreviousPage(): void {
-    this.addressService.goToPreviousPage();
   }
 }
