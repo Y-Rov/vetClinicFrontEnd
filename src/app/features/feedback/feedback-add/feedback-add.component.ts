@@ -16,7 +16,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 export class FeedbackAddComponent implements OnInit {
 
   form = new FormGroup({
-    email: new FormControl(this.user.email, Validators.email),
+    email: new FormControl(this.user.email, [Validators.email, Validators.required]),
     serviceRate : new FormControl(0, Validators.required),
     priceRate : new FormControl(0, Validators.required),
     supportRate : new FormControl(0, Validators.required),
