@@ -1,9 +1,9 @@
-<form [formGroup]="editUserAddressForm">
+<form #addressForm="ngForm" [formGroup]="editUserAddressForm">
   <div>
     <mat-form-field class="first-form-field form-field" appearance="outline">
       <mat-label>City</mat-label>
       <input matInput maxlength="{{cityAndStreetMaxLength}}" placeholder="Ex.: Ivano-Frankivsk" formControlName="city">
-      <mat-hint align="end">{{editUserAddressForm.value.city?.length}}/{{cityAndStreetMaxLength}}</mat-hint>
+      <mat-hint align="end">{{editUserAddressForm.value.city?.length || 0}}/{{cityAndStreetMaxLength}}</mat-hint>
       <mat-error *ngIf="editUserAddressForm.get('city')?.invalid">{{getErrorMessage('city')}}</mat-error>
     </mat-form-field>
   </div>
@@ -11,7 +11,7 @@
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Street</mat-label>
       <input matInput maxlength="{{cityAndStreetMaxLength}}" placeholder="Ex. Halytska" formControlName="street">
-      <mat-hint align="end">{{editUserAddressForm.value.street?.length}}/{{cityAndStreetMaxLength}}</mat-hint>
+      <mat-hint align="end">{{editUserAddressForm.value.street?.length || 0}}/{{cityAndStreetMaxLength}}</mat-hint>
       <mat-error *ngIf="editUserAddressForm.get('street')?.invalid">{{getErrorMessage('street')}}</mat-error>
     </mat-form-field>
   </div>
@@ -19,7 +19,7 @@
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>House number</mat-label>
       <input matInput maxlength="{{houseMaxLength}}" placeholder="Ex. 123" formControlName="house">
-      <mat-hint align="end">{{editUserAddressForm.value.house?.length}}/{{houseMaxLength}}</mat-hint>
+      <mat-hint align="end">{{editUserAddressForm.value.house?.length || 0}}/{{houseMaxLength}}</mat-hint>
       <mat-error *ngIf="editUserAddressForm.get('house')?.invalid">{{getErrorMessage('house')}}</mat-error>
     </mat-form-field>
   </div>
@@ -41,6 +41,6 @@
   <div class="controls">
     <button mat-raised-button class="submit-btn" color="primary" (click)="updateUserAddress()">{{submitButtonText}}</button>
     <button mat-raised-button (click)="addressService.goToPreviousPage()">Back to profile</button>
-    <button *ngIf="deleteButtonVisibility" mat-raised-button color="warn" (click)="deleteAddress()">Delete</button>
+    <button *ngIf="deleteButtonVisibility" mat-raised-button color="warn" (click)="deleteAddress(addressForm)">Delete</button>
   </div>
 </form>

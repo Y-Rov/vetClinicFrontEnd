@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AddressService} from "../../../services/addressService/address.service";
-import {ActivatedRoute} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDeletionDialogComponent} from "../confirm-deletion-dialog/confirm-deletion-dialog.component";
+import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import { AddressService } from "../../../services/addressService/address.service";
+import { ActivatedRoute } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmDeletionDialogComponent } from "../confirm-deletion-dialog/confirm-deletion-dialog.component";
 
 @Component({
   selector: 'app-user-address-edit',
@@ -73,33 +73,39 @@ export class UserAddressEditComponent implements OnInit {
   }
 
   updateUserAddress(): void {
-    if (this.editUserAddressForm.pristine) {
-      this.snackBar.open(`There is nothing to update!`, 'Close', {
-        duration: 4000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      });
-      return;
-    }
-
-    if (this.deleteButtonVisibility && this.editUserAddressForm.dirty) {
-      this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
-        .subscribe(() => {
-          this.showSnackBar('updated');
+    if (this.editUserAddressForm.valid) {
+      if (this.editUserAddressForm.pristine) {
+        this.snackBar.open(`There is nothing to update!`, 'Close', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
         });
-    } else {
-      if (!this.deleteButtonVisibility && this.editUserAddressForm.valid) {
+        return;
+      }
+
+      if (this.deleteButtonVisibility) {
+        this.addressService.update({id: this.userId, ...this.editUserAddressForm.value})
+          .subscribe(() => {
+            this.showSnackBarWith('updated');
+          });
+      } else {
         this.addressService.create({id: this.userId, ...this.editUserAddressForm.value})
           .subscribe(() => {
-            this.showSnackBar('created');
+            this.showSnackBarWith('created');
             this.submitButtonText = "Update";
             this.deleteButtonVisibility = true;
           });
       }
+    } else {
+      this.snackBar.open(`The form has been filled out incorrectly!`, 'Close', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
     }
   }
 
-  deleteAddress(): void {
+  deleteAddress(formReference: FormGroupDirective): void {
     let deleteDialog = this.confirmDeletionDialog.open(ConfirmDeletionDialogComponent, {
       data: "address",
       autoFocus: "dialog",
@@ -112,8 +118,8 @@ export class UserAddressEditComponent implements OnInit {
         if (dialogResult) {
           this.addressService.deleteById(this.userId)
             .subscribe(() => {
-              this.showSnackBar("deleted");
-              this.editUserAddressForm.reset();
+              this.showSnackBarWith("deleted");
+              formReference.resetForm();
               this.submitButtonText = "Add";
               this.deleteButtonVisibility = false;
             });
@@ -121,8 +127,8 @@ export class UserAddressEditComponent implements OnInit {
       });
   }
 
-  showSnackBar(verb: string): void {
-    this.snackBar.open(`Your address was ${verb} successfully!`, 'Close', {
+  showSnackBarWith(performedOperation: string): void {
+    this.snackBar.open(`Your address was ${performedOperation} successfully!`, 'Close', {
       duration: 4000,
       horizontalPosition: 'center',
       verticalPosition: 'top'
