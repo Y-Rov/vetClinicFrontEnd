@@ -24,9 +24,45 @@
 .paginator
   width: 700px
 
+.filter-view-div
+  display: flex
+  flex-direction: row
+  align-items: center
+  width: 95%
+
 .filter
-  margin-left: 30px
-  width: 100% - 30
+  flex: 1
+
+.rotated-icon
+  transform: rotate(180deg)
+
+.grid-view-paginator
+  display: flex
+  flex-direction: row
+  align-items: center
+
+.direction-toggle
+  margin-right: 20px
+  margin-bottom: 20px
+
+.page-buttons-block
+  display: flex
+  flex-direction: row
+  margin-bottom: 20px
+
+.grid-paginator-arrow
+  width: fit-content
+  height: fit-content
+  font-size: 30px
+
+mat-form-field
+  margin-right: 20px
+
+.filter-selector
+  width: 100px
+
+.count-selector
+  width: 100px
 
 .new-procedure-button
   margin-top: 20px
@@ -36,7 +72,6 @@
   margin-top: 10px
 
 .new-card
-  @extend mat-elevation-z6 !optional
   margin: 12px
   width: 300px
   flex-basis: 300px
@@ -57,9 +92,6 @@
   height: fit-content
   font-size: 170px
   color: lightgray
-
-.filter-view-div
-  width: 100%
 
 table
   width: 100%

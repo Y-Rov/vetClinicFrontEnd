@@ -2,9 +2,9 @@
   <p class="mat-headline">VetClinic corporate blog</p>
 
   <div class="filter-view-div">
-    <mat-form-field appearance="outline">
+    <mat-form-field style="width: 150px" appearance="outline">
       <mat-label>Choose view</mat-label>
-      <mat-select [formControl]="selected">
+      <mat-select [formControl]="selectedView">
         <mat-option value="list">List view</mat-option>
         <mat-option value="grid">Grid view</mat-option>
       </mat-select>
@@ -12,11 +12,58 @@
 
     <mat-form-field class="filter" appearance="outline">
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Placeholder" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Placeholder">
     </mat-form-field>
+
+    <ng-container class="grid-view-paginator" *ngIf="selectedView.value == 'grid'">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Count</mat-label>
+        <mat-select [formControl]="selectedCount">
+          <mat-option value="8">8</mat-option>
+          <mat-option value="16">16</mat-option>
+          <mat-option value="24">24</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class="direction-toggle" mat-mini-fab color="primary" (click)="toggleOrderByDirection()">
+        <mat-icon [ngClass]="iconStyle">arrow_downward</mat-icon>
+      </button>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Order by</mat-label>
+        <mat-select [formControl]="selectedOrderBy">
+          <mat-option value="Title">Title</mat-option>
+          <mat-option value="Creation Time">Creation Time</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="page-buttons-block">
+        <div>
+          <button mat-icon-button
+                  [disabled]="!(pageInfo?.hasPrevious ?? false)"
+                  (click)="onPrevPageClick()"
+                  color=primary>
+            <mat-icon class="grid-paginator-arrow">
+              chevron_left
+            </mat-icon>
+          </button>
+        </div>
+        <div class="next-btn">
+          <button mat-icon-button
+                  [disabled]="!(pageInfo?.hasNext ?? false)"
+                  (click)="onNextPageClick()"
+                  color=primary>
+            <mat-icon class="grid-paginator-arrow">
+              chevron_right
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
   </div>
 
-  <ng-container *ngIf="selected.value == 'grid'; else listView">
+  <ng-container *ngIf="selectedView.value == 'grid'; else listView">
     <!--Grid of cards view-->
     <div class="article-grid-wrapper">
       <app-article-card *ngFor="let select of articles" [article]="select"

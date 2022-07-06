@@ -32,6 +32,10 @@ export class ArticleService extends ResourceService<Article>{
       url += '/published';
     }
 
+    if(this.authService.isAuthorized() && this.authService.isInRole('Admin')){
+      pageSize -= 1;
+    }
+
     url += `?PageNumber=${pageNumber}&PageSize=${pageSize}`;
     if (filterParam !== null) {
       url += `&FilterParam=${filterParam}`;
@@ -45,6 +49,7 @@ export class ArticleService extends ResourceService<Article>{
       url += `&OrderByDirection=${orderByDirection}`;
     }
 
+    console.log(url);
     return this.http.get<ArticleParameters>(url, this.httpOptions)
       .pipe(
         catchError(this.handleError<ArticleParameters>('getAll'))

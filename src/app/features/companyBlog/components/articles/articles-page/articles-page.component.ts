@@ -9,7 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {DateTimeService} from "../../../services/dateTimeService/date-time.service";
 import {NewArticleDialogComponent} from "../new-article-dialog/new-article-dialog.component";
 import {AuthService} from "../../../../../core/services/authService/auth.service";
-import {ProcedureParameters} from "../../../../../core/models/operational-models/QueryParameters/ProcedureParameters";
+import {ArticleParameters} from "../../../../../core/models/operational-models/QueryParameters/ArticleParameters";
 
 @Component({
   selector: 'app-articles-page',
@@ -20,21 +20,25 @@ export class ArticlesPageComponent implements OnInit {
 
   articles: Article[] = [];
 
-  selected = new FormControl('grid');
+  selectedView = new FormControl('grid');
+  selectedCount = new FormControl(8);
+  selectedOrderBy = new FormControl('Creation Time');
 
   dataSource: MatTableDataSource<Article> = new MatTableDataSource(this.articles);
   displayedColumns: string[] = ['title', 'createdAt', 'authorName'];
 
   pageSizeOptions: { name: string; value: number }[] = [
-    { name: '5', value: 5 },
-    { name: '10', value: 10 }
+    { name: '8', value: 8 },
+    { name: '16', value: 16 },
+    { name: '24', value: 24 }
   ];
 
-  pageInfo: ProcedureParameters | null = null;
+  pageInfo: ArticleParameters | null = null;
   currentPageSize: number = this.pageSizeOptions[0].value;
-  filterValue: string | null = null;
-  currentOrderByOption: string | null = null;
+  filterValue: string | null = '';
+  currentOrderByOption: string | null = 'Creation Time';
   currentOrderByDirection: string | null = 'asc';
+  iconStyle: string = '';
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -52,10 +56,10 @@ export class ArticlesPageComponent implements OnInit {
 
   updateList(
     pageNumber: number = 1,
-    pageSize: number = 5,
-    filterParam: string | null = null,
-    orderByParam: string | null = null,
-    orderByDirection: string | null = null): void{
+    pageSize: number = this.currentPageSize!,
+    filterParam: string | null = this.filterValue,
+    orderByParam: string | null = this.currentOrderByOption,
+    orderByDirection: string | null = this.currentOrderByDirection): void{
     this.articleService.getAllPaged(
         pageNumber,
         pageSize,
@@ -64,6 +68,7 @@ export class ArticlesPageComponent implements OnInit {
         orderByDirection,
         !(this.authService.isAuthorized() && this.authService.isInRole('Admin')))
       .subscribe(data => {
+        console.log(data);
         this.articles = data.entities;
         this.dataSource.data = data.entities;
         this.updatePageInfo(data);
@@ -71,11 +76,42 @@ export class ArticlesPageComponent implements OnInit {
       return;
   }
 
-  private updatePageInfo(data: ProcedureParameters): void {
-    this.pageInfo = <ProcedureParameters>data;
+  private updatePageInfo(data: ArticleParameters): void {
+    this.pageInfo = <ArticleParameters>data;
   }
 
   ngOnInit(): void {
+    this.selectedCount.valueChanges.subscribe(
+      data => {
+        if (this.selectedView.value == 'grid') {
+          this.pageInfo!.pageSize = data!;
+          this.currentPageSize = data!;
+          this.updateList();
+        }
+      }
+    );
+
+    this.selectedOrderBy.valueChanges.subscribe(
+      data => {
+        if (this.selectedView.value == 'grid') {
+          this.currentOrderByOption = data!;
+          this.updateList();
+        }
+      }
+    );
+  }
+
+  toggleOrderByDirection(){
+    if(this.currentOrderByDirection === 'asc') {
+      this.currentOrderByDirection = 'desc';
+      this.iconStyle = 'rotated-icon';
+    }
+    else {
+      this.currentOrderByDirection = 'asc';
+      this.iconStyle = '';
+    }
+
+    this.updateList();
   }
 
   onDeleteArticle(event: any): void{
@@ -83,12 +119,12 @@ export class ArticlesPageComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.filterValue = (event.target as HTMLInputElement).value;
+    this.updateList(1,
+      this.currentPageSize,
+      this.filterValue,
+      this.currentOrderByOption,
+      this.currentOrderByDirection);
   }
 
   onNewArticle(){
@@ -113,13 +149,21 @@ export class ArticlesPageComponent implements OnInit {
 
   onPrevPageClick(): void {
     if (this.pageInfo?.hasPrevious) {
-      this.updateList(this.pageInfo!.currentPage - 1, this.pageInfo!.pageSize, this.currentOrderByOption);
+      this.updateList(
+        this.pageInfo!.currentPage - 1,
+        this.currentPageSize,
+        this.filterValue,
+        this.currentOrderByOption,
+        this.currentOrderByDirection);
     }
   }
 
   onNextPageClick(): void {
     if (this.pageInfo?.hasNext) {
-      this.updateList(this.pageInfo!.currentPage + 1, this.pageInfo!.pageSize, this.currentOrderByOption);
+      this.updateList(this.pageInfo!.currentPage + 1,
+        this.currentPageSize, this.filterValue,
+        this.currentOrderByOption,
+        this.currentOrderByDirection);
     }
   }
 
@@ -138,7 +182,7 @@ export class ArticlesPageComponent implements OnInit {
     }
     this.updateList(
       1,
-      this.pageInfo!.pageSize!,
+      this.currentPageSize!,
       this.filterValue,
       this.currentOrderByOption,
       this.currentOrderByDirection);
