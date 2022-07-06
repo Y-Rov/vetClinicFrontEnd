@@ -17,6 +17,8 @@
     <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/specializations">Specializations</a>
     <a mat-button routerLinkActive="active"
+       *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/feedbacks">Feedbacks</a>
+    <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/animals">Animals</a>
   </div>
