@@ -6,10 +6,12 @@
     <a mat-button routerLinkActive="active" routerLink="/doctors">Doctors</a>
 
     <a mat-button routerLinkActive="active" routerLink="/blog">Blog</a>
-   <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/appointments">My Appointments</a>
+    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/appointments">My Appointments</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()">My Work</a>
     <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Accountant')" routerLink="/salaries">Salary</a>
+    <a mat-button routerLinkActive="active"
+       *ngIf="authService.isAuthorized() && authService.isInRole('Accountant')" routerLink="/financialStatement">FinancialStatement</a>
     <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/users">Users</a>
     <a mat-button routerLinkActive="active"
@@ -24,6 +26,11 @@
   <div class="user-operations-container">
     <a mat-button *ngIf="!authService.isAuthorized()" routerLink="auth/signup">Sign up</a>
     <a mat-button *ngIf="!authService.isAuthorized()" routerLink="auth/login">Login</a>
+
+    <a *ngIf="authService.isAuthorized()" [routerLink]="['/users', authService.getUserId()]">
+      <div class="user-img-wrapper"><img src="{{profilePic}}" alt="My profile" ></div>
+    </a>
+
     <a mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
   </div>
 </mat-toolbar>

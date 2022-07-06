@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'feedbacks',
     loadChildren: () => import('./features/feedback/feedback.module').then(m => m.FeedbackModule)
+  },
+  {
+    path: 'financialStatement',
+    loadChildren: () => import('./features/financialStatements/financial-statement.module').then(m => m.FinancialStatementModule)
   }
 ];
 
