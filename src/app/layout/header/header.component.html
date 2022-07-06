@@ -24,6 +24,11 @@
   <div class="user-operations-container">
     <a mat-button *ngIf="!authService.isAuthorized()" routerLink="auth/signup">Sign up</a>
     <a mat-button *ngIf="!authService.isAuthorized()" routerLink="auth/login">Login</a>
+
+    <a *ngIf="authService.isAuthorized()" [routerLink]="['/users', authService.getUserId()]">
+      <div class="user-img-wrapper"><img src="{{profilePic}}" alt="My profile" ></div>
+    </a>
+
     <a mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
   </div>
 </mat-toolbar>
