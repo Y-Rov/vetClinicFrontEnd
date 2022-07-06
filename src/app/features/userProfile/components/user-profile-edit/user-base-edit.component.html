@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="img-wrapper">
-    <img [src]="this.domSanitizer.bypassSecurityTrustUrl(this.profilePicture)" alt="">
-    <button id="profile-pic-btn" type="button" mat-raised-button (click)="fileInput.click()">Add Profile Picture</button>
+    <img src="{{this.profilePicture}}" alt="">
+    <button id="profile-pic-btn" type="button" mat-raised-button (click)="fileInput.click()">Edit Profile Picture</button>
     <input hidden (change)="handleFileChange($event)" #fileInput type="file">
   </div>
   <div>
