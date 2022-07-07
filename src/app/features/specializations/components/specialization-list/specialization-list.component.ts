@@ -15,6 +15,7 @@ import {
 import {
   SpecializationAddUserDialogComponent
 } from "../specialization-add-user-dialog/specialization-add-user-dialog.component";
+import {SpecializationParameters} from "../../../../core/models/operational-models/SpecializationParameters";
 
 @Component({
   selector: 'app-specializationService-list',
@@ -27,9 +28,16 @@ export class SpecializationListComponent implements OnInit {
 
   specializations: MatTableDataSource<Specialization>
     = new MatTableDataSource();
-    //Specialization[];
 
   columnsToDisplay = ["name","procedures","users", "edit", "delete"];
+
+  pageSizeOptions: { name: string; value: number }[] = [
+    { name: '4', value: 4 },
+    { name: '10', value: 10 }
+  ];
+
+  pageInfo: SpecializationParameters | null = null;
+  currentPageSize: number = this.pageSizeOptions[0].value;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
@@ -38,15 +46,20 @@ export class SpecializationListComponent implements OnInit {
     this.service = specializationService;
   }
 
-  ngOnInit(): void {
-    this.service.getAll()
-      .subscribe((specializations =>
-        this.specializations.data = specializations
-      ));
+  private updateSpecializations(pageNumber: number = 1, pageSize: number = 4) : void{
+    this.service.getAllSpecializations(pageNumber, pageSize)
+      .subscribe(data => {
+        this.specializations.data = data.entities;
+        this.updatePageInfo(data);
+      });
   }
 
-  ngAfterViewInit() {
-    this.specializations.paginator = this.paginator!;
+  private updatePageInfo(data: SpecializationParameters) : void{
+    this.pageInfo = <SpecializationParameters>data;
+  }
+
+  ngOnInit(): void {
+    this.updateSpecializations();
   }
 
   onAddSpecialization(){
@@ -107,5 +120,19 @@ export class SpecializationListComponent implements OnInit {
   onRemoveUser(userId: number, specializationId: number) : void{
     this.specializationService.removeUser(userId, specializationId)
       .subscribe(() => this.ngOnInit());
+  }
+
+  onNextPageClick() : void{
+    if(this.pageInfo?.hasNext)
+      this.updateSpecializations(this.pageInfo.currentPage+1, this.pageInfo.pageSize);
+  }
+
+  onPrevPageClick() : void{
+    if(this.pageInfo?.hasPrevious)
+      this.updateSpecializations(this.pageInfo.currentPage-1, this.pageInfo.pageSize);
+  }
+
+  selectPageSizeOptions() : void{
+    this.updateSpecializations(1, this.currentPageSize);
   }
 }

@@ -6,6 +6,7 @@ import {ResourceService} from "../../../../core/services/resourceService/resourc
 import {Location} from "@angular/common";
 import {catchError} from "rxjs/operators";
 import {Procedure} from "../../../../core/models/Procedure";
+import {SpecializationParameters} from "../../../../core/models/operational-models/SpecializationParameters";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,16 @@ export class SpecializationService extends ResourceService<Specialization>{
   constructor(private httpClient : HttpClient,
               private currentLocation: Location) {
     super(httpClient, currentLocation, Specialization, "https://localhost:5001/api/specialization");
+  }
+
+  getAllSpecializations(pageNumber : number = 1, pageSize: number = 4)
+    : Observable<SpecializationParameters>{
+    let url = `${this.apiUrl}?PageNumber=${pageNumber}&PageSize=${pageSize}`;
+
+    return this.http.get<SpecializationParameters>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<SpecializationParameters>('GetAllSpecializations'))
+      );
   }
 
   removeProcedure(procedureId: number, specializationId: number) : Observable<void>{
