@@ -15,6 +15,8 @@ import { UserProfileInfoComponent } from './components/user-profile-info/user-pr
 import { UserBaseEditComponent } from './components/user-profile-edit/user-base-edit.component';
 import { UserAddressEditComponent } from './components/user-profile-edit/user-address-edit/user-address-edit.component';
 import { UserPortfolioEditComponent } from './components/user-profile-edit/user-portfolio-edit/user-portfolio-edit.component';
+import { ConfirmDeletionDialogComponent } from './components/user-profile-edit/confirm-deletion-dialog/confirm-deletion-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { UserPortfolioEditComponent } from './components/user-profile-edit/user-
     UserProfileInfoComponent,
     UserBaseEditComponent,
     UserAddressEditComponent,
-    UserPortfolioEditComponent
+    UserPortfolioEditComponent,
+    ConfirmDeletionDialogComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { UserPortfolioEditComponent } from './components/user-profile-edit/user-
     MatButtonModule,
     MatInputModule,
     MatSnackBarModule,
-    UserProfileRoutingModule
+    UserProfileRoutingModule,
+    MatDialogModule
   ]
 })
 export class UserProfileModule { }

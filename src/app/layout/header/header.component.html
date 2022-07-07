@@ -7,7 +7,6 @@
 
     <a mat-button routerLinkActive="active" routerLink="/blog">Blog</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/appointments">My Appointments</a>
-    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()">My Work</a>
     <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Accountant')" routerLink="/salaries">Salary</a>
     <a mat-button routerLinkActive="active"
