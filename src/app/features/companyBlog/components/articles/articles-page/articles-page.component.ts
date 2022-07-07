@@ -1,15 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort} from "@angular/material/sort";
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {ArticleService} from "../../../services/articleService/article.service";
 import {Article} from "../../../../../core/models/Article";
-import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {DateTimeService} from "../../../services/dateTimeService/date-time.service";
 import {NewArticleDialogComponent} from "../new-article-dialog/new-article-dialog.component";
 import {AuthService} from "../../../../../core/services/authService/auth.service";
 import {ArticleParameters} from "../../../../../core/models/operational-models/QueryParameters/ArticleParameters";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-articles-page',
@@ -40,14 +39,12 @@ export class ArticlesPageComponent implements OnInit {
   currentOrderByDirection: string | null = 'asc';
   iconStyle: string = '';
 
-  @ViewChild(MatSort) sort?: MatSort;
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-
   constructor(private formBuilder : FormBuilder,
               private articleService: ArticleService,
               private matDialog: MatDialog,
               public dateTimeService: DateTimeService,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private snackBar: MatSnackBar) {
     this.updateList();
     if(authService.isAuthorized() && authService.isInRole('Admin')){
       this.displayedColumns.push('action');
@@ -133,10 +130,17 @@ export class ArticlesPageComponent implements OnInit {
     dialogRef
       .afterClosed()
       .subscribe((requireReload: boolean) => {
-        if(requireReload)
+        if(requireReload) {
+          this.snackBar.open(`The article has been deleted successfully!`, 'Close', {
+            duration: 4000,
+            panelClass: ['green-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
           this.updateList()
         }
-      );
+      }
+    );
   }
 
   onArticleChange(): void {
