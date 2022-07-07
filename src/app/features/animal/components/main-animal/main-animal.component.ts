@@ -9,6 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {AnimalMedcardComponent} from "../animal-medcard/animal-medcard.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-main-animal',
@@ -17,34 +18,30 @@ import {AnimalMedcardComponent} from "../animal-medcard/animal-medcard.component
 })
 export class MainAnimalComponent implements OnInit {
 
-  dataSource: MatTableDataSource<Animal> = new MatTableDataSource();
-  displayedColumns: string[] = ['nickName','ownerId','birthDate', 'delete', 'edit', 'viewmedcard'];
-  animals : Animal[] |null = null;
+  animals : Animal[] | null = null;
+  ownerId : number = 0;
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   constructor(
     private animalService: AnimalService,
+    private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog) {
+    this.ownerId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   private updateList(): void {
-    this.animalService.getAll().subscribe((data) => {
+    console.log(this.ownerId);
+    this.animalService.getAllAnimals(this.ownerId).subscribe((data) => {
       console.log(data);
-      this.dataSource.data = data;
       this.animals = data;
       console.log(this.animals)
-      this.dataSource.sort = this.sort!;
     });
   }
 
   ngOnInit(): void {
     this.updateList();
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator!;
   }
 
   onDeleteAnimal(animal:Animal){

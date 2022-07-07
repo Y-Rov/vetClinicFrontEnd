@@ -15,6 +15,7 @@ import { UserProfileInfoComponent } from './components/user-profile-info/user-pr
 import { UserBaseEditComponent } from './components/user-profile-edit/user-base-edit.component';
 import { UserAddressEditComponent } from './components/user-profile-edit/user-address-edit/user-address-edit.component';
 import { UserPortfolioEditComponent } from './components/user-profile-edit/user-portfolio-edit/user-portfolio-edit.component';
+import {AnimalModule} from "../animal/animal.module";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { UserPortfolioEditComponent } from './components/user-profile-edit/user-
     MatButtonModule,
     MatInputModule,
     MatSnackBarModule,
-    UserProfileRoutingModule
+    UserProfileRoutingModule,
+    AnimalModule
   ]
 })
 export class UserProfileModule { }

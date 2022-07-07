@@ -53,4 +53,9 @@ export class AnimalService extends ResourceService<Animal>{
     const url = `${this.apiUrl}/medcard/${id}`;
     return this.httpClient.get(url, this.httpOptions);
   }
+
+  getAllAnimals(id: number):Observable<any>{
+    const url = `${this.apiUrl}/${id}`;
+    return this.httpClient.get(url,this.httpOptions);
+  }
 }
