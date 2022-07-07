@@ -8,6 +8,7 @@ import {DeleteProcedureDialogComponent} from "../delete-procedure-dialog/delete-
 import {EditProcedureDialogComponent} from "../edit-procedure-dialog/edit-procedure-dialog.component";
 import {NewProcedureDialogComponent} from "../new-procedure-dialog/new-procedure-dialog.component";
 import {ProcedureParameters} from "../../../../core/models/operational-models/QueryParameters/ProcedureParameters";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-procedures-page',
@@ -34,7 +35,8 @@ export class ProceduresPageComponent implements OnInit {
   constructor(
     private procedureService: ProcedureService,
     public authService : AuthService,
-    private matDialog: MatDialog) {
+    private matDialog: MatDialog,
+    private snackBar: MatSnackBar) {
   }
 
   private updateList(
@@ -68,7 +70,17 @@ export class ProceduresPageComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {
+      if(requireReload) {
+        this.snackBar.open(`The procedure has been deleted successfully!`, 'Close', {
+          duration: 4000,
+          panelClass: ['green-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.updateList();
+      }
+    });
   }
 
   onEditProcedure(element: any){
@@ -77,13 +89,33 @@ export class ProceduresPageComponent implements OnInit {
       data: procedure
     });
 
-    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {
+      if(requireReload) {
+        this.snackBar.open(`The procedure has been updated successfully!`, 'Close', {
+          duration: 4000,
+          panelClass: ['green-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.updateList();
+      }
+    });
   }
 
   onNewProcedure(){
     const dialogRef = this.matDialog.open(NewProcedureDialogComponent);
 
-    dialogRef.afterClosed().subscribe((requireReload: boolean) => {if(requireReload) this.updateList()});
+    dialogRef.afterClosed().subscribe((requireReload: boolean) => {
+      if(requireReload) {
+        this.snackBar.open(`The procedure has been created successfully!`, 'Close', {
+          duration: 4000,
+          panelClass: ['green-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.updateList();
+      }
+    });
   }
 
   applyFilter(event: Event) {
