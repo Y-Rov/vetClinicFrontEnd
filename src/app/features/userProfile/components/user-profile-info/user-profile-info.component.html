@@ -1,4 +1,6 @@
-<div class="profile-wrapper">
+
+<div class="main-div">
+  <div class="profile-wrapper">
   <div class="img-wrapper">
     <img [src]="user?.profilePicture" >
   </div>
@@ -14,7 +16,17 @@
 
   <a routerLink="/users/{{id}}/edit" id="edit-btn" mat-raised-button color="primary">EDIT</a>
 
-  <button mat-stroked-button class="feedback-button" (click)="leaveFeedback()" color="primary">
-    Leave feedback
-  </button>
+    <button mat-stroked-button class="feedback-button" (click)="leaveFeedback()" color="primary">
+      Leave feedback
+    </button>
+
+  </div>
+
+  <app-main-animal></app-main-animal>
+  
 </div>
+
+
+
+
+
