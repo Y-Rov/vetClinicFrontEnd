@@ -5,9 +5,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeleteAnimalComponent} from "../delete-animal/delete-animal.component";
 import {EditAnimalComponent} from "../edit-animal/edit-animal.component";
 import {AddAnimalComponent} from "../add-animal/add-animal.component";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
-import {MatPaginator} from "@angular/material/paginator";
 import {AnimalMedcardComponent} from "../animal-medcard/animal-medcard.component";
 import {ActivatedRoute} from "@angular/router";
 
@@ -20,9 +17,6 @@ export class MainAnimalComponent implements OnInit {
 
   animals : Animal[] | null = null;
   ownerId : number = 0;
-
-  @ViewChild(MatSort) sort?: MatSort;
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   constructor(
     private animalService: AnimalService,
