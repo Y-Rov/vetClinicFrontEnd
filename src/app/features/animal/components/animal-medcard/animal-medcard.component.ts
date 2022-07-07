@@ -6,6 +6,11 @@ import {AnimalService} from "../../animalService/animal.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Appointment} from "../../../../core/models/Appointment";
 import {MainAnimalComponent} from "../main-animal/main-animal.component";
+import {AnimalParameters} from "../../../../core/models/operational-models/QueryParameters/AnimalParameters";
+import {
+  ExceptionParametersWithList
+} from "../../../../core/models/operational-models/QueryParameters/ExceptionParametersWithList";
+import {ExceptionParameters} from "../../../../core/models/operational-models/QueryParameters/ExceptionParameters";
 
 @Component({
   selector: 'app-animal-medcard',
@@ -16,10 +21,14 @@ import {MainAnimalComponent} from "../main-animal/main-animal.component";
 export class AnimalMedcardComponent implements OnInit {
 
   dataSource: MatTableDataSource<Appointment> = new MatTableDataSource();
-  displayedColumns: string[] = ['data','disease'];
-
   @ViewChild(MatSort) sort?: MatSort;
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  displayedColumns: string[] = ['data','disease'];
+  pagingInfo : AnimalParameters | null = null;
+  itemsPerPage : number = 5;
+  options = [
+    {name:"5", value: 5},
+    {name: "10", value: 10}
+  ]
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data : number,
@@ -27,20 +36,43 @@ export class AnimalMedcardComponent implements OnInit {
     public dialogRef: MatDialogRef<MainAnimalComponent>)
   {}
 
-  private updateList(): void {
-    this.animalService.getMedCard(this.data).subscribe((data) => {
-      this.dataSource.data = data;
+  private updateList(CurrentPage: number = 1, PageSize: number = 5): void {
+
+    this.animalService.getMedCard(this.data, CurrentPage, PageSize).subscribe((data) => {
+      this.dataSource.data = data.entities;
       console.log(data);
       this.dataSource.sort = this.sort!;
+      this.updatePagingInfo(data);
     });
   }
 
-  ngOnInit(): void {
-    this.updateList();
+  onNextButtonInfoClick() {
+    if (this.pagingInfo?.hasNext) {
+
+      this.updateList(this.pagingInfo!.currentPage + 1, this.pagingInfo!.pageSize);
+    }
+
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator!;
+  onPrevButtonInfoClick() {
+
+    if (this.pagingInfo?.hasPrevious) {
+
+      this.updateList(this.pagingInfo!.currentPage - 1, this.pagingInfo!.pageSize);
+    }
+
+  }
+
+  private updatePagingInfo(data: AnimalParameters): void {
+    this.pagingInfo = <AnimalParameters>data;
+  }
+
+  selectOption() {
+    this.updateList(1, this.itemsPerPage);
+  }
+
+  ngOnInit(): void {
+    this.updateList(1,5);
   }
 
   onNoClick(): void{
