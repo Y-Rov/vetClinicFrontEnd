@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User} from "../../../../core/models/User";
+import { User } from "../../../../core/models/User";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../../userDashboard/services/userService/user.service";
 import { AuthService } from "../../../../core/services/authService/auth.service";
 import { ActivatedRoute } from "@angular/router";
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-profile-edit',
