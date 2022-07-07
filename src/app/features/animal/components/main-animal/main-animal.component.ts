@@ -15,7 +15,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class MainAnimalComponent implements OnInit {
 
-  animals : Animal[] | null = null;
+  animals : Animal[] = [];
   ownerId : number = 0;
 
   constructor(

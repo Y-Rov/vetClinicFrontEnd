@@ -1,4 +1,4 @@
-<div id="animalCarousel" class="carousel" data-bs-ride="carousel" *ngIf="animals != null">
+<div id="animalCarousel" class="carousel" data-bs-ride="carousel" *ngIf="animals.length>0">
   <div class="carousel-inner">
     <div *ngFor="let an of animals; let i = index" [ngClass]="i === 0 ? 'carousel-item active': 'carousel-item'">
       <div class="inner-flex">
