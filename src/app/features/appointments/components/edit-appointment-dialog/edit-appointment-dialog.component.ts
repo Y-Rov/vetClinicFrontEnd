@@ -38,7 +38,7 @@ export class EditAppointmentDialogComponent implements OnInit {
     private animalService : AnimalService
     ) {  
       this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
-      this.userService.getAll().subscribe((data: User[]) => this.users = data)
+      this.userService.getDoctors().subscribe((data: User[]) => this.users = data)
       this.animalService.getAll().subscribe((data: Animal[]) => this.animals = data);
     }
 
