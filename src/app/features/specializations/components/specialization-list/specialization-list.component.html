@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="specialization-list.component.sass">
 <div class="wrapper">
+  <div>
 <table
   mat-table [dataSource]="specializations"
-  class="mat-elevation-z8 row">
+  class="mat-elevation-z8 row elem">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let spec">
@@ -114,4 +115,5 @@
   Add specialization
   <mat-icon color="accent">add</mat-icon>
 </button>
+</div>
 </div>

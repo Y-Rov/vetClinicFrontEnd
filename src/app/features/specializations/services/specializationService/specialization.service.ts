@@ -7,6 +7,7 @@ import {Location} from "@angular/common";
 import {catchError} from "rxjs/operators";
 import {Procedure} from "../../../../core/models/Procedure";
 import {SpecializationParameters} from "../../../../core/models/operational-models/SpecializationParameters";
+import {User} from "../../../../core/models/User";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,14 @@ export class SpecializationService extends ResourceService<Specialization>{
     return this.http.put<void>(requestUrl,viewModel,this.httpOptions)
       .pipe(
         catchError(this.handleError<void>('update'))
+      );
+  }
+
+  getEmployees() : Observable<User[]>{
+    let url = `${this.apiUrl}/employees`;
+    return this.http.get<User[]>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<User[]>('get'))
       );
   }
 
