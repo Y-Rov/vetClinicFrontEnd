@@ -5,6 +5,7 @@ import {Animal} from "../../../core/models/Animal";
 import { ResourceService } from "../../../core/services/resourceService/resource.service";
 import { Location } from "@angular/common";
 import {AuthService} from "../../../core/services/authService/auth.service";
+import {AnimalParameters} from "../../../core/models/operational-models/QueryParameters/AnimalParameters";
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,13 @@ export class AnimalService extends ResourceService<Animal>{
       );
   }
 
-  getMedCard(id:number) : Observable<any>{
-    const url = `${this.apiUrl}/medcard/${id}`;
-    return this.httpClient.get(url, this.httpOptions);
+  getMedCard(id:number, pageNumber: number = 1, pageSize: number = 5) : Observable<AnimalParameters>{
+    const url = `${this.apiUrl}/medcard/?pageNumber=${pageNumber}&pageSize=${pageSize}&animalId=${id}`;
+    return this.httpClient.get<AnimalParameters>(url, this.httpOptions);
+  }
+
+  getAllAnimals(id: number):Observable<any>{
+    const url = `${this.apiUrl}/${id}`;
+    return this.httpClient.get(url,this.httpOptions);
   }
 }
