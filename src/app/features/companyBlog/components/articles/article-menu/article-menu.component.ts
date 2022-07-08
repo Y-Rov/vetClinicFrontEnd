@@ -5,6 +5,7 @@ import {Article} from "../../../../../core/models/Article";
 import {Router} from "@angular/router";
 import {DeleteArticleDialogComponent} from "../delete-article-dialog/delete-article-dialog.component";
 import {EditArticleDialogComponent} from "../edit-article-dialog/edit-article-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-article-menu',
@@ -24,7 +25,8 @@ export class ArticleMenuComponent implements OnInit {
 
   constructor(private articleService: ArticleService,
               private router: Router,
-              private matDialog: MatDialog) { }
+              private matDialog: MatDialog,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -46,8 +48,14 @@ export class ArticleMenuComponent implements OnInit {
             this.articleService
               .getById(this.currentArticle!.id!)
               .subscribe((art) => {
-                  this.currentArticle = art;
-                  this.articleChange.emit(this.currentArticle!)
+                this.snackBar.open(`The article has been edited successfully!`, 'Close', {
+                  duration: 4000,
+                  panelClass: ['green-snackbar'],
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top'
+                });
+                this.currentArticle = art;
+                this.articleChange.emit(this.currentArticle!)
                 }
               );
           }
@@ -59,7 +67,15 @@ export class ArticleMenuComponent implements OnInit {
     event.stopPropagation();
     this.currentArticle!.published = true;
     const updatedArticle: Article = Object.assign(this.currentArticle!, {published: true})
-    this.articleService.updateArticle(updatedArticle).subscribe(() => { this.currentArticle!.published = true });
+    this.articleService.updateArticle(updatedArticle).subscribe(() => {
+      this.currentArticle!.published = true
+      this.snackBar.open(`The article has been published successfully!`, 'Close', {
+        duration: 4000,
+        panelClass: ['green-snackbar'],
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
+    });
   }
 
   onUnublish(event: Event): void{
@@ -78,6 +94,12 @@ export class ArticleMenuComponent implements OnInit {
       .afterClosed()
       .subscribe((requireReload: boolean) => {
         if(requireReload){
+          this.snackBar.open(`The article has been deleted successfully!`, 'Close', {
+            duration: 4000,
+            panelClass: ['green-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
           this.deletedArticle.emit(this.currentArticle!)
         }
       });
