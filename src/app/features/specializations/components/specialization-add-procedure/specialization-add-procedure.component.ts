@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Procedure} from "../../../../core/models/Procedure";
 import {FormBuilder} from "@angular/forms";
-import {ProcedureService} from "../../../../core/services/procedureService/procedure.service";
 import {SpecializationService} from "../../services/specializationService/specialization.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {SpecializationListComponent} from "../specialization-list/specialization-list.component";
 import {Specialization} from "../../../../core/models/Specialization";
+import {ProcedureService} from "../../../procedures/services/procedureService/procedure.service";
 
 @Component({
   selector: 'app-specialization-add-procedure',
@@ -22,8 +22,10 @@ export class SpecializationAddProcedureComponent implements OnInit {
               private dialog: MatDialogRef<SpecializationListComponent>,
               private procedureService: ProcedureService,
               private specializationService: SpecializationService) {
-    procedureService.getAll()
-      .subscribe((procedures) => this.procedures = procedures);
+    this.procedureService.getAllPaged(1, 2000032)
+      .subscribe(data => {
+      this.procedures = data.entities;
+    });
   }
 
   onSave() : void{
