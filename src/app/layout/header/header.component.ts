@@ -14,7 +14,7 @@ import { SignupComponent } from '../../shared/components/authComponents/signup-p
 })
 export class HeaderComponent implements OnInit {
   userId: number = 0;
-  profilePic: string | null | undefined = null;
+  profilePic?: string;
 
   constructor(
     private matDialog: MatDialog,
@@ -23,28 +23,26 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) 
   {
-    this.userId = authService.getUserId();
   }
 
-  get ProfilePick() : string {
-    if(this.profilePic == null){
-      return '/assets/images/default_profile_pic.jpg';
-    }
-    return `data:image/png;base64,${this.profilePic}`
-  }
-
-  ngOnInit(): void {
-    this.getProfilePic();
-  }
-  
-  getProfilePic(){
-      this.userService.getById(this.userId)
-        .subscribe(user => this.profilePic = user.profilePicture);
+  ngOnInit(): void { 
+    this.loadProfilePicture();
+    this.authService.login$.subscribe(_ => {
+      this.loadProfilePicture();
+    })
   }
 
   onLogout(){
     this.authService.logout();
     this.router.navigate(['/auth/login'])
   }
-
+  
+  loadProfilePicture(){
+    let userId: number = this.authService.getUserId();
+    if (userId != null) {
+      this.userService.getById(userId).subscribe(user => {
+        this.profilePic = `data:image/png;base64,{user.profilePicture!}`;
+      })
+    }
+  }
 }
