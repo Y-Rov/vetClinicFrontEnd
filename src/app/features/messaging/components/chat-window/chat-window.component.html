@@ -1,0 +1,25 @@
+<div class="chat-window">
+    <div class="chat-window-header">
+        <p>{{chat?.name}}</p>
+    </div>
+
+    <div class="chat-window-messages">
+        <app-message
+            *ngFor="let message in chat?.messages"
+            [message]="message">
+        </app-message>
+    </div>
+
+    <div class="chat-window-input">
+        <textarea class="message-input" 
+            matInput 
+            [(ngModel)]="messageText"
+            (keydown.enter)="onSendMessage(messageText)">
+        </textarea>
+        <mat-icon 
+            *ngIf = "messageText.trim()"
+            (click)="onSendMessage(messageText)">
+            send
+        </mat-icon>
+    </div>
+</div>
