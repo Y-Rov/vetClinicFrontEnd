@@ -24,9 +24,13 @@ export class EditProcedureDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ProceduresPageComponent>,
     private procedureService : ProcedureService,
     private specializationService: SpecializationService) {
-    this.specializations = [];
-    this.selectedSpec = [];
-    specializationService.getAll().subscribe((data) => this.specializations = data);
+      this.specializations = [];
+      this.selectedSpec = [];
+      specializationService
+        .getAllSpecializations(1, 10)
+        .subscribe((data) =>
+          this.specializations = data.entities
+        );
   }
 
   form = new FormGroup({

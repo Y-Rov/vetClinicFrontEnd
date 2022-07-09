@@ -4,8 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {SpecializationListComponent} from "../specialization-list/specialization-list.component";
 import {SpecializationService} from "../../services/specializationService/specialization.service";
-import {ProcedureService} from "../../../../core/services/procedureService/procedure.service";
 import {Specialization} from "../../../../core/models/Specialization";
+import {ProcedureService} from "../../../procedures/services/procedureService/procedure.service";
 
 @Component({
   selector: 'app-add-specialization-dialog',
@@ -26,8 +26,10 @@ export class AddSpecializationDialogComponent implements OnInit {
               private dialog: MatDialogRef<SpecializationListComponent>,
               private specializationService: SpecializationService,
               private  procedureService: ProcedureService) {
-    procedureService.getAll().subscribe((procedures) =>
-    this.procedures = procedures);
+    this.procedureService.getAllPaged(1, 2000032)
+      .subscribe(data => {
+        this.procedures = data.entities;
+      });
   }
 
   onSaveForm(): void{
