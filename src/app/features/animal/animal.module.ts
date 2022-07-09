@@ -21,28 +21,31 @@ import {AnimalsRoutingModule} from "./animals-routing.module";
 
 
 @NgModule({
-  declarations: [
-    MainAnimalComponent,
-    AddAnimalComponent,
-    DeleteAnimalComponent,
-    EditAnimalComponent,
-    AnimalMedcardComponent
-  ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatInputModule,
-    SharedModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatSortModule,
-    AnimalsRoutingModule
-  ]
+    declarations: [
+        MainAnimalComponent,
+        AddAnimalComponent,
+        DeleteAnimalComponent,
+        EditAnimalComponent,
+        AnimalMedcardComponent
+    ],
+    exports: [
+        MainAnimalComponent
+    ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatInputModule,
+        SharedModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatSortModule,
+        AnimalsRoutingModule
+    ]
 })
 export class AnimalModule { }

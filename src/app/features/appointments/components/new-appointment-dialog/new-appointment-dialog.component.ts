@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
@@ -11,6 +11,7 @@ import { ProcedureService } from 'src/app/features/procedures/services/procedure
 import { UserService } from 'src/app/features/userDashboard/services/userService/user.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { AppointmentsPageComponent } from '../appointments-page/appointments-page.component';
+import {AuthService} from "../../../../core/services/authService/auth.service";
 
 @Component({
   selector: 'app-new-appointment-dialog',
@@ -18,7 +19,7 @@ import { AppointmentsPageComponent } from '../appointments-page/appointments-pag
   styleUrls: ['./new-appointment-dialog.component.sass']
 })
 export class NewAppointmentDialogComponent implements OnInit {
-  
+
   procedures: Procedure[] = [];
   selectedprocedure: Procedure[] = [];
   isSelectionChanged: boolean = false;
@@ -26,27 +27,31 @@ export class NewAppointmentDialogComponent implements OnInit {
   users: User[] = [];
   selectedUser: User[]=[];
 
+  userId: number;
   animals: Animal[] = [];
   selectedAnimal: Animal= {} as Animal;
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
   public dialogRef: MatDialogRef<AppointmentsPageComponent>,
+
+  private authService : AuthService,
+
   private appointmentService : AppointmentService,
   private procedureService : ProcedureService,
   private userService : UserService,
-  private animalService : AnimalService) {  
-
+  private animalService : AnimalService) {
+    this.userId = authService.getUserId();
     this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
     this.userService.getDoctors().subscribe((data: User[]) => this.users = data)
-    this.animalService.getAll().subscribe((data: Animal[]) => this.animals = data);
+    this.animalService.getAllAnimals(this.userId).subscribe((data: Animal[]) => this.animals = data);
   }
 
   form = new FormGroup({
 
-    dateAndTime: new FormControl(new Date(), Validators.min(30)), 
+    dateAndTime: new FormControl(new Date(), Validators.min(30)),
     disease: new FormControl("", [Validators.minLength(3),Validators.maxLength(255)])
   });
-  
+
   ngOnInit(): void {
   }
 
@@ -56,12 +61,11 @@ export class NewAppointmentDialogComponent implements OnInit {
     }
     if(!(this.form.dirty || this.isSelectionChanged)) {
       this.dialogRef.close(false);
-    }  
+    }
     const finalData : Appointment = this.form.value as Appointment;
     finalData.procedures = this.selectedprocedure;
     finalData.users = this.selectedUser;
     finalData.animal = this.selectedAnimal;
-    console.log("ACVFD");
     // finalData.dateAndTime = this
     console.log(finalData);
     this.appointmentService.addAppointment(finalData).subscribe(() => this.dialogRef.close(true));
@@ -71,14 +75,14 @@ export class NewAppointmentDialogComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  onMultiSelectSubmitProcedure(event : any) : void{ 
+  onMultiSelectSubmitProcedure(event : any) : void{
     console.log(...event.data);
     this.selectedprocedure = [...event.data ] as Procedure[];
     this.isSelectionChanged = event.isChanged;
   }
 
-  
-  onMultiSelectSubmitDoctor(event : any) : void{ 
+
+  onMultiSelectSubmitDoctor(event : any) : void{
     console.log(...event.data);
     this.selectedUser = [...event.data] as User[];
     this.isSelectionChanged = event.isChanged;
@@ -92,7 +96,7 @@ export class NewAppointmentDialogComponent implements OnInit {
   }
 
   isButtonEnabled(): boolean{
-    return this.form.valid && (this.form.dirty || this.isSelectionChanged); 
+    return this.form.valid && (this.form.dirty || this.isSelectionChanged);
   }
 
 }

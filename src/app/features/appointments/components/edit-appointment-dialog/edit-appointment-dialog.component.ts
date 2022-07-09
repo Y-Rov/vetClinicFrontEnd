@@ -10,6 +10,7 @@ import { ProcedureService } from 'src/app/features/procedures/services/procedure
 import { UserService } from 'src/app/features/userDashboard/services/userService/user.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { AppointmentsPageComponent } from '../appointments-page/appointments-page.component';
+import {AuthService} from "../../../../core/services/authService/auth.service";
 
 @Component({
   selector: 'app-edit-appointment-dialog',
@@ -25,6 +26,7 @@ export class EditAppointmentDialogComponent implements OnInit {
   users: User[] = [];
   selectedUser: User[]=[];
 
+  userId: number;
   animals: Animal[] = [];
   public selectedAnimal: Animal = {};
 
@@ -35,18 +37,21 @@ export class EditAppointmentDialogComponent implements OnInit {
     private appointmentService : AppointmentService,
     private procedureService : ProcedureService,
     private userService : UserService,
-    private animalService : AnimalService
-    ) {  
+    private animalService : AnimalService,
+    private authService : AuthService,
+    ) {
+      this.userId = authService.getUserId();
       this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
       this.userService.getDoctors().subscribe((data: User[]) => this.users = data)
-      this.animalService.getAll().subscribe((data: Animal[]) => this.animals = data);
+      this.animalService.getAllAnimals(this.userId).subscribe((data: Animal[]) => this.animals = data);
+
     }
 
   form = new FormGroup({
 
-    date: new FormControl(new Date(), Validators.min(30)), 
+    date: new FormControl(new Date(), Validators.min(30)),
     disease: new FormControl("", [Validators.minLength(3),Validators.maxLength(255)])
-    
+
   });
 
   ngOnInit(): void {
@@ -66,26 +71,26 @@ export class EditAppointmentDialogComponent implements OnInit {
     this.data.dateAndTime = new Date(this.form.value.date!);
     this.data.disease = this.form.value.disease!;
     this.data.procedures = this.selectedprocedure;
-    
+
     this.data.users = this.selectedUser;
     this.data.animal= this.selectedAnimal;
     console.log(this.data);
     this.appointmentService.updateAppointment(this.data).subscribe(() => this.dialogRef.close(true));
 }
-    
+
 
   onNoClick(): void {
     this.dialogRef.close(false);
   }
 
-  onMultiSelectSubmitProcedure(event : any) : void{ 
+  onMultiSelectSubmitProcedure(event : any) : void{
     console.log(...event.data);
     this.selectedprocedure = [...event.data ] as Procedure[];
     this.isSelectionChanged = event.isChanged;
   }
 
-  
-  onMultiSelectSubmitDoctor(event : any) : void{ 
+
+  onMultiSelectSubmitDoctor(event : any) : void{
     console.log(...event.data);
     this.selectedUser = [...event.data] as User[];
     this.isSelectionChanged = event.isChanged;
@@ -103,6 +108,6 @@ export class EditAppointmentDialogComponent implements OnInit {
   }
 
   isButtonEnabled(): boolean{
-    return this.form.valid && (this.form.dirty || this.isSelectionChanged); 
+    return this.form.valid && (this.form.dirty || this.isSelectionChanged);
   }
 }
