@@ -1,0 +1,12 @@
+<p>chat-preview works!</p>
+<div class="chat-preview-wrapper">
+    <div class="chat-picture">
+        <img src= {{chat?.picture}}>
+    </div>
+    <div class="chat-info">
+        <h3 class="chat-name">{{chat?.name}}</h3>
+        <div class="last-message">
+            <span class="message">{{chat?.lastMessage?.text ?? ''}}</span>
+        </div>
+    </div>
+</div>
