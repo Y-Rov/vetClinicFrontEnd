@@ -16,6 +16,7 @@ import { NewProcedureDialogComponent } from './components/new-procedure-dialog/n
 import { EditProcedureDialogComponent } from './components/edit-procedure-dialog/edit-procedure-dialog.component';
 import { DeleteProcedureDialogComponent } from './components/delete-procedure-dialog/delete-procedure-dialog.component';
 import { ProceduresRoutingModule } from "./procedures-routing.module";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProceduresRoutingModule } from "./procedures-routing.module";
     MatTableModule,
     MatTooltipModule,
     ProceduresRoutingModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
   ]
 })
 export class ProceduresModule { }
