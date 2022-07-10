@@ -17,9 +17,9 @@ import { UserAddressEditComponent } from './components/user-profile-edit/user-ad
 import { UserPortfolioEditComponent } from './components/user-profile-edit/user-portfolio-edit/user-portfolio-edit.component';
 
 import { ConfirmDeletionDialogComponent } from './components/user-profile-edit/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import { MatDialogModule } from "@angular/material/dialog";
 
-import {AnimalModule} from "../animal/animal.module";
+import { AnimalModule } from "../animal/animal.module";
 
 
 
