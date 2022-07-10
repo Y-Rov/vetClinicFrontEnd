@@ -41,7 +41,10 @@ export class HeaderComponent implements OnInit {
     let userId: number = this.authService.getUserId();
     if (userId != null) {
       this.userService.getById(userId).subscribe(user => {
-        this.profilePic = `data:image/png;base64,{user.profilePicture!}`;
+        if (user.profilePicture != null)
+          this.profilePic = user.profilePicture!;
+        else
+          this.profilePic = '/assets/images/default_profile_pic.jpg';
       })
     }
   }
