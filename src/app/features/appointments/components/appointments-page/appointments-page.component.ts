@@ -31,10 +31,6 @@ export class AppointmentsPageComponent implements OnInit {
   private updateList(): void {
     this.appointmentService.getAll().subscribe(data => {
       console.log(data);
-      // for(let a of data){
-      //   a.users = a.users?.filter(u => u.role! == "Doctor");
-        
-      // }
       this.dataSource.data = data;
       this.dataSource.sort = this.sort!;
     });

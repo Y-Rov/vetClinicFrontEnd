@@ -41,7 +41,8 @@ export class EditAppointmentDialogComponent implements OnInit {
     private authService : AuthService,
     ) {
       this.userId = authService.getUserId();
-      this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
+      this.procedureService.getAllPaged(1, 2000032)
+      .subscribe(data => { this.procedures = data.entities; });
       this.userService.getDoctors().subscribe((data: User[]) => this.users = data)
       this.animalService.getAllAnimals(this.userId).subscribe((data: Animal[]) => this.animals = data);
 
