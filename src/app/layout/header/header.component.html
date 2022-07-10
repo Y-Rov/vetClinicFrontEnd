@@ -29,6 +29,6 @@
       <div class="user-img-wrapper"><img [src]="profilePic" alt="My profile" ></div>
     </a>
 
-    <a mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
+    <a class="logout-button" mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
   </div>
 </mat-toolbar>
