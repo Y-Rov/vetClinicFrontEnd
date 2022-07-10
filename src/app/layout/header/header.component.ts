@@ -29,7 +29,10 @@ export class HeaderComponent implements OnInit {
     this.loadProfilePicture();
     this.authService.login$.subscribe(_ => {
       this.loadProfilePicture();
-    })
+    });
+    this.userService.edit$.subscribe(_ => {
+      this.loadProfilePicture();
+    });
   }
 
   onLogout(){

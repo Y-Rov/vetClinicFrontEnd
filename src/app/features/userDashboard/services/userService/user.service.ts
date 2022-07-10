@@ -4,7 +4,7 @@ import { User } from '../../../../core/models/User';
 import { Location } from '@angular/common';
 import { ResourceService } from '../../../../core/services/resourceService/resource.service';
 import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { RegisterEmployeeModel } from '../../../../core/models/RegisterEmployeeModel';
 import { RegisterFormModel } from 'src/app/core/models/operational-models/form-models/RegisterFormModel';
 import { UserParameters } from 'src/app/core/models/operational-models/QueryParameters/UserParameters';
@@ -13,6 +13,8 @@ import { UserParameters } from 'src/app/core/models/operational-models/QueryPara
   providedIn: 'root'
 })
 export class UserService extends ResourceService<User> {
+  edit$: Subject<User> = new Subject<User>();
+  
   constructor(
     http: HttpClient,
     currentLocation: Location) {

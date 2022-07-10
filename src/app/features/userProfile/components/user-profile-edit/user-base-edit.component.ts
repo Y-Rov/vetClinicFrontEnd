@@ -60,7 +60,9 @@ export class UserBaseEditComponent implements OnInit {
 
     reader.onload = (e: any) => {
       const bytes = e.target.result.split('base64,')[1];
+
       this.user.profilePicture = bytes;
+      this.profilePicture = `data:image/png;base64,${bytes}`;
     };
 
     reader.readAsDataURL(file);
@@ -77,7 +79,10 @@ export class UserBaseEditComponent implements OnInit {
     this.user.phoneNumber = this.editUserForm.value.phoneNumber!;
     this.user.birthDate = this.editUserForm.value.birthDate!;
 
-    this.userService.update(this.user).subscribe();
+    this.userService.update(this.user).subscribe(user => {
+      this.userService.edit$.next(user);
+    });
+    
     this.goToPreviousPage();
   }
 

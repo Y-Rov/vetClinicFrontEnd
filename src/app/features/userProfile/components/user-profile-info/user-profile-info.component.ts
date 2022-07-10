@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from "../../../../core/models/User";
 import { UserService } from "../../../userDashboard/services/userService/user.service";
 import { ActivatedRoute } from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
-import {FeedbackAddComponent} from "../../../feedback/feedback-add/feedback-add.component";
+import { MatDialog } from "@angular/material/dialog";
+import { FeedbackAddComponent } from "../../../feedback/feedback-add/feedback-add.component";
 
 @Component({
   selector: 'app-user-profile-info',
