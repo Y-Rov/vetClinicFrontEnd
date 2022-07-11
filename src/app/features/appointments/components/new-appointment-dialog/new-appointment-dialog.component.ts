@@ -41,8 +41,9 @@ export class NewAppointmentDialogComponent implements OnInit {
   private userService : UserService,
   private animalService : AnimalService) {
     this.userId = authService.getUserId();
-    this.procedureService.getAll().subscribe((data: Procedure[]) => this.procedures = data)
-    this.userService.getAll().subscribe((data: User[]) => this.users = data)
+    this.procedureService.getAllPaged(1, 2000032)
+      .subscribe(data => { this.procedures = data.entities; });
+    this.userService.getDoctors().subscribe((data: User[]) => this.users = data)
     this.animalService.getAllAnimals(this.userId).subscribe((data: Animal[]) => this.animals = data);
   }
 
@@ -66,8 +67,6 @@ export class NewAppointmentDialogComponent implements OnInit {
     finalData.procedures = this.selectedprocedure;
     finalData.users = this.selectedUser;
     finalData.animal = this.selectedAnimal;
-    console.log("ACVFD");
-    // finalData.dateAndTime = this
     console.log(finalData);
     this.appointmentService.addAppointment(finalData).subscribe(() => this.dialogRef.close(true));
   }
