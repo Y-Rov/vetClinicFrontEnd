@@ -67,7 +67,6 @@ export class NewAppointmentDialogComponent implements OnInit {
     finalData.procedures = this.selectedprocedure;
     finalData.users = this.selectedUser;
     finalData.animal = this.selectedAnimal;
-    // finalData.dateAndTime = this
     console.log(finalData);
     this.appointmentService.addAppointment(finalData).subscribe(() => this.dialogRef.close(true));
   }
