@@ -25,6 +25,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSelectModule } from "@angular/material/select";
 import { ViewArticleContainerComponent } from './components/articles/view-article-container/view-article-container.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import {MatSortModule} from "@angular/material/sort";
 
 
 
@@ -43,23 +44,24 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     ArticlesPageComponent,
     ViewArticleContainerComponent
   ],
-  imports: [
-      CommonModule,
-      CompanyBlogRoutingModule,
-      MatMenuModule,
-      MatIconModule,
-      MatDividerModule,
-      ReactiveFormsModule,
-      MatFormFieldModule,
-      MatButtonModule,
-      MatInputModule,
-      AngularEditorModule,
-      MatCardModule,
-      MatTableModule,
-      MatSelectModule,
-      FormsModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        CommonModule,
+        CompanyBlogRoutingModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDividerModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        AngularEditorModule,
+        MatCardModule,
+        MatTableModule,
+        MatSelectModule,
+        FormsModule,
+        MatSnackBarModule,
+        MatSortModule
+    ],
   providers: [
   ],
 })
