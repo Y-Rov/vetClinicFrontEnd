@@ -46,6 +46,6 @@ export class NewArticleDialogComponent<T> implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.articleService.discardEditing().subscribe(() => this.dialogRef.close(false));
   }
 }

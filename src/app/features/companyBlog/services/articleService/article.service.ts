@@ -56,6 +56,14 @@ export class ArticleService extends ResourceService<Article>{
       );
   }
 
+  discardEditing(): Observable<void>{
+    const url: string = `${this.apiUrl}/discard`
+    return this.httpClient.post<void>(url, {}, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<void>('discardEditing'))
+      );
+  }
+
   postArticle(article: Article): Observable<Article>{
     const viewModel = {
       title: article.title,
