@@ -49,7 +49,6 @@ export class ArticleService extends ResourceService<Article>{
       url += `&OrderByDirection=${orderByDirection}`;
     }
 
-    console.log(url);
     return this.http.get<ArticleParameters>(url, this.httpOptions)
       .pipe(
         catchError(this.handleError<ArticleParameters>('getAll'))

@@ -51,7 +51,6 @@ export class PreviewArticleComponent implements OnInit {
     this.articleService.updateArticle(updatedArticle).subscribe(() =>
     {
       this.currentArticle!.published = true
-      console.log(this.route.url);
       this.router.navigateByUrl(`$blog/${this.currentArticle!.id}`);
     });
   }

@@ -65,7 +65,6 @@ export class ArticlesPageComponent implements OnInit {
         orderByDirection,
         !(this.authService.isAuthorized() && this.authService.isInRole('Admin')))
       .subscribe(data => {
-        console.log(data);
         this.articles = data.entities;
         this.dataSource.data = data.entities;
         this.updatePageInfo(data);
