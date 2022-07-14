@@ -15,7 +15,7 @@ import {
 import {
   SpecializationAddUserDialogComponent
 } from "../specialization-add-user-dialog/specialization-add-user-dialog.component";
-import {SpecializationParameters} from "../../../../core/models/operational-models/SpecializationParameters";
+import {SpecializationParameters} from "../../../../core/models/operational-models/QueryParameters/SpecializationParameters";
 
 @Component({
   selector: 'app-specializationService-list',

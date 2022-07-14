@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {Feedback} from "../../../core/models/Feedback";
-import {FeedbackService} from "../../../core/services/feedbackService/feedback.service";
+import {FeedbackService} from "./services/feedback.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FeedbackAddComponent} from "../feedback-add/feedback-add.component";
+import {FeedbackParameters} from "../../../core/models/operational-models/QueryParameters/FeedbackParameters";
 
 @Component({
   selector: 'app-feedbacks',
@@ -25,31 +26,39 @@ export class FeedbacksComponent implements OnInit {
     { name: '20', value: 20 }
   ];
 
+  pageInfo: FeedbackParameters | null = null;
   currentPageSize: number = this.pageSizeOptions[0].value;
   currentPageNumber: number = 1;
   filterValue: string | null = null;
 
   constructor(
-    private feedbackService : FeedbackService,
-    private matDialog : MatDialog) { }
+    private feedbackService : FeedbackService) { }
 
   private updateFeedbacks(
-    takeCount?: number,
-    skipCount: number = 0,
+    pageNumber: number = 1,
+    pageSize: number = 4,
     filterParam: string | null = null){
-    this.feedbackService.getFeedbacks(skipCount, takeCount, filterParam)
+    this.feedbackService.getFeedbacks(pageNumber, pageSize, filterParam)
       .subscribe(
-        data => this.dataSource.data = data
+        data => {
+          this.dataSource.data = data.entities;
+          this.updatePageInfo(data);
+        }
       );
   }
 
+  updatePageInfo(pageInformation : FeedbackParameters){
+    this.pageInfo = pageInformation;
+  }
+
+  // Change signatures!!!
+
   selectPageSizeOption(): void {
-    this.updateFeedbacks(this.currentPageSize);
+    this.updateFeedbacks(this.currentPageNumber,this.currentPageSize,this.filterValue);
     this.currentPageNumber = 1;
   }
 
   onPrevPageClick(): void {
-    this.currentPageNumber -= 1;
     this.updateFeedbacks(this.currentPageSize, this.currentPageSize * (this.currentPageNumber - 1));
   }
 
@@ -65,10 +74,6 @@ export class FeedbacksComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateFeedbacks(this.currentPageSize);
-  }
-
-  leaveFeedback(){
-    const dialog = this.matDialog.open(FeedbackAddComponent);
   }
 
 }
