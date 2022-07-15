@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDeletionDialogComponent } from "../confirm-deletion-dialog/confirm-deletion-dialog.component";
+import {Address} from "../../../../../core/models/Address";
 
 @Component({
   selector: 'app-user-address-edit',
@@ -14,11 +15,12 @@ import { ConfirmDeletionDialogComponent } from "../confirm-deletion-dialog/confi
 export class UserAddressEditComponent implements OnInit {
 
   userId: number;
+  userAddress?: Address;
   deleteButtonVisibility: boolean = false;
   submitButtonText: string = "Add";
   readonly cityAndStreetMaxLength: number = 85;
   readonly houseMaxLength: number = 15;
-  readonly apartmentNumberMaxLength = 5;
+  readonly apartmentNumberMaxLength: number = 5;
 
   editUserAddressForm = new FormGroup({
     'city': new FormControl<string>('', [Validators.required, Validators.maxLength(this.cityAndStreetMaxLength)]),
@@ -59,6 +61,7 @@ export class UserAddressEditComponent implements OnInit {
     this.addressService.getById(this.userId)
       .subscribe(address => {
         if (address !== undefined) {
+          this.userAddress = address;
           this.editUserAddressForm.patchValue({
             city: address.city,
             street: address.street,
@@ -72,9 +75,18 @@ export class UserAddressEditComponent implements OnInit {
       });
   }
 
+  // Returns true if the user has changed the value in the form
+  isDifferent(data: any) {
+    let equal: boolean = true;
+    Object.keys(data).forEach(key => {
+      equal = (equal && data[key] == this.editUserAddressForm.get(key));
+    })
+    return equal;
+  }
+
   updateUserAddress(): void {
     if (this.editUserAddressForm.valid) {
-      if (this.editUserAddressForm.pristine) {
+      if (!this.isDifferent(this.userAddress)) {
         this.snackBar.open(`There is nothing to update!`, 'Close', {
           duration: 4000,
           horizontalPosition: 'center',
