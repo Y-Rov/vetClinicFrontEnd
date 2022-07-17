@@ -107,6 +107,6 @@ export class ArticleMenuComponent implements OnInit {
 
   onPreview(event: Event) : void{
     event.stopPropagation();
-    this.router.navigateByUrl(`preview/${this.currentArticle!.id}`);
+    this.router.navigateByUrl(`${this.router.url}/preview/${this.currentArticle!.id!}`);
   }
 }

@@ -2,7 +2,7 @@
   <mat-card-title>
     <span class="title-span">{{article!.title!.length > 20 ? article!.title!.slice(0, 20) + '...' : article!.title}}</span>
     <app-article-menu
-      [(article)]="article!"
+      [article]="article!"
       (deletedArticle)="onDeleteArticle()"
       *ngIf="authService.isAuthorized() && authService.isInRole('Admin')"></app-article-menu>
   </mat-card-title>
