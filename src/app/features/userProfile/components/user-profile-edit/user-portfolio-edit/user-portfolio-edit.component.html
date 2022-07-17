@@ -8,7 +8,8 @@
 </div>
 
 <div class="controls">
-  <button mat-raised-button class="submit-btn" color="primary" (click)="updateUserPortfolio()">{{submitButtonText}}</button>
+  <button [disabled]="description.invalid" mat-raised-button class="submit-btn" color="primary"
+          (click)="updateUserPortfolio()">Save</button>
   <button mat-raised-button (click)="portfolioService.goToPreviousPage()">Back to profile</button>
   <button *ngIf="deleteButtonVisibility" mat-raised-button color="warn" (click)="deletePortfolio()">Delete</button>
 </div>

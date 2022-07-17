@@ -19,27 +19,28 @@
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>House number</mat-label>
       <input matInput maxlength="{{houseMaxLength}}" placeholder="Ex. 123" formControlName="house">
-      <mat-hint align="end">{{editUserAddressForm.value.house?.length || 0}}/{{houseMaxLength}}</mat-hint>
       <mat-error *ngIf="editUserAddressForm.get('house')?.invalid">{{getErrorMessage('house')}}</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Apartment number</mat-label>
-      <input matInput maxlength="{{apartmentNumberMaxLength}}" placeholder="Ex. 15" formControlName="apartmentNumber">
-      <mat-error *ngIf="editUserAddressForm.get('apartmentNumber')?.invalid">{{getErrorMessage('apartmentNumber')}}</mat-error>
+      <input type="number" matInput maxlength="{{apartmentNumberMaxLength}}" placeholder="Ex. 15"
+             formControlName="apartmentNumber" [min]=1 (keydown)="ignoreNotNumberSymbols($event)">
+      <mat-error *ngIf="editUserAddressForm.get('apartmentNumber')?.invalid">{{getErrorMessage('apartment number')}}</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Postcode</mat-label>
       <input matInput placeholder="Ex. 76000" formControlName="zipCode">
-      <mat-error *ngIf="editUserAddressForm.get('zipCode')?.invalid">{{getErrorMessage('zipCode')}}</mat-error>
+      <mat-error *ngIf="editUserAddressForm.get('zipCode')?.invalid">{{getErrorMessage('zip code')}}</mat-error>
     </mat-form-field>
   </div>
 
   <div class="controls">
-    <button mat-raised-button class="submit-btn" color="primary" (click)="updateUserAddress()">{{submitButtonText}}</button>
+    <button [disabled]="editUserAddressForm.invalid" mat-raised-button class="submit-btn" color="primary"
+            (click)="updateUserAddress()">Save</button>
     <button mat-raised-button (click)="addressService.goToPreviousPage()">Back to profile</button>
     <button *ngIf="deleteButtonVisibility" mat-raised-button color="warn" (click)="deleteAddress(addressForm)">Delete</button>
   </div>

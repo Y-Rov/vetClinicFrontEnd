@@ -21,8 +21,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 
 import { AnimalModule } from "../animal/animal.module";
 
-
-
 @NgModule({
   declarations: [
     UserProfileInfoComponent,
