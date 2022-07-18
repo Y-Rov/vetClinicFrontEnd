@@ -7,10 +7,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Appointment} from "../../../../core/models/Appointment";
 import {MainAnimalComponent} from "../main-animal/main-animal.component";
 import {AnimalParameters} from "../../../../core/models/operational-models/QueryParameters/AnimalParameters";
-import {
-  ExceptionParametersWithList
-} from "../../../../core/models/operational-models/QueryParameters/ExceptionParametersWithList";
-import {ExceptionParameters} from "../../../../core/models/operational-models/QueryParameters/ExceptionParameters";
+import {FileSaverService} from "ngx-filesaver";
+import {HttpResponse} from "@angular/common/http";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-animal-medcard',
@@ -26,24 +25,28 @@ export class AnimalMedcardComponent implements OnInit {
   pagingInfo : AnimalParameters | null = null;
   itemsPerPage : number = 5;
   options = [
-    {name:"5", value: 5},
-    {name: "10", value: 10}
+    {name: "5", value: 5},
+    {name: "10", value: 10},
+    {name: "All", value: 0}
   ]
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data : number,
     private animalService: AnimalService,
-    public dialogRef: MatDialogRef<MainAnimalComponent>)
+    public dialogRef: MatDialogRef<MainAnimalComponent>,
+    private fS:FileSaverService)
   {}
 
   private updateList(CurrentPage: number = 1, PageSize: number = 5): void {
-
     this.animalService.getMedCard(this.data, CurrentPage, PageSize).subscribe((data) => {
       this.dataSource.data = data.entities;
-      console.log(data);
       this.dataSource.sort = this.sort!;
       this.updatePagingInfo(data);
     });
+  }
+
+  MakePdf(){
+    this.animalService.getPDF(this.data, 1, this.itemsPerPage);
   }
 
   onNextButtonInfoClick() {
