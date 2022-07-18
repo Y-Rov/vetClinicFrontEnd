@@ -31,16 +31,6 @@ export class UserPortfolioEditComponent implements OnInit {
     this.userId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
-  getErrorMessage(): string {
-    if (this.description.hasError('required')) {
-      return 'This field is required';
-    }
-
-    return this.description.hasError('minlength')
-      ? 'Your portfolio is too short! Tell the world more about yourself ;)'
-      : '';
-  }
-
   ngOnInit(): void {
     this.getUserPortfolio();
   }

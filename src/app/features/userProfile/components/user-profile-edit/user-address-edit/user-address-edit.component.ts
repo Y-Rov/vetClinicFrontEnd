@@ -93,7 +93,9 @@ export class UserAddressEditComponent implements OnInit {
 
   updateCurrentAddress(address: any): void {
     Object.keys(address).forEach(key => {
-      address[key] = this.editUserAddressForm.get(`${key}`)?.value;
+      if (key !== 'id') {
+        address[key] = this.editUserAddressForm.get(`${key}`)?.value;
+      }
     })
   }
 

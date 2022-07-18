@@ -33,7 +33,7 @@
   <div>
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Postcode</mat-label>
-      <input matInput placeholder="Ex. 76000" formControlName="zipCode">
+      <input matInput emptyValueToNull placeholder="Ex. 76000" formControlName="zipCode">
       <mat-error *ngIf="editUserAddressForm.get('zipCode')?.invalid">{{getErrorMessage('zip code')}}</mat-error>
     </mat-form-field>
   </div>
