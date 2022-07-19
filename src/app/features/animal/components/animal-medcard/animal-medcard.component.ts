@@ -46,7 +46,9 @@ export class AnimalMedcardComponent implements OnInit {
   }
 
   MakePdf(){
-    this.animalService.getPDF(this.data, 1, this.itemsPerPage);
+    this.animalService.getPDF(this.data, 1, this.itemsPerPage).subscribe(blob=>{
+      saveAs(blob,'myFile.pdf')
+    });
   }
 
   onNextButtonInfoClick() {

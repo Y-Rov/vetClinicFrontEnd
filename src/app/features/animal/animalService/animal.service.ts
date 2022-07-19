@@ -62,12 +62,9 @@ export class AnimalService extends ResourceService<Animal>{
     return this.httpClient.get<AnimalParameters>(url, this.httpOptions);
   }
 
-  getPDF(id:number, pageNumber: number = 1, pageSize: number = 5) {
+  getPDF(id:number, pageNumber: number = 1, pageSize: number = 5) : Observable<any> {
     const url = `${this.apiUrl}/generatePDF/?pageNumber=${pageNumber}&pageSize=${pageSize}&animalId=${id}`;
-    this.httpClient.get(url,{responseType:'blob'}).subscribe(blob=>{
-      saveAs(blob,'myFile.pdf');
-    });
-   // return this.httpClient.post<Blob>(url,{responseType:'blob'});
+    return this.httpClient.get(url,{responseType:'blob'});
   }
 
   getAllAnimals(id: number):Observable<any>{
