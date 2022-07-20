@@ -20,19 +20,12 @@ export class FinancialStatementService extends ResourceService <FinStatementOneM
   }
 
 
-  getAllFinStat( data: MyDate ,pageNumber: number = 1, pageSize: number = 4)
+  getAllFinStat( data: MyDate ,pageNumber: number = 1, pageSize: number = 5)
     : Observable<FinancialStatementParameters> {
-    const viewModel =
-    {
-      startDate: data.startDate,
-      endDate: data.endDate
-    };
-    let url = `${this.apiUrl}?PageNumber=${pageNumber}&PageSize=${pageSize}`;
 
-    return this.http.post<FinancialStatementParameters>(url, viewModel, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<FinancialStatementParameters>('GetAllFinStat'))
-      );
+    let url = `${this.apiUrl}?Date.StartDate=${data.startDate.toISOString()}&Date.EndDate=${data.endDate.toISOString()}&PageNumber=${pageNumber}&PageSize=${pageSize}`;
+
+    return this.http.get<FinancialStatementParameters>(url, this.httpOptions);
   }
 
   getFinancialStatement(data: MyDate): Observable<FinStatementOneMonth[]> {
