@@ -1,4 +1,4 @@
-import { MessageGet } from "./Messages/MessageGet";
+import { Message } from "./Message";
 
 export class Chat {
     id?: number;
@@ -6,6 +6,6 @@ export class Chat {
     interlocutorId?: number;
     picture?: string;
     numberOfUnreadMessages: number = 0;
-    lastMessage?: MessageGet;
-    messages: MessageGet[] = [];
+    lastMessage?: Message;
+    messages?: Message[];
 }
