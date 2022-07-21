@@ -19,11 +19,8 @@ export class MessagingPageComponent implements OnInit {
   ngOnInit(): void {
     // load chats
     this.messagingService.getChats().subscribe(
-      data => this.chats = data
+      chats => this.chats = chats
     );
-
-    // load unread messages into registry
-    this.messagingService.getUnreadMessages(); 
 
     // on receive message
     // TODO: 

@@ -1,8 +1,7 @@
-<p>messaging-page works!</p>
 <div class="messages-wrapper">
     <div class="chats-preview-sidebar">
         <app-chat-preview 
-            *ngFor="let chat in chats" 
+            *ngFor="let chat of chats" 
             [chat]="chat"
             (click)="onChatSelect(chat)">
         </app-chat-preview>
