@@ -7,19 +7,30 @@ import { ChatPreviewComponent } from './components/chat-preview/chat-preview.com
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MessagingRoutingModule } from './messaging-routing.module';
+import { ObserveVisibilityDirective } from 'src/app/attribute-directives/observe-visibility.directive'
+
 
 @NgModule({
   declarations: [
     MessagingPageComponent,
     ChatWindowComponent,
     MessageComponent,
-    ChatPreviewComponent
+    ChatPreviewComponent,
+    ObserveVisibilityDirective
   ],
   imports: [
     CommonModule,
     FormsModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MessagingRoutingModule,
+    MatDividerModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class MessagingModule { }
