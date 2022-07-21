@@ -26,8 +26,7 @@ export class AnimalMedcardComponent implements OnInit {
   itemsPerPage : number = 5;
   options = [
     {name: "5", value: 5},
-    {name: "10", value: 10},
-    {name: "All", value: 0}
+    {name: "10", value: 10}
   ]
 
   constructor(
@@ -46,8 +45,8 @@ export class AnimalMedcardComponent implements OnInit {
   }
 
   MakePdf(){
-    this.animalService.getPDF(this.data, 1, this.itemsPerPage).subscribe(blob=>{
-      saveAs(blob,'myFile.pdf')
+    this.animalService.getPDF(this.data, 1, 0).subscribe(blob=>{
+      saveAs(blob)
     });
   }
 
