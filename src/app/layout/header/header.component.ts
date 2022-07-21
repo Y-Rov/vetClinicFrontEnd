@@ -37,6 +37,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProfilePic();
+    if (this.authService.isAuthorized()){
+      this.messagingService.connectToSignalRServer();
+      this.messagingService.getUnreadMessages().subscribe();
+    }
   }
   
   getProfilePic(){
