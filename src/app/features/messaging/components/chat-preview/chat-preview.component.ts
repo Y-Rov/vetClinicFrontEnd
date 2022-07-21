@@ -16,8 +16,16 @@ export class ChatPreviewComponent implements OnInit {
   ) 
   {}
 
+  get numberOfUnreadMessages() {
+    let result: number = 0;
+
+    if (this.chat?.id != undefined){
+      result = this.messagingService
+              .getNumberOfUnreadMessages(this.chat.id) ?? 0
+    }
+    return result;
+  }
+
   ngOnInit(): void {
-    if (this.chat != undefined)
-      this.chat.numberOfUnreadMessages = this.messagingService.unreadMessageRegistry.get(this.chat.id!)?.length ?? 0;
   }
 }
