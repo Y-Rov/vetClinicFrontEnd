@@ -22,8 +22,8 @@ export class SpecializationAddUserDialogComponent implements OnInit {
               private dialog: MatDialogRef<SpecializationListComponent>,
               private userService: UserService,
               private specializationService: SpecializationService) {
-    userService.getAllUsers(1,10)
-      .subscribe(data => this.users = data.entities);
+    specializationService.getEmployees()
+      .subscribe(data => this.users = data);
     console.log(this.users);
   }
 

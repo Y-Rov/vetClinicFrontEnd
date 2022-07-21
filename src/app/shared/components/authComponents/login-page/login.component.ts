@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { LoginFormModel } from 'src/app/core/models/operational-models/form-models/LoginFormModel'
+import { TokensResponse } from 'src/app/core/models/operational-models/TokensResponse';
 import { AuthService } from 'src/app/core/services/authService/auth.service';
+import { UserService } from 'src/app/features/userDashboard/services/userService/user.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     private authService : AuthService,
+    private userService: UserService,
     private router: Router) 
     { }
 
@@ -35,14 +38,15 @@ export class LoginComponent implements OnInit {
         this.handleLoginFail();
         return throwError(err)
       }))
-      .subscribe(response => this.handleLoginSuccess());
+      .subscribe(response => this.handleLoginSuccess(response));
   }
 
   private handleLoginFail(){
     this.isLoginSucceeded = false;
   }
 
-  private handleLoginSuccess(){
+  private handleLoginSuccess(tokenResponse: TokensResponse){
+    this.authService.login$.next(tokenResponse);
     this.router.navigate(['/procedures']);
   }
 }

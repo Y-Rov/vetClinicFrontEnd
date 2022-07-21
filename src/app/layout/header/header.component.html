@@ -7,7 +7,6 @@
 
     <a mat-button routerLinkActive="active" routerLink="/blog">Blog</a>
     <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/appointments">My Appointments</a>
-    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()">My Work</a>
     <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Accountant')" routerLink="/salaries">Salary</a>
     <a mat-button routerLinkActive="active"
@@ -20,7 +19,6 @@
        *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/feedbacks">Feedbacks</a>
     <a mat-button routerLinkActive="active"
        *ngIf="authService.isAuthorized() && authService.isInRole('Admin')" routerLink="/exceptions">Exceptions</a>
-    <a mat-button routerLinkActive="active" *ngIf="authService.isAuthorized()" routerLink="/animals">Animals</a>
   </div>
 
   <div class="user-operations-container">
@@ -40,6 +38,6 @@
       </div>
     </a>
 
-    <a mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
+    <a class="logout-button" mat-button *ngIf="authService.isAuthorized()" (click)="onLogout()">Logout</a>
   </div>
 </mat-toolbar>

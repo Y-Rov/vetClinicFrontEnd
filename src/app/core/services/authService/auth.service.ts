@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import * as moment from "moment";
 import { TokensResponse } from '../../models/operational-models/TokensResponse';
 import jwtDecode from 'jwt-decode';
@@ -20,6 +20,7 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded'
     }),
   };
+  login$: Subject<TokensResponse> = new Subject<TokensResponse>();
 
   constructor(private http: HttpClient, private userService: UserService) {
   }
@@ -33,9 +34,12 @@ export class AuthService {
     body.set('client_secret', "angular_client_secret");
     body.set('scope', 'apiAccess offline_access');
 
-    var request = this.http.post<TokensResponse>(this.tokenUrl, body, this.httpOptions)
-    request.subscribe((response) => this.setSession(response))
-    return request;
+    return this.http.post<TokensResponse>(this.tokenUrl, body, this.httpOptions).pipe(
+      tap(tokenResponse => {
+        this.setSession(tokenResponse);
+        this.login$.next(tokenResponse);
+      })
+    );
   }
 
   public register(registerForm : RegisterFormModel) : Observable<User> {

@@ -23,7 +23,7 @@ export class DisplayCommentComponent implements OnInit {
     if(this.profilePickTemp == null){
       return '/assets/images/default_profile_pic.jpg';
     }
-    return `data:image/png;base64,${this.profilePickTemp}`
+    return `${this.profilePickTemp}`
   }
 
   constructor(private commentService: CommentService,
@@ -76,6 +76,9 @@ export class DisplayCommentComponent implements OnInit {
   getProfilePick(): void{
     this.userService
       .getById(this.comment!.authorId!)
-      .subscribe(data => this.profilePickTemp = data.profilePicture!);
+      .subscribe(data => {
+        this.profilePickTemp = data.profilePicture!;
+        console.log(data.profilePicture)
+      });
   }
 }

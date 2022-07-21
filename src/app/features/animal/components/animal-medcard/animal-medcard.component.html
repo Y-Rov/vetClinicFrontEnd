@@ -19,11 +19,25 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator class="mat-elevation-z6 row"
-                   [pageSizeOptions]="[3]"
-                   aria-label="Select page of users">
-    </mat-paginator>
+    <div class="pagginator row mat-elevation-z8 ">
+      <div class="paginatorElemetnPostion">items per page </div>
+      <div class="paginatorElemetnPostion">
+        <select (change)="selectOption()" [(ngModel)]="itemsPerPage">
+          <option *ngFor="let o of options">
+            {{o.name}}
+          </option>
+        </select>
+      </div>
+      <div class="paginatorElemetnPostion">{{pagingInfo?.currentPage??0}} of {{pagingInfo?.totalPages??0}}</div>
+      <div class="paginatorElemetnPostion"> <button mat-raised-button
+          [disabled]="!(pagingInfo?.hasPrevious??false)" (click)="onPrevButtonInfoClick()"
+          color="info">Prev</button></div>
+      <div class="paginatorElemetnPostion"> <button mat-raised-button
+           [disabled]="!(pagingInfo?.hasNext??false)" (click)="onNextButtonInfoClick()"
+           color="info">Next</button></div>
+    </div>
   </div>
+
 </ng-container>
 <ng-container *ngIf="dataSource.data.length<=0">
   <p>Medcard is empty</p>

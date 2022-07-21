@@ -22,7 +22,11 @@ export class NewProcedureDialogComponent implements OnInit {
               public dialogRef: MatDialogRef<ProceduresPageComponent>,
               private procedureService : ProcedureService,
               private specializationService: SpecializationService) {
-    specializationService.getAll().subscribe((data) => this.specializations = data);
+    specializationService
+      .getAllSpecializations(1, 10)
+      .subscribe((data) =>
+        this.specializations = data.entities
+      );
   }
 
   form = new FormGroup({

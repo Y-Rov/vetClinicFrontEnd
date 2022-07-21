@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Location} from "@angular/common";
 import {catchError, Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {ProcedureParameters} from "../../../../core/models/operational-models/QueryParameters/ProcedureParameters";
 
 @Injectable({
   providedIn: 'any'
@@ -18,7 +19,33 @@ export class ProcedureService extends ResourceService<Procedure> {
     super(httpClient, currentLocation, Procedure, 'https://localhost:5001/api/procedures');
   }
 
-  createProcedure(procedure: Procedure): Observable<Procedure>{
+  getAllPaged(pageNumber: number = 1,
+              pageSize: number = 5,
+              filterParam: string | null = null,
+              orderByParam: string | null = null,
+              orderByDirection: string | null = null): Observable<ProcedureParameters> {
+    let url = `${this.apiUrl}?PageNumber=${pageNumber}&PageSize=${pageSize}`;
+
+    if (filterParam !== null) {
+      url += `&FilterParam=${filterParam}`;
+    }
+
+    if (orderByParam !== null) {
+      url += `&OrderByParam=${orderByParam}`;
+    }
+
+    if(orderByDirection !== null){
+      url += `&OrderByDirection=${orderByDirection}`;
+    }
+
+    return this.http.get<ProcedureParameters>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<ProcedureParameters>('getAll'))
+      );
+  }
+
+
+    createProcedure(procedure: Procedure): Observable<Procedure>{
     const viewModel = {
       id: procedure.id,
       name: procedure.name,

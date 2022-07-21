@@ -41,9 +41,9 @@ export class ViewArticleComponent implements OnInit {
         this.currentArticle = article;
         this.currentArticle.createdAt = new Date(article.createdAt!);
         this.articleService
-          .getPublished()
+          .getAllPaged(1, 5, null, null, null, true)
           .subscribe(data => {
-            this.otherArticles = data
+            this.otherArticles = data.entities
               .filter(art => art.id != this.currentArticle!.id!)
               .splice(0, 5);
         });
