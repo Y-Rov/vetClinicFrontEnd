@@ -4,6 +4,7 @@
     <app-article-menu
       [article]="article!"
       (deletedArticle)="onDeleteArticle()"
+      (articleChange)="onArticleChange($event)"
       *ngIf="authService.isAuthorized() && authService.isInRole('Admin')"></app-article-menu>
   </mat-card-title>
   <mat-divider inset></mat-divider>
