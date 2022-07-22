@@ -22,7 +22,8 @@ export class SalaryPageComponent implements OnInit {
 
   pageSizeOptions: { name: string; value: number }[] = [
     { name: '5', value: 5 },
-    { name: '10', value: 10 }
+    { name: '10', value: 10 },
+    { name: '20', value: 20 }
   ];
   pageInfo: SalaryParameters | null = null;
   currentPageSize: number = this.pageSizeOptions[0].value;
