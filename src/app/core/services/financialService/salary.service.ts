@@ -19,7 +19,7 @@ export class SalaryService extends ResourceService<Salary>{
     super(httpClient, currentLocation, Salary, 'https://localhost:5001/api/Financial');
   }
 
-  getAllSalary(pageNumber: number = 1, pageSize: number = 4)
+  getAllSalary(pageNumber: number = 1, pageSize: number = 5)
     : Observable<SalaryParameters> {
     let url = `${this.apiUrl}?PageNumber=${pageNumber}&PageSize=${pageSize}`;
 
