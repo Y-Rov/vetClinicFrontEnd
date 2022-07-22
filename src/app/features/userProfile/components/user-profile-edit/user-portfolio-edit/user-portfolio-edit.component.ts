@@ -41,6 +41,7 @@ export class UserPortfolioEditComponent implements OnInit {
         if (portfolio !== undefined) {
           this.description.setValue(portfolio.description!);
           this.userPortfolio = portfolio;
+          this.userPortfolio.id = this.userId;
           this.deleteButtonVisibility = true;
         }
       });
@@ -52,14 +53,15 @@ export class UserPortfolioEditComponent implements OnInit {
       return;
     }
 
-    this.userPortfolio!.description = this.description.value;
     if (this.deleteButtonVisibility) {
+      this.userPortfolio!.description = this.description.value;
       this.portfolioService.update({id: this.userId, description: this.description.value})
         .subscribe(() => {
           this.snackbarService.openWithMessage('Your portfolio was updated successfully!');
         });
     } else {
-        this.portfolioService.create({id: this.userId, description: this.description.value})
+      this.userPortfolio = new Portfolio({ id: this.userId, description: this.description.value });
+        this.portfolioService.create(this.userPortfolio)
           .subscribe(() => {
             this.snackbarService.openWithMessage('Your portfolio was created successfully!');
             this.deleteButtonVisibility = true;

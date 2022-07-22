@@ -131,7 +131,7 @@ export class UserAddressEditComponent implements OnInit {
     deleteDialog.afterClosed()
       .subscribe((dialogResult) => {
         if (dialogResult) {
-          this.addressService.deleteById(this.userAddress?.id!)
+          this.addressService.deleteById(this.userAddress!.id!)
             .subscribe(() => {
               this.snackbarService.openWithMessage("Your address was deleted successfully!");
               formReference.resetForm();
