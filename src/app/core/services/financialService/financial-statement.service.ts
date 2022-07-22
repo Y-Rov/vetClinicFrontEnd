@@ -19,6 +19,10 @@ export class FinancialStatementService extends ResourceService <FinStatementOneM
     super(httpClient, currentLocation, FinStatementOneMonth, 'https://localhost:5001/api/financialStatements');
   }
 
+  getPDF(data: MyDate, pageNumber: number = 1, pageSize: number = 5): Observable<any> {
+    let url = `${this.apiUrl}?/generatePDF/Date.StartDate=${data.startDate.toISOString()}&Date.EndDate=${data.endDate.toISOString()}&PageNumber=${pageNumber}&PageSize=${pageSize}`;
+    return this.httpClient.get(url, { responseType: 'blob' });
+  }
 
   getAllFinStat( data: MyDate ,pageNumber: number = 1, pageSize: number = 5)
     : Observable<FinancialStatementParameters> {
