@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FinStatementOneMonth } from '../../../../core/models/FinancialStatement/FinStatementOneMonth';
 import { MyDate } from '../../../../core/models/FinancialStatement/MyDate';
+import { FinancialStatementParameters } from '../../../../core/models/operational-models/QueryParameters/FinancialStatementParameters';
 import { FinancialStatementService } from '../../../../core/services/financialService/financial-statement.service';
 import { FinancialStatementPageComponent } from '../financial-statement-page/financial-statement-page.component';
 
@@ -26,13 +27,22 @@ export class FinancialStatementResultComponent implements OnInit {
   displayedColumns = ['month', 'totalExpences', 'totalIncomes', 'incomesDetail', 'expencesDetail'];
   ExpandedExpences: any;
   ExpandedIncomes: any;
+
+  pageSizeOptions: { name: string; value: number }[] = [
+    { name: '5', value: 5 },
+    { name: '10', value: 10 },
+    { name: '20', value: 20 }
+  ];
+  pageInfo: FinancialStatementParameters | null = null;
+  currentPageSize: number = this.pageSizeOptions[0].value;
+
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
     constructor(
     @Inject(MAT_DIALOG_DATA) private date: MyDate,
     private finService: FinancialStatementService,
-      public dialogRef: MatDialogRef<FinancialStatementPageComponent>) {
-}
+    public dialogRef: MatDialogRef<FinancialStatementPageComponent>) {
+  }
 
   ngOnInit(): void {
     this.updateList();
@@ -41,11 +51,31 @@ export class FinancialStatementResultComponent implements OnInit {
     this.dataSource.paginator = this.paginator!;
   }
 
-  private updateList(): void {
-    this.finService.getFinancialStatement(this.date).subscribe((data) => {
-      this.dataSource.data = data;
+  private updateList(pageNumber: number = 1, pageSize: number = 5): void {
+    this.finService.getAllFinStat(this.date, pageNumber, pageSize).subscribe((data) => {
+      this.dataSource.data = data.entities;
+      this.updatePageInfo(data);
     });
   }
+
+  private updatePageInfo(data: FinancialStatementParameters): void {
+    this.pageInfo = <FinancialStatementParameters>data;
+  }
+
+  onNextPageClick(): void {
+    if (this.pageInfo?.hasNext)
+      this.updateList(this.pageInfo.currentPage + 1, this.pageInfo.pageSize);
+  }
+
+  onPrevPageClick(): void {
+    if (this.pageInfo?.hasPrevious)
+      this.updateList(this.pageInfo.currentPage - 1, this.pageInfo.pageSize);
+  }
+
+  selectPageSizeOptions(): void {
+    this.updateList(1, this.currentPageSize);
+  }
+
   onClick(): void {
     console.log("click");
   }
