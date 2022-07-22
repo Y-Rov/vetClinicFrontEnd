@@ -37,7 +37,6 @@ export class FinancialStatementResultComponent implements OnInit {
   pageInfo: FinancialStatementParameters | null = null;
   currentPageSize: number = this.pageSizeOptions[0].value;
 
-
     constructor(
     @Inject(MAT_DIALOG_DATA) private date: MyDate,
     private finService: FinancialStatementService,
@@ -79,9 +78,5 @@ export class FinancialStatementResultComponent implements OnInit {
 
   selectPageSizeOptions(): void {
     this.updateList(1, this.currentPageSize);
-  }
-
-  onClick(): void {
-    console.log("click");
   }
 }
