@@ -29,7 +29,7 @@ export class NewArticleDialogComponent<T> implements OnInit {
     finalData.createdAt = new Date(Date.now());
     this.articleService
       .postArticle(finalData)
-      .subscribe(() => this.dialogRef.close(true));
+      .subscribe(result => this.dialogRef.close(result !== null && result !== undefined));
   }
 
   onSaveDraft(){

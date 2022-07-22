@@ -33,7 +33,9 @@ export class EditArticleDialogComponent<T> implements OnInit {
     finalData.published = true;
     finalData.createdAt = new Date(Date.now());
     finalData.id = this.data.id;
-    this.articleService.updateArticle(finalData).subscribe(() => this.dialogRef.close(true));
+    this.articleService
+      .updateArticle(finalData)
+      .subscribe(result => this.dialogRef.close(result !== null && result !== undefined));
   }
 
   onSaveDraft(){
