@@ -26,8 +26,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { LoginComponent } from './components/authComponents/login-page/login.component';
 import { SignupComponent } from './components/authComponents/signup-page/signup.component';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
 
 import { NullValueDirective } from './directives/null-value.directive';
 
@@ -36,8 +34,6 @@ import { NullValueDirective } from './directives/null-value.directive';
     MultiSelectComponent,
     LoginComponent,
     SignupComponent,
-    AboutComponent,
-    HomeComponent,
     NullValueDirective
   ],
   imports: [
@@ -72,7 +68,6 @@ import { NullValueDirective } from './directives/null-value.directive';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    HomeComponent,
     MultiSelectComponent,
     NullValueDirective
   ],
