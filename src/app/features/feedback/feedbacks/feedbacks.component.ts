@@ -16,7 +16,7 @@ export class FeedbacksComponent implements OnInit {
     new MatTableDataSource<Feedback>();
 
   displayedColumns: string[] = [
-    "email","serviceRate","priceRate","supportRate","suggestions","user"
+    "email","serviceRate","priceRate","supportRate","suggestions","user","communicate"
   ];
 
   pageSizeOptions: { name: string; value: number }[] = [
@@ -63,12 +63,14 @@ export class FeedbacksComponent implements OnInit {
     this.updateFeedbacks(1, this.currentPageSize, this.filterValue);
   }
 
+  sendEmail(email : string){
+
+  }
+
   ngOnInit(): void {
     this.updateFeedbacks(this.currentPageSize);
   }
 
-  leaveFeedback(){
-    const dialog = this.matDialog.open(FeedbackAddComponent);
-  }
+
 
 }
