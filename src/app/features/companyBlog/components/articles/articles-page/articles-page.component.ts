@@ -20,7 +20,7 @@ export class ArticlesPageComponent implements OnInit {
   articles: Article[] = [];
 
   selectedView = new FormControl('grid');
-  selectedCount = new FormControl(8);
+  selectedCount = new FormControl("8");
   selectedOrderBy = new FormControl('Creation Time');
 
   dataSource: MatTableDataSource<Article> = new MatTableDataSource(this.articles);
@@ -80,8 +80,8 @@ export class ArticlesPageComponent implements OnInit {
     this.selectedCount.valueChanges.subscribe(
       data => {
         if (this.selectedView.value == 'grid') {
-          this.pageInfo!.pageSize = data!;
-          this.currentPageSize = data!;
+          this.pageInfo!.pageSize = Number(data!);
+          this.currentPageSize = Number(data!);
           this.updateList();
         }
       }
