@@ -6,10 +6,22 @@ import {MatIconModule} from "@angular/material/icon";
 import {RouterModule} from "@angular/router";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import {HomeComponent} from "./home/home.component";
+import {AboutComponent} from "./about/about.component";
 
 @NgModule({
-  declarations: [HeaderComponent,FooterComponent],
-  exports: [HeaderComponent,FooterComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    AboutComponent
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    AboutComponent
+  ],
   imports: [
     CommonModule,
     MatIconModule,

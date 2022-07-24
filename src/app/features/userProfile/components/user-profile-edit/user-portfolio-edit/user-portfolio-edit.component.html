@@ -3,12 +3,12 @@
     <mat-label>Enter your portfolio</mat-label>
     <textarea class="custom-textarea" matInput placeholder="Ex. I am professional in..." [formControl]="description"></textarea>
     <mat-hint align="end">{{description.value?.length || 0}}/{{descriptionMaxLength}}</mat-hint>
-    <mat-error *ngIf="description.invalid">{{getErrorMessage()}}</mat-error>
   </mat-form-field>
 </div>
 
 <div class="controls">
-  <button mat-raised-button class="submit-btn" color="primary" (click)="updateUserPortfolio()">{{submitButtonText}}</button>
+  <button [disabled]="description.invalid" mat-raised-button class="submit-btn" color="primary"
+          (click)="updateUserPortfolio()">Save</button>
   <button mat-raised-button (click)="portfolioService.goToPreviousPage()">Back to profile</button>
   <button *ngIf="deleteButtonVisibility" mat-raised-button color="warn" (click)="deletePortfolio()">Delete</button>
 </div>
