@@ -20,7 +20,7 @@ export class ArticlesPageComponent implements OnInit {
   articles: Article[] = [];
 
   selectedView = new FormControl('grid');
-  selectedCount = new FormControl(8);
+  selectedCount = new FormControl("8");
   selectedOrderBy = new FormControl('Creation Time');
 
   dataSource: MatTableDataSource<Article> = new MatTableDataSource(this.articles);
@@ -65,7 +65,6 @@ export class ArticlesPageComponent implements OnInit {
         orderByDirection,
         !(this.authService.isAuthorized() && this.authService.isInRole('Admin')))
       .subscribe(data => {
-        console.log(data);
         this.articles = data.entities;
         this.dataSource.data = data.entities;
         this.updatePageInfo(data);
@@ -81,8 +80,8 @@ export class ArticlesPageComponent implements OnInit {
     this.selectedCount.valueChanges.subscribe(
       data => {
         if (this.selectedView.value == 'grid') {
-          this.pageInfo!.pageSize = data!;
-          this.currentPageSize = data!;
+          this.pageInfo!.pageSize = Number(data!);
+          this.currentPageSize = Number(data!);
           this.updateList();
         }
       }
@@ -131,13 +130,20 @@ export class ArticlesPageComponent implements OnInit {
       .afterClosed()
       .subscribe((requireReload: boolean) => {
         if(requireReload) {
-          this.snackBar.open(`The article has been deleted successfully!`, 'Close', {
+          this.snackBar.open(`The article has been created successfully!`, 'Close', {
             duration: 4000,
             panelClass: ['green-snackbar'],
             horizontalPosition: 'center',
             verticalPosition: 'top'
           });
           this.updateList()
+        } else {
+          this.snackBar.open(`The article hasn't been created!`, 'Close', {
+            duration: 4000,
+            panelClass: ['green-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
         }
       }
     );

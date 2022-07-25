@@ -13,7 +13,7 @@
         placeholder="Write your comment here"></textarea>
       <mat-hint>Length must be greater than 1</mat-hint>
     </mat-form-field>
-    <button mat-fab color="primary" (click)="onPostComment($event)">
+    <button mat-fab color="primary" (click)="onPostComment($event)" [disabled]="form.value.content == ''">
       <mat-icon class="white-icon">send</mat-icon>
     </button>
   </form>
