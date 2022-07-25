@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {FeedbackService} from "../feedbacks/services/feedback.service";
 import {AuthService} from "../../../core/services/authService/auth.service";
 import {Feedback} from "../../../core/models/Feedback";
@@ -31,7 +31,18 @@ export class FeedbackAddComponent implements OnInit {
     private authService : AuthService) {
   }
 
+  isRated() {
+    let rated = this.form.controls.supportRate.value !=0 &&
+      this.form.controls.priceRate.value !=0 &&
+      this.form.controls.serviceRate.value !=0;
+    return rated ;
+  }
+
   onSaveForm() : void{
+    if(!this.isRated()) {
+      this.form.setErrors({'incorrect': true});
+      return;
+    }
     const feedback : Feedback =
       this.form.value as Feedback;
       feedback.userId = this.authService.getUserId();
