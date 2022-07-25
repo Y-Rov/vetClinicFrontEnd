@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommentService} from "../../../services/commentService/comment.service";
 import {Comment} from "../../../../../core/models/Comment";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {AuthService} from "../../../../../core/services/authService/auth.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class CommentsContainerComponent implements OnInit {
   @Input() currentArticleId?: number
 
   form = new FormGroup({
-    content: new FormControl("", Validators.minLength(1)),
+    content: new FormControl(""),
   })
 
   comments: Comment[] = [];
