@@ -13,7 +13,8 @@
   <div class="radio-input">
   <div class="mat-radio-label-content">How would you rate our service?</div>
   <mat-label>
-    <mat-radio-group aria-label="Select an option"
+    <mat-radio-group required aria-label="Select an option"
+                     [formControl] = "form.controls.serviceRate"
                      formControlName = "serviceRate">
       <mat-radio-button value= 1>
         <mat-icon>sentiment_very_dissatisfied</mat-icon>
@@ -30,6 +31,7 @@
       <mat-radio-button  value= 4>
         <mat-icon>sentiment_very_satisfied</mat-icon>
       </mat-radio-button>
+      <mat-error *ngIf="form.controls.serviceRate.value == 0">Service rate is required</mat-error>
     </mat-radio-group>
   </mat-label>
   </div>
@@ -38,7 +40,7 @@
   <div class="radio-input">
   <div class="mat-radio-label-content">How would you rate our prices?</div>
   <mat-label>
-    <mat-radio-group
+    <mat-radio-group required [formControl] = "form.controls.priceRate"
       formControlName = "priceRate">
       <mat-radio-button value= 1>
         <mat-icon>sentiment_very_dissatisfied</mat-icon>
@@ -55,6 +57,7 @@
       <mat-radio-button  value= 4>
         <mat-icon>sentiment_very_satisfied</mat-icon>
       </mat-radio-button>
+      <mat-error *ngIf="form.controls.priceRate.value == 0">Price rate is required</mat-error>
     </mat-radio-group>
   </mat-label>
   </div>
@@ -63,8 +66,8 @@
   <div class="radio-input">
   <div class="mat-radio-label-content">How would you rate our customer support?</div>
   <mat-label>
-    <mat-radio-group
-      formControlName = "supportRate">
+    <mat-radio-group required
+      formControlName = "supportRate" [formControl] = "form.controls.supportRate">
       <mat-radio-button value= 1>
         <mat-icon>sentiment_very_dissatisfied</mat-icon>
       </mat-radio-button>
@@ -80,6 +83,7 @@
       <mat-radio-button  value= 4>
         <mat-icon>sentiment_very_satisfied</mat-icon>
       </mat-radio-button>
+      <mat-error *ngIf="form.controls.supportRate.value == 0">Support rate is required</mat-error>
     </mat-radio-group>
   </mat-label>
   </div>
@@ -95,7 +99,7 @@
     </mat-form-field>
 
   <div class = "buttons-div">
-    <button mat-raised-button type="submit" [disabled]="!form.valid" color="primary" (click)="onSaveForm()">Add</button>
+    <button mat-raised-button type="submit" (click)="onSaveForm()" [disabled]="form.invalid" color="primary">Add</button>
     <button color="warn" mat-raised-button class="cancel-button" (click)="onCancelClick()">Cancel</button>
   </div>
 

@@ -20,8 +20,7 @@ import { ConfirmDeletionDialogComponent } from './components/user-profile-edit/c
 import { MatDialogModule } from "@angular/material/dialog";
 
 import { AnimalModule } from "../animal/animal.module";
-
-
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -43,7 +42,8 @@ import { AnimalModule } from "../animal/animal.module";
     MatSnackBarModule,
     UserProfileRoutingModule,
     MatDialogModule,
-    AnimalModule
+    AnimalModule,
+    SharedModule
   ]
 })
 export class UserProfileModule { }
