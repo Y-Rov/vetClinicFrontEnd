@@ -3,6 +3,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Feedback} from "../../../core/models/Feedback";
 import {FeedbackService} from "./services/feedback.service";
 import {FeedbackParameters} from "../../../core/models/operational-models/QueryParameters/FeedbackParameters";
+import {MatDialog} from "@angular/material/dialog";
+import {WriteEmailDialogComponent} from "../../email/write-email-dialog/write-email-dialog.component";
 
 @Component({
   selector: 'app-feedbacks',
@@ -15,7 +17,7 @@ export class FeedbacksComponent implements OnInit {
     new MatTableDataSource();
 
   displayedColumns: string[] = [
-    "email","serviceRate","priceRate","supportRate","suggestions","user"
+    "email","serviceRate","priceRate","supportRate","suggestions","user", "communicate"
   ];
 
   pageSizeOptions: { name: string; value: number }[] = [
@@ -29,7 +31,8 @@ export class FeedbacksComponent implements OnInit {
   filterValue: string | null = null;
 
   constructor(
-    private feedbackService : FeedbackService) { }
+    private feedbackService : FeedbackService,
+    private matDialog: MatDialog) { }
 
   private updateFeedbacks(
     pageNumber: number = 1,
@@ -77,6 +80,14 @@ export class FeedbacksComponent implements OnInit {
 
   selectPageSizeOptions(): void {
     this.updateFeedbacks(1, this.currentPageSize);
+  }
+
+  sendEmail(email : string){
+    const responseDialog = this.matDialog.open(WriteEmailDialogComponent,{
+      data : email
+    });
+
+    responseDialog.afterClosed().subscribe();
   }
 
   ngOnInit(): void {

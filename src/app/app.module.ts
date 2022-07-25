@@ -15,6 +15,7 @@ import { UnauthGuard } from './helpers/unauth-guard/unauth.guard';
 
 import {AboutComponent} from "./layout/about/about.component";
 import {HomeComponent} from "./layout/home/home.component";
+import {EmailModule} from "./features/email/email.module";
 
 const appRoutes: Routes = [
   {
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     LayoutModule,
+    EmailModule,
     SharedModule
   ],
   providers: [
