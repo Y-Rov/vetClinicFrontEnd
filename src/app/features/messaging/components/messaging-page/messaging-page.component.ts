@@ -10,31 +10,25 @@ import { MessagingService } from '../../services/messaging.service';
 })
 export class MessagingPageComponent implements OnInit {
 
-  chats: Chat[] = [];
-  selectedChat?: Chat;
-
   constructor(
-    private messagingService: MessagingService,
+    public messagingService: MessagingService,
     public authService: AuthService
   ) { }
 
   ngOnInit(): void {
     // load chats
-    this.messagingService.getChats().subscribe(
-      chats => this.chats = chats
-    );
+    this.messagingService.getChats().subscribe();
 
     // on receive message
-    // TODO: 
     this.messagingService.getMessage$.subscribe(
       message => 
-        this.chats.find(c => c.id === message.chatRoomId)
+        this.messagingService.chats?.find(c => c.id === message.chatRoomId)
           ?.messages?.push(message)
     )
   }
 
   onChatSelect(chat: Chat): void {
-    this.selectedChat = chat;
+    this.messagingService.selectedChat = chat;
   }
 
 }

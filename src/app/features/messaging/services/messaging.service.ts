@@ -7,6 +7,7 @@ import { Chat } from 'src/app/core/models/Chat';
 import { AuthService } from 'src/app/core/services/authService/auth.service';
 import { ResourceService } from 'src/app/core/services/resourceService/resource.service';
 import { Message } from 'src/app/core/models/Message';
+import { UserService } from '../../userDashboard/services/userService/user.service';
 
 
 @Injectable({
@@ -14,13 +15,14 @@ import { Message } from 'src/app/core/models/Message';
 })
 export class MessagingService{
 
-  private hubConnection: HubConnection;
+  private hubConnection: HubConnection | undefined;
 
   private baseUrl: string = 'https://localhost:5001'
-  private hubUrl: string = `${this.baseUrl}/hubs/messages?access_token=${this.authService.getAccessToken()}`;
+  private hubUrl: string = `${this.baseUrl}/hubs/messages`;
   private messagesApiUrl: string = `${this.baseUrl}/api/messages`;
   private chatsApiUrl: string = `${this.baseUrl}/api/chats`;
   private unreadMessagesCount: number = 0;
+  private _selectedChat: Chat | undefined;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,18 +31,21 @@ export class MessagingService{
   };
 
   public unreadMessageRegistry: Map<number, Message[]> = new Map();
+  public chats: Chat[] | undefined;
   public getMessage$ : Subject<Message> = new Subject<Message>();
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService)
-  {
-    this.hubConnection = new HubConnectionBuilder()
-      .withUrl(this.hubUrl)
-      .build();
-  }
+    private authService: AuthService,
+    private userService: UserService)
+  { }
 
   public connectToSignalRServer(): void {
+    let url = `${this.hubUrl}?access_token=${this.authService.getAccessToken()}`;
+    this.hubConnection = new HubConnectionBuilder()
+    .withUrl(url)
+    .build();
+
     this.hubConnection
       .start()
       .then(() => console.log('Connection has been established'))
@@ -49,8 +54,21 @@ export class MessagingService{
     this.listenMessages();
   }
 
+  public disconnectFromSignalRServer(): void {
+    if (this.hubConnection){
+      this.hubConnection.stop();
+    }
+  }
+
   public get numberOfUnreadMessages(){
     return this.unreadMessagesCount;
+  }
+
+  public set selectedChat(chat : Chat | undefined) {
+    this._selectedChat = chat;
+  }
+  public get selectedChat(): Chat | undefined {
+    return this._selectedChat;
   }
 
   public getNumberOfUnreadMessages(chatId: number) {
@@ -63,6 +81,7 @@ export class MessagingService{
 
   public getChats(): Observable<Chat[]> {
     return this.http.get<Chat[]>(this.chatsApiUrl).pipe(
+      tap(chats => this.chats = chats),
       catchError(err => this.handleError('get chats', err))
     );
   }
@@ -86,6 +105,7 @@ export class MessagingService{
   public sendMessage(message: Message) : Observable<Message> {
     return this.http.post<Message>(this.messagesApiUrl, message, this.httpOptions)
       .pipe(
+        tap(_ => this.ensureChatCreatedWhenSend(message)),
         catchError(err => this.handleError('Send message', err))
       );
   }
@@ -100,7 +120,8 @@ export class MessagingService{
   }
 
   private listenMessages(): void {
-    this.hubConnection.on('getMessage', (message) => {
+    this.hubConnection?.on('getMessage', (message) => {
+      this.ensureChatCreatedWhenGet(message);
       this.saveOneToRegistry(message);
       this.getMessage$.next(message);
     });
@@ -118,6 +139,34 @@ export class MessagingService{
     else {
       let unreadMessages: Message[] = [message];
       this.unreadMessageRegistry.set(message.chatRoomId!, unreadMessages);
+    }
+  }
+
+  private ensureChatCreatedWhenSend(message: Message): void {
+    let chat = this.selectedChat;
+    if (chat){
+      if (!this.chats?.map(c => c.interlocutorId).includes(message.receiverId)){
+        this.chats?.push(chat);
+      }
+    }
+  }
+
+  private ensureChatCreatedWhenGet(message: Message): void {
+    let chat = this.chats?.find(c => c.interlocutorId == message.senderId);
+    if (!chat){
+      this.userService.getById(message.senderId!).subscribe(user => {
+        chat = new Chat({
+          id: message.chatRoomId,
+          name: `${user.firstName} ${user.lastName}`,
+          interlocutorId: message.senderId,
+          picture: user.profilePicture
+        })
+        this.chats?.push(chat);
+      })
+    }
+    else {
+      if (!chat.id)
+        chat.id = message.chatRoomId
     }
   }
 
