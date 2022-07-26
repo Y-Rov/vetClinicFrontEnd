@@ -6,6 +6,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {RouterModule} from "@angular/router";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge'
 import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
 
@@ -27,7 +28,8 @@ import {AboutComponent} from "./about/about.component";
     MatIconModule,
     RouterModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatBadgeModule
   ]
 })
 export class LayoutModule { }

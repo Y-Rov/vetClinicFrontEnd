@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
   }
 
   private handleLoginSuccess(tokenResponse: TokensResponse){
-    this.authService.login$.next(tokenResponse);
     this.router.navigate(['/procedures']);
   }
 }

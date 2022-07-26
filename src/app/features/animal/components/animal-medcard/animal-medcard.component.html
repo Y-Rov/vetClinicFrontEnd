@@ -24,7 +24,7 @@
       <div class="paginatorElemetnPostion">
         <select (change)="selectOption()" [(ngModel)]="itemsPerPage">
           <option *ngFor="let o of options">
-            {{o.name}}
+            {{o.value}}
           </option>
         </select>
       </div>
@@ -36,6 +36,7 @@
            [disabled]="!(pagingInfo?.hasNext??false)" (click)="onNextButtonInfoClick()"
            color="info">Next</button></div>
     </div>
+    <button (click)="MakePdf()" mat-raised-button color="accent" id="pdfBtn">PDF</button>
   </div>
 
 </ng-container>

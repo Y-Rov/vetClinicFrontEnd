@@ -5,7 +5,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Specialization">
   </mat-form-field>
   <div id="doctors">
-    <div *ngFor="let doctor of doctors">
+    <div class="doctor-card" *ngFor="let doctor of doctors">
       <div class="img-wrapper">
         <img [src]="doctor?.profilePicture!" >
       </div>
@@ -15,6 +15,12 @@
         <div class="portfolio">{{doctor.portfolio?.description}}</div>
       </div>
       <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
+      <button mat-raised-button 
+        class="submit-btn" 
+        color="primary"
+        (click)="onAskAQuestion(doctor)">
+        ASK A QUESTION
+      </button>
     </div>
   </div>
 </div>
