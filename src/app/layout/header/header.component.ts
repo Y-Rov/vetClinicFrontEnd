@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
 import { Router } from '@angular/router';
 import { User } from 'src/app/core/models/User';
@@ -13,7 +13,7 @@ import { SignupComponent } from '../../shared/components/authComponents/signup-p
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   userId: number = 0;
   profilePic?: string;
 
@@ -28,17 +28,26 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void { 
+    if (this.authService.isAuthorized())
+      this.messagingService.connectToSignalRServer();
+
     this.loadProfilePicture();
     this.authService.login$.subscribe(_ => {
       this.loadProfilePicture();
+      this.messagingService.connectToSignalRServer();
     });
     this.userService.edit$.subscribe(_ => {
       this.loadProfilePicture();
     });
   }
 
+  ngOnDestroy(): void {
+    this.messagingService.disconnectFromSignalRServer();
+  }
+
   onLogout(){
     this.authService.logout();
+    this.messagingService.disconnectFromSignalRServer();
     this.router.navigate(['/auth/login'])
   }
   
