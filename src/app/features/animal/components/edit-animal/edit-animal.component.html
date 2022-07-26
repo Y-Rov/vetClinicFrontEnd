@@ -23,7 +23,7 @@
   </p>
   <div>
     <button id="profile-pic-btn" type="button" mat-raised-button (click)="fileInput.click()">Add Animal Picture</button>
-    <input id="hidden-input" hidden (change)="handleFileChange($event)" #fileInput type="file">
+    <input id="hidden-input" hidden (change)="handleFileChange($event)" #fileInput type="file" accept="image/*">
     <span id="profile-pic-hint" *ngIf="animalPhoto !== null">Picture has been selected</span>
   </div>
   <div class="buttons-div">
