@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div [formGroup]="form">
+    <div class="mat-title">Send mailing</div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select recipients</mat-label>
+      <select #recipients (change)="onSelected(recipients.value)" matNativeControl required>
+        <option value="clients">Clients</option>
+        <option value="employees">Employees</option>
+      </select>
+    </mat-form-field>
+
+    <p>
+      <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+        <input
+          matInput
+          formControlName = "subject"
+          type="string"
+          minlength="4"
+          placeholder="Subject">
+        <mat-hint>Length must be greater than 4</mat-hint>
+        <mat-error *ngIf="form.controls.subject.invalid">Length must be greater than 4</mat-error>
+      </mat-form-field>
+    </p>
+
+    <mat-card class="mat-elevation-z0 wrapper">
+      <angular-editor formControlName="body" [config]="editorConfig.config"></angular-editor>
+    </mat-card>
+
+    <div class="buttons-div">
+      <button mat-flat-button class="cancel-button" (click)="onCancelClick()">Cancel</button>
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="!(form.valid && form.dirty)"
+        (click)="onSend()">Send</button>
+    </div>
+  </div>
+</div>

@@ -36,7 +36,7 @@ export class FeedbacksComponent implements OnInit {
 
   private updateFeedbacks(
     pageNumber: number = 1,
-    pageSize: number = 4,
+    pageSize: number = 5,
     filterParam: string | null = null){
     this.feedbackService.getFeedbacks(pageNumber, pageSize, filterParam)
       .subscribe(

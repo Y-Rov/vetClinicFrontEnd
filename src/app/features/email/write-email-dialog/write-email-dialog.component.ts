@@ -3,7 +3,7 @@ import {EmailService} from "../../../core/services/emailService/email.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FeedbacksComponent} from "../../feedback/feedbacks/feedbacks.component";
-import {EmailMessage} from "../../../core/models/emailMessage";
+import {EmailMessage} from "../../../core/models/EmailMessage";
 
 @Component({
   selector: 'app-write-email-dialog',
