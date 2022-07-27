@@ -44,7 +44,7 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
       );
   }
 
-  update(entity: T): Observable<T> {
+  update(entity: Partial<T>): Observable<T> {
     const url = `${this.apiUrl}/${entity.id}`;
     return this.http.put<T>(url, entity, this.httpOptions)
       .pipe(
@@ -65,16 +65,19 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
     return (error: HttpErrorResponse): Observable<T> => {
       switch (error.status) {
         case 0:
-          console.error(`During ${operation} a client-side error occurred: `, error.error);
+          console.warn(`During ${operation} a client-side error occurred: `, error.error);
           break;
         case 401:
           console.warn(`During ${operation}: Unauthorized access, code ${error.status}, body was: `, error.error);
+          break;
+        case 403:
+          console.warn(`During ${operation}: Forbidden, code ${error.status}, body was: `, error.error);
           break;
         case 404:
           console.warn(`During ${operation}: Resource is not available code ${error.status}, body was: `, error.error);
           break;
         case 500:
-          console.error(`During ${operation}: something went wrong on the server!`);
+          console.error(`During ${operation}: something went wrong on the server! Body was: `, error.error);
           break;
       }
 

@@ -40,7 +40,7 @@ export class UserPortfolioEditComponent implements OnInit {
       .subscribe(portfolio => {
         if (portfolio !== undefined) {
           this.description.setValue(portfolio.description!);
-          this.userPortfolio = portfolio;
+          this.userPortfolio = { ... portfolio };
           this.userPortfolio.id = this.userId;
           this.deleteButtonVisibility = true;
         }

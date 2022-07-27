@@ -15,7 +15,7 @@ import { SnackbarProviderService } from "../../../../../core/services/snackbarSe
 export class UserAddressEditComponent implements OnInit {
 
   userId: number;
-  userAddress: Address | null = null;
+  userCurrentAddress: Address | null = null;
   deleteButtonVisibility: boolean = false;
   readonly cityAndStreetMaxLength: number = 85;
   readonly houseMaxLength: number = 15;
@@ -64,10 +64,9 @@ export class UserAddressEditComponent implements OnInit {
 
   getUserAddress(): void {
     this.addressService.getById(this.userId)
-      .subscribe(address => {
-        if (address !== undefined) {
-          this.userAddress = address;
-          this.userAddress.id = this.userId;
+      .subscribe((address) => {
+        if (address) {
+          this.userCurrentAddress = { ... address };
           this.editUserAddressForm.patchValue({
             city: address.city,
             street: address.street,
@@ -91,28 +90,45 @@ export class UserAddressEditComponent implements OnInit {
     return equal;
   }
 
-  updateCurrentAddress(address: any): void {
-    Object.keys(address).forEach(key => {
-      if (key !== 'id') {
-        address[key] = this.editUserAddressForm.get(`${key}`)?.value;
+  updateCurrentAddress(oldAddress: any): Partial<Address> {
+    let updatedAddress: any = new Address();
+    Object.keys(oldAddress).forEach(key => {
+      if (key !== 'id' && oldAddress[key] !== this.editUserAddressForm.get(`${key}`)?.value ||
+        key ==='apartmentNumber' || key === 'zipCode') {
+        updatedAddress[key] = this.editUserAddressForm.get(`${key}`)?.value;
+        oldAddress[key] = updatedAddress[key];
       }
     })
+    updatedAddress.id = this.userId;
+    return updatedAddress;
+  }
+
+  createUserAddress(): void {
+    let newAddress: any = new Address();
+    Object.keys(this.editUserAddressForm.value).forEach(key => {
+      if (key !== 'id') {
+        newAddress[key] = this.editUserAddressForm.get(`${key}`)?.value;
+      }
+    })
+    newAddress.id = this.userId;
+    this.userCurrentAddress = newAddress;
   }
 
   updateUserAddress(): void {
-    if (this.userAddress && this.isFormAndCurrentAddressSame(this.userAddress)) {
-      this.snackbarService.openWithMessage('There is nothing to update!');
-      return;
-    }
-
-    this.updateCurrentAddress(this.userAddress);
     if (this.deleteButtonVisibility) {
-      this.addressService.update(this.userAddress!)
+      if (this.isFormAndCurrentAddressSame(this.userCurrentAddress)) {
+        this.snackbarService.openWithMessage('There is nothing to update!');
+        return;
+      }
+
+      let userUpdatedAddress = this.updateCurrentAddress(this.userCurrentAddress);
+      this.addressService.update(userUpdatedAddress)
         .subscribe(() => {
           this.snackbarService.openWithMessage('Your address was updated successfully!');
         });
     } else {
-      this.addressService.create(this.userAddress!)
+      this.createUserAddress();
+      this.addressService.create(this.userCurrentAddress!)
         .subscribe(() => {
           this.snackbarService.openWithMessage('Your address was created successfully!');
           this.deleteButtonVisibility = true;
@@ -122,21 +138,21 @@ export class UserAddressEditComponent implements OnInit {
 
   deleteAddress(formReference: FormGroupDirective): void {
     let deleteDialog = this.confirmDeletionDialog.open(ConfirmDeletionDialogComponent, {
-      data: "address",
-      autoFocus: "dialog",
-      width: "17.25vw",
-      height: "17.25vh"
+      data: 'address',
+      autoFocus: 'dialog',
+      width: '17.25vw',
+      height: '17.25vh'
     });
 
     deleteDialog.afterClosed()
       .subscribe((dialogResult) => {
         if (dialogResult) {
-          this.addressService.deleteById(this.userAddress!.id!)
+          this.addressService.deleteById(this.userId)
             .subscribe(() => {
               this.snackbarService.openWithMessage("Your address was deleted successfully!");
               formReference.resetForm();
               this.deleteButtonVisibility = false;
-              this.userAddress = null;
+              this.userCurrentAddress = null;
             });
         }
       });
