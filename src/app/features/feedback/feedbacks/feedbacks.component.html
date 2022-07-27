@@ -80,7 +80,7 @@
     <ng-container matColumnDef="communicate">
       <th mat-header-cell *matHeaderCellDef>Communicate</th>
       <td mat-cell *matCellDef = "let feedback">
-        <mat-icon matTooltip="Communicate" (click)="sendEmail(feedback.email)"> email</mat-icon>
+        <mat-icon class="communicate-icon" matTooltip="Communicate" (click)="sendEmail(feedback.email)"> email</mat-icon>
       </td>
     </ng-container>
 
