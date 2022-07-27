@@ -18,13 +18,6 @@ export class MessagingPageComponent implements OnInit {
   ngOnInit(): void {
     // load chats
     this.messagingService.getChats().subscribe();
-
-    // on receive message
-    this.messagingService.getMessage$.subscribe(
-      message => 
-        this.messagingService.chats?.find(c => c.id === message.chatRoomId)
-          ?.messages?.push(message)
-    )
   }
 
   onChatSelect(chat: Chat): void {
