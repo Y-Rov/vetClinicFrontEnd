@@ -52,12 +52,17 @@ export class MessagingService{
       .catch(err => this.handleError('Connect to SignalR server', err));
 
     this.listenMessages();
+    this.getUnreadMessages().subscribe();
   }
 
   public disconnectFromSignalRServer(): void {
     if (this.hubConnection){
       this.hubConnection.stop();
     }
+    this.selectedChat = undefined;
+    this.chats = undefined;
+    this.unreadMessageRegistry = new Map();
+    this.unreadMessagesCount = 0;
   }
 
   public get numberOfUnreadMessages(){

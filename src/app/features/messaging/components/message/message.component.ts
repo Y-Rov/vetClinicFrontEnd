@@ -37,7 +37,7 @@ export class MessageComponent implements OnInit {
     if (currentDate.getFullYear() - currentDate.getFullYear() > 0)
       yearStr = dateTime.getFullYear().toString();
 
-    return `${dateTime.getHours()}:${dateTime.getMinutes()}, ${dateTime.getDay()} ${months[dateTime.getMonth()]} ${yearStr}`
+    return `${dateTime.getHours()}:${dateTime.getMinutes()}, ${dateTime.getDate()} ${months[dateTime.getMonth()]} ${yearStr}`
   }
 
   constructor(

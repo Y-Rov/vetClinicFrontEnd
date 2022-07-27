@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chat } from 'src/app/core/models/Chat';
+import { AuthService } from 'src/app/core/services/authService/auth.service';
 import { User } from "../../core/models/User";
 import { MessagingService } from '../messaging/services/messaging.service';
 import { UserService } from "../userDashboard/services/userService/user.service";
@@ -16,6 +17,7 @@ export class DoctorsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private messagingService: MessagingService,
+    public authService: AuthService,
     private router: Router) { }
 
   ngOnInit(): void {
