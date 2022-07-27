@@ -15,7 +15,8 @@
         <div class="portfolio">{{doctor.portfolio?.description}}</div>
       </div>
       <button mat-raised-button class="submit-btn" color="primary">MAKE AN APPOINTMENT</button>
-      <button mat-raised-button 
+      <button mat-raised-button
+        *ngIf="doctor.id != authService.getUserId()"  
         class="submit-btn" 
         color="primary"
         (click)="onAskAQuestion(doctor)">
