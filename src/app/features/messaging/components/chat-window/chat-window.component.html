@@ -6,7 +6,7 @@
         <div class="chat-name">{{chat?.name}}</div>
     </div>
 
-    <div *ngIf="chat?.messages" class="chat-window-messages" #messagesContainer [scrollTop]="scrollTop">
+    <div *ngIf="chat?.messages" class="chat-window-messages" #messagesContainer>
         <app-message
             *ngFor="let message of chat?.messages"
             attr.id="messsage-{{message.id}}"
