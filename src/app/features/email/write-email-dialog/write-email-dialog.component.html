@@ -1,0 +1,40 @@
+<script src="write-email-dialog.component.ts"></script>
+<div [formGroup]="form">
+  <div class="mat-title">Write response to feedback </div>
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <input
+      matInput
+      formControlName = "recipient"
+      type="email"
+      placeholder="Recipient's email">
+  </mat-form-field>
+
+  <p>
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <input
+      matInput
+      formControlName = "subject"
+      type="string"
+      minlength="4"
+      placeholder="Subject">
+    <mat-hint>Length must be greater than 4</mat-hint>
+    <mat-error *ngIf="form.controls.subject.invalid">Length must be greater than 4</mat-error>
+  </mat-form-field>
+  </p>
+
+  <mat-form-field [ngStyle]="{'width':'320px'}" appearance="outline">
+    <input
+      matInput
+      formControlName = "body"
+      type="string"
+      minlength="10"
+      placeholder="Body">
+    <mat-hint>Length must be greater than 10</mat-hint>
+    <mat-error *ngIf="form.controls.body.invalid">Length must be greater than 10</mat-error>
+  </mat-form-field>
+
+  <div class ="buttons-div">
+    <button mat-raised-button type="submit" color="primary" (click)="onSendForm()">Send</button>
+    <button color="primary" mat-raised-button class="cancel-button" (click) = "onCancelClick()">Cancel</button>
+  </div>
+</div>

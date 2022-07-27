@@ -4,6 +4,7 @@ import { UserService } from "../../../userDashboard/services/userService/user.se
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { FeedbackAddComponent } from "../../../feedback/feedback-add/feedback-add.component";
+import {MailingWriteComponent} from "../../../email/mailing-write/mailing-write.component";
 
 @Component({
   selector: 'app-user-profile-info',
@@ -29,6 +30,10 @@ export class UserProfileInfoComponent implements OnInit {
     const dialog = this.matDialog.open(FeedbackAddComponent, {
       data: this.user
     });
+  }
+
+  sendNotification(){
+    const dialog= this.matDialog.open(MailingWriteComponent);
   }
 
   getUser(id: number): void {
